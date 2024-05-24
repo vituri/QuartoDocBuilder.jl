@@ -1,0 +1,23 @@
+---
+engine: julia
+---
+
+# quarto_index
+    
+
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+quarto_index()
+
+```
+
+Generate the index.qmd file. It is just a copy of the README.md file.
+ 
+
+
+:::
+    
+

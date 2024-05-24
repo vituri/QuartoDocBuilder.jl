@@ -1,0 +1,116 @@
+{
+  "cells": [
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| eval: false\n",
+        "sin(x)"
+      ],
+      "id": "da25db80",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Compute sine of `x`, where `x` is in radians.\n",
+        " \n",
+        "\n",
+        "See also [`sind`](@ref), [`sinpi`](@ref), [`sincos`](@ref), [`cis`](@ref), [`asin`](@ref).\n",
+        " \n",
+        "\n",
+        "\n",
+        "### Examples\n"
+      ],
+      "id": "211d6eaf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| eval: false\n",
+        "julia> round.(sin.(range(0, 2pi, length=9)'), digits=3)\n",
+        "1×9 Matrix{Float64}:\n",
+        " 0.0  0.707  1.0  0.707  0.0  -0.707  -1.0  -0.707  -0.0\n",
+        "\n",
+        "julia> sind(45)\n",
+        "0.7071067811865476\n",
+        "\n",
+        "julia> sinpi(1/4)\n",
+        "0.7071067811865475\n",
+        "\n",
+        "julia> round.(sincos(pi/6), digits=3)\n",
+        "(0.5, 0.866)\n",
+        "\n",
+        "julia> round(cis(pi/6), digits=3)\n",
+        "0.866 + 0.5im\n",
+        "\n",
+        "julia> round(exp(im*pi/6), digits=3)\n",
+        "0.866 + 0.5im"
+      ],
+      "id": "3f6fedab",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n"
+      ],
+      "id": "a321e0ac"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| eval: false\n",
+        "sin(A::AbstractMatrix)"
+      ],
+      "id": "d07c2c25",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Compute the matrix sine of a square matrix `A`.\n",
+        " \n",
+        "\n",
+        "If `A` is symmetric or Hermitian, its eigendecomposition ([`eigen`](@ref)) is used to compute the sine. Otherwise, the sine is determined by calling [`exp`](@ref).\n",
+        " \n",
+        "\n",
+        "\n",
+        "### Examples\n"
+      ],
+      "id": "1f2982f1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| eval: false\n",
+        "julia> sin(fill(1.0, (2,2)))\n",
+        "2×2 Matrix{Float64}:\n",
+        " 0.454649  0.454649\n",
+        " 0.454649  0.454649"
+      ],
+      "id": "1f3b9f9c",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "julia-nodeps-1.9",
+      "language": "julia",
+      "display_name": "Julia nodeps 1.9.3",
+      "path": "/home/vituri/.local/share/jupyter/kernels/julia-nodeps-1.9"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

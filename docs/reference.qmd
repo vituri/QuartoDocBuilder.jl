@@ -1,0 +1,3 @@
+# Reference
+
+Some cool refs! See @from_module/cos.qmd

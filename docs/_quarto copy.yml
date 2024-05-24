@@ -1,0 +1,54 @@
+project:
+  type: website
+  output-dir: site
+
+execute:
+  freeze: true  # re-render only when source changes
+  cache: true
+  warning: false
+
+website:
+  # title: "MyPackage"
+  search: true
+
+  navbar:
+    background: primary
+
+    left:
+      - text: "Pkgdown.jl"
+        href: index.qmd
+      - text: "Reference"
+        href: reference.qmd
+      - text: "Tutorials"
+        href: tutorials.qmd
+
+  sidebar:
+    - title: "Reference"
+      style: "docked"
+      background: light
+      # contents: from_module
+      contents: 
+        - reference.qmd
+        - auto: "from_module/*"
+
+    - title: "Tutorials"
+      style: "docked"
+      background: light
+      contents:
+        - tutorials.qmd
+        - auto: "tutorials/*"
+
+  page-footer: "Website generated with [Quarto](https://quarto.org/) and [Pkgdown.jl](https://github.com/vituri/Pkgdown.jl)"
+
+
+format:
+  html:
+    theme: cosmo    
+    toc: true
+    # code-tools: true
+    preview-links: true
+    # page-layout: full
+    max-width: 90vw
+    # code-link: true
+    
+engine: julia

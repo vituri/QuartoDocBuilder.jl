@@ -1,0 +1,23 @@
+---
+engine: julia
+---
+
+# quarto_build_site
+    
+
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+quarto_build_site(module_name)
+
+```
+
+Create all the files necessary to build the Quarto website.
+ 
+
+
+:::
+    
+

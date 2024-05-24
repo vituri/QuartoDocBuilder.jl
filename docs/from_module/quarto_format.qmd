@@ -1,0 +1,156 @@
+---
+engine: julia
+---
+
+# quarto_format
+    
+
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+quarto_format(m::Markdown.Code, eval = false)
+
+```
+
+Format a block of markdown code to Quarto.
+ 
+
+### Arguments
+    
+  * m::Markdown: a block of Markdown.Code.
+  * eval: if false, then the resulting block is not going to
+be evaluated.
+ 
+
+
+:::
+    
+
+ --- 
+ 
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+quarto_format(m)
+
+```
+
+Return a plain text from `m`.
+ 
+
+
+:::
+    
+
+ --- 
+ 
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+quarto_format(m::Markdown.Paragraph)
+
+```
+
+Return a plain text of `m` and a line break.
+ 
+
+
+:::
+    
+
+ --- 
+ 
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+quarto_format(m::AbstractString)
+
+```
+
+Returns `m`.
+ 
+
+
+:::
+    
+
+ --- 
+ 
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+quarto_format(m::Markdown.Header{1})
+
+```
+
+Take a level 1 header and write it as a level 3 header.
+ 
+
+
+:::
+    
+
+ --- 
+ 
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+quarto_format(md::Markdown.MD)
+
+```
+
+Given a markdown block, apply `quarto_format` to each of its elements and concatenate the resulting string.
+ 
+
+
+:::
+    
+
+ --- 
+ 
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+quarto_format(s::Symbol)
+
+```
+
+Create the documentation of a symbol (function, object, etc) `s`.
+ 
+
+
+:::
+    
+
+ --- 
+ 
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+quarto_format(md::Markdown.Admonition)
+
+```
+
+Format a Markdown.Admonition into a callout block in Quarto.
+ 
+
+
+:::
+    
+

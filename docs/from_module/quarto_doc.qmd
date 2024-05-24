@@ -1,0 +1,23 @@
+---
+engine: julia
+---
+
+# quarto_doc
+    
+
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+quarto_doc(s::Symbol)
+
+```
+
+Create the documentation of a symbol (function, object, etc) `s`.
+ 
+
+
+:::
+    
+

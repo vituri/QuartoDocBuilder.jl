@@ -1,0 +1,6 @@
+site/
+.quarto/
+.jupyter_cache/
+_freeze/
+
+/.quarto/

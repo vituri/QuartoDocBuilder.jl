@@ -1,0 +1,27 @@
+---
+engine: julia
+---
+
+# quarto_yaml
+    
+
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+quarto_yaml(module_name)
+
+```
+
+Generate the _quarto.yaml file.
+ 
+
+### Arguments
+    
+  * `module_name`: the name of the current module.
+
+
+:::
+    
+

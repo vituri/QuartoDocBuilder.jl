@@ -1,0 +1,23 @@
+---
+engine: julia
+---
+
+# quarto_doc_page
+    
+
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+quarto_doc_page(s; dir = "docs/from_module")
+
+```
+
+Given a symbol `s`, write its .qmd doc into the folder `dir`.
+ 
+
+
+:::
+    
+
