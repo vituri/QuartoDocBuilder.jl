@@ -1,0 +1,142 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "QuartoDocBuilder.jl",
+    "section": "",
+    "text": "QuartoDocBuilder.jl is a package inspired by R pkgdown. It provides an easy way to generate a website with documentation and vignettes, by creating a Quarto project.\nBeing powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted.\n\n\nAdvantages?\nCI/CD?\nVersioning?"
+  },
+  {
+    "objectID": "index.html#comparison-to-documenter.jl",
+    "href": "index.html#comparison-to-documenter.jl",
+    "title": "QuartoDocBuilder.jl",
+    "section": "",
+    "text": "Advantages?\nCI/CD?\nVersioning?"
+  },
+  {
+    "objectID": "test.html",
+    "href": "test.html",
+    "title": "",
+    "section": "",
+    "text": "sin(x)\n\nCompute sine of x, where x is in radians.\nSee also sind, sinpi, sincos, cis, asin.\n\nExamples\n\njulia&gt; round.(sin.(range(0, 2pi, length=9)'), digits=3)\n1×9 Matrix{Float64}:\n 0.0  0.707  1.0  0.707  0.0  -0.707  -1.0  -0.707  -0.0\n\njulia&gt; sind(45)\n0.7071067811865476\n\njulia&gt; sinpi(1/4)\n0.7071067811865475\n\njulia&gt; round.(sincos(pi/6), digits=3)\n(0.5, 0.866)\n\njulia&gt; round(cis(pi/6), digits=3)\n0.866 + 0.5im\n\njulia&gt; round(exp(im*pi/6), digits=3)\n0.866 + 0.5im\n\n\n\nsin(A::AbstractMatrix)\n\nCompute the matrix sine of a square matrix A.\nIf A is symmetric or Hermitian, its eigendecomposition (eigen) is used to compute the sine. Otherwise, the sine is determined by calling exp.\n\n\nExamples\n\njulia&gt; sin(fill(1.0, (2,2)))\n2×2 Matrix{Float64}:\n 0.454649  0.454649\n 0.454649  0.454649"
+  },
+  {
+    "objectID": "from_module/quarto_index.html",
+    "href": "from_module/quarto_index.html",
+    "title": "quarto_index",
+    "section": "",
+    "text": "quarto_index\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_index()\n\nGenerate the index.qmd file. It is just a copy of the README.md file.",
+    "crumbs": [
+      "Reference",
+      "quarto_index"
+    ]
+  },
+  {
+    "objectID": "from_module/quarto_build_site.html",
+    "href": "from_module/quarto_build_site.html",
+    "title": "quarto_build_site",
+    "section": "",
+    "text": "quarto_build_site\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_build_site(module_name)\n\nCreate all the files necessary to build the Quarto website.",
+    "crumbs": [
+      "Reference",
+      "quarto_build_site"
+    ]
+  },
+  {
+    "objectID": "from_module/quarto_format.html",
+    "href": "from_module/quarto_format.html",
+    "title": "quarto_format",
+    "section": "",
+    "text": "quarto_format\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::Markdown.Code, eval = false)\n\nFormat a block of markdown code to Quarto.\n\nArguments\n\nm::Markdown: a block of Markdown.Code.\neval: if false, then the resulting block is not going to be evaluated.\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m)\n\nReturn a plain text from m.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::Markdown.Paragraph)\n\nReturn a plain text of m and a line break.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::AbstractString)\n\nReturns m.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::Markdown.Header{1})\n\nTake a level 1 header and write it as a level 3 header.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(md::Markdown.MD)\n\nGiven a markdown block, apply quarto_format to each of its elements and concatenate the resulting string.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(s::Symbol)\n\nCreate the documentation of a symbol (function, object, etc) s.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(md::Markdown.Admonition)\n\nFormat a Markdown.Admonition into a callout block in Quarto.",
+    "crumbs": [
+      "Reference",
+      "quarto_format"
+    ]
+  },
+  {
+    "objectID": "tutorials/tutorial-2.html",
+    "href": "tutorials/tutorial-2.html",
+    "title": "Making something even more cool",
+    "section": "",
+    "text": "Making something even more cool\nSecond tutorial! Uhuuul!",
+    "crumbs": [
+      "Tutorials",
+      "Making something even more cool"
+    ]
+  },
+  {
+    "objectID": "tutorials.html",
+    "href": "tutorials.html",
+    "title": "Tutorials",
+    "section": "",
+    "text": "Tutorials\nHere we gather many tutorials!!",
+    "crumbs": [
+      "Tutorials"
+    ]
+  },
+  {
+    "objectID": "tutorials/tutorial-1.html",
+    "href": "tutorials/tutorial-1.html",
+    "title": "Making something cool",
+    "section": "",
+    "text": "Making something cool\nFirst tutorial! Uhuuul!",
+    "crumbs": [
+      "Tutorials",
+      "Making something cool"
+    ]
+  },
+  {
+    "objectID": "from_module/quarto_callout_block.html",
+    "href": "from_module/quarto_callout_block.html",
+    "title": "quarto_callout_block",
+    "section": "",
+    "text": "quarto_callout_block\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_callout_block(s)\n\nCreate a callout block with the string s.",
+    "crumbs": [
+      "Reference",
+      "quarto_callout_block"
+    ]
+  },
+  {
+    "objectID": "from_module/quarto_yaml.html",
+    "href": "from_module/quarto_yaml.html",
+    "title": "quarto_yaml",
+    "section": "",
+    "text": "quarto_yaml\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_yaml(module_name)\n\nGenerate the _quarto.yaml file.\n\nArguments\n\nmodule_name: the name of the current module.",
+    "crumbs": [
+      "Reference",
+      "quarto_yaml"
+    ]
+  },
+  {
+    "objectID": "from_module/quarto_doc_page.html",
+    "href": "from_module/quarto_doc_page.html",
+    "title": "quarto_doc_page",
+    "section": "",
+    "text": "quarto_doc_page\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_doc_page(s; dir = \"docs/from_module\")\n\nGiven a symbol s, write its .qmd doc into the folder dir.",
+    "crumbs": [
+      "Reference",
+      "quarto_doc_page"
+    ]
+  },
+  {
+    "objectID": "from_module/quarto_doc.html",
+    "href": "from_module/quarto_doc.html",
+    "title": "quarto_doc",
+    "section": "",
+    "text": "quarto_doc\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_doc(s::Symbol)\n\nCreate the documentation of a symbol (function, object, etc) s.",
+    "crumbs": [
+      "Reference",
+      "quarto_doc"
+    ]
+  },
+  {
+    "objectID": "reference.html",
+    "href": "reference.html",
+    "title": "Reference",
+    "section": "",
+    "text": "Reference\nSome cool refs! See @from_module/cos.qmd",
+    "crumbs": [
+      "Reference"
+    ]
+  }
+]
