@@ -134,7 +134,7 @@
     "href": "reference.html",
     "title": "Reference",
     "section": "",
-    "text": "Reference\nSome cool refs! See @from_module/cos.qmd",
+    "text": "Reference\nSome cool refs! See quarto_format for example!",
     "crumbs": [
       "Reference"
     ]
