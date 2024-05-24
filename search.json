@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "QuartoDocBuilder.jl",
     "section": "",
-    "text": "QuartoDocBuilder.jl is a package inspired by R pkgdown. It provides an easy way to generate a website with documentation and vignettes, by creating a Quarto project.\nBeing powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted.\n\n\nAdvantages?\nCI/CD?\nVersioning?"
+    "text": "QuartoDocBuilder.jl is a package inspired by R pkgdown. It provides an easy way to generate a website with documentation and vignettes, by creating a Quarto project.\nBeing powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted. This website doc even has a comment section! Check some examples here and the complete list of options here.\n\n\nAdvantages?\nCI/CD?\nVersioning?"
   },
   {
     "objectID": "index.html#comparison-to-documenter.jl",
