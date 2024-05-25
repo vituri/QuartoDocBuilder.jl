@@ -11,7 +11,10 @@ export quarto_format,
 include("build.jl");
 export quarto_yaml,
     quarto_index,    
-    quarto_doc_page,
+    quarto_doc_page,    
     quarto_build_site;
+
+include("styles.jl");
+export quarto_styles;
 
 end # module Pkgdown

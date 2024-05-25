@@ -1,13 +1,107 @@
+---
+toc: false
+---
+
 # QuartoDocBuilder.jl
 
 QuartoDocBuilder.jl is a package inspired by R [pkgdown](https://pkgdown.r-lib.org/). It provides an easy way to generate a website with documentation and vignettes, by creating a [Quarto](https://quarto.org/) project.
 
-Being powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted.
+Being powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted. This website doc even has a comment section! Check some examples [here](https://quarto.org/docs/gallery/#websites) and the complete list of options [here](https://quarto.org/docs/reference/projects/websites.html). 
 
-## Comparison to Documenter.jl
+The [Quarto website](https://quarto.org/) itself is written with Quarto! Check the github repo [here](https://github.com/quarto-dev/quarto-web) to get some inspiration.
 
-Advantages?
+# Features
 
-CI/CD?
 
-Versioning?
+
+::: {.content-block}
+::: {.features}
+
+
+::: {.feature}
+### Easy configuration
+
+Install the latest Quarto version, `]add` QuartoDocBuilder, run `quarto_build_site("My_package")` and you are done. It's up to you write the best doc ever!
+
+::: {.learn-more}
+[Learn more »](/docs/reference/quarto_build_site.qmd)
+:::
+:::
+
+
+::: {.feature}
+### Comment section
+
+Every page can have a commentary section. Let people speak! By default, QuartoDocBuilder.jl provides Discus, which is the easiest to configure.
+
+::: {.learn-more}
+[Learn more »](https://quarto.org/docs/reference/projects/websites.html#comments)
+:::
+:::
+
+::: {.feature}
+### Scientific Markdown
+
+LaTeX equations and citations, cross-references, figure panels, callouts, advanced page layout, comment sections and so on. It's time to write some $e^{i \pi} + 1 = 0$!
+
+::: {.learn-more}
+[Learn more »](https://quarto.org/docs/authoring/markdown-basics.html)
+:::
+:::
+
+::: {.feature}
+### Websites and Books
+
+Want to publish your really nice tutorial in an online book? Or make a blog? Or a Word document? Or a pdf with LaTeX? Well, use the same files and render the project with Quarto!
+
+::: {.learn-more}
+[Learn more »](https://quarto.org/docs/websites/)
+:::
+:::
+
+::: {.feature}
+### Customization
+
+With a bit of .css magic you can customize almost everything! Why not put a spinning raccoon in the middle of a serious text?
+
+<div style="text-align: center">
+<style> 
+.rotate {
+  animation: rotation 2s infinite linear;
+  opacity: 1
+  display: block;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+</style>
+
+<img src=resources/image.jpg width=100 class="rotate">
+</div>
+
+
+::: {.learn-more}
+[Learn more »](https://quarto.org/docs/reference/projects/websites.html)
+:::
+:::
+
+
+::: {.feature}
+### Multilanguage
+
+By default, QuartoDocBuilder uses the `julia` engine provided by [QuartoNotebookRunner.jl](https://github.com/PumasAI/QuartoNotebookRunner.jl/), but you can use Jupyter and be able to run R and Python code along with Julia in the same document!
+
+::: {.learn-more}
+[Learn more »](https://quarto.org/docs/get-started/computations/jupyter.html)
+:::
+:::
+
+
+:::
+:::

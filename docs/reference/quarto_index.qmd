@@ -2,7 +2,7 @@
 engine: julia
 ---
 
-# quarto_build_site
+# quarto_index {#sec-doc}
     
 
 ::: {.callout-note appearance="simple" title="docblock" collapse=false}    
@@ -10,11 +10,11 @@ engine: julia
 
 ```{julia}
 #| eval: false
-quarto_build_site(module_name)
+quarto_index()
 
 ```
 
-Create all the files necessary to build the Quarto website.
+Generate the index.qmd file. It is just a copy of the README.md file.
  
 
 

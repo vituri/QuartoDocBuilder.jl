@@ -6,24 +6,55 @@ Generate the _quarto.yaml file.
 # Arguments
 - `module_name`: the name of the current module.
 """
-function quarto_yaml(module_name)
+function quarto_yaml(
+  module_name
+  ;output_dir = "site"
+  ,freeze = "auto"
+  ,cache = "true"
+  ,warning = "false"
+
+  ,comments = "true"
+  ,repo = "USERNAME/REPOSITORY"
+
+  ,theme = "flatly"
+  )
 
     if isfile("docs/_quarto.yml")
-        @warn "docs/_quarto.yml already exists! Delete it by hand and try again." 
+        @warn "docs/_quarto.yml already exists! Delete it and try again." 
         return nothing
     end
 
-    module_name = "Pkgdown"
+  # project
 
-yaml = 
-"""
+  yaml = String[]
+s = """
+
 project:
   type: website
-  output-dir: site
+  output-dir: $output_dir"""
+push!(yaml, s)
+
+    # execute
+    s = """
+
+execute:
+  freeze: $freeze
+  cache: $cache
+  warning: $warning"""
+push!(yaml, s)
+
+# website
+s = 
+  """
 
 website:
-  title: "$(module_name).jl"
-  search: true
+  # title: "$(module_name).jl"
+  page-navigation: true
+  bread-crumbs: true
+
+  search:
+    show-item-context: true
+    type: overlay
 
   navbar:
     background: primary
@@ -42,28 +73,72 @@ website:
       background: light
       contents: 
         - reference.qmd
-        - auto: "from_module/*"
+        - auto: "reference/*"
 
     - title: "Tutorials"
       style: "docked"
       background: light
       contents:
         - tutorials.qmd
-        - auto: "tutorials/*" 
+        - auto: "tutorials/*"
+        
+"""
 
-  page-footer: "Website generated with [Quarto](https://quarto.org/) and [Pkgdown.jl](https://github.com/vituri/Pkgdown.jl)"
+push!(yaml, s)  
 
+# comments
+if comments == "true"
+s = """
+
+  comments:
+    giscus:
+      repo: $repo
+      reactions-enabled: true
+      loading: lazy
+      mapping: pathname
+
+"""
+
+push!(yaml, s)  
+
+end
+
+# footer
+s = """
+
+page-footer: "Website generated with [Quarto](https://quarto.org/) and [Pkgdown.jl](https://github.com/vituri/Pkgdown.jl)"
+
+"""
+  push!(yaml, s)  
+
+# engine
+
+s = """
+
+engine: julia
+"""
+push!(yaml, s)
+
+# format
+
+s = """
 
 format:
   html:
-    theme: cosmo    
-    toc: true
+    theme: $theme
+    css: styles.css
+    code-copy: true
+    code-overflow: wrap
     preview-links: true
-    
-engine: julia
-"""
+    toc: true
+    toc-depth: 3
+    toc-expand: true """
 
-write("docs/_quarto.yml", yaml)
+push!(yaml, s)
+
+final_yaml = string(yaml...)
+
+write("docs/_quarto.yml", final_yaml)
 
 end
 
@@ -73,20 +148,12 @@ end
 Generate the index.qmd file. It is just a copy of the README.md file.
 """
 function quarto_index()
-    cp("README.md", "docs/index.qmd", force=true)
-end
-
-"""
-    quarto_build_site(module_name)
-
-Create all the files necessary to build the Quarto website.
-"""
-function quarto_build_site(module_name)
-
-    quarto_index()
-
-    quarto_yaml(module_name)
-
+  try
+    cp("README.md", "docs/index.qmd", force=false)
+  catch
+    @warn "docs/index.qmd already exists!"
+  end
+    
 end
 
 function quarto_git_ignore()
@@ -97,4 +164,68 @@ _freeze/
 """
 
 write("docs/.gitignore", texto)
+end
+
+
+"""
+    quarto_build_site(module_name)
+
+Create all the files necessary to build the Quarto website.
+"""
+function quarto_build_site(module_name; kwargs...)
+
+  if isdir("docs") == false
+    mkdir("docs")
+  end
+
+  quarto_yaml(module_name; kwargs...)
+  
+  quarto_git_ignore()
+
+  # reference
+  if isdir("docs/reference") == false
+    mkdir("docs/reference")
+  end
+
+  if isfile("docs/reference.qmd") == false
+    s = """
+    
+# Reference
+    
+Write your references here."""
+
+    write("docs/reference.qmd", s)
+  end
+
+  # tutorials
+  if isdir("docs/tutorials") == false
+    mkdir("docs/tutorials")
+
+    s = """
+    
+# First tutorial
+    
+This is my first tutorial!"""
+
+    write("docs/tutorials/tutorial-01.qmd", s)
+  end
+
+  if isfile("docs/tutorials.qmd") == false
+    write("docs/tutorials.qmd", """
+
+# Tutorials
+    
+    
+    Describe your tutorials here.""")
+  end
+
+  quarto_index()
+
+  fs = names(@eval $(Symbol(module_name)))[2:end]
+
+  fs .|> quarto_doc_page
+
+  quarto_styles()
+
+  @info "All done!"
 end

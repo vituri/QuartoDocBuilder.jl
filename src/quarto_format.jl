@@ -153,16 +153,17 @@ end
 
 Given a symbol `s`, write its .qmd doc into the folder `dir`.
 """
-function quarto_doc_page(s; dir = "docs/from_module")
+function quarto_doc_page(s; dir = "docs/reference")
 
     blocks = quarto_doc(s) .|> quarto_callout_block
+    st = string(s)
 
     qmd = """
       ---
       engine: julia
       ---
 
-      # $(string(s))
+      # $(st) {#sec-doc}
           
       $(str_concat(blocks, sep = "\n --- \n "))
       """

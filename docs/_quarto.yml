@@ -1,15 +1,19 @@
+
 project:
   type: website
   output-dir: site
-
 execute:
-  # freeze: true  # re-render only when source changes
-  # cache: true
+  freeze: auto
+  cache: true
   warning: false
-
 website:
-  # title: "MyPackage"
-  search: true
+  # title: "QuartoDocBuilder.jl"
+  page-navigation: true
+  bread-crumbs: true
+
+  search:
+    show-item-context: true
+    type: overlay
 
   navbar:
     background: primary
@@ -26,10 +30,9 @@ website:
     - title: "Reference"
       style: "docked"
       background: light
-      # contents: from_module
       contents: 
         - reference.qmd
-        - auto: "from_module/*"
+        - auto: "reference/*"
 
     - title: "Tutorials"
       style: "docked"
@@ -37,22 +40,28 @@ website:
       contents:
         - tutorials.qmd
         - auto: "tutorials/*"
+        
 
-  page-footer: "Website generated with [Quarto](https://quarto.org/) and [QuartoDocBuilder.jl](https://github.com/vituri/QuartoDocBuilder.jl)"
+  comments:
+    giscus:
+      repo: vituri/QuartoDocBuilder.jl
+      reactions-enabled: true
+      loading: lazy
+      mapping: pathname
 
+
+page-footer: "Website generated with [Quarto](https://quarto.org/) and [Pkgdown.jl](https://github.com/vituri/Pkgdown.jl)"
+
+
+engine: julia
 
 format:
   html:
-    # theme: cosmo
     theme: flatly
-    # theme: flatly
-    # code-tools: true
+    css: styles.css
+    code-copy: true
+    code-overflow: wrap
     preview-links: true
-    # page-layout: full
-    max-width: 90vw
-    # code-link: true
     toc: true
     toc-depth: 3
-    toc-expand: true
-    
-engine: julia
+    toc-expand: true 

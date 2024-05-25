@@ -2,7 +2,7 @@
 engine: julia
 ---
 
-# quarto_callout_block
+# quarto_build_site {#sec-doc}
     
 
 ::: {.callout-note appearance="simple" title="docblock" collapse=false}    
@@ -10,11 +10,11 @@ engine: julia
 
 ```{julia}
 #| eval: false
-quarto_callout_block(s)
+quarto_build_site(module_name)
 
 ```
 
-Create a callout block with the string `s`.
+Create all the files necessary to build the Quarto website.
  
 
 

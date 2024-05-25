@@ -2,7 +2,7 @@
 engine: julia
 ---
 
-# quarto_index
+# quarto_yaml {#sec-doc}
     
 
 ::: {.callout-note appearance="simple" title="docblock" collapse=false}    
@@ -10,12 +10,16 @@ engine: julia
 
 ```{julia}
 #| eval: false
-quarto_index()
+quarto_yaml(module_name)
 
 ```
 
-Generate the index.qmd file. It is just a copy of the README.md file.
+Generate the _quarto.yaml file.
  
+
+### Arguments
+    
+  * `module_name`: the name of the current module.
 
 
 :::

@@ -14,13 +14,6 @@ fs = names(QuartoDocBuilder)[2:end]
 s = fs[1] 
 fs .|> quarto_doc_page
 
-Base.doc(@eval $s)
-
-blocks = quarto_format(s)
-
-quarto_doc_page.(fs)
-
-quarto_doc_page(:sin)
 
 # caminho completo
 

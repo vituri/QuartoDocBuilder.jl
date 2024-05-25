@@ -2,7 +2,7 @@
 engine: julia
 ---
 
-# quarto_yaml
+# quarto_doc_page {#sec-doc}
     
 
 ::: {.callout-note appearance="simple" title="docblock" collapse=false}    
@@ -10,16 +10,12 @@ engine: julia
 
 ```{julia}
 #| eval: false
-quarto_yaml(module_name)
+quarto_doc_page(s; dir = "docs/from_module")
 
 ```
 
-Generate the _quarto.yaml file.
+Given a symbol `s`, write its .qmd doc into the folder `dir`.
  
-
-### Arguments
-    
-  * `module_name`: the name of the current module.
 
 
 :::

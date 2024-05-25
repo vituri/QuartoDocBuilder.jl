@@ -2,7 +2,7 @@
 engine: julia
 ---
 
-# quarto_format
+# quarto_format {#sec-doc}
     
 
 ::: {.callout-note appearance="simple" title="docblock" collapse=false}    
@@ -112,24 +112,6 @@ quarto_format(md::Markdown.MD)
 ```
 
 Given a markdown block, apply `quarto_format` to each of its elements and concatenate the resulting string.
- 
-
-
-:::
-    
-
- --- 
- 
-::: {.callout-note appearance="simple" title="docblock" collapse=false}    
-
-
-```{julia}
-#| eval: false
-quarto_format(s::Symbol)
-
-```
-
-Create the documentation of a symbol (function, object, etc) `s`.
  
 
 

@@ -2,7 +2,7 @@
 engine: julia
 ---
 
-# quarto_doc_page
+# quarto_callout_block {#sec-doc}
     
 
 ::: {.callout-note appearance="simple" title="docblock" collapse=false}    
@@ -10,11 +10,11 @@ engine: julia
 
 ```{julia}
 #| eval: false
-quarto_doc_page(s; dir = "docs/from_module")
+quarto_callout_block(s)
 
 ```
 
-Given a symbol `s`, write its .qmd doc into the folder `dir`.
+Create a callout block with the string `s`.
  
 
 
