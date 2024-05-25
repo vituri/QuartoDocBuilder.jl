@@ -51,7 +51,7 @@ ul.task-list li input[type="checkbox"] {
     "/",
     "s"
   ],
-  "show-item-context": false,
+  "show-item-context": true,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -67,11 +67,40 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -106,18 +135,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#quartodocbuilder.jl" id="toc-quartodocbuilder.jl" class="nav-link active" data-scroll-target="#quartodocbuilder.jl">QuartoDocBuilder.jl</a>
-  <ul class="collapse">
-  <li><a href="#comparison-to-documenter.jl" id="toc-comparison-to-documenter.jl" class="nav-link" data-scroll-target="#comparison-to-documenter.jl">Comparison to Documenter.jl</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -128,14 +146,77 @@ ul.task-list li input[type="checkbox"] {
 <h1>QuartoDocBuilder.jl</h1>
 <p>QuartoDocBuilder.jl is a package inspired by R <a href="https://pkgdown.r-lib.org/">pkgdown</a>. It provides an easy way to generate a website with documentation and vignettes, by creating a <a href="https://quarto.org/">Quarto</a> project.</p>
 <p>Being powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted. This website doc even has a comment section! Check some examples <a href="https://quarto.org/docs/gallery/#websites">here</a> and the complete list of options <a href="https://quarto.org/docs/reference/projects/websites.html">here</a>.</p>
-<section id="comparison-to-documenter.jl" class="level2">
-<h2 class="anchored" data-anchor-id="comparison-to-documenter.jl">Comparison to Documenter.jl</h2>
-<p>Advantages?</p>
-<p>CI/CD?</p>
-<p>Versioning?</p>
-
-
+<p>The <a href="https://quarto.org/">Quarto website</a> itself is written with Quarto! Check the github repo <a href="https://github.com/quarto-dev/quarto-web">here</a> to get some inspiration.</p>
 </section>
+<section id="features" class="level1">
+<h1>Features</h1>
+<div class="content-block">
+<div class="features">
+<section id="easy-configuration" class="level3 feature">
+<h3 class="anchored" data-anchor-id="easy-configuration">Easy configuration</h3>
+<p>Install the latest Quarto version, <code>]add</code> QuartoDocBuilder, run <code>quarto_build_site("My_package")</code> and you are done. It’s up to you write the best doc ever!</p>
+<div class="learn-more">
+<p><a href="./docs/reference/quarto_build_site.qmd">Learn more »</a></p>
+</div>
+</section>
+<section id="comment-section" class="level3 feature">
+<h3 class="anchored" data-anchor-id="comment-section">Comment section</h3>
+<p>Every page can have a commentary section. Let people speak! By default, QuartoDocBuilder.jl provides Discus, which is the easiest to configure.</p>
+<div class="learn-more">
+<p><a href="https://quarto.org/docs/reference/projects/websites.html#comments">Learn more »</a></p>
+</div>
+</section>
+<section id="scientific-markdown" class="level3 feature">
+<h3 class="anchored" data-anchor-id="scientific-markdown">Scientific Markdown</h3>
+<p>LaTeX equations and citations, cross-references, figure panels, callouts, advanced page layout, comment sections and so on. It’s time to write some <span class="math inline">\(e^{i \pi} + 1 = 0\)</span>!</p>
+<div class="learn-more">
+<p><a href="https://quarto.org/docs/authoring/markdown-basics.html">Learn more »</a></p>
+</div>
+</section>
+<section id="websites-and-books" class="level3 feature">
+<h3 class="anchored" data-anchor-id="websites-and-books">Websites and Books</h3>
+<p>Want to publish your really nice tutorial in an online book? Or make a blog? Or a Word document? Or a pdf with LaTeX? Well, use the same files and render the project with Quarto!</p>
+<div class="learn-more">
+<p><a href="https://quarto.org/docs/websites/">Learn more »</a></p>
+</div>
+</section>
+<section id="customization" class="level3 feature">
+<h3 class="anchored" data-anchor-id="customization">Customization</h3>
+<p>With a bit of .css magic you can customize almost everything! Why not put a spinning raccoon in the middle of a serious text?</p>
+<div style="text-align: center">
+<style> 
+.rotate {
+  animation: rotation 2s infinite linear;
+  opacity: 1
+  display: block;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+</style>
+<p><img src="resources/image.jpg" width="100" class="rotate"></p>
+</div>
+<div class="learn-more">
+<p><a href="https://quarto.org/docs/reference/projects/websites.html">Learn more »</a></p>
+</div>
+</section>
+<section id="multilanguage" class="level3 feature">
+<h3 class="anchored" data-anchor-id="multilanguage">Multilanguage</h3>
+<p>By default, QuartoDocBuilder uses the <code>julia</code> engine provided by <a href="https://github.com/PumasAI/QuartoNotebookRunner.jl/">QuartoNotebookRunner.jl</a>, but you can use Jupyter and be able to run R and Python code along with Julia in the same document!</p>
+<div class="learn-more">
+<p><a href="https://quarto.org/docs/get-started/computations/jupyter.html">Learn more »</a></p>
+</div>
+</section>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -564,19 +645,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
-    <div class="nav-footer-left">
-      &nbsp;
-    </div>   
-    <div class="nav-footer-center">
-<p>Website generated with <a href="https://quarto.org/">Quarto</a> and <a href="https://github.com/vituri/QuartoDocBuilder.jl">QuartoDocBuilder.jl</a></p>
-</div>
-    <div class="nav-footer-right">
-      &nbsp;
-    </div>
-  </div>
-</footer>
 
 
 

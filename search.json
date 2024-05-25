@@ -4,25 +4,11 @@
     "href": "index.html",
     "title": "QuartoDocBuilder.jl",
     "section": "",
-    "text": "QuartoDocBuilder.jl is a package inspired by R pkgdown. It provides an easy way to generate a website with documentation and vignettes, by creating a Quarto project.\nBeing powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted. This website doc even has a comment section! Check some examples here and the complete list of options here.\n\n\nAdvantages?\nCI/CD?\nVersioning?"
+    "text": "QuartoDocBuilder.jl\nQuartoDocBuilder.jl is a package inspired by R pkgdown. It provides an easy way to generate a website with documentation and vignettes, by creating a Quarto project.\nBeing powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted. This website doc even has a comment section! Check some examples here and the complete list of options here.\nThe Quarto website itself is written with Quarto! Check the github repo here to get some inspiration.\n\n\nFeatures\n\n\n\nEasy configuration\nInstall the latest Quarto version, ]add QuartoDocBuilder, run quarto_build_site(\"My_package\") and you are done. It’s up to you write the best doc ever!\n\nLearn more »\n\n\n\nComment section\nEvery page can have a commentary section. Let people speak! By default, QuartoDocBuilder.jl provides Discus, which is the easiest to configure.\n\nLearn more »\n\n\n\nScientific Markdown\nLaTeX equations and citations, cross-references, figure panels, callouts, advanced page layout, comment sections and so on. It’s time to write some \\(e^{i \\pi} + 1 = 0\\)!\n\nLearn more »\n\n\n\nWebsites and Books\nWant to publish your really nice tutorial in an online book? Or make a blog? Or a Word document? Or a pdf with LaTeX? Well, use the same files and render the project with Quarto!\n\nLearn more »\n\n\n\nCustomization\nWith a bit of .css magic you can customize almost everything! Why not put a spinning raccoon in the middle of a serious text?\n\n\n\n\n\nLearn more »\n\n\n\nMultilanguage\nBy default, QuartoDocBuilder uses the julia engine provided by QuartoNotebookRunner.jl, but you can use Jupyter and be able to run R and Python code along with Julia in the same document!\n\nLearn more »"
   },
   {
-    "objectID": "index.html#comparison-to-documenter.jl",
-    "href": "index.html#comparison-to-documenter.jl",
-    "title": "QuartoDocBuilder.jl",
-    "section": "",
-    "text": "Advantages?\nCI/CD?\nVersioning?"
-  },
-  {
-    "objectID": "test.html",
-    "href": "test.html",
-    "title": "",
-    "section": "",
-    "text": "sin(x)\n\nCompute sine of x, where x is in radians.\nSee also sind, sinpi, sincos, cis, asin.\n\nExamples\n\njulia&gt; round.(sin.(range(0, 2pi, length=9)'), digits=3)\n1×9 Matrix{Float64}:\n 0.0  0.707  1.0  0.707  0.0  -0.707  -1.0  -0.707  -0.0\n\njulia&gt; sind(45)\n0.7071067811865476\n\njulia&gt; sinpi(1/4)\n0.7071067811865475\n\njulia&gt; round.(sincos(pi/6), digits=3)\n(0.5, 0.866)\n\njulia&gt; round(cis(pi/6), digits=3)\n0.866 + 0.5im\n\njulia&gt; round(exp(im*pi/6), digits=3)\n0.866 + 0.5im\n\n\n\nsin(A::AbstractMatrix)\n\nCompute the matrix sine of a square matrix A.\nIf A is symmetric or Hermitian, its eigendecomposition (eigen) is used to compute the sine. Otherwise, the sine is determined by calling exp.\n\n\nExamples\n\njulia&gt; sin(fill(1.0, (2,2)))\n2×2 Matrix{Float64}:\n 0.454649  0.454649\n 0.454649  0.454649"
-  },
-  {
-    "objectID": "from_module/quarto_index.html",
-    "href": "from_module/quarto_index.html",
+    "objectID": "reference/quarto_index.html",
+    "href": "reference/quarto_index.html",
     "title": "quarto_index",
     "section": "",
     "text": "quarto_index\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_index()\n\nGenerate the index.qmd file. It is just a copy of the README.md file.",
@@ -32,8 +18,8 @@
     ]
   },
   {
-    "objectID": "from_module/quarto_build_site.html",
-    "href": "from_module/quarto_build_site.html",
+    "objectID": "reference/quarto_build_site.html",
+    "href": "reference/quarto_build_site.html",
     "title": "quarto_build_site",
     "section": "",
     "text": "quarto_build_site\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_build_site(module_name)\n\nCreate all the files necessary to build the Quarto website.",
@@ -43,62 +29,8 @@
     ]
   },
   {
-    "objectID": "from_module/quarto_format.html",
-    "href": "from_module/quarto_format.html",
-    "title": "quarto_format",
-    "section": "",
-    "text": "quarto_format\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::Markdown.Code, eval = false)\n\nFormat a block of markdown code to Quarto.\n\nArguments\n\nm::Markdown: a block of Markdown.Code.\neval: if false, then the resulting block is not going to be evaluated.\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m)\n\nReturn a plain text from m.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::Markdown.Paragraph)\n\nReturn a plain text of m and a line break.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::AbstractString)\n\nReturns m.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::Markdown.Header{1})\n\nTake a level 1 header and write it as a level 3 header.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(md::Markdown.MD)\n\nGiven a markdown block, apply quarto_format to each of its elements and concatenate the resulting string.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(s::Symbol)\n\nCreate the documentation of a symbol (function, object, etc) s.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(md::Markdown.Admonition)\n\nFormat a Markdown.Admonition into a callout block in Quarto.",
-    "crumbs": [
-      "Reference",
-      "quarto_format"
-    ]
-  },
-  {
-    "objectID": "tutorials/tutorial-2.html",
-    "href": "tutorials/tutorial-2.html",
-    "title": "Making something even more cool",
-    "section": "",
-    "text": "Making something even more cool\nSecond tutorial! Uhuuul!",
-    "crumbs": [
-      "Tutorials",
-      "Making something even more cool"
-    ]
-  },
-  {
-    "objectID": "tutorials.html",
-    "href": "tutorials.html",
-    "title": "Tutorials",
-    "section": "",
-    "text": "Tutorials\nHere we gather many tutorials!!",
-    "crumbs": [
-      "Tutorials"
-    ]
-  },
-  {
-    "objectID": "tutorials/tutorial-1.html",
-    "href": "tutorials/tutorial-1.html",
-    "title": "Making something cool",
-    "section": "",
-    "text": "Making something cool\nFirst tutorial! Uhuuul!",
-    "crumbs": [
-      "Tutorials",
-      "Making something cool"
-    ]
-  },
-  {
-    "objectID": "from_module/quarto_callout_block.html",
-    "href": "from_module/quarto_callout_block.html",
-    "title": "quarto_callout_block",
-    "section": "",
-    "text": "quarto_callout_block\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_callout_block(s)\n\nCreate a callout block with the string s.",
-    "crumbs": [
-      "Reference",
-      "quarto_callout_block"
-    ]
-  },
-  {
-    "objectID": "from_module/quarto_yaml.html",
-    "href": "from_module/quarto_yaml.html",
+    "objectID": "reference/quarto_yaml.html",
+    "href": "reference/quarto_yaml.html",
     "title": "quarto_yaml",
     "section": "",
     "text": "quarto_yaml\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_yaml(module_name)\n\nGenerate the _quarto.yaml file.\n\nArguments\n\nmodule_name: the name of the current module.",
@@ -108,8 +40,73 @@
     ]
   },
   {
-    "objectID": "from_module/quarto_doc_page.html",
-    "href": "from_module/quarto_doc_page.html",
+    "objectID": "reference/quarto_callout_block.html",
+    "href": "reference/quarto_callout_block.html",
+    "title": "quarto_callout_block",
+    "section": "",
+    "text": "quarto_callout_block\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_callout_block(s)\n\nCreate a callout block with the string s.",
+    "crumbs": [
+      "Reference",
+      "quarto_callout_block"
+    ]
+  },
+  {
+    "objectID": "tutorials/tutorial-01.html",
+    "href": "tutorials/tutorial-01.html",
+    "title": "First tutorial",
+    "section": "",
+    "text": "First tutorial\nThis is my first tutorial!",
+    "crumbs": [
+      "Tutorials",
+      "First tutorial"
+    ]
+  },
+  {
+    "objectID": "tutorials.html",
+    "href": "tutorials.html",
+    "title": "",
+    "section": "",
+    "text": "Describe your tutorials here.",
+    "crumbs": [
+      "Tutorials",
+      "tutorials.html"
+    ]
+  },
+  {
+    "objectID": "reference.html",
+    "href": "reference.html",
+    "title": "Reference",
+    "section": "",
+    "text": "Reference\nWrite your references here.",
+    "crumbs": [
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_format.html",
+    "href": "reference/quarto_format.html",
+    "title": "quarto_format",
+    "section": "",
+    "text": "quarto_format\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::Markdown.Code, eval = false)\n\nFormat a block of markdown code to Quarto.\n\nArguments\n\nm::Markdown: a block of Markdown.Code.\neval: if false, then the resulting block is not going to be evaluated.\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m)\n\nReturn a plain text from m.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::Markdown.Paragraph)\n\nReturn a plain text of m and a line break.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::AbstractString)\n\nReturns m.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::Markdown.Header{1})\n\nTake a level 1 header and write it as a level 3 header.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(md::Markdown.MD)\n\nGiven a markdown block, apply quarto_format to each of its elements and concatenate the resulting string.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(md::Markdown.Admonition)\n\nFormat a Markdown.Admonition into a callout block in Quarto.",
+    "crumbs": [
+      "Reference",
+      "quarto_format"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_styles.html",
+    "href": "reference/quarto_styles.html",
+    "title": "quarto_styles",
+    "section": "",
+    "text": "quarto_styles\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nQuartoDocBuilder.quarto_styles\n\nNo documentation found! :(",
+    "crumbs": [
+      "Reference",
+      "quarto_styles"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_doc_page.html",
+    "href": "reference/quarto_doc_page.html",
     "title": "quarto_doc_page",
     "section": "",
     "text": "quarto_doc_page\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_doc_page(s; dir = \"docs/from_module\")\n\nGiven a symbol s, write its .qmd doc into the folder dir.",
@@ -119,24 +116,14 @@
     ]
   },
   {
-    "objectID": "from_module/quarto_doc.html",
-    "href": "from_module/quarto_doc.html",
+    "objectID": "reference/quarto_doc.html",
+    "href": "reference/quarto_doc.html",
     "title": "quarto_doc",
     "section": "",
     "text": "quarto_doc\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_doc(s::Symbol)\n\nCreate the documentation of a symbol (function, object, etc) s.",
     "crumbs": [
       "Reference",
       "quarto_doc"
-    ]
-  },
-  {
-    "objectID": "reference.html",
-    "href": "reference.html",
-    "title": "Reference",
-    "section": "",
-    "text": "Reference\nSome cool refs! See quarto_format for example!",
-    "crumbs": [
-      "Reference"
     ]
   }
 ]
