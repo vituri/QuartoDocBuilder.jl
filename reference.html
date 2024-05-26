@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./reference/quarto_build_site.html" rel="next">
+<link href="./reference/quarto_build_refpage.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -127,6 +127,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_build_refpage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_build_refpage</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./reference/quarto_build_site.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_build_site</span></a>
   </div>
@@ -147,6 +153,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./reference/quarto_doc_page.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_doc_page</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_doc_short.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_doc_short</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -195,7 +207,86 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="reference" class="level1">
 <h1>Reference</h1>
-<p>Write your references here.</p>
+<p><a href="./reference/quarto_build_refpage.html">quarto_build_refpage(module_name; output = “docs/reference.qmd”)</a></p>
+<blockquote class="blockquote">
+<p>Build the docs/reference.qmd file with a short description of each object.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_build_site.html">quarto_build_site(module_name::AbstractString; kwargs…)</a></p>
+<blockquote class="blockquote">
+<p>Create all the files necessary to build the Quarto website for the first time.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_callout_block.html">quarto_callout_block(s)</a></p>
+<blockquote class="blockquote">
+<p>Create a callout block with the string <code>s</code>.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_doc.html">quarto_doc(s::Symbol)</a></p>
+<blockquote class="blockquote">
+<p>Create the documentation of a symbol (function, object, etc) <code>s</code>.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_doc_page.html">quarto_doc_page(s; dir = “docs/reference”)</a></p>
+<blockquote class="blockquote">
+<p>Given a symbol <code>s</code>, write its .qmd doc into the folder <code>dir</code>.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_doc_short.html">quarto_doc_short(s::Symbol)</a></p>
+<blockquote class="blockquote">
+<p>Create a short description of the object. Used to build the Reference page.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_format.html">quarto_format(m::Markdown.Code, eval = false)</a></p>
+<blockquote class="blockquote">
+<p>Format a block of markdown code to Quarto.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_format.html">quarto_format(m)</a></p>
+<blockquote class="blockquote">
+<p>Return a plain text from <code>m</code>.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_format.html">quarto_format(m::Markdown.Paragraph)</a></p>
+<blockquote class="blockquote">
+<p>Return a plain text of <code>m</code> and a line break.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_format.html">quarto_format(m::AbstractString)</a></p>
+<blockquote class="blockquote">
+<p>Returns <code>m</code>.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_format.html">quarto_format(m::Markdown.Header{1})</a></p>
+<blockquote class="blockquote">
+<p>Take a level 1 header and write it as a level 3 header.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_format.html">quarto_format(md::Markdown.MD)</a></p>
+<blockquote class="blockquote">
+<p>Given a markdown block, apply <code>quarto_format</code> to each of its elements and concatenate the resulting string.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_format.html">quarto_format(md::Markdown.Admonition)</a></p>
+<blockquote class="blockquote">
+<p>Format a Markdown.Admonition into a callout block in Quarto.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_index.html">quarto_index()</a></p>
+<blockquote class="blockquote">
+<p>Generate the index.qmd file. It is just a copy of the README.md file.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_styles.html">quarto_styles()</a></p>
+<blockquote class="blockquote">
+<p>Create the docs/styles.css file with some suggested css classes.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_yaml.html">quarto_yaml( module_name::AbstractString ;output_dir = “site” ,freeze = “auto” ,cache = “true” ,warning = “false” ,comments = “true” ,repo = “USERNAME/REPOSITORY” ,theme = “flatly” )</a></p>
+<blockquote class="blockquote">
+<p>Generate the _quarto.yaml file.</p>
+</blockquote>
+<hr>
 
 
 </section>
@@ -629,8 +720,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./reference/quarto_build_site.html" class="pagination-link" aria-label="quarto_build_site">
-        <span class="nav-page-text">quarto_build_site</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./reference/quarto_build_refpage.html" class="pagination-link" aria-label="quarto_build_refpage">
+        <span class="nav-page-text">quarto_build_refpage</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

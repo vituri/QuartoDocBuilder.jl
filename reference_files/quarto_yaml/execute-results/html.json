@@ -1,0 +1,11 @@
+{
+  "hash": "ba9f8552550190bf5e980025270d800f",
+  "result": {
+    "engine": "julia",
+    "markdown": "---\nengine: julia\n---\n\n# quarto_yaml {#sec-doc}\n    \n\n::: {.callout-note appearance=\"simple\" title=\"docblock\" collapse=false}    \n\n\n::: {#2 .cell execution_count=0}\n``` {.julia .cell-code}\nquarto_yaml(\n  module_name::AbstractString\n  ;output_dir = \"site\"\n  ,freeze = \"auto\"\n  ,cache = \"true\"\n  ,warning = \"false\"\n  ,comments = \"true\"\n  ,repo = \"USERNAME/REPOSITORY\"\n  ,theme = \"flatly\"\n  )\n\n```\n:::\n\n\n\nGenerate the _quarto.yaml file.\n \n\n### Arguments\n    \n  * `module_name`: the name of the current module.\n  * `output_dir`: the directory of the output, inside /docs/ .\n  * `freeze`, `cache`, `warning`: execution options in Quarto.\n  * `comments`: if the comment section with Discus is enabled.\n  * `repo`: string in the format USERNAME/REPOSITORY so your\ncomment section work with Discus.\n \n  * `theme`: one of the bootswatch themes available in Quarto.\n\n### Details\n    \nThis function creates the docs/_quarto.yaml file. See   https://quarto.org/docs/reference/projects/websites.html for more details.\n \n\n\n:::\n\n\n",
+    "supporting": [
+      "quarto_yaml_files/figure-html"
+    ],
+    "filters": []
+  }
+}

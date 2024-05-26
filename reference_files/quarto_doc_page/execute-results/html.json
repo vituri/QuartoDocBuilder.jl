@@ -1,0 +1,11 @@
+{
+  "hash": "5270e6c85cc618cb494b086656074bb5",
+  "result": {
+    "engine": "julia",
+    "markdown": "---\nengine: julia\n---\n\n# quarto_doc_page {#sec-doc}\n    \n\n::: {.callout-note appearance=\"simple\" title=\"docblock\" collapse=false}    \n\n\n::: {#2 .cell execution_count=0}\n``` {.julia .cell-code}\nquarto_doc_page(s; dir = \"docs/reference\")\n\n```\n:::\n\n\n\nGiven a symbol `s`, write its .qmd doc into the folder `dir`.\n \n\n\n:::\n\n\n",
+    "supporting": [
+      "quarto_doc_page_files/figure-html"
+    ],
+    "filters": []
+  }
+}

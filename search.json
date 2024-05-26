@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "QuartoDocBuilder.jl",
     "section": "",
-    "text": "QuartoDocBuilder.jl\nQuartoDocBuilder.jl is a package inspired by R pkgdown. It provides an easy way to generate a website with documentation and vignettes, by creating a Quarto project.\nBeing powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted. This website doc even has a comment section! Check some examples here and the complete list of options here.\nThe Quarto website itself is written with Quarto! Check the github repo here to get some inspiration.\n\n\nFeatures\n\n\n\nEasy configuration\nInstall the latest Quarto version, ]add QuartoDocBuilder, run quarto_build_site(\"My_package\") and you are done. It’s up to you write the best doc ever!\n\nLearn more »\n\n\n\nComment section\nEvery page can have a commentary section. Let people speak! By default, QuartoDocBuilder.jl provides Discus, which is the easiest to configure.\n\nLearn more »\n\n\n\nScientific Markdown\nLaTeX equations and citations, cross-references, figure panels, callouts, advanced page layout, comment sections and so on. It’s time to write some \\(e^{i \\pi} + 1 = 0\\)!\n\nLearn more »\n\n\n\nWebsites and Books\nWant to publish your really nice tutorial in an online book? Or make a blog? Or a Word document? Or a pdf with LaTeX? Well, use the same files and render the project with Quarto!\n\nLearn more »\n\n\n\nCustomization\nWith a bit of .css magic you can customize almost everything! Why not put a spinning raccoon in the middle of a serious text?\n\n\n\n\n\nLearn more »\n\n\n\nMultilanguage\nBy default, QuartoDocBuilder uses the julia engine provided by QuartoNotebookRunner.jl, but you can use Jupyter and be able to run R and Python code along with Julia in the same document!\n\nLearn more »"
+    "text": "QuartoDocBuilder.jl\nQuartoDocBuilder.jl is a package inspired by R pkgdown. It provides an easy way to generate a website with documentation and vignettes, by creating a Quarto project.\nBeing powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted. This website doc even has a comment section! Check some examples here and the complete list of options here.\nThe Quarto website itself is written with Quarto! Check the github repo here to get some inspiration.\n\n\nFeatures\n\n\n\nEasy configuration\nInstall the latest Quarto version, ]add QuartoDocBuilder, run quarto_build_site and you are done. It’s up to you write the best doc ever!\n\nLearn more »\n\n\n\nComment section\nEvery page can have a commentary section. Let people speak! By default, QuartoDocBuilder.jl provides Discus, which is the easiest to configure.\n\nLearn more »\n\n\n\nScientific Markdown\nInline code, LaTeX equations and citations, cross-references, figure panels, callouts, advanced page layout, comment sections and so on. It’s time to write some \\(e^{i \\pi} + 1 = 0\\)!\n\nLearn more »\n\n\n\nWebsites and Books\nWant to publish your really nice tutorial in an online book? Or make a blog? Or a Word document? Or a pdf with LaTeX? Well, use the same files and render the project with Quarto!\n\nLearn more »\n\n\n\nCustomization\nWith a bit of .css magic you can customize almost everything! Why not put a spinning raccoon in the middle of a serious text?\n\n\n\n\n\nLearn more »\n\n\n\nMultilanguage\nBy default, QuartoDocBuilder uses the julia engine provided by QuartoNotebookRunner.jl, but you can use Jupyter and be able to run R and Python code along with Julia in the same document!\n\nLearn more »"
   },
   {
     "objectID": "reference/quarto_index.html",
@@ -22,10 +22,21 @@
     "href": "reference/quarto_build_site.html",
     "title": "quarto_build_site",
     "section": "",
-    "text": "quarto_build_site\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_build_site(module_name)\n\nCreate all the files necessary to build the Quarto website.",
+    "text": "quarto_build_site\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_build_site(module_name::AbstractString; kwargs...)\n\nCreate all the files necessary to build the Quarto website for the first time.\n\nArguments\n\nmodule_name::AbstractString: your module’s name.\nkwargs...: kwargs passed to quarto_yaml.\n\n\n\nDetails\nThis function does a lot of things!\n\nCreate the docs directory, if it doesn’t exist.\nCreate docs/_quarto.yaml, which is the file that contains all information about how to render the website as a Quarto project.\nCreate the directory docs/reference and the file docs/reference.qmd if they don’t exist.\nCreate the directory docs/tutorials and the file docs/tutorials.qmd if they don’t exist, together with docs/tutorials/tutorial-01.qmd.\nCopy your README.md file as docs/index.qmd.\nCreate docs/styles.css with some predefined styles.\nCreate a .qmd file in docs/reference for each object in module_name.",
     "crumbs": [
       "Reference",
       "quarto_build_site"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_styles.html",
+    "href": "reference/quarto_styles.html",
+    "title": "quarto_styles",
+    "section": "",
+    "text": "quarto_styles\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_styles()\n\nCreate the docs/styles.css file with some suggested css classes.",
+    "crumbs": [
+      "Reference",
+      "quarto_styles"
     ]
   },
   {
@@ -33,7 +44,7 @@
     "href": "reference/quarto_yaml.html",
     "title": "quarto_yaml",
     "section": "",
-    "text": "quarto_yaml\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_yaml(module_name)\n\nGenerate the _quarto.yaml file.\n\nArguments\n\nmodule_name: the name of the current module.",
+    "text": "quarto_yaml\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_yaml(\n  module_name::AbstractString\n  ;output_dir = \"site\"\n  ,freeze = \"auto\"\n  ,cache = \"true\"\n  ,warning = \"false\"\n  ,comments = \"true\"\n  ,repo = \"USERNAME/REPOSITORY\"\n  ,theme = \"flatly\"\n  )\n\nGenerate the _quarto.yaml file.\n\nArguments\n\nmodule_name: the name of the current module.\noutput_dir: the directory of the output, inside /docs/ .\nfreeze, cache, warning: execution options in Quarto.\ncomments: if the comment section with Discus is enabled.\nrepo: string in the format USERNAME/REPOSITORY so your comment section work with Discus.\ntheme: one of the bootswatch themes available in Quarto.\n\n\n\nDetails\nThis function creates the docs/_quarto.yaml file. See https://quarto.org/docs/reference/projects/websites.html for more details.",
     "crumbs": [
       "Reference",
       "quarto_yaml"
@@ -53,23 +64,22 @@
   {
     "objectID": "tutorials/tutorial-01.html",
     "href": "tutorials/tutorial-01.html",
-    "title": "First tutorial",
+    "title": "From zero to nice docs!",
     "section": "",
-    "text": "First tutorial\nThis is my first tutorial!",
+    "text": "From zero to nice docs!\nStart with a package\nInstall QuartoDocBuilder.jl",
     "crumbs": [
       "Tutorials",
-      "First tutorial"
+      "From zero to nice docs!"
     ]
   },
   {
     "objectID": "tutorials.html",
     "href": "tutorials.html",
-    "title": "",
+    "title": "Tutorials",
     "section": "",
-    "text": "Describe your tutorials here.",
+    "text": "Tutorials\nDescribe your tutorials here.",
     "crumbs": [
-      "Tutorials",
-      "tutorials.html"
+      "Tutorials"
     ]
   },
   {
@@ -77,7 +87,7 @@
     "href": "reference.html",
     "title": "Reference",
     "section": "",
-    "text": "Reference\nWrite your references here.",
+    "text": "Reference\nquarto_build_refpage(module_name; output = “docs/reference.qmd”)\n\nBuild the docs/reference.qmd file with a short description of each object.\n\n\nquarto_build_site(module_name::AbstractString; kwargs…)\n\nCreate all the files necessary to build the Quarto website for the first time.\n\n\nquarto_callout_block(s)\n\nCreate a callout block with the string s.\n\n\nquarto_doc(s::Symbol)\n\nCreate the documentation of a symbol (function, object, etc) s.\n\n\nquarto_doc_page(s; dir = “docs/reference”)\n\nGiven a symbol s, write its .qmd doc into the folder dir.\n\n\nquarto_doc_short(s::Symbol)\n\nCreate a short description of the object. Used to build the Reference page.\n\n\nquarto_format(m::Markdown.Code, eval = false)\n\nFormat a block of markdown code to Quarto.\n\n\nquarto_format(m)\n\nReturn a plain text from m.\n\n\nquarto_format(m::Markdown.Paragraph)\n\nReturn a plain text of m and a line break.\n\n\nquarto_format(m::AbstractString)\n\nReturns m.\n\n\nquarto_format(m::Markdown.Header{1})\n\nTake a level 1 header and write it as a level 3 header.\n\n\nquarto_format(md::Markdown.MD)\n\nGiven a markdown block, apply quarto_format to each of its elements and concatenate the resulting string.\n\n\nquarto_format(md::Markdown.Admonition)\n\nFormat a Markdown.Admonition into a callout block in Quarto.\n\n\nquarto_index()\n\nGenerate the index.qmd file. It is just a copy of the README.md file.\n\n\nquarto_styles()\n\nCreate the docs/styles.css file with some suggested css classes.\n\n\nquarto_yaml( module_name::AbstractString ;output_dir = “site” ,freeze = “auto” ,cache = “true” ,warning = “false” ,comments = “true” ,repo = “USERNAME/REPOSITORY” ,theme = “flatly” )\n\nGenerate the _quarto.yaml file.",
     "crumbs": [
       "Reference"
     ]
@@ -94,14 +104,25 @@
     ]
   },
   {
-    "objectID": "reference/quarto_styles.html",
-    "href": "reference/quarto_styles.html",
-    "title": "quarto_styles",
+    "objectID": "reference/quarto_build_refpage.html",
+    "href": "reference/quarto_build_refpage.html",
+    "title": "quarto_build_refpage",
     "section": "",
-    "text": "quarto_styles\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nQuartoDocBuilder.quarto_styles\n\nNo documentation found! :(",
+    "text": "quarto_build_refpage\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_build_refpage(module_name; output = \"docs/reference.qmd\")\n\nBuild the docs/reference.qmd file with a short description of each object.\n\nArguments\n\nmodule_name: the module name.\noutput: the output file. By default, it is “docs/reference.qmd”.",
     "crumbs": [
       "Reference",
-      "quarto_styles"
+      "quarto_build_refpage"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_doc_short.html",
+    "href": "reference/quarto_doc_short.html",
+    "title": "quarto_doc_short",
+    "section": "",
+    "text": "quarto_doc_short\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_doc_short(s::Symbol)\n\nCreate a short description of the object. Used to build the Reference page.",
+    "crumbs": [
+      "Reference",
+      "quarto_doc_short"
     ]
   },
   {
@@ -109,7 +130,7 @@
     "href": "reference/quarto_doc_page.html",
     "title": "quarto_doc_page",
     "section": "",
-    "text": "quarto_doc_page\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_doc_page(s; dir = \"docs/from_module\")\n\nGiven a symbol s, write its .qmd doc into the folder dir.",
+    "text": "quarto_doc_page\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_doc_page(s; dir = \"docs/reference\")\n\nGiven a symbol s, write its .qmd doc into the folder dir.",
     "crumbs": [
       "Reference",
       "quarto_doc_page"

@@ -1,0 +1,11 @@
+{
+  "hash": "7900a78b56f0fc50d9266e081669bf70",
+  "result": {
+    "engine": "julia",
+    "markdown": "---\nengine: julia\n---\n\n# quarto_index {#sec-doc}\n    \n\n::: {.callout-note appearance=\"simple\" title=\"docblock\" collapse=false}    \n\n\n::: {#2 .cell execution_count=0}\n``` {.julia .cell-code}\nquarto_index()\n\n```\n:::\n\n\n\nGenerate the index.qmd file. It is just a copy of the README.md file.\n \n\n\n:::\n\n\n",
+    "supporting": [
+      "quarto_index_files"
+    ],
+    "filters": []
+  }
+}

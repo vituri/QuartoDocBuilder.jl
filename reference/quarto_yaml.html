@@ -161,6 +161,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../reference/quarto_build_refpage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_build_refpage</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../reference/quarto_build_site.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_build_site</span></a>
   </div>
@@ -181,6 +187,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../reference/quarto_doc_page.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_doc_page</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/quarto_doc_short.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_doc_short</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -242,14 +254,32 @@ docblock
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div id="2" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_yaml</span>(module_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_yaml</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  module_name<span class="op">::</span><span class="dt">AbstractString</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  ;output_dir <span class="op">=</span> <span class="st">"site"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  ,freeze <span class="op">=</span> <span class="st">"auto"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  ,cache <span class="op">=</span> <span class="st">"true"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  ,warning <span class="op">=</span> <span class="st">"false"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  ,comments <span class="op">=</span> <span class="st">"true"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  ,repo <span class="op">=</span> <span class="st">"USERNAME/REPOSITORY"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  ,theme <span class="op">=</span> <span class="st">"flatly"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Generate the _quarto.yaml file.</p>
 <section id="arguments" class="level3">
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <ul>
-<li><code>module_name</code>: the name of the current module.</li>
+<li><p><code>module_name</code>: the name of the current module.</p></li>
+<li><p><code>output_dir</code>: the directory of the output, inside /docs/ .</p></li>
+<li><p><code>freeze</code>, <code>cache</code>, <code>warning</code>: execution options in Quarto.</p></li>
+<li><p><code>comments</code>: if the comment section with Discus is enabled.</p></li>
+<li><p><code>repo</code>: string in the format USERNAME/REPOSITORY so your comment section work with Discus.</p></li>
+<li><p><code>theme</code>: one of the bootswatch themes available in Quarto.</p></li>
 </ul>
+</section>
+<section id="details" class="level3">
+<h3 class="anchored" data-anchor-id="details">Details</h3>
+<p>This function creates the docs/_quarto.yaml file. See https://quarto.org/docs/reference/projects/websites.html for more details.</p>
 </section>
 </div>
 </div>

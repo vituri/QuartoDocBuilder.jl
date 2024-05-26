@@ -1,0 +1,11 @@
+{
+  "hash": "dba2ff486963b52a7158d3b888b2c76f",
+  "result": {
+    "engine": "julia",
+    "markdown": "---\nengine: julia\n---\n\n# quarto_format {#sec-doc}\n    \n\n::: {.callout-note appearance=\"simple\" title=\"docblock\" collapse=false}    \n\n\n::: {#2 .cell execution_count=0}\n``` {.julia .cell-code}\nquarto_format(m::Markdown.Code, eval = false)\n\n```\n:::\n\n\n\nFormat a block of markdown code to Quarto.\n \n\n### Arguments\n    \n  * m::Markdown: a block of Markdown.Code.\n  * eval: if false, then the resulting block is not going to\nbe evaluated.\n \n\n\n:::\n    \n\n --- \n \n::: {.callout-note appearance=\"simple\" title=\"docblock\" collapse=false}    \n\n\n::: {#4 .cell execution_count=0}\n``` {.julia .cell-code}\nquarto_format(m)\n\n```\n:::\n\n\n\nReturn a plain text from `m`.\n \n\n\n:::\n    \n\n --- \n \n::: {.callout-note appearance=\"simple\" title=\"docblock\" collapse=false}    \n\n\n::: {#6 .cell execution_count=0}\n``` {.julia .cell-code}\nquarto_format(m::Markdown.Paragraph)\n\n```\n:::\n\n\n\nReturn a plain text of `m` and a line break.\n \n\n\n:::\n    \n\n --- \n \n::: {.callout-note appearance=\"simple\" title=\"docblock\" collapse=false}    \n\n\n::: {#8 .cell execution_count=0}\n``` {.julia .cell-code}\nquarto_format(m::AbstractString)\n\n```\n:::\n\n\n\nReturns `m`.\n \n\n\n:::\n    \n\n --- \n \n::: {.callout-note appearance=\"simple\" title=\"docblock\" collapse=false}    \n\n\n::: {#10 .cell execution_count=0}\n``` {.julia .cell-code}\nquarto_format(m::Markdown.Header{1})\n\n```\n:::\n\n\n\nTake a level 1 header and write it as a level 3 header.\n \n\n\n:::\n    \n\n --- \n \n::: {.callout-note appearance=\"simple\" title=\"docblock\" collapse=false}    \n\n\n::: {#12 .cell execution_count=0}\n``` {.julia .cell-code}\nquarto_format(md::Markdown.MD)\n\n```\n:::\n\n\n\nGiven a markdown block, apply `quarto_format` to each of its elements and concatenate the resulting string.\n \n\n\n:::\n    \n\n --- \n \n::: {.callout-note appearance=\"simple\" title=\"docblock\" collapse=false}    \n\n\n::: {#14 .cell execution_count=0}\n``` {.julia .cell-code}\nquarto_format(md::Markdown.Admonition)\n\n```\n:::\n\n\n\nFormat a Markdown.Admonition into a callout block in Quarto.\n \n\n\n:::\n\n\n",
+    "supporting": [
+      "quarto_format_files"
+    ],
+    "filters": []
+  }
+}

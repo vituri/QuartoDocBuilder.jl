@@ -1,0 +1,11 @@
+{
+  "hash": "20dc781b3d79e18a46a24e3c72b74c1a",
+  "result": {
+    "engine": "julia",
+    "markdown": "---\nengine: julia\n---\n\n# quarto_callout_block {#sec-doc}\n    \n\n::: {.callout-note appearance=\"simple\" title=\"docblock\" collapse=false}    \n\n\n::: {#2 .cell execution_count=0}\n``` {.julia .cell-code}\nquarto_callout_block(s)\n\n```\n:::\n\n\n\nCreate a callout block with the string `s`.\n \n\n\n:::\n\n\n",
+    "supporting": [
+      "quarto_callout_block_files"
+    ],
+    "filters": []
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "hash": "fe78a84550598d4797adbbbd7cafc086",
+  "result": {
+    "engine": "julia",
+    "markdown": "---\nengine: julia\n---\n\n# quarto_build_site {#sec-doc}\n    \n\n::: {.callout-note appearance=\"simple\" title=\"docblock\" collapse=false}    \n\n\n::: {#2 .cell execution_count=0}\n``` {.julia .cell-code}\nquarto_build_site(module_name::AbstractString; kwargs...)\n\n```\n:::\n\n\n\nCreate all the files necessary to build the Quarto  website for the first time.\n \n\n### Arguments\n    \n  * `module_name`::AbstractString: your module's name.\n  * `kwargs...`: kwargs passed to `quarto_yaml`.\n\n### Details\n    \nThis function does a lot of things!\n \n  * Create the `docs` directory, if it doesn't exist.\n  * Create docs/_quarto.yaml, which is the file that\ncontains all information about how to render the  website as a Quarto project.\n \n  * Create the directory `docs/reference` and the file\ndocs/reference.qmd if they don't exist.\n \n  * Create the directory `docs/tutorials` and the file\ndocs/tutorials.qmd if they don't exist, together with docs/tutorials/tutorial-01.qmd.\n \n  * Copy your README.md file as docs/index.qmd.\n  * Create docs/styles.css with some predefined styles.\n  * Create a .qmd file in docs/reference for each object\nin `module_name`.\n \n\n\n:::\n\n\n",
+    "supporting": [
+      "quarto_build_site_files/figure-html"
+    ],
+    "filters": []
+  }
+}

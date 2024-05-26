@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../reference/quarto_callout_block.html" rel="next">
-<link href="../reference.html" rel="prev">
+<link href="../reference/quarto_build_refpage.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -162,6 +162,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../reference/quarto_build_refpage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_build_refpage</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../reference/quarto_build_site.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">quarto_build_site</span></a>
   </div>
@@ -182,6 +188,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../reference/quarto_doc_page.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_doc_page</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/quarto_doc_short.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_doc_short</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -243,9 +255,29 @@ docblock
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div id="2" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_site</span>(module_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_site</span>(module_name<span class="op">::</span><span class="dt">AbstractString</span>; kwargs<span class="op">...</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Create all the files necessary to build the Quarto website.</p>
+<p>Create all the files necessary to build the Quarto website for the first time.</p>
+<section id="arguments" class="level3">
+<h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
+<ul>
+<li><code>module_name</code>::AbstractString: your module’s name.</li>
+<li><code>kwargs...</code>: kwargs passed to <code>quarto_yaml</code>.</li>
+</ul>
+</section>
+<section id="details" class="level3">
+<h3 class="anchored" data-anchor-id="details">Details</h3>
+<p>This function does a lot of things!</p>
+<ul>
+<li><p>Create the <code>docs</code> directory, if it doesn’t exist.</p></li>
+<li><p>Create docs/_quarto.yaml, which is the file that contains all information about how to render the website as a Quarto project.</p></li>
+<li><p>Create the directory <code>docs/reference</code> and the file docs/reference.qmd if they don’t exist.</p></li>
+<li><p>Create the directory <code>docs/tutorials</code> and the file docs/tutorials.qmd if they don’t exist, together with docs/tutorials/tutorial-01.qmd.</p></li>
+<li><p>Copy your README.md file as docs/index.qmd.</p></li>
+<li><p>Create docs/styles.css with some predefined styles.</p></li>
+<li><p>Create a .qmd file in docs/reference for each object in <code>module_name</code>.</p></li>
+</ul>
+</section>
 </div>
 </div>
 </div>
@@ -680,8 +712,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../reference.html" class="pagination-link" aria-label="Reference">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Reference</span>
+      <a href="../reference/quarto_build_refpage.html" class="pagination-link" aria-label="quarto_build_refpage">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">quarto_build_refpage</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
