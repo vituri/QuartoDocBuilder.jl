@@ -2,7 +2,7 @@
 engine: julia
 ---
 
-# quarto_doc_page {#sec-doc}
+# quarto_doc_short {#sec-doc}
     
 
 ::: {.callout-note appearance="simple" title="docblock" collapse=false}    
@@ -10,11 +10,11 @@ engine: julia
 
 ```{julia}
 #| eval: false
-quarto_doc_page(s; dir = "docs/reference")
+quarto_doc_short(s::Symbol)
 
 ```
 
-Given a symbol `s`, write its .qmd doc into the folder `dir`.
+Create a short description of the object. Used to build the Reference page.
  
 
 

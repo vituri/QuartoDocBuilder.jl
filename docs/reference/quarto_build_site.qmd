@@ -10,11 +10,36 @@ engine: julia
 
 ```{julia}
 #| eval: false
-quarto_build_site(module_name)
+quarto_build_site(module_name::AbstractString; kwargs...)
 
 ```
 
-Create all the files necessary to build the Quarto website.
+Create all the files necessary to build the Quarto  website for the first time.
+ 
+
+### Arguments
+    
+  * `module_name`::AbstractString: your module's name.
+  * `kwargs...`: kwargs passed to `quarto_yaml`.
+
+### Details
+    
+This function does a lot of things!
+ 
+  * Create the `docs` directory, if it doesn't exist.
+  * Create docs/_quarto.yaml, which is the file that
+contains all information about how to render the  website as a Quarto project.
+ 
+  * Create the directory `docs/reference` and the file
+docs/reference.qmd if they don't exist.
+ 
+  * Create the directory `docs/tutorials` and the file
+docs/tutorials.qmd if they don't exist, together with docs/tutorials/tutorial-01.qmd.
+ 
+  * Copy your README.md file as docs/index.qmd.
+  * Create docs/styles.css with some predefined styles.
+  * Create a .qmd file in docs/reference for each object
+in `module_name`.
  
 
 

@@ -1,4 +1,160 @@
-    
+---
+engine: julia
+---
+
 # Reference
-    
-Write your references here.
+  
+
+[quarto_build_refpage(module_name; output = "docs/reference.qmd")](reference/quarto_build_refpage.qmd)
+
+> Build the docs/reference.qmd file with a short description of each object.
+ 
+
+
+---
+
+          
+[quarto_build_site(module_name::AbstractString; kwargs...)](reference/quarto_build_site.qmd)
+
+> Create all the files necessary to build the Quarto  website for the first time.
+ 
+
+
+---
+
+          
+[quarto_callout_block(s)](reference/quarto_callout_block.qmd)
+
+> Create a callout block with the string `s`.
+ 
+
+
+---
+
+          
+[quarto_doc(s::Symbol)](reference/quarto_doc.qmd)
+
+> Create the documentation of a symbol (function, object, etc) `s`.
+ 
+
+
+---
+
+          
+[quarto_doc_page(s; dir = "docs/reference")](reference/quarto_doc_page.qmd)
+
+> Given a symbol `s`, write its .qmd doc into the folder `dir`.
+ 
+
+
+---
+
+          
+[quarto_doc_short(s::Symbol)](reference/quarto_doc_short.qmd)
+
+> Create a short description of the object. Used to build the Reference page.
+ 
+
+
+---
+
+          
+[quarto_format(m::Markdown.Code, eval = false)](reference/quarto_format.qmd)
+
+> Format a block of markdown code to Quarto.
+ 
+
+
+---
+
+          
+[quarto_format(m)](reference/quarto_format.qmd)
+
+> Return a plain text from `m`.
+ 
+
+
+---
+
+          
+[quarto_format(m::Markdown.Paragraph)](reference/quarto_format.qmd)
+
+> Return a plain text of `m` and a line break.
+ 
+
+
+---
+
+          
+[quarto_format(m::AbstractString)](reference/quarto_format.qmd)
+
+> Returns `m`.
+ 
+
+
+---
+
+          
+[quarto_format(m::Markdown.Header{1})](reference/quarto_format.qmd)
+
+> Take a level 1 header and write it as a level 3 header.
+ 
+
+
+---
+
+          
+[quarto_format(md::Markdown.MD)](reference/quarto_format.qmd)
+
+> Given a markdown block, apply `quarto_format` to each of its elements and concatenate the resulting string.
+ 
+
+
+---
+
+          
+[quarto_format(md::Markdown.Admonition)](reference/quarto_format.qmd)
+
+> Format a Markdown.Admonition into a callout block in Quarto.
+ 
+
+
+---
+
+          
+[quarto_index()](reference/quarto_index.qmd)
+
+> Generate the index.qmd file. It is just a copy of the README.md file.
+ 
+
+
+---
+
+          
+[quarto_styles()](reference/quarto_styles.qmd)
+
+> Create the docs/styles.css file with some suggested css classes.
+ 
+
+
+---
+
+          
+[quarto_yaml(
+  module_name::AbstractString
+  ;output_dir = "site"
+  ,freeze = "auto"
+  ,cache = "true"
+  ,warning = "false"
+  ,comments = "true"
+  ,repo = "USERNAME/REPOSITORY"
+  ,theme = "flatly"
+  )](reference/quarto_yaml.qmd)
+
+> Generate the _quarto.yaml file.
+ 
+
+
+---
+
+          

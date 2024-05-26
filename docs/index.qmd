@@ -12,8 +12,6 @@ The [Quarto website](https://quarto.org/) itself is written with Quarto! Check t
 
 # Features
 
-
-
 ::: {.content-block}
 ::: {.features}
 
@@ -21,7 +19,7 @@ The [Quarto website](https://quarto.org/) itself is written with Quarto! Check t
 ::: {.feature}
 ### Easy configuration
 
-Install the latest Quarto version, `]add` QuartoDocBuilder, run `quarto_build_site("My_package")` and you are done. It's up to you write the best doc ever!
+Install the latest Quarto version, `]add` QuartoDocBuilder, run `quarto_build_site` and you are done. It's up to you write the best doc ever!
 
 ::: {.learn-more}
 [Learn more »](/docs/reference/quarto_build_site.qmd)
@@ -42,7 +40,7 @@ Every page can have a commentary section. Let people speak! By default, QuartoDo
 ::: {.feature}
 ### Scientific Markdown
 
-LaTeX equations and citations, cross-references, figure panels, callouts, advanced page layout, comment sections and so on. It's time to write some $e^{i \pi} + 1 = 0$!
+Inline code, LaTeX equations and citations, cross-references, figure panels, callouts, advanced page layout, comment sections and so on. It's time to write some $e^{i \pi} + 1 = 0$!
 
 ::: {.learn-more}
 [Learn more »](https://quarto.org/docs/authoring/markdown-basics.html)

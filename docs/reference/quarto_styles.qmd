@@ -10,12 +10,12 @@ engine: julia
 
 ```{julia}
 #| eval: false
-
-QuartoDocBuilder.quarto_styles
+quarto_styles()
 
 ```
 
-No documentation found! :(
+Create the docs/styles.css file with some suggested css classes.
+ 
 
 
 :::

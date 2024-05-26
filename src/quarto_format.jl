@@ -149,7 +149,7 @@ end
 
 
 """
-    quarto_doc_page(s; dir = "docs/from_module")
+    quarto_doc_page(s; dir = "docs/reference")
 
 Given a symbol `s`, write its .qmd doc into the folder `dir`.
 """
@@ -171,3 +171,54 @@ function quarto_doc_page(s; dir = "docs/reference")
     @info "Writing docs to file $path"
     write(path, qmd)
 end
+
+function get_function_name(s)
+    s[1:findfirst("(", s)[1] - 1]
+end
+
+"""
+    quarto_doc_short(s::Symbol)
+
+Create a short description of the object. Used to build
+the Reference page.
+"""
+function quarto_doc_short(s::Symbol)
+    z = Base.doc(@eval $s)
+    ct = z.content
+  
+    if ct[1] isa Markdown.Paragraph
+        return [
+            """
+  
+  ```{julia}
+  #| eval: false
+  
+  $(ct[2].content[1].code)
+  
+  ```
+  
+  No documentation found! :(
+            """
+        ]
+    else
+        x = ct[1]
+        dc_short = map(ct) do x
+            code, description = x.content[1].content[1:2]
+            f_name = code.code |> get_function_name
+  
+            s = """
+  
+  [$(code.code)](reference/$(f_name).qmd)
+  
+  > $(quarto_format(description))
+  
+  ---
+  
+            """
+        end
+  
+        return quarto_format.(dc_short)
+  
+    end
+  
+  end

@@ -10,7 +10,16 @@ engine: julia
 
 ```{julia}
 #| eval: false
-quarto_yaml(module_name)
+quarto_yaml(
+  module_name::AbstractString
+  ;output_dir = "site"
+  ,freeze = "auto"
+  ,cache = "true"
+  ,warning = "false"
+  ,comments = "true"
+  ,repo = "USERNAME/REPOSITORY"
+  ,theme = "flatly"
+  )
 
 ```
 
@@ -20,6 +29,18 @@ Generate the _quarto.yaml file.
 ### Arguments
     
   * `module_name`: the name of the current module.
+  * `output_dir`: the directory of the output, inside /docs/ .
+  * `freeze`, `cache`, `warning`: execution options in Quarto.
+  * `comments`: if the comment section with Discus is enabled.
+  * `repo`: string in the format USERNAME/REPOSITORY so your
+comment section work with Discus.
+ 
+  * `theme`: one of the bootswatch themes available in Quarto.
+
+### Details
+    
+This function creates the docs/_quarto.yaml file. See   https://quarto.org/docs/reference/projects/websites.html for more details.
+ 
 
 
 :::

@@ -1,0 +1,28 @@
+---
+engine: julia
+---
+
+# quarto_build_refpage {#sec-doc}
+    
+
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+quarto_build_refpage(module_name; output = "docs/reference.qmd")
+
+```
+
+Build the docs/reference.qmd file with a short description of each object.
+ 
+
+### Arguments
+    
+  * `module_name`: the module name.
+  * `output`: the output file. By default, it is "docs/reference.qmd".
+
+
+:::
+    
+

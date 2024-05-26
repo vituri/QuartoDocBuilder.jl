@@ -1,3 +1,8 @@
+"""
+    quarto_styles()
+
+Create the docs/styles.css file with some suggested css classes.
+"""
 function quarto_styles()
     s = """
 

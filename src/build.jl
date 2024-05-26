@@ -1,13 +1,34 @@
 """
-    quarto_yaml(module_name)
+    quarto_yaml(
+      module_name::AbstractString
+      ;output_dir = "site"
+      ,freeze = "auto"
+      ,cache = "true"
+      ,warning = "false"
+      ,comments = "true"
+      ,repo = "USERNAME/REPOSITORY"
+      ,theme = "flatly"
+      )
 
 Generate the _quarto.yaml file.
 
 # Arguments
 - `module_name`: the name of the current module.
+- `output_dir`: the directory of the output, inside /docs/ .
+- `freeze`, `cache`, `warning`: execution options in Quarto.
+- `comments`: if the comment section with Discus is enabled.
+- `repo`: string in the format USERNAME/REPOSITORY so your
+comment section work with Discus.
+- `theme`: one of the bootswatch themes available in Quarto.
+
+# Details
+
+This function creates the docs/_quarto.yaml file. See
+  https://quarto.org/docs/reference/projects/websites.html for
+more details.
 """
 function quarto_yaml(
-  module_name
+  module_name::AbstractString
   ;output_dir = "site"
   ,freeze = "auto"
   ,cache = "true"
@@ -168,11 +189,44 @@ end
 
 
 """
-    quarto_build_site(module_name)
 
-Create all the files necessary to build the Quarto website.
+    quarto_build_site(module_name::AbstractString; kwargs...)
+
+Create all the files necessary to build the Quarto 
+website for the first time.
+
+# Arguments
+
+- `module_name`::AbstractString: your module's name.
+
+- `kwargs...`: kwargs passed to `quarto_yaml`.
+
+# Details
+
+This function does a lot of things!
+
+- Create the `docs` directory, if it doesn't exist.
+
+- Create docs/_quarto.yaml, which is the file that
+contains all information about how to render the 
+website as a Quarto project.
+
+- Create the directory `docs/reference` and the file 
+docs/reference.qmd if they don't exist.
+
+- Create the directory `docs/tutorials` and the file 
+docs/tutorials.qmd if they don't exist, together with
+docs/tutorials/tutorial-01.qmd.
+
+- Copy your README.md file as docs/index.qmd.
+
+- Create docs/styles.css with some predefined styles.
+
+- Create a .qmd file in docs/reference for each object
+in `module_name`.
+
 """
-function quarto_build_site(module_name; kwargs...)
+function quarto_build_site(module_name::AbstractString; kwargs...)
 
   if isdir("docs") == false
     mkdir("docs")
@@ -228,4 +282,39 @@ This is my first tutorial!"""
   quarto_styles()
 
   @info "All done!"
+end
+
+"""
+    quarto_build_refpage(module_name; output = "docs/reference.qmd")
+
+Build the docs/reference.qmd file with a short description of
+each object.
+
+# Arguments
+
+- `module_name`: the module name.
+
+- `output`: the output file. By default, it is "docs/reference.qmd".
+"""
+function quarto_build_refpage(module_name; output = "docs/reference.qmd")
+  fs = names(@eval $(Symbol(module_name)))[2:end]
+
+  short_docs = map(quarto_doc_short.(fs)) do x
+      if x isa Vector
+          return string(x...)
+      else
+          return x
+      end
+  end
+  
+  s = """---
+engine: julia
+---
+
+# Reference
+  
+$(string(short_docs...))
+"""
+
+  write(output, s)
 end
