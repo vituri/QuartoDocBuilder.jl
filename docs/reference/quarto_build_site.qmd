@@ -10,7 +10,7 @@ engine: julia
 
 ```{julia}
 #| eval: false
-quarto_build_site(module_name::AbstractString; kwargs...)
+quarto_build_site(module_name; kwargs...)
 
 ```
 
@@ -19,7 +19,7 @@ Create all the files necessary to build the Quarto  website for the first time.
 
 ### Arguments
     
-  * `module_name`::AbstractString: your module's name.
+  * `module_name`: your module's name.
   * `kwargs...`: kwargs passed to `quarto_yaml`.
 
 ### Details

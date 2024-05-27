@@ -2,6 +2,12 @@ module QuartoDocBuilder
 
 using Markdown
 
+function get_objects_from_module(m::Module)
+    [k for (k, v) ∈ Base.Docs.meta(m)]
+end
+
+export get_objects_from_module;
+
 include("quarto_format.jl");
 export quarto_format, 
     quarto_doc,

@@ -123,8 +123,8 @@ end
 
 Create the documentation of a symbol (function, object, etc) `s`.
 """
-function quarto_doc(s::Symbol)
-    z = Base.doc(@eval $s)
+function quarto_doc(b)
+    z = Base.doc(b)
     ct = z.content
     
     if ct[1] isa Markdown.Paragraph        
@@ -156,7 +156,7 @@ Given a symbol `s`, write its .qmd doc into the folder `dir`.
 function quarto_doc_page(s; dir = "docs/reference")
 
     blocks = quarto_doc(s) .|> quarto_callout_block
-    st = string(s)
+    st = string(s.var)
 
     qmd = """
       ---
@@ -167,7 +167,7 @@ function quarto_doc_page(s; dir = "docs/reference")
           
       $(str_concat(blocks, sep = "\n --- \n "))
       """
-    path = "$(dir)/$(string(s)).qmd"
+    path = "$(dir)/$(st).qmd"
     @info "Writing docs to file $path"
     write(path, qmd)
 end
@@ -182,8 +182,8 @@ end
 Create a short description of the object. Used to build
 the Reference page.
 """
-function quarto_doc_short(s::Symbol)
-    z = Base.doc(@eval $s)
+function quarto_doc_short(b)
+    z = Base.doc(b)
     ct = z.content
   
     if ct[1] isa Markdown.Paragraph

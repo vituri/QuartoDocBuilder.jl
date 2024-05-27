@@ -25,5 +25,33 @@ findfirst(z)
 
 s = sin
 
+function get_objects_from_module(m::Module)
+    [k for (k, v) ∈ Base.Docs.meta(m)]
+end
+
+m = QuartoDocBuilder
+fs = get_objects_from_module(m)
+
+b = fs[1]
 
 
+z = Base.doc(b)
+ct = z.content
+
+if ct[1] isa Markdown.Paragraph        
+  return  [
+"""
+
+```{julia}
+#| eval: false
+
+$(ct[2].content[1].code)
+
+```
+
+No documentation found! :(
+"""
+    ]
+else 
+    return quarto_format.(ct)
+end 

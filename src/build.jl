@@ -275,7 +275,7 @@ This is my first tutorial!"""
 
   quarto_index()
 
-  fs = names(module_name)[2:end]
+  fs = get_objects_from_module(module_name) #names(module_name)[2:end]
 
   fs .|> quarto_doc_page
 
@@ -297,7 +297,7 @@ each object.
 - `output`: the output file. By default, it is "docs/reference.qmd".
 """
 function quarto_build_refpage(module_name; output = "docs/reference.qmd")
-  fs = names(module_name)[2:end]
+  fs = get_objects_from_module(module_name)
 
   short_docs = map(quarto_doc_short.(fs)) do x
       if x isa Vector

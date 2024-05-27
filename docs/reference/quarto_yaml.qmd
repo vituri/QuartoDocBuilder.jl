@@ -11,7 +11,7 @@ engine: julia
 ```{julia}
 #| eval: false
 quarto_yaml(
-  module_name::AbstractString
+  module_name
   ;output_dir = "site"
   ,freeze = "auto"
   ,cache = "true"

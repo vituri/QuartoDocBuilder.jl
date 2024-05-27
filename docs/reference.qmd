@@ -5,60 +5,6 @@ engine: julia
 # Reference
   
 
-[quarto_build_refpage(module_name; output = "docs/reference.qmd")](reference/quarto_build_refpage.qmd)
-
-> Build the docs/reference.qmd file with a short description of each object.
- 
-
-
----
-
-          
-[quarto_build_site(module_name::AbstractString; kwargs...)](reference/quarto_build_site.qmd)
-
-> Create all the files necessary to build the Quarto  website for the first time.
- 
-
-
----
-
-          
-[quarto_callout_block(s)](reference/quarto_callout_block.qmd)
-
-> Create a callout block with the string `s`.
- 
-
-
----
-
-          
-[quarto_doc(s::Symbol)](reference/quarto_doc.qmd)
-
-> Create the documentation of a symbol (function, object, etc) `s`.
- 
-
-
----
-
-          
-[quarto_doc_page(s; dir = "docs/reference")](reference/quarto_doc_page.qmd)
-
-> Given a symbol `s`, write its .qmd doc into the folder `dir`.
- 
-
-
----
-
-          
-[quarto_doc_short(s::Symbol)](reference/quarto_doc_short.qmd)
-
-> Create a short description of the object. Used to build the Reference page.
- 
-
-
----
-
-          
 [quarto_format(m::Markdown.Code, eval = false)](reference/quarto_format.qmd)
 
 > Format a block of markdown code to Quarto.
@@ -122,9 +68,54 @@ engine: julia
 ---
 
           
-[quarto_index()](reference/quarto_index.qmd)
+[quarto_yaml(
+  module_name
+  ;output_dir = "site"
+  ,freeze = "auto"
+  ,cache = "true"
+  ,warning = "false"
+  ,comments = "true"
+  ,repo = "USERNAME/REPOSITORY"
+  ,theme = "flatly"
+  )](reference/quarto_yaml.qmd)
 
-> Generate the index.qmd file. It is just a copy of the README.md file.
+> Generate the _quarto.yaml file.
+ 
+
+
+---
+
+          
+[quarto_doc(s::Symbol)](reference/quarto_doc.qmd)
+
+> Create the documentation of a symbol (function, object, etc) `s`.
+ 
+
+
+---
+
+          
+[quarto_doc_page(s; dir = "docs/reference")](reference/quarto_doc_page.qmd)
+
+> Given a symbol `s`, write its .qmd doc into the folder `dir`.
+ 
+
+
+---
+
+          
+[quarto_doc_short(s::Symbol)](reference/quarto_doc_short.qmd)
+
+> Create a short description of the object. Used to build the Reference page.
+ 
+
+
+---
+
+          
+[quarto_build_site(module_name; kwargs...)](reference/quarto_build_site.qmd)
+
+> Create all the files necessary to build the Quarto  website for the first time.
  
 
 
@@ -140,18 +131,27 @@ engine: julia
 ---
 
           
-[quarto_yaml(
-  module_name::AbstractString
-  ;output_dir = "site"
-  ,freeze = "auto"
-  ,cache = "true"
-  ,warning = "false"
-  ,comments = "true"
-  ,repo = "USERNAME/REPOSITORY"
-  ,theme = "flatly"
-  )](reference/quarto_yaml.qmd)
+[quarto_callout_block(s)](reference/quarto_callout_block.qmd)
 
-> Generate the _quarto.yaml file.
+> Create a callout block with the string `s`.
+ 
+
+
+---
+
+          
+[quarto_index()](reference/quarto_index.qmd)
+
+> Generate the index.qmd file. It is just a copy of the README.md file.
+ 
+
+
+---
+
+          
+[quarto_build_refpage(module_name; output = "docs/reference.qmd")](reference/quarto_build_refpage.qmd)
+
+> Build the docs/reference.qmd file with a short description of each object.
  
 
 
