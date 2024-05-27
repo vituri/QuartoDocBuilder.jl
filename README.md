@@ -8,3 +8,4 @@ The [Quarto website](https://quarto.org/) itself is written with Quarto! Check t
 
 # How to use
 
+See the tutorials at https://vituri.github.io/QuartoDocBuilder.jl/tutorials.html .
