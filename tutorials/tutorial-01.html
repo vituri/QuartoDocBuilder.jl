@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -141,7 +175,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#from-zero-to-nice-docs" id="toc-from-zero-to-nice-docs" class="nav-link active" data-scroll-target="#from-zero-to-nice-docs">From zero to nice docs!</a></li>
+  <li><a href="#from-zero-to-nice-docs" id="toc-from-zero-to-nice-docs" class="nav-link active" data-scroll-target="#from-zero-to-nice-docs">From zero to nice docs!</a>
+  <ul class="collapse">
+  <li><a href="#first-steps" id="toc-first-steps" class="nav-link" data-scroll-target="#first-steps">First steps</a>
+  <ul class="collapse">
+  <li><a href="#the-docs-folder" id="toc-the-docs-folder" class="nav-link" data-scroll-target="#the-docs-folder">The docs folder</a></li>
+  <li><a href="#changing-the-environment" id="toc-changing-the-environment" class="nav-link" data-scroll-target="#changing-the-environment">Changing the environment</a></li>
+  <li><a href="#creating-the-files" id="toc-creating-the-files" class="nav-link" data-scroll-target="#creating-the-files">Creating the files</a></li>
+  <li><a href="#installing-quarto" id="toc-installing-quarto" class="nav-link" data-scroll-target="#installing-quarto">Installing Quarto</a></li>
+  <li><a href="#creating-the-website" id="toc-creating-the-website" class="nav-link" data-scroll-target="#creating-the-website">Creating the website</a></li>
+  <li><a href="#enabling-comment-sections-optional" id="toc-enabling-comment-sections-optional" class="nav-link" data-scroll-target="#enabling-comment-sections-optional">Enabling comment sections (optional)</a></li>
+  <li><a href="#publishing-your-website" id="toc-publishing-your-website" class="nav-link" data-scroll-target="#publishing-your-website">Publishing your website</a></li>
+  <li><a href="#setting-your-default-github-pages" id="toc-setting-your-default-github-pages" class="nav-link" data-scroll-target="#setting-your-default-github-pages">Setting your default Github Pages</a></li>
+  <li><a href="#ready-to-go" id="toc-ready-to-go" class="nav-link" data-scroll-target="#ready-to-go">Ready to go!</a></li>
+  </ul></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next steps</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -153,10 +202,103 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="from-zero-to-nice-docs" class="level1">
 <h1>From zero to nice docs!</h1>
-<p>Start with a package</p>
-<p>Install QuartoDocBuilder.jl</p>
+<p>In this tutorial I will explain the steps to build your docs without too much of a headache! I will use my package <a href="https://github.com/TidierOrg/TidierIteration.jl">TidierIteration.jl</a> as an example.</p>
+<section id="first-steps" class="level2">
+<h2 class="anchored" data-anchor-id="first-steps">First steps</h2>
+<section id="the-docs-folder" class="level3">
+<h3 class="anchored" data-anchor-id="the-docs-folder">The docs folder</h3>
+<p>In your package directory (in my case, Github/TidierIteration), create a <code>docs</code> directory.</p>
+<p>Now create a Julia script named <code>make.jl</code> inside <code>docs</code> with the following content:</p>
+<div id="2" class="cell" data-execution_count="0">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">TidierIteration</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">QuartoDocBuilder</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_site</span>(TidierIteration, repo <span class="op">=</span> <span class="st">"TidierOrg/TidierIteration.jl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="changing-the-environment" class="level3">
+<h3 class="anchored" data-anchor-id="changing-the-environment">Changing the environment</h3>
+<p>I don’t want to make <code>QuartoDocBuilder</code> a dependency on <code>TidierIteration</code>! So I have to change my environment to use this package. To do this is easy: go to the REPL and type</p>
+<div id="4" class="cell" data-execution_count="0">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>] activate docs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The output is</p>
+<pre><code>  Activating new project at `~/Documentos/GitHub/TidierIteration.jl/docs`</code></pre>
+<p>Now you add these two packages as dependencies to the <code>docs</code> environment:</p>
+<div id="6" class="cell" data-execution_count="0">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>] add <span class="op">../</span>TidierIteration.jl<span class="op">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and</p>
+<div id="8" class="cell" data-execution_count="0">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>] add https<span class="op">://</span>github.com<span class="op">/</span>vituri<span class="op">/</span>QuartoDocBuilder.jl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note: here <code>]</code> denote the <code>pkg</code> mode in the REPL. If you are already in <code>pkg</code> mode, don’t need to type <code>]</code>.</p>
+</section>
+<section id="creating-the-files" class="level3">
+<h3 class="anchored" data-anchor-id="creating-the-files">Creating the files</h3>
+<p>Now we are good to go! Just run the <code>docs/make.jl</code> (line by line in VSCode, for example).</p>
+<p>If everything went smoothly (I hope so!), your <code>docs/</code> folder will looks like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial-01-files.png" class="img-fluid figure-img"></p>
+<figcaption>A nice docs folder.</figcaption>
+</figure>
+</div>
+</section>
+<section id="installing-quarto" class="level3">
+<h3 class="anchored" data-anchor-id="installing-quarto">Installing Quarto</h3>
+<p>All these .qmd files are useless if we don’t have Quarto installed! Go to https://quarto.org/docs/download/ and install. <strong>Important</strong>: you need to install the latest pre-release version, otherwise you won’t have the <code>julia</code> engine!</p>
+<p>If you use VSCode, I strongly suggest that you also install the Quarto extension.</p>
+</section>
+<section id="creating-the-website" class="level3">
+<h3 class="anchored" data-anchor-id="creating-the-website">Creating the website</h3>
+<p>Now is the best part: open <code>docs/index.qmd</code> and press the “preview” button on VSCode</p>
+<p><img src="tutorial-01-preview.png" class="img-fluid"></p>
+<p>The magic will start to happen and all .qmd files will be rendered into pages:</p>
+<p><img src="tutorial-01-rendering.png" class="img-fluid"></p>
+<p>If everything went alright, you will see this interactive viewer:</p>
+<p><img src="tutorial-01-viewer.png" class="img-fluid"></p>
+<p>In this case, I needed to copy the <code>assets/</code> directory to the <code>docs/</code> folder.</p>
+</section>
+<section id="enabling-comment-sections-optional" class="level3">
+<h3 class="anchored" data-anchor-id="enabling-comment-sections-optional">Enabling comment sections (optional)</h3>
+<p>Comment sections are a great way to see if people are having trouble to understand your docs! By default, QuartoDocBuilder enables the comment section using Discus. You need to give permission to Discus interact with your Discussion section on Github.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tutorial-01-discussions.png" class="img-fluid figure-img"></p>
+<figcaption>Enabling the Discussion tab on your repository.</figcaption>
+</figure>
+</div>
+<p>Go to <a href="https://github.com/apps/giscus">https://github.com/apps/giscus</a> and allow Discus to access your repo:</p>
+<p><img src="tutorial-01-discus1.png" class="img-fluid"></p>
+<p><img src="tutorial-01-discus2.png" class="img-fluid"></p>
+<p><img src="tutorial-01-discus3.png" class="img-fluid"></p>
+<p><img src="tutorial-01-discus4.png" class="img-fluid"></p>
+</section>
+<section id="publishing-your-website" class="level3">
+<h3 class="anchored" data-anchor-id="publishing-your-website">Publishing your website</h3>
+<p>Now it’s time to shine! Use the <code>bash</code> and go to your <code>docs/</code> folder. Simply run the following command:</p>
+<pre><code>quarto publish</code></pre>
+<p><img src="tutorial-01-publish.png" class="img-fluid"></p>
+<p>Choose Github Pages and you are good to go!</p>
+</section>
+<section id="setting-your-default-github-pages" class="level3">
+<h3 class="anchored" data-anchor-id="setting-your-default-github-pages">Setting your default Github Pages</h3>
+<p>Check if your Github Pages is set to use the branch gh-pages and the folder “/” (root).</p>
+<p><img src="tutorial-01-ghpages.png" class="img-fluid"></p>
+</section>
+<section id="ready-to-go" class="level3">
+<h3 class="anchored" data-anchor-id="ready-to-go">Ready to go!</h3>
+<p>After all this trouble, your Quarto website is online! You will see something like this:</p>
+<p><img src="tutorial-01-website.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>
+<p>What now? How can I make my docs even better, add tutorials and examples? This is the content of the next tutorial…</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

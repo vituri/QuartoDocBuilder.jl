@@ -207,36 +207,6 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="reference" class="level1">
 <h1>Reference</h1>
-<p><a href="./reference/quarto_build_refpage.html">quarto_build_refpage(module_name; output = “docs/reference.qmd”)</a></p>
-<blockquote class="blockquote">
-<p>Build the docs/reference.qmd file with a short description of each object.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_build_site.html">quarto_build_site(module_name::AbstractString; kwargs…)</a></p>
-<blockquote class="blockquote">
-<p>Create all the files necessary to build the Quarto website for the first time.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_callout_block.html">quarto_callout_block(s)</a></p>
-<blockquote class="blockquote">
-<p>Create a callout block with the string <code>s</code>.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_doc.html">quarto_doc(s::Symbol)</a></p>
-<blockquote class="blockquote">
-<p>Create the documentation of a symbol (function, object, etc) <code>s</code>.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_doc_page.html">quarto_doc_page(s; dir = “docs/reference”)</a></p>
-<blockquote class="blockquote">
-<p>Given a symbol <code>s</code>, write its .qmd doc into the folder <code>dir</code>.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_doc_short.html">quarto_doc_short(s::Symbol)</a></p>
-<blockquote class="blockquote">
-<p>Create a short description of the object. Used to build the Reference page.</p>
-</blockquote>
-<hr>
 <p><a href="./reference/quarto_format.html">quarto_format(m::Markdown.Code, eval = false)</a></p>
 <blockquote class="blockquote">
 <p>Format a block of markdown code to Quarto.</p>
@@ -272,9 +242,29 @@ ul.task-list li input[type="checkbox"] {
 <p>Format a Markdown.Admonition into a callout block in Quarto.</p>
 </blockquote>
 <hr>
-<p><a href="./reference/quarto_index.html">quarto_index()</a></p>
+<p><a href="./reference/quarto_yaml.html">quarto_yaml( module_name ;output_dir = “site” ,freeze = “auto” ,cache = “true” ,warning = “false” ,comments = “true” ,repo = “USERNAME/REPOSITORY” ,theme = “flatly” )</a></p>
 <blockquote class="blockquote">
-<p>Generate the index.qmd file. It is just a copy of the README.md file.</p>
+<p>Generate the _quarto.yaml file.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_doc.html">quarto_doc(s::Symbol)</a></p>
+<blockquote class="blockquote">
+<p>Create the documentation of a symbol (function, object, etc) <code>s</code>.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_doc_page.html">quarto_doc_page(s; dir = “docs/reference”)</a></p>
+<blockquote class="blockquote">
+<p>Given a symbol <code>s</code>, write its .qmd doc into the folder <code>dir</code>.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_doc_short.html">quarto_doc_short(s::Symbol)</a></p>
+<blockquote class="blockquote">
+<p>Create a short description of the object. Used to build the Reference page.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_build_site.html">quarto_build_site(module_name; kwargs…)</a></p>
+<blockquote class="blockquote">
+<p>Create all the files necessary to build the Quarto website for the first time.</p>
 </blockquote>
 <hr>
 <p><a href="./reference/quarto_styles.html">quarto_styles()</a></p>
@@ -282,9 +272,19 @@ ul.task-list li input[type="checkbox"] {
 <p>Create the docs/styles.css file with some suggested css classes.</p>
 </blockquote>
 <hr>
-<p><a href="./reference/quarto_yaml.html">quarto_yaml( module_name::AbstractString ;output_dir = “site” ,freeze = “auto” ,cache = “true” ,warning = “false” ,comments = “true” ,repo = “USERNAME/REPOSITORY” ,theme = “flatly” )</a></p>
+<p><a href="./reference/quarto_callout_block.html">quarto_callout_block(s)</a></p>
 <blockquote class="blockquote">
-<p>Generate the _quarto.yaml file.</p>
+<p>Create a callout block with the string <code>s</code>.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_index.html">quarto_index()</a></p>
+<blockquote class="blockquote">
+<p>Generate the index.qmd file. It is just a copy of the README.md file.</p>
+</blockquote>
+<hr>
+<p><a href="./reference/quarto_build_refpage.html">quarto_build_refpage(module_name; output = “docs/reference.qmd”)</a></p>
+<blockquote class="blockquote">
+<p>Build the docs/reference.qmd file with a short description of each object.</p>
 </blockquote>
 <hr>
 
