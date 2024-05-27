@@ -1,6 +1,6 @@
 """
     quarto_yaml(
-      module_name::AbstractString
+      module_name
       ;output_dir = "site"
       ,freeze = "auto"
       ,cache = "true"
@@ -28,7 +28,7 @@ This function creates the docs/_quarto.yaml file. See
 more details.
 """
 function quarto_yaml(
-  module_name::AbstractString
+  module_name
   ;output_dir = "site"
   ,freeze = "auto"
   ,cache = "true"
@@ -69,7 +69,7 @@ s =
   """
 
 website:
-  # title: "$(module_name).jl"
+  # title: "$(string(module_name)).jl"
   page-navigation: true
   bread-crumbs: true
 
@@ -81,7 +81,7 @@ website:
     background: primary
 
     left:
-      - text: "$(module_name).jl"
+      - text: "$(string(module_name)).jl"
         href: index.qmd
       - text: "Reference"
         href: reference.qmd
@@ -190,14 +190,14 @@ end
 
 """
 
-    quarto_build_site(module_name::AbstractString; kwargs...)
+    quarto_build_site(module_name; kwargs...)
 
 Create all the files necessary to build the Quarto 
 website for the first time.
 
 # Arguments
 
-- `module_name`::AbstractString: your module's name.
+- `module_name`: your module's name.
 
 - `kwargs...`: kwargs passed to `quarto_yaml`.
 
@@ -226,7 +226,7 @@ docs/tutorials/tutorial-01.qmd.
 in `module_name`.
 
 """
-function quarto_build_site(module_name::AbstractString; kwargs...)
+function quarto_build_site(module_name; kwargs...)
 
   if isdir("docs") == false
     mkdir("docs")
@@ -275,7 +275,7 @@ This is my first tutorial!"""
 
   quarto_index()
 
-  fs = names(@eval $(Symbol(module_name)))[2:end]
+  fs = names(module_name)[2:end]
 
   fs .|> quarto_doc_page
 
@@ -297,7 +297,7 @@ each object.
 - `output`: the output file. By default, it is "docs/reference.qmd".
 """
 function quarto_build_refpage(module_name; output = "docs/reference.qmd")
-  fs = names(@eval $(Symbol(module_name)))[2:end]
+  fs = names(module_name)[2:end]
 
   short_docs = map(quarto_doc_short.(fs)) do x
       if x isa Vector
