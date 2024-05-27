@@ -3,7 +3,129 @@ engine: julia
 ---
 
 # From zero to nice docs!
-    
-Start with a package
 
-Install QuartoDocBuilder.jl
+In this tutorial I will explain the steps to build your docs without too much of a headache! I will use my package [TidierIteration.jl](https://github.com/TidierOrg/TidierIteration.jl) as an example.
+
+## First steps
+
+### The docs folder
+
+In your package directory (in my case, Github/TidierIteration), create a `docs` directory. 
+
+Now create a Julia script named `make.jl` inside `docs` with the following content:
+
+```{julia}
+#| eval: false
+using TidierIteration
+using QuartoDocBuilder
+
+quarto_build_site(TidierIteration, repo = "TidierOrg/TidierIteration.jl")
+```
+
+### Changing the environment
+
+I don't want to make `QuartoDocBuilder` a dependency on `TidierIteration`! So I have to change my environment to use this package. To do this is easy: go to the REPL and type
+
+```{julia}
+#| eval: false
+
+] activate docs
+```
+
+The output is
+
+```
+  Activating new project at `~/Documentos/GitHub/TidierIteration.jl/docs`
+```
+
+Now you add these two packages as dependencies to the `docs` environment:
+
+```{julia}
+#| eval: false
+
+] add ../TidierIteration.jl/
+```
+
+and 
+
+```{julia}
+#| eval: false
+
+] add https://github.com/vituri/QuartoDocBuilder.jl
+```
+
+Note: here `]` denote the `pkg` mode in the REPL. If you are already in `pkg` mode, don't need to type `]`.
+
+### Creating the files
+
+Now we are good to go! Just run the `docs/make.jl` (line by line in VSCode, for example).
+
+If everything went smoothly (I hope so!), your `docs/` folder will looks like this:
+
+![A nice docs folder.](tutorial-01-files.png)
+
+### Installing Quarto
+
+All these .qmd files are useless if we don't have Quarto installed! Go to https://quarto.org/docs/download/ and install. **Important**: you need to install the latest pre-release version, otherwise you won't have the `julia` engine!
+
+If you use VSCode, I strongly suggest that you also install the Quarto extension.
+
+### Creating the website
+
+Now is the best part: open `docs/index.qmd` and press the "preview" button on VSCode
+
+![](tutorial-01-preview.png)
+
+The magic will start to happen and all .qmd files will be rendered into pages:
+
+![](tutorial-01-rendering.png)
+
+If everything went alright, you will see this interactive viewer:
+
+![](tutorial-01-viewer.png)
+
+In this case, I needed to copy the `assets/` directory to the `docs/` folder.
+
+### Enabling comment sections (optional)
+
+Comment sections are a great way to see if people are having trouble to understand your docs! By default, QuartoDocBuilder enables the comment section using Discus. You need to give permission to Discus interact with your Discussion section on Github.
+
+![Enabling the Discussion tab on your repository.](tutorial-01-discussions.png)
+
+Go to [https://github.com/apps/giscus](https://github.com/apps/giscus) and allow Discus to access your repo:
+
+![](tutorial-01-discus1.png)
+
+![](tutorial-01-discus2.png)
+
+![](tutorial-01-discus3.png)
+
+![](tutorial-01-discus4.png)
+
+### Publishing your website
+
+Now it's time to shine! Use the `bash` and go to your `docs/` folder. Simply run the following command:
+
+```
+quarto publish
+```
+
+![](tutorial-01-publish.png)
+
+Choose Github Pages and you are good to go!
+
+### Setting your default Github Pages
+
+Check if your Github Pages is set to use the branch gh-pages and the folder "/" (root).
+
+![](tutorial-01-ghpages.png)
+
+### Ready to go!
+
+After all this trouble, your Quarto website is online! You will see something like this:
+
+![](tutorial-01-website.png)
+
+## Next steps
+
+What now? How can I make my docs even better, add tutorials and examples? This is the content of the next tutorial...
