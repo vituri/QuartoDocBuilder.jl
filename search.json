@@ -105,6 +105,61 @@
     ]
   },
   {
+    "objectID": "tutorials/tutorial-02.html",
+    "href": "tutorials/tutorial-02.html",
+    "title": "Adding content",
+    "section": "",
+    "text": "After the first tutorial, we have a basic Quarto website running. But what if we want to add more things?\n\n\nAt the start of every .qmd file you create, add the lines\n\n---\nengine: julia\n---\n\n\nso Quarto will use the julia engine (and not the jupyter one).\n\n\n\nAll .qmd files in the docs/tutorials folder will be rendered and put together on the Tutorials tab. If you want more control over which .qmd files will be rendered and in which order, you will need to edit the file docs/_quarto.yaml. See more details at the Quarto official documentation.\nIn TidierIteration.jl, I added the following files\n\nwhich rendered as follows\n\n\n\n\nIf you kept developing your package and added more functions (or modified some existent ones), it is a good idea to remake all .qmd files on the docs/reference/ folder. To do that, activate the docs/ environment like in the previous tutorial and run the following:\n\nusing .TidierIteration\nusing QuartoDocBuilder\n\nobjs = get_objects_from_module(module_name)\nobjs .|&gt; quarto_doc_page\n\nThis can also be written in the docs/make.jl file. If you want to rewrite the docs/reference.qmd file, add the following line:\n\nquarto_build_refpage(TidierIteration)\n\nBe careful: this will overwrite your current docs/reference.qmd file! In case you want to write the content of this file into another file, pass the optional argument output:\n\nquarto_build_refpage(TidierIteration, output = \"docs/reference2.qmd\")\n\n\n\n\nAll this can be done by modifying the docs/_quarto.yaml file. Learn how to do it here. For example, here are different ways to navigate in your site, changing the header and so on.",
+    "crumbs": [
+      "Tutorials",
+      "Adding content"
+    ]
+  },
+  {
+    "objectID": "tutorials/tutorial-02.html#the-julia-engine",
+    "href": "tutorials/tutorial-02.html#the-julia-engine",
+    "title": "Adding content",
+    "section": "",
+    "text": "At the start of every .qmd file you create, add the lines\n\n---\nengine: julia\n---\n\n\nso Quarto will use the julia engine (and not the jupyter one).",
+    "crumbs": [
+      "Tutorials",
+      "Adding content"
+    ]
+  },
+  {
+    "objectID": "tutorials/tutorial-02.html#adding-tutorials",
+    "href": "tutorials/tutorial-02.html#adding-tutorials",
+    "title": "Adding content",
+    "section": "",
+    "text": "All .qmd files in the docs/tutorials folder will be rendered and put together on the Tutorials tab. If you want more control over which .qmd files will be rendered and in which order, you will need to edit the file docs/_quarto.yaml. See more details at the Quarto official documentation.\nIn TidierIteration.jl, I added the following files\n\nwhich rendered as follows",
+    "crumbs": [
+      "Tutorials",
+      "Adding content"
+    ]
+  },
+  {
+    "objectID": "tutorials/tutorial-02.html#adding-more-function-to-the-reference-page",
+    "href": "tutorials/tutorial-02.html#adding-more-function-to-the-reference-page",
+    "title": "Adding content",
+    "section": "",
+    "text": "If you kept developing your package and added more functions (or modified some existent ones), it is a good idea to remake all .qmd files on the docs/reference/ folder. To do that, activate the docs/ environment like in the previous tutorial and run the following:\n\nusing .TidierIteration\nusing QuartoDocBuilder\n\nobjs = get_objects_from_module(module_name)\nobjs .|&gt; quarto_doc_page\n\nThis can also be written in the docs/make.jl file. If you want to rewrite the docs/reference.qmd file, add the following line:\n\nquarto_build_refpage(TidierIteration)\n\nBe careful: this will overwrite your current docs/reference.qmd file! In case you want to write the content of this file into another file, pass the optional argument output:\n\nquarto_build_refpage(TidierIteration, output = \"docs/reference2.qmd\")",
+    "crumbs": [
+      "Tutorials",
+      "Adding content"
+    ]
+  },
+  {
+    "objectID": "tutorials/tutorial-02.html#creating-more-tabs-adjusting-the-layout-and-so-on",
+    "href": "tutorials/tutorial-02.html#creating-more-tabs-adjusting-the-layout-and-so-on",
+    "title": "Adding content",
+    "section": "",
+    "text": "All this can be done by modifying the docs/_quarto.yaml file. Learn how to do it here. For example, here are different ways to navigate in your site, changing the header and so on.",
+    "crumbs": [
+      "Tutorials",
+      "Adding content"
+    ]
+  },
+  {
     "objectID": "reference.html",
     "href": "reference.html",
     "title": "Reference",
