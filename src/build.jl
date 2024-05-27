@@ -18,7 +18,7 @@ Generate the _quarto.yaml file.
 - `freeze`, `cache`, `warning`: execution options in Quarto.
 - `comments`: if the comment section with Discus is enabled.
 - `repo`: string in the format USERNAME/REPOSITORY so your
-comment section work with Discus.
+comment section work with Discus. Also used to make the github icon.
 - `theme`: one of the bootswatch themes available in Quarto.
 
 # Details
@@ -87,6 +87,11 @@ website:
         href: reference.qmd
       - text: "Tutorials"
         href: tutorials.qmd
+    
+    tools:
+    - icon: github
+      href: https://github.com/$(repo)
+      text: "$(string(module_name)).jl"
 
   sidebar:
     - title: "Reference"
@@ -127,7 +132,7 @@ end
 # footer
 s = """
 
-page-footer: "Website generated with [Quarto](https://quarto.org/) and [Pkgdown.jl](https://github.com/vituri/Pkgdown.jl)"
+  page-footer: "Website generated with [Quarto](https://quarto.org/) and [QuartoDocBuilder.jl](https://github.com/vituri/QuartoDocBuilder.jl)"
 
 """
   push!(yaml, s)  

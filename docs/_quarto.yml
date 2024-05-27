@@ -3,8 +3,8 @@ project:
   type: website
   output-dir: site
 execute:
-  freeze: auto
-  cache: true
+  freeze: false
+  cache: false
   warning: false
 website:
   # title: "QuartoDocBuilder.jl"
@@ -25,6 +25,12 @@ website:
         href: reference.qmd
       - text: "Tutorials"
         href: tutorials.qmd
+
+    tools:
+    - icon: github
+      href: https://github.com/vituri/QuartoDocBuilder.jl
+      text: QuartoDocBuilder.jl
+
 
   sidebar:
     - title: "Reference"
@@ -50,7 +56,7 @@ website:
       mapping: pathname
 
 
-page-footer: "Website generated with [Quarto](https://quarto.org/) and [Pkgdown.jl](https://github.com/vituri/Pkgdown.jl)"
+  page-footer: "Website generated with [Quarto](https://quarto.org/) and [Pkgdown.jl](https://github.com/vituri/Pkgdown.jl)"
 
 
 engine: julia

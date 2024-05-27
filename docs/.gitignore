@@ -4,3 +4,4 @@ site/
 _freeze/
 
 /.quarto/
+/*_files/

@@ -1,0 +1,71 @@
+---
+engine: julia
+---
+
+# Adding content
+
+After the first tutorial, we have a basic Quarto website running. But what if we want to add more things?
+
+## The julia engine
+
+At the start of every .qmd file you create, add the lines
+
+```
+
+---
+engine: julia
+---
+
+
+```
+
+so Quarto will use the `julia` engine (and not the jupyter one). 
+
+## Adding tutorials
+
+All .qmd files in the `docs/tutorials` folder will be rendered and put together on the Tutorials tab. If you want more control over which .qmd files will be rendered and in which order, you will need to edit the file `docs/_quarto.yaml`. See more details at [the Quarto official documentation](https://quarto.org/docs/websites/).
+
+In TidierIteration.jl, I added the following files
+
+![](tutorial-02-files.png)
+
+which rendered as follows
+
+![](tutorial-02-rendered.png)
+
+## Adding more function to the Reference page
+
+If you kept developing your package and added more functions (or modified some existent ones), it is a good idea to remake all .qmd files on the `docs/reference/` folder. To do that, activate the `docs/` environment like in the previous tutorial and run the following:
+
+
+```{julia}
+#| eval: false
+using .TidierIteration
+using QuartoDocBuilder
+
+objs = get_objects_from_module(module_name)
+objs .|> quarto_doc_page
+```
+
+This can also be written in the `docs/make.jl` file. If you want to rewrite the `docs/reference.qmd` file, add the following line:
+
+
+```{julia}
+#| eval: false
+
+quarto_build_refpage(TidierIteration)
+
+```
+
+Be careful: this will overwrite your current `docs/reference.qmd` file! In case you want to write the content of this file into another file, pass the optional argument `output`:
+
+```{julia}
+#| eval: false
+
+quarto_build_refpage(TidierIteration, output = "docs/reference2.qmd")
+
+```
+
+## Creating more tabs, adjusting the layout and so on
+
+All this can be done by modifying the `docs/_quarto.yaml` file. Learn how to do it [here](https://quarto.org/docs/reference/projects/websites.html). For example, [here](https://quarto.org/docs/websites/website-navigation.html) are different ways to navigate in your site, [changing the header](https://quarto.org/docs/websites/website-tools.html) and so on.
