@@ -7,6 +7,7 @@ inspired by R's pkgdown package.
 # Features
 - Generate documentation from Julia docstrings
 - Organized reference pages with grouping
+- Multiple navbar sections with dropdowns
 - Articles/vignettes support
 - Changelog generation from NEWS.md
 - GitHub Actions integration
@@ -20,13 +21,18 @@ using QuartoDocBuilder
 # Simple usage
 quarto_build_site(MyPackage; repo="user/MyPackage.jl")
 
-# With configuration
+# With multiple sections
 config = QuartoConfig(
     module_name = MyPackage,
     repo = "user/MyPackage.jl",
     reference = [
         ReferenceGroup(title="Core", contents=[:main_func]),
         ReferenceGroup(title="Utils", contents=[starts_with("util_")])
+    ],
+    sections = [
+        SectionConfig(title="Tutorials", dir="tutorials", order=1),
+        SectionConfig(title="Explanation", dir="explanation", order=2),
+        SectionConfig(title="How-to Guides", dir="how-to", order=3)
     ],
     theme = ThemeConfig(bootswatch="flatly", dark_mode=true)
 )
@@ -43,7 +49,7 @@ using TOML
 # ============================================================================
 include("config.jl")
 
-export QuartoConfig, ReferenceGroup, ArticleConfig, ThemeConfig, FooterConfig, NavbarItem
+export QuartoConfig, ReferenceGroup, SectionConfig, ThemeConfig, FooterConfig, NavbarItem
 export load_config, default_config, validate_config, merge_config
 export get_dark_theme, detect_repo
 

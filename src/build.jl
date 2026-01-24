@@ -422,7 +422,8 @@ end
 
 """
 Internal: Build navbar YAML section.
-"""
+
+Supports multiple dropdown sections.
 function _build_navbar_yaml(config::QuartoConfig, module_str::String)
     repo = config.repo
 
@@ -446,35 +447,40 @@ function _build_navbar_yaml(config::QuartoConfig, module_str::String)
         href: reference.qmd
 """
 
-    # Add Articles with dropdown if configured
-    articles = config.articles
-    articles_dir = "docs/" * articles.dir
+    # Build sections with dropdowns
+    sorted_sections = sort(config.sections, by = s -> s.order)
 
-    if isdir(articles_dir)
-        article_files = discover_articles(articles_dir)
+    for section in sorted_sections
+        section_dir = "docs/" * section.dir
+        index_file = !isempty(section.index_file) ? section.index_file : "$(section.dir).qmd"
 
-        if !isempty(article_files) && articles.dropdown && length(article_files) <= 10
-            # Create dropdown menu
-            yaml *= """      - text: "$(articles.title)"
+        if isdir(section_dir)
+            section_files = discover_articles(section_dir)
+
+            if !isempty(section_files) && section.dropdown && length(section_files) <= section.dropdown_limit
+                # Create dropdown menu
+                yaml *= """      - text: "$(section.title)"
         menu:
 """
-            for f in article_files
-                title = get_article_title("docs/" * f)
-                yaml *= """          - text: "$title"
+                for f in section_files
+                    title = get_article_title("docs/" * f)
+                    yaml *= """          - text: "$title"
             href: $f
 """
+                end
+            elseif !isempty(section_files) || isfile("docs/$index_file")
+                # Link to index page
+                yaml *= """      - text: "$(section.title)"
+        href: $index_file
+"""
             end
-        elseif !isempty(article_files) || isfile("docs/articles.qmd")
-            yaml *= """      - text: "$(articles.title)"
-        href: articles.qmd
+        elseif isfile("docs/$index_file")
+            # Directory doesn't exist but index file does
+            yaml *= """      - text: "$(section.title)"
+        href: $index_file
 """
         end
     end
-
-    # Add Tutorials
-    yaml *= """      - text: "Tutorials"
-        href: tutorials.qmd
-"""
 
     # Add News if enabled and exists
     if config.news && isfile(config.news_file)
@@ -501,10 +507,10 @@ end
 
 """
 Internal: Build sidebar YAML section.
+
+Supports multiple sections with their own sidebars.
 """
 function _build_sidebar_yaml(config::QuartoConfig)
-    articles_dir = config.articles.dir
-
     yaml = """
   sidebar:
     - title: "Reference"
@@ -513,25 +519,27 @@ function _build_sidebar_yaml(config::QuartoConfig)
       contents:
         - reference.qmd
         - auto: "reference/*"
+"""
 
-    - title: "Tutorials"
+    # Build sidebars for each section
+    for section in config.sections
+        if !section.sidebar
+            continue
+        end
+
+        section_dir = section.dir
+        index_file = !isempty(section.index_file) ? section.index_file : "$(section.dir).qmd"
+
+        if isdir("docs/" * section_dir)
+            yaml *= """
+    - title: "$(section.title)"
       style: "docked"
       background: light
       contents:
-        - tutorials.qmd
-        - auto: "tutorials/*"
+        - $index_file
+        - auto: "$section_dir/*"
 """
-
-    # Add articles sidebar if directory exists
-    if isdir("docs/" * articles_dir)
-        yaml *= """
-    - title: "$(config.articles.title)"
-      style: "docked"
-      background: light
-      contents:
-        - articles.qmd
-        - auto: "$articles_dir/*"
-"""
+        end
     end
 
     yaml
@@ -603,12 +611,12 @@ end
 Build the documentation site from a QuartoConfig struct.
 
 This is the config-based alternative to `quarto_build_site(module_name; kwargs...)`.
-Supports all pkgdown-like features including grouped references, articles, news, etc.
+Supports all pkgdown-like features including grouped references, multiple sections, news, etc.
 
 # Arguments
 - `config::QuartoConfig`: Full configuration struct
 
-# Example
+# Example (with multiple sections)
 ```julia
 config = QuartoConfig(
     module_name = MyPackage,
@@ -616,6 +624,11 @@ config = QuartoConfig(
     reference = [
         ReferenceGroup(title="Core", contents=[:main_func]),
         ReferenceGroup(title="Utils", contents=[starts_with("util_")])
+    ],
+    sections = [
+        SectionConfig(title="Tutorials", dir="tutorials", order=1),
+        SectionConfig(title="Explanation", dir="explanation", order=2),
+        SectionConfig(title="How-to Guides", dir="how-to", order=3)
     ],
     theme = ThemeConfig(bootswatch="cosmo", dark_mode=true)
 )
@@ -652,46 +665,35 @@ function quarto_build_site(config::QuartoConfig)
         quarto_build_refpage(module_name)
     end
 
-    # Create tutorials directory
-    if !isdir("docs/tutorials")
-        mkdir("docs/tutorials")
+    # Create section directories and index files
+    for section in config.sections
+        section_dir = "docs/" * section.dir
+        index_file = !isempty(section.index_file) ? section.index_file : "$(section.dir).qmd"
+        index_path = "docs/$index_file"
 
-        s = """---
-title: "First Tutorial"
----
+        # Create directory if it doesn't exist
+        if !isdir(section_dir)
+            mkpath(section_dir)
+        end
 
-# First Tutorial
-
-This is my first tutorial!
-"""
-        write("docs/tutorials/tutorial-01.qmd", s)
-    end
-
-    if !isfile("docs/tutorials.qmd")
-        write("docs/tutorials.qmd", """---
-title: "Tutorials"
+        # Create index file if it doesn't exist
+        if !isfile(index_path)
+            desc = !isempty(section.desc) ? section.desc : "Explore the $(section.title) section."
+            write(index_path, """---
+title: "$(section.title)"
 listing:
-  - id: tutorials-listing
-    contents: "tutorials/*.qmd"
+  - id: $(section.dir)-listing
+    contents: "$(section.dir)/*.qmd"
     type: default
 ---
 
-Explore our tutorials to learn how to use the package.
+$desc
 
-::: {#tutorials-listing}
+::: {#$(section.dir)-listing}
 :::
 """)
-    end
-
-    # Create articles directory
-    articles_dir = "docs/" * config.articles.dir
-    if !isdir(articles_dir)
-        mkpath(articles_dir)
-    end
-
-    # Generate articles index
-    if !isfile("docs/articles.qmd")
-        quarto_articles_index(config)
+            @info "Created section index: $index_path"
+        end
     end
 
     # Generate news page

@@ -1,5 +1,6 @@
 # Documentation build script for QuartoDocBuilder.jl
 # This script uses QuartoDocBuilder to document itself!
+# Showcases the multiple sections feature (like Rhino documentation)
 
 using Pkg
 Pkg.activate(@__DIR__)
@@ -8,7 +9,7 @@ Pkg.instantiate()
 
 using QuartoDocBuilder
 
-# Full configuration demonstrating all features
+# Full configuration demonstrating all features including MULTIPLE SECTIONS
 config = QuartoConfig(
     module_name = QuartoDocBuilder,
     repo = "vituri/QuartoDocBuilder.jl",
@@ -18,7 +19,7 @@ config = QuartoConfig(
         ReferenceGroup(
             title = "Configuration",
             desc = "Types and functions for configuring documentation generation.",
-            contents = [:QuartoConfig, :ReferenceGroup, :ThemeConfig, :ArticleConfig,
+            contents = [:QuartoConfig, :ReferenceGroup, :SectionConfig, :ThemeConfig,
                        :FooterConfig, :NavbarItem, :load_config, :default_config,
                        :validate_config, :merge_config, :get_dark_theme, :detect_repo]
         ),
@@ -76,13 +77,31 @@ config = QuartoConfig(
         )
     ],
 
-    # Articles configuration with dropdown
-    articles = ArticleConfig(
-        title = "Tutorials",
-        desc = "Learn how to use QuartoDocBuilder to create beautiful documentation for your Julia packages.",
-        dropdown = true
-    ),
-    get_started = "articles/getting-started.qmd",
+    # MULTIPLE SECTIONS - like Rhino documentation!
+    # Each section gets its own dropdown in the navbar
+    sections = [
+        SectionConfig(
+            title = "Tutorials",
+            dir = "tutorials",
+            desc = "Step-by-step guides to get you started with QuartoDocBuilder.",
+            order = 1
+        ),
+        SectionConfig(
+            title = "Explanation",
+            dir = "explanation",
+            desc = "Understand how QuartoDocBuilder works under the hood.",
+            order = 2
+        ),
+        SectionConfig(
+            title = "How-to Guides",
+            dir = "how-to",
+            desc = "Task-oriented guides for common documentation tasks.",
+            order = 3
+        )
+    ],
+
+    # "Get Started" link in navbar
+    get_started = "tutorials/getting-started.qmd",
 
     # News/changelog enabled
     news = true,
@@ -108,6 +127,7 @@ config = QuartoConfig(
 
 # Build the documentation site
 println("Building QuartoDocBuilder.jl documentation...")
+println("Using multiple sections: Tutorials, Explanation, How-to Guides")
 quarto_build_site(config)
 
 println()

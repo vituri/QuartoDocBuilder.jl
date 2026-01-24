@@ -1,0 +1,136 @@
+---
+title: "Multiple Navbar Sections"
+description: "Learn how to create multiple dropdown sections like Rhino documentation"
+order: 2
+---
+
+# Multiple Navbar Sections
+
+QuartoDocBuilder supports multiple dropdown sections in the navbar, similar to [Rhino documentation](https://appsilon.github.io/rhino/). This allows you to organize your documentation into logical categories like "Tutorials", "Explanation", and "How-to Guides".
+
+## Using SectionConfig
+
+To create multiple sections, use the `sections` field in `QuartoConfig`:
+
+```julia
+using QuartoDocBuilder
+
+config = QuartoConfig(
+    module_name = MyPackage,
+    repo = "user/MyPackage.jl",
+
+    # Define multiple sections - each gets a dropdown in the navbar
+    sections = [
+        SectionConfig(
+            title = "Tutorials",
+            dir = "tutorials",
+            desc = "Step-by-step guides to get started.",
+            order = 1
+        ),
+        SectionConfig(
+            title = "Explanation",
+            dir = "explanation",
+            desc = "Understand how things work.",
+            order = 2
+        ),
+        SectionConfig(
+            title = "How-to Guides",
+            dir = "how-to",
+            desc = "Task-oriented guides.",
+            order = 3
+        )
+    ]
+)
+
+quarto_build_site(config)
+```
+
+## SectionConfig Options
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `title` | String | *required* | Display title in navbar |
+| `dir` | String | "" | Directory containing `.qmd` files |
+| `desc` | String | "" | Description for the section index page |
+| `dropdown` | Bool | true | Show as dropdown menu |
+| `dropdown_limit` | Int | 15 | Max items before falling back to index link |
+| `index_file` | String | "" | Custom index file name (defaults to `{dir}.qmd`) |
+| `sidebar` | Bool | true | Show sidebar when browsing this section |
+| `order` | Int | 100 | Position in navbar (lower = more left) |
+
+## Directory Structure
+
+When you define sections, create corresponding directories:
+
+```
+docs/
+├── tutorials/
+│   ├── getting-started.qmd
+│   ├── basic-usage.qmd
+│   └── advanced.qmd
+├── explanation/
+│   ├── architecture.qmd
+│   └── how-it-works.qmd
+├── how-to/
+│   ├── deploy-github.qmd
+│   └── custom-theme.qmd
+└── make.jl
+```
+
+QuartoDocBuilder will automatically:
+
+1. Create dropdown menus for each section in the navbar
+2. Generate index pages (e.g., `tutorials.qmd`, `explanation.qmd`)
+3. Create sidebars for navigation within each section
+
+## TOML Configuration
+
+You can also configure sections via `_quartodoc.toml`:
+
+```toml
+[[sections]]
+title = "Tutorials"
+dir = "tutorials"
+order = 1
+
+[[sections]]
+title = "Explanation"
+dir = "explanation"
+order = 2
+
+[[sections]]
+title = "How-to Guides"
+dir = "how-to"
+order = 3
+dropdown_limit = 20
+```
+
+## Controlling Dropdown Behavior
+
+By default, sections with fewer than 15 items show as dropdown menus. For sections with many items, the dropdown falls back to linking to an index page.
+
+```julia
+# This section will always show as a dropdown (up to 50 items)
+SectionConfig(
+    title = "How-to Guides",
+    dir = "how-to",
+    dropdown_limit = 50
+)
+
+# This section will never show as a dropdown
+SectionConfig(
+    title = "Examples",
+    dir = "examples",
+    dropdown = false
+)
+```
+
+## Example: This Documentation
+
+This very documentation uses multiple sections:
+
+- **Tutorials** - Getting started guides
+- **Explanation** - How QuartoDocBuilder works
+- **How-to Guides** - Task-oriented guides
+
+Check out the [make.jl](https://github.com/vituri/QuartoDocBuilder.jl/blob/main/docs/make.jl) for the complete configuration.

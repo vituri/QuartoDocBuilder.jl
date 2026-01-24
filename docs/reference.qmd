@@ -10,11 +10,11 @@ Types and functions for configuring documentation generation.
 
 | Function | Description |
 |----------|-------------|
-| [`ArticleConfig`](reference/ArticleConfig.qmd) | Configuration for articles/vignettes section. |
 | [`FooterConfig`](reference/FooterConfig.qmd) | Configuration for page footer. |
 | [`NavbarItem`](reference/NavbarItem.qmd) | Configuration for navbar items. |
 | [`QuartoConfig`](reference/QuartoConfig.qmd) | Main configuration struct for QuartoDocBuilder. |
 | [`ReferenceGroup`](reference/ReferenceGroup.qmd) | Configuration for a reference section group. |
+| [`SectionConfig`](reference/SectionConfig.qmd) | Configuration for a navbar section (supports multiple dropdowns like Rhino). |
 | [`ThemeConfig`](reference/ThemeConfig.qmd) | Configuration for theming and appearance. |
 | [`default_config`](reference/default_config.qmd) | default_config(module_name::Module) -> QuartoConfig |
 | [`detect_repo`](reference/detect_repo.qmd) | detect_repo() -> String |

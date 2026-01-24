@@ -22,19 +22,29 @@ website:
       - text: "QuartoDocBuilder.jl"
         href: index.qmd
       - text: "Get Started"
-        href: articles/getting-started.qmd
+        href: tutorials/getting-started.qmd
       - text: "Reference"
         href: reference.qmd
       - text: "Tutorials"
         menu:
-          - text: "Advanced Features"
-            href: articles/advanced.qmd
-          - text: "Configuration & Customization"
-            href: articles/configuration.qmd
           - text: "Getting Started"
-            href: articles/getting-started.qmd
-      - text: "Tutorials"
-        href: tutorials.qmd
+            href: tutorials/getting-started.qmd
+          - text: "Multiple Navbar Sections"
+            href: tutorials/multiple-sections.qmd
+      - text: "Explanation"
+        menu:
+          - text: "Architecture Overview"
+            href: explanation/architecture.qmd
+          - text: "Docstring Processing"
+            href: explanation/docstring-processing.qmd
+      - text: "How-to Guides"
+        menu:
+          - text: "Customize Theme"
+            href: how-to/customize-theme.qmd
+          - text: "Deploy to GitHub Pages"
+            href: how-to/deploy-github-pages.qmd
+          - text: "Organize Reference Page"
+            href: how-to/organize-reference.qmd
       - text: "News"
         href: news.qmd
     tools:
@@ -49,19 +59,24 @@ website:
       contents:
         - reference.qmd
         - auto: "reference/*"
-
     - title: "Tutorials"
       style: "docked"
       background: light
       contents:
         - tutorials.qmd
         - auto: "tutorials/*"
-    - title: "Tutorials"
+    - title: "Explanation"
       style: "docked"
       background: light
       contents:
-        - articles.qmd
-        - auto: "articles/*"
+        - explanation.qmd
+        - auto: "explanation/*"
+    - title: "How-to Guides"
+      style: "docked"
+      background: light
+      contents:
+        - how-to.qmd
+        - auto: "how-to/*"
 
   comments:
     giscus:

@@ -1,0 +1,164 @@
+---
+title: "Customize Theme"
+description: "Change colors, fonts, and appearance"
+order: 2
+---
+
+# Customize Theme
+
+QuartoDocBuilder supports extensive theme customization through `ThemeConfig`.
+
+## Basic Theme Selection
+
+Choose from Bootswatch themes:
+
+```julia
+theme = ThemeConfig(
+    bootswatch = "cosmo"  # or flatly, journal, lumen, etc.
+)
+```
+
+### Available Light Themes
+
+| Theme | Description |
+|-------|-------------|
+| `flatly` | Flat and clean |
+| `cosmo` | Modern and professional |
+| `journal` | News/article style |
+| `litera` | Readable and light |
+| `lumen` | Bright and cheerful |
+| `minty` | Fresh green accent |
+| `pulse` | Purple accent |
+| `sandstone` | Warm earth tones |
+| `yeti` | Bootstrap default look |
+
+## Dark Mode
+
+Enable automatic light/dark mode toggle:
+
+```julia
+theme = ThemeConfig(
+    bootswatch = "flatly",
+    dark_mode = true  # Adds theme toggle, pairs with "darkly"
+)
+```
+
+Dark themes are automatically paired:
+
+| Light | Dark |
+|-------|------|
+| flatly | darkly |
+| cosmo | cyborg |
+| journal | slate |
+| lumen | solar |
+| minty | vapor |
+
+## Custom Colors
+
+Override default colors:
+
+```julia
+theme = ThemeConfig(
+    bootswatch = "flatly",
+    primary = "#007bff",    # Primary brand color
+    accent = "#28a745",     # Links and accents
+    bg = "#ffffff",         # Background
+    fg = "#212529"          # Text color
+)
+```
+
+## Custom Fonts
+
+Specify font families:
+
+```julia
+theme = ThemeConfig(
+    font_base = "Open Sans, sans-serif",
+    font_heading = "Montserrat, sans-serif",
+    font_code = "Fira Code, monospace"
+)
+```
+
+## Syntax Highlighting
+
+Choose a code highlighting theme:
+
+```julia
+theme = ThemeConfig(
+    code_highlight = "github"  # or monokai, dracula, nord, etc.
+)
+```
+
+## Custom CSS
+
+Add custom CSS rules:
+
+```julia
+theme = ThemeConfig(
+    bootswatch = "flatly",
+    custom_css = """
+    /* Custom navbar gradient */
+    .navbar {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    }
+
+    /* Custom code block style */
+    pre code {
+        border-radius: 8px;
+    }
+
+    /* Highlight callouts */
+    .callout-note {
+        border-left-color: #007bff;
+    }
+    """
+)
+```
+
+## Custom SCSS Variables
+
+For advanced customization, use SCSS:
+
+```julia
+theme = ThemeConfig(
+    custom_scss = """
+    $primary: #667eea;
+    $link-color: #764ba2;
+    $border-radius: 0.5rem;
+    """
+)
+```
+
+## Complete Example
+
+```julia
+config = QuartoConfig(
+    module_name = MyPackage,
+    repo = "user/MyPackage.jl",
+
+    theme = ThemeConfig(
+        bootswatch = "cosmo",
+        dark_mode = true,
+        primary = "#6366f1",
+        accent = "#8b5cf6",
+        code_highlight = "nord",
+        font_heading = "Inter, sans-serif",
+        custom_css = """
+        .navbar-brand {
+            font-weight: 700;
+        }
+        """
+    )
+)
+```
+
+## Preview Changes
+
+After modifying the theme, rebuild and preview:
+
+```bash
+julia --project=docs docs/make.jl
+cd docs && quarto preview
+```
+
+The preview server will hot-reload CSS changes.

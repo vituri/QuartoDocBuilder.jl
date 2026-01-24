@@ -1,0 +1,12 @@
+---
+title: "How-to Guides"
+listing:
+  - id: how-to-listing
+    contents: "how-to/*.qmd"
+    type: default
+---
+
+Task-oriented guides for common documentation tasks.
+
+::: {#how-to-listing}
+:::

@@ -36,21 +36,39 @@ Base.@kwdef mutable struct NavbarItem
 end
 
 """
-Configuration for articles/vignettes section.
+Configuration for a navbar section (supports multiple dropdowns).
+
+Each section can have its own directory of .qmd files that appear as a dropdown
+in the navbar and as a sidebar when browsing that section.
 
 # Fields
-- `title::String`: Section title (default: "Articles")
-- `desc::String`: Description for the articles index page
-- `dir::String`: Directory containing articles (default: "articles")
-- `dropdown::Bool`: Whether to show articles as dropdown in navbar
-- `contents::Vector{Any}`: Custom article organization (optional)
+- `title::String`: Display title in navbar (required)
+- `dir::String`: Directory containing .qmd files for this section
+- `desc::String`: Description for the section index page
+- `dropdown::Bool`: Whether to show as dropdown menu (default: true)
+- `dropdown_limit::Int`: Max items before falling back to index link (default: 15)
+- `index_file::String`: Name of index file (default: "{dir}.qmd" in docs/)
+- `sidebar::Bool`: Whether to show sidebar when in this section (default: true)
+- `order::Int`: Order in navbar (lower = more left, default: 100)
+
+# Example
+```julia
+sections = [
+    SectionConfig(title="Tutorials", dir="tutorials", order=1),
+    SectionConfig(title="Explanation", dir="explanation", order=2),
+    SectionConfig(title="How-to Guides", dir="how-to", order=3, dropdown_limit=20)
+]
+```
 """
-Base.@kwdef struct ArticleConfig
-    title::String = "Articles"
+Base.@kwdef struct SectionConfig
+    title::String
+    dir::String = ""
     desc::String = ""
-    dir::String = "articles"
     dropdown::Bool = true
-    contents::Vector{Any} = Any[]
+    dropdown_limit::Int = 15
+    index_file::String = ""
+    sidebar::Bool = true
+    order::Int = 100
 end
 
 """
@@ -116,9 +134,9 @@ Main configuration struct for QuartoDocBuilder.
 ## Reference
 - `reference::Vector{ReferenceGroup}`: Reference page organization
 
-## Articles
-- `articles::ArticleConfig`: Articles configuration
-- `get_started::String`: Path to "Get Started" article
+## Sections (Multiple Navbar Dropdowns)
+- `sections::Vector{SectionConfig}`: Multiple navbar sections with dropdowns
+- `get_started::String`: Path to "Get Started" page (shown prominently in navbar)
 
 ## News
 - `news::Bool`: Generate news page from NEWS.md (default: true)
@@ -138,7 +156,7 @@ Main configuration struct for QuartoDocBuilder.
 ## Footer
 - `footer::FooterConfig`: Footer configuration
 
-# Example
+# Example (with multiple sections)
 
 ```julia
 config = QuartoConfig(
@@ -147,6 +165,11 @@ config = QuartoConfig(
     reference = [
         ReferenceGroup(title="Core", contents=[:main_func, :helper_func]),
         ReferenceGroup(title="Utils", contents=[starts_with("util_")])
+    ],
+    sections = [
+        SectionConfig(title="Tutorials", dir="tutorials", order=1),
+        SectionConfig(title="Explanation", dir="explanation", order=2),
+        SectionConfig(title="How-to Guides", dir="how-to", order=3)
     ],
     theme = ThemeConfig(bootswatch="cosmo", dark_mode=true)
 )
@@ -166,8 +189,8 @@ Base.@kwdef struct QuartoConfig
     # Reference
     reference::Vector{ReferenceGroup} = ReferenceGroup[]
 
-    # Articles
-    articles::ArticleConfig = ArticleConfig()
+    # Sections (multiple navbar dropdowns)
+    sections::Vector{SectionConfig} = SectionConfig[]
     get_started::String = ""
 
     # News
@@ -309,15 +332,21 @@ function _toml_to_config(data::Dict)
         ))
     end
 
-    # Parse articles section
-    articles_data = get(data, "articles", Dict())
-    articles = ArticleConfig(
-        title = get(articles_data, "title", "Articles"),
-        desc = get(articles_data, "desc", ""),
-        dir = get(articles_data, "dir", "articles"),
-        dropdown = get(articles_data, "dropdown", true),
-        contents = get(articles_data, "contents", Any[])
-    )
+    # Parse sections (multiple navbar dropdowns)
+    sections_data = get(data, "sections", [])
+    sections = SectionConfig[]
+    for sec in sections_data
+        push!(sections, SectionConfig(
+            title = get(sec, "title", ""),
+            dir = get(sec, "dir", ""),
+            desc = get(sec, "desc", ""),
+            dropdown = get(sec, "dropdown", true),
+            dropdown_limit = get(sec, "dropdown_limit", 15),
+            index_file = get(sec, "index_file", ""),
+            sidebar = get(sec, "sidebar", true),
+            order = get(sec, "order", 100)
+        ))
+    end
 
     # Parse theme section
     theme_data = get(data, "theme", Dict())
@@ -357,8 +386,8 @@ function _toml_to_config(data::Dict)
         cache = string(get(execution, "cache", "true")),
         warning = string(get(execution, "warning", "false")),
         reference = reference,
-        articles = articles,
-        get_started = get(articles_data, "get_started", ""),
+        sections = sections,
+        get_started = get(project, "get_started", ""),
         news = get(news_data, "enabled", true),
         news_file = get(news_data, "file", "NEWS.md"),
         comments = get(project, "comments", true),
@@ -417,7 +446,7 @@ function merge_config(base::QuartoConfig, overrides::QuartoConfig)
         cache = overrides.cache != "true" ? overrides.cache : base.cache,
         warning = overrides.warning != "false" ? overrides.warning : base.warning,
         reference = !isempty(overrides.reference) ? overrides.reference : base.reference,
-        articles = overrides.articles,
+        sections = !isempty(overrides.sections) ? overrides.sections : base.sections,
         get_started = !isempty(overrides.get_started) ? overrides.get_started : base.get_started,
         news = overrides.news,
         news_file = overrides.news_file != "NEWS.md" ? overrides.news_file : base.news_file,

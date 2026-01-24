@@ -1,0 +1,165 @@
+---
+title: "Organize Reference Page"
+description: "Group and organize your API reference documentation"
+order: 3
+---
+
+# Organize Reference Page
+
+By default, QuartoDocBuilder lists all documented functions alphabetically. You can organize them into logical groups using `ReferenceGroup`.
+
+## Basic Grouping
+
+```julia
+reference = [
+    ReferenceGroup(
+        title = "Core Functions",
+        contents = [:main_func, :helper_func, :process_data]
+    ),
+    ReferenceGroup(
+        title = "Utilities",
+        contents = [:format_output, :validate_input]
+    )
+]
+
+config = QuartoConfig(
+    module_name = MyPackage,
+    reference = reference
+)
+```
+
+## Using Selectors
+
+Instead of listing every function, use pattern-based selectors:
+
+### `starts_with`
+
+Match functions by name prefix:
+
+```julia
+ReferenceGroup(
+    title = "Data Processing",
+    contents = [starts_with("process_")]  # process_data, process_file, etc.
+)
+```
+
+### `ends_with`
+
+Match functions by name suffix:
+
+```julia
+ReferenceGroup(
+    title = "Utilities",
+    contents = [ends_with("_util")]  # format_util, string_util, etc.
+)
+```
+
+### `matches`
+
+Use regex patterns:
+
+```julia
+ReferenceGroup(
+    title = "Getters & Setters",
+    contents = [matches(r"^(get|set)_")]  # get_value, set_config, etc.
+)
+```
+
+### `contains`
+
+Match substring anywhere in name:
+
+```julia
+ReferenceGroup(
+    title = "Helper Functions",
+    contents = [contains("helper")]  # my_helper, string_helper_func, etc.
+)
+```
+
+## Combining Selectors
+
+Mix explicit symbols with selectors:
+
+```julia
+ReferenceGroup(
+    title = "Data I/O",
+    contents = [
+        :read_data,              # Explicit symbol
+        :write_data,             # Explicit symbol
+        starts_with("load_"),    # All load_* functions
+        starts_with("save_")     # All save_* functions
+    ]
+)
+```
+
+## Adding Descriptions
+
+Each group can have a description:
+
+```julia
+ReferenceGroup(
+    title = "Configuration",
+    desc = "Functions for setting up and configuring the package.",
+    contents = [:QuartoConfig, :ThemeConfig, :load_config]
+)
+```
+
+## Complete Example
+
+```julia
+reference = [
+    ReferenceGroup(
+        title = "Configuration",
+        desc = "Types and functions for configuring documentation.",
+        contents = [:QuartoConfig, :SectionConfig, :ThemeConfig,
+                   :load_config, :default_config]
+    ),
+    ReferenceGroup(
+        title = "Site Building",
+        desc = "Core functions for generating documentation sites.",
+        contents = [:quarto_build_site, starts_with("quarto_")]
+    ),
+    ReferenceGroup(
+        title = "Content Selectors",
+        desc = "Helpers for organizing reference pages.",
+        contents = [:starts_with, :ends_with, :matches, :contains]
+    ),
+    ReferenceGroup(
+        title = "Utilities",
+        contents = [ends_with("_util"), contains("helper")]
+    )
+]
+```
+
+## Automatic Grouping
+
+If you don't specify `reference`, QuartoDocBuilder auto-groups by type:
+
+- **Functions** - All function symbols
+- **Types** - All struct/type definitions
+- **Constants** - All constant values
+
+```julia
+# This will auto-group
+config = QuartoConfig(
+    module_name = MyPackage,
+    reference = []  # Empty = auto-group
+)
+```
+
+## Order Matters
+
+Functions are assigned to the **first** matching group. Order your groups from most specific to most general:
+
+```julia
+reference = [
+    # Specific first
+    ReferenceGroup(title = "Core", contents = [:main_func]),
+
+    # Pattern-based second
+    ReferenceGroup(title = "Processing", contents = [starts_with("process_")]),
+
+    # Catch-all last
+    ReferenceGroup(title = "Other", contents = [matches(r".*")])
+]
+```
