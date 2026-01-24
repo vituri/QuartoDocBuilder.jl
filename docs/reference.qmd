@@ -1,160 +1,135 @@
 ---
-engine: julia
+title: "Reference"
+toc: true
+toc-depth: 2
 ---
 
-# Reference
-  
+## Configuration {#sec-configuration}
+
+Types and functions for configuring documentation generation.
+
+| Function | Description |
+|----------|-------------|
+| [`ArticleConfig`](reference/ArticleConfig.qmd) | Configuration for articles/vignettes section. |
+| [`FooterConfig`](reference/FooterConfig.qmd) | Configuration for page footer. |
+| [`NavbarItem`](reference/NavbarItem.qmd) | Configuration for navbar items. |
+| [`QuartoConfig`](reference/QuartoConfig.qmd) | Main configuration struct for QuartoDocBuilder. |
+| [`ReferenceGroup`](reference/ReferenceGroup.qmd) | Configuration for a reference section group. |
+| [`ThemeConfig`](reference/ThemeConfig.qmd) | Configuration for theming and appearance. |
+| [`default_config`](reference/default_config.qmd) | default_config(module_name::Module) -> QuartoConfig |
+| [`detect_repo`](reference/detect_repo.qmd) | detect_repo() -> String |
+| [`get_dark_theme`](reference/get_dark_theme.qmd) | get_dark_theme(light_theme::String) -> String |
+| [`load_config`](reference/load_config.qmd) | load_config(path::String="_quartodoc.toml") -> Union{QuartoConfig, Nothing} |
+| [`merge_config`](reference/merge_config.qmd) | merge_config(base::QuartoConfig, overrides::QuartoConfig) -> QuartoConfig |
+| [`validate_config`](reference/validate_config.qmd) | validate_config(config::QuartoConfig) -> Bool |
+
+## Content Selectors {#sec-content-selectors}
+
+pkgdown-style helpers for organizing reference pages by matching function names.
+
+| Function | Description |
+|----------|-------------|
+| [`apply_selector`](reference/apply_selector.qmd) | apply_selector(selector, symbols::Vector{Symbol}) -> Vector{Symbol} |
+| [`auto_group_objects`](reference/auto_group_objects.qmd) | auto_group_objects(module_name::Module) -> Vector{Tuple{ReferenceGroup, Vector{Symbol}}} |
+| [`contains`](reference/contains.qmd) | contains(substring::String) -> Function |
+| [`ends_with`](reference/ends_with.qmd) | ends_with(suffix::String) -> Function |
+| [`filter_objects`](reference/filter_objects.qmd) | filter_objects(module_name::Module, selectors::Vector) -> Vector{Symbol} |
+| [`group_objects`](reference/group_objects.qmd) | group_objects(module_name::Module, groups::Vector{ReferenceGroup}) -> Vector{Tuple{ReferenceGroup... |
+| [`has_docstring`](reference/has_docstring.qmd) | has_docstring(module_name::Module) -> Function |
+| [`is_exported`](reference/is_exported.qmd) | is_exported(module_name::Module) -> Function |
+| [`is_function_symbol`](reference/is_function_symbol.qmd) | is_function_symbol(module_name::Module) -> Function |
+| [`is_type_symbol`](reference/is_type_symbol.qmd) | is_type_symbol(module_name::Module) -> Function |
+| [`matches`](reference/matches.qmd) | matches(pattern::Union{String, Regex}) -> Function |
+| [`parse_content_selector`](reference/parse_content_selector.qmd) | parse_content_selector(s::String) -> Union{Symbol, Function} |
+| [`starts_with`](reference/starts_with.qmd) | starts_with(prefix::String) -> Function |
+
+## Site Building {#sec-site-building}
+
+Core functions for generating documentation sites.
+
+| Function | Description |
+|----------|-------------|
+| [`quarto_build_refpage`](reference/quarto_build_refpage.qmd) | quarto_build_refpage(module_name; output = "docs/reference.qmd") |
+| [`quarto_build_refpage_grouped`](reference/quarto_build_refpage_grouped.qmd) | quarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String="docs/refe... |
+| [`quarto_build_site`](reference/quarto_build_site.qmd) | quarto_build_site(module_name; kwargs...) |
+| [`quarto_index`](reference/quarto_index.qmd) | quarto_index() |
+| [`quarto_rebuild_all`](reference/quarto_rebuild_all.qmd) | quarto_rebuild_all(module_name::Module; kwargs...) |
+| [`quarto_rebuild_reference`](reference/quarto_rebuild_reference.qmd) | quarto_rebuild_reference(module_name::Module) |
+| [`quarto_yaml`](reference/quarto_yaml.qmd) | quarto_yaml( |
+| [`quarto_yaml_from_config`](reference/quarto_yaml_from_config.qmd) | quarto_yaml_from_config(config::QuartoConfig; force::Bool=false) |
+
+## Docstring Processing {#sec-docstring-processing}
+
+Functions for extracting and formatting Julia docstrings to Quarto format.
+
+| Function | Description |
+|----------|-------------|
+| [`get_objects_from_module`](reference/get_objects_from_module.qmd) | get_objects_from_module(m::Module) -> Vector{Symbol} |
+| [`quarto_callout_block`](reference/quarto_callout_block.qmd) | quarto_callout_block(s) |
+| [`quarto_doc`](reference/quarto_doc.qmd) | quarto_doc(s::Symbol) |
+| [`quarto_doc_page`](reference/quarto_doc_page.qmd) | quarto_doc_page(s; dir = "docs/reference") |
+| [`quarto_doc_short`](reference/quarto_doc_short.qmd) | quarto_doc_short(s::Symbol) |
+| [`quarto_format`](reference/quarto_format.qmd) | quarto_format(m::Markdown.Code, eval = false) |
+
+## Articles & News {#sec-articles-&-news}
+
+Article discovery and changelog generation.
+
+| Function | Description |
+|----------|-------------|
+| [`ArticleInfo`](reference/ArticleInfo.qmd) | ArticleInfo |
+| [`NewsVersion`](reference/NewsVersion.qmd) | NewsVersion |
+| [`build_articles_navbar`](reference/build_articles_navbar.qmd) | build_articles_navbar(config::QuartoConfig) -> Dict |
+| [`build_articles_yaml`](reference/build_articles_yaml.qmd) | build_articles_yaml(config::QuartoConfig) -> String |
+| [`create_article_template`](reference/create_article_template.qmd) | create_article_template(filepath::String; title::String="", order::Int=999) |
+| [`create_articles_directory`](reference/create_articles_directory.qmd) | create_articles_directory(config::QuartoConfig) |
+| [`create_news_template`](reference/create_news_template.qmd) | create_news_template(path::String="NEWS.md"; package_name::String="Package") |
+| [`detect_get_started`](reference/detect_get_started.qmd) | detect_get_started(module_name::Module; dir::String="docs/articles") -> Union{String, Nothing} |
+| [`discover_articles`](reference/discover_articles.qmd) | discover_articles(dir::String="docs/articles") -> Vector{String} |
+| [`discover_articles_recursive`](reference/discover_articles_recursive.qmd) | discover_articles_recursive(dir::String="docs/articles") -> Vector{String} |
+| [`get_article_info`](reference/get_article_info.qmd) | get_article_info(filepath::String) -> ArticleInfo |
+| [`get_article_title`](reference/get_article_title.qmd) | get_article_title(filepath::String) -> String |
+| [`has_news`](reference/has_news.qmd) | has_news(config::QuartoConfig) -> Bool |
+| [`linkify_github_refs`](reference/linkify_github_refs.qmd) | linkify_github_refs(text::String, repo::String) -> String |
+| [`news_summary`](reference/news_summary.qmd) | news_summary(config::QuartoConfig) -> String |
+| [`parse_news`](reference/parse_news.qmd) | parse_news(path::String="NEWS.md") -> Vector{NewsVersion} |
+| [`quarto_articles_index`](reference/quarto_articles_index.qmd) | quarto_articles_index(config::QuartoConfig; output::String="docs/articles.qmd") |
+| [`quarto_articles_index_manual`](reference/quarto_articles_index_manual.qmd) | quarto_articles_index_manual(config::QuartoConfig; output::String="docs/articles.qmd") |
+| [`quarto_news_page`](reference/quarto_news_page.qmd) | quarto_news_page(config::QuartoConfig; output::String="docs/news.qmd") |
+
+## Auto-linking {#sec-auto-linking}
+
+Automatic cross-reference linking in documentation.
+
+| Function | Description |
+|----------|-------------|
+| [`ReferenceIndex`](reference/ReferenceIndex.qmd) | ReferenceIndex |
+| [`autolink_references`](reference/autolink_references.qmd) | autolink_references(text::String, index::ReferenceIndex) -> String |
+| [`build_reference_index`](reference/build_reference_index.qmd) | build_reference_index(module_name::Module; base_path::String="reference") -> ReferenceIndex |
+| [`create_reference_report`](reference/create_reference_report.qmd) | create_reference_report(module_name::Module) -> String |
+| [`find_undefined_references`](reference/find_undefined_references.qmd) | find_undefined_references(text::String, index::ReferenceIndex) -> Vector{String} |
+| [`link_julia_docs`](reference/link_julia_docs.qmd) | link_julia_docs(text::String) -> String |
+| [`resolve_reference`](reference/resolve_reference.qmd) | resolve_reference(name::String, index::ReferenceIndex) -> Union{String, Nothing} |
+
+## Styles & Themes {#sec-styles-&-themes}
+
+CSS generation and theme customization.
+
+| Function | Description |
+|----------|-------------|
+| [`quarto_styles`](reference/quarto_styles.qmd) | quarto_styles() |
+| [`quarto_styles_from_config`](reference/quarto_styles_from_config.qmd) | quarto_styles_from_config(config::QuartoConfig) |
+
+## GitHub Integration {#sec-github-integration}
+
+CI/CD workflow generation and deployment helpers.
+
+| Function | Description |
+|----------|-------------|
+| [`quarto_docs_project_toml`](reference/quarto_docs_project_toml.qmd) | quarto_docs_project_toml(module_name::Module) |
+| [`quarto_github_action`](reference/quarto_github_action.qmd) | quarto_github_action(; kwargs...) |
+| [`quarto_github_action_simple`](reference/quarto_github_action_simple.qmd) | quarto_github_action_simple(; kwargs...) |
+| [`quarto_makejl_template`](reference/quarto_makejl_template.qmd) | quarto_makejl_template(module_name::Module; config_file::String="") |
+| [`quarto_setup_instructions`](reference/quarto_setup_instructions.qmd) | quarto_setup_instructions() -> String |
+| [`setup_documentation`](reference/setup_documentation.qmd) | setup_documentation(module_name::Module; repo::String="", kwargs...) |
 
-[quarto_format(m::Markdown.Code, eval = false)](reference/quarto_format.qmd)
-
-> Format a block of markdown code to Quarto.
- 
-
-
----
-
-          
-[quarto_format(m)](reference/quarto_format.qmd)
-
-> Return a plain text from `m`.
- 
-
-
----
-
-          
-[quarto_format(m::Markdown.Paragraph)](reference/quarto_format.qmd)
-
-> Return a plain text of `m` and a line break.
- 
-
-
----
-
-          
-[quarto_format(m::AbstractString)](reference/quarto_format.qmd)
-
-> Returns `m`.
- 
-
-
----
-
-          
-[quarto_format(m::Markdown.Header{1})](reference/quarto_format.qmd)
-
-> Take a level 1 header and write it as a level 3 header.
- 
-
-
----
-
-          
-[quarto_format(md::Markdown.MD)](reference/quarto_format.qmd)
-
-> Given a markdown block, apply `quarto_format` to each of its elements and concatenate the resulting string.
- 
-
-
----
-
-          
-[quarto_format(md::Markdown.Admonition)](reference/quarto_format.qmd)
-
-> Format a Markdown.Admonition into a callout block in Quarto.
- 
-
-
----
-
-          
-[quarto_yaml(
-  module_name
-  ;output_dir = "site"
-  ,freeze = "auto"
-  ,cache = "true"
-  ,warning = "false"
-  ,comments = "true"
-  ,repo = "USERNAME/REPOSITORY"
-  ,theme = "flatly"
-  )](reference/quarto_yaml.qmd)
-
-> Generate the _quarto.yaml file.
- 
-
-
----
-
-          
-[quarto_doc(s::Symbol)](reference/quarto_doc.qmd)
-
-> Create the documentation of a symbol (function, object, etc) `s`.
- 
-
-
----
-
-          
-[quarto_doc_page(s; dir = "docs/reference")](reference/quarto_doc_page.qmd)
-
-> Given a symbol `s`, write its .qmd doc into the folder `dir`.
- 
-
-
----
-
-          
-[quarto_doc_short(s::Symbol)](reference/quarto_doc_short.qmd)
-
-> Create a short description of the object. Used to build the Reference page.
- 
-
-
----
-
-          
-[quarto_build_site(module_name; kwargs...)](reference/quarto_build_site.qmd)
-
-> Create all the files necessary to build the Quarto  website for the first time.
- 
-
-
----
-
-          
-[quarto_styles()](reference/quarto_styles.qmd)
-
-> Create the docs/styles.css file with some suggested css classes.
- 
-
-
----
-
-          
-[quarto_callout_block(s)](reference/quarto_callout_block.qmd)
-
-> Create a callout block with the string `s`.
- 
-
-
----
-
-          
-[quarto_index()](reference/quarto_index.qmd)
-
-> Generate the index.qmd file. It is just a copy of the README.md file.
- 
-
-
----
-
-          
-[quarto_build_refpage(module_name; output = "docs/reference.qmd")](reference/quarto_build_refpage.qmd)
-
-> Build the docs/reference.qmd file with a short description of each object.
- 
-
-
----
-
-          

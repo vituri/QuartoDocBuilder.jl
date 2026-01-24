@@ -151,12 +151,13 @@ end
 """
     quarto_doc_page(s; dir = "docs/reference")
 
-Given a symbol `s`, write its .qmd doc into the folder `dir`.
+Given a symbol or binding `s`, write its .qmd doc into the folder `dir`.
 """
 function quarto_doc_page(s; dir = "docs/reference")
 
     blocks = quarto_doc(s) .|> quarto_callout_block
-    st = string(s.var)
+    # Handle both Symbol and Binding inputs
+    st = s isa Symbol ? string(s) : string(s.var)
 
     qmd = """
       ---

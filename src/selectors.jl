@@ -232,8 +232,8 @@ symbols = filter_objects(MyModule, [starts_with("process_"), ends_with("_util")]
 ```
 """
 function filter_objects(module_name::Module, selectors::Vector)
-    # Get all documented symbols
-    all_symbols = Symbol[k for (k, _) in Base.Docs.meta(module_name)]
+    # Get all documented symbols (extract .var from Binding objects)
+    all_symbols = Symbol[k.var for (k, _) in Base.Docs.meta(module_name)]
 
     result = Symbol[]
     for sel in selectors
@@ -258,8 +258,8 @@ Returns a vector of (group, symbols) pairs.
 Vector of tuples, each containing a ReferenceGroup and its matched symbols.
 """
 function group_objects(module_name::Module, groups::Vector{ReferenceGroup})
-    # Get all documented symbols
-    all_symbols = Symbol[k for (k, _) in Base.Docs.meta(module_name)]
+    # Get all documented symbols (extract .var from Binding objects)
+    all_symbols = Symbol[k.var for (k, _) in Base.Docs.meta(module_name)]
     used_symbols = Set{Symbol}()
 
     result = Tuple{ReferenceGroup, Vector{Symbol}}[]
@@ -295,7 +295,7 @@ Used as fallback when no custom grouping is specified.
 - `module_name::Module`: Module to analyze
 """
 function auto_group_objects(module_name::Module)
-    all_symbols = Symbol[k for (k, v) in Base.Docs.meta(module_name)]
+    all_symbols = Symbol[k.var for (k, _) in Base.Docs.meta(module_name)]
 
     functions = Symbol[]
     types = Symbol[]

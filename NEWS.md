@@ -1,0 +1,21 @@
+# QuartoDocBuilder 0.1.0 (2026-01-24)
+
+## Features
+
+- Initial release with pkgdown-like functionality for Julia packages
+- Configuration system with type-safe `QuartoConfig` struct
+- Reference page grouping with pkgdown-style selectors (`starts_with`, `ends_with`, `matches`, `contains`)
+- Articles/vignettes system with auto-discovery and navbar dropdowns
+- NEWS.md parsing and changelog page generation with GitHub issue linking
+- Light/dark mode toggle with automatic theme pairing (flatly/darkly, cosmo/cyborg, etc.)
+- Auto-linking of function references in documentation
+- GitHub Actions workflow generation for automated deployment
+- Giscus comments integration for reader feedback
+- Custom theming support (colors, fonts, CSS/SCSS)
+- TOML configuration file support (`_quartodoc.toml`)
+
+## Dependencies
+
+- Only uses Julia stdlib packages (Markdown, TOML)
+- No external dependencies required
+- Minimum Julia version: 1.6

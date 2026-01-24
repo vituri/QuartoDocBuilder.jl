@@ -10,19 +10,26 @@ engine: julia
 
 ```{julia}
 #| eval: false
-quarto_format(m::Markdown.Code, eval = false)
+Symbol(x...) -> Symbol
 
 ```
 
-Format a block of markdown code to Quarto.
+Create a [`Symbol`](@ref) by concatenating the string representations of the arguments together.
  
 
-### Arguments
+### Examples
     
-  * m::Markdown: a block of Markdown.Code.
-  * eval: if false, then the resulting block is not going to
-be evaluated.
- 
+
+```{julia}
+#| eval: false
+julia> Symbol("my", "name")
+:myname
+
+julia> Symbol("day", 4)
+:day4
+
+```
+
 
 
 :::
@@ -35,101 +42,34 @@ be evaluated.
 
 ```{julia}
 #| eval: false
-quarto_format(m)
+Symbol
 
 ```
 
-Return a plain text from `m`.
+The type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). `Symbol`s can be entered using the `:` quote operator:
  
-
-
-:::
-    
-
- --- 
- 
-::: {.callout-note appearance="simple" title="docblock" collapse=false}    
-
 
 ```{julia}
 #| eval: false
-quarto_format(m::Markdown.Paragraph)
+julia> :name
+:name
+
+julia> typeof(:name)
+Symbol
+
+julia> x = 42
+42
+
+julia> eval(:x)
+42
 
 ```
 
-Return a plain text of `m` and a line break.
+`Symbol`s can also be constructed from strings or other values by calling the constructor `Symbol(x...)`.
  
-
-
-:::
-    
-
- --- 
+`Symbol`s are immutable and their implementation re-uses the same object for all `Symbol`s with the same name.
  
-::: {.callout-note appearance="simple" title="docblock" collapse=false}    
-
-
-```{julia}
-#| eval: false
-quarto_format(m::AbstractString)
-
-```
-
-Returns `m`.
- 
-
-
-:::
-    
-
- --- 
- 
-::: {.callout-note appearance="simple" title="docblock" collapse=false}    
-
-
-```{julia}
-#| eval: false
-quarto_format(m::Markdown.Header{1})
-
-```
-
-Take a level 1 header and write it as a level 3 header.
- 
-
-
-:::
-    
-
- --- 
- 
-::: {.callout-note appearance="simple" title="docblock" collapse=false}    
-
-
-```{julia}
-#| eval: false
-quarto_format(md::Markdown.MD)
-
-```
-
-Given a markdown block, apply `quarto_format` to each of its elements and concatenate the resulting string.
- 
-
-
-:::
-    
-
- --- 
- 
-::: {.callout-note appearance="simple" title="docblock" collapse=false}    
-
-
-```{julia}
-#| eval: false
-quarto_format(md::Markdown.Admonition)
-
-```
-
-Format a Markdown.Admonition into a callout block in Quarto.
+Unlike strings, `Symbol`s are "atomic" or "scalar" entities that do not support iteration over characters.
  
 
 

@@ -1,0 +1,345 @@
+---
+title: "Configuration & Customization"
+description: "Complete guide to configuring and customizing your documentation"
+order: 2
+---
+
+# Configuration & Customization
+
+QuartoDocBuilder offers extensive customization through the `QuartoConfig` struct. This guide covers all configuration options.
+
+## The QuartoConfig Struct
+
+The main configuration is done through `QuartoConfig`:
+
+```julia
+config = QuartoConfig(
+    module_name = MyPackage,        # Required: your module
+    repo = "user/MyPackage.jl",     # GitHub repository
+    output_dir = "site",            # Output directory
+
+    # Reference page organization
+    reference = [...],              # Vector of ReferenceGroup
+
+    # Articles
+    articles = ArticleConfig(...),
+    get_started = "articles/intro.qmd",
+
+    # News
+    news = true,
+    news_file = "NEWS.md",
+
+    # Theme
+    theme = ThemeConfig(...),
+
+    # Comments
+    comments = true,
+    giscus_repo = "user/repo",
+
+    # Footer
+    footer = FooterConfig(...)
+)
+```
+
+## Reference Page Organization
+
+The reference page can be organized into groups using `ReferenceGroup`:
+
+```julia
+reference = [
+    ReferenceGroup(
+        title = "Core Functions",
+        desc = "Main package functionality",
+        contents = [:main_function, :helper_function]
+    ),
+    ReferenceGroup(
+        title = "Utilities",
+        contents = [:util_a, :util_b]
+    )
+]
+```
+
+### Using Selector Functions
+
+Instead of listing every function manually, use selector functions:
+
+| Selector | Description | Example |
+|----------|-------------|---------|
+| `starts_with(prefix)` | Functions starting with prefix | `starts_with("process_")` |
+| `ends_with(suffix)` | Functions ending with suffix | `ends_with("_util")` |
+| `matches(pattern)` | Functions matching regex | `matches(r"^get")` |
+| `contains(substring)` | Functions containing substring | `contains("helper")` |
+
+**Example:**
+
+```julia
+reference = [
+    ReferenceGroup(
+        title = "Data Processing",
+        desc = "Functions for processing data",
+        contents = [
+            :main_process,           # Explicit symbol
+            starts_with("process_"), # All functions starting with "process_"
+            ends_with("_data")       # All functions ending with "_data"
+        ]
+    ),
+    ReferenceGroup(
+        title = "Getters & Setters",
+        contents = [matches(r"^(get|set)_")]
+    ),
+    ReferenceGroup(
+        title = "Utilities",
+        contents = [contains("util"), contains("helper")]
+    )
+]
+```
+
+### Automatic Grouping
+
+If you don't specify `reference`, QuartoDocBuilder auto-groups by type:
+
+- **Functions** - All function symbols
+- **Types** - All struct/type definitions
+- **Constants** - All constant values
+
+## Theme Customization
+
+### ThemeConfig Options
+
+```julia
+theme = ThemeConfig(
+    bootswatch = "flatly",       # Bootswatch theme name
+    dark_mode = true,            # Enable light/dark toggle
+    primary = "#446E9B",         # Primary color (optional)
+    bg = "",                     # Background color (optional)
+    fg = "",                     # Foreground color (optional)
+    accent = "",                 # Accent/link color (optional)
+    font_base = "",              # Base font family (optional)
+    font_heading = "",           # Heading font family (optional)
+    font_code = "",              # Code font family (optional)
+    code_highlight = "github",   # Syntax highlighting theme
+    custom_css = "",             # Additional CSS
+    custom_scss = ""             # Additional SCSS variables
+)
+```
+
+### Available Bootswatch Themes
+
+Light themes (automatically paired with dark variants):
+
+| Light Theme | Dark Variant |
+|-------------|--------------|
+| `flatly` | `darkly` |
+| `cosmo` | `cyborg` |
+| `journal` | `slate` |
+| `litera` | `superhero` |
+| `lumen` | `solar` |
+| `minty` | `vapor` |
+| `pulse` | `quartz` |
+| `sandstone` | `slate` |
+| `yeti` | `slate` |
+
+### Custom Colors
+
+Add custom colors using CSS color values:
+
+```julia
+theme = ThemeConfig(
+    bootswatch = "flatly",
+    primary = "#007bff",         # Custom primary color
+    accent = "#28a745",          # Custom link color
+    custom_css = """
+    .navbar {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    """
+)
+```
+
+### Light/Dark Mode
+
+When `dark_mode = true`, QuartoDocBuilder:
+
+1. Adds a theme toggle button to the navbar
+2. Automatically pairs your light theme with a matching dark theme
+3. Respects user's system preference
+
+To disable:
+
+```julia
+theme = ThemeConfig(
+    bootswatch = "flatly",
+    dark_mode = false    # No toggle, always light theme
+)
+```
+
+## Footer Customization
+
+```julia
+footer = FooterConfig(
+    left = "Copyright 2024 [Author](https://author.com)",
+    center = "",
+    right = "Built with QuartoDocBuilder.jl"
+)
+```
+
+Markdown is supported in footer text.
+
+## TOML Configuration File
+
+For complex configurations, use a `_quartodoc.toml` file:
+
+```toml
+[project]
+repo = "user/MyPackage.jl"
+output_dir = "site"
+comments = true
+
+[execution]
+freeze = "auto"
+cache = true
+
+[[reference]]
+title = "Core Functions"
+desc = "Main package functionality"
+contents = ["main_func", "starts_with:process_"]
+
+[[reference]]
+title = "Utilities"
+contents = ["ends_with:_util"]
+
+[articles]
+title = "Tutorials"
+dropdown = true
+get_started = "articles/intro.qmd"
+
+[theme]
+bootswatch = "flatly"
+dark_mode = true
+code_highlight = "github"
+
+[footer]
+left = "Copyright 2024"
+right = "Built with QuartoDocBuilder.jl"
+```
+
+Load and use it:
+
+```julia
+using QuartoDocBuilder
+
+# Load config from file
+config = load_config("_quartodoc.toml")
+
+# Set the module (can't be in TOML)
+config = QuartoConfig(
+    module_name = MyPackage,
+    # Other fields from loaded config are preserved
+    repo = config.repo,
+    reference = config.reference,
+    theme = config.theme,
+    # ...
+)
+
+quarto_build_site(config)
+```
+
+## Articles Configuration
+
+```julia
+articles = ArticleConfig(
+    title = "Tutorials",           # Navbar text
+    desc = "Learn how to use...",  # Index page description
+    dir = "articles",              # Directory name
+    dropdown = true                # Show as dropdown in navbar
+)
+```
+
+### "Get Started" Link
+
+Add a prominent "Get Started" link in the navbar:
+
+```julia
+config = QuartoConfig(
+    # ...
+    get_started = "articles/getting-started.qmd"
+)
+```
+
+## Giscus Comments
+
+Enable reader comments using [Giscus](https://giscus.app/):
+
+```julia
+config = QuartoConfig(
+    # ...
+    comments = true,
+    giscus_repo = "user/repo"  # Repository with Discussions enabled
+)
+```
+
+Requirements:
+
+1. Enable GitHub Discussions on your repository
+2. Install the [Giscus app](https://github.com/apps/giscus)
+3. Set `giscus_repo` to your repository
+
+## Complete Example
+
+Here's a full configuration example:
+
+```julia
+using MyPackage
+using QuartoDocBuilder
+
+config = QuartoConfig(
+    module_name = MyPackage,
+    repo = "myuser/MyPackage.jl",
+
+    reference = [
+        ReferenceGroup(
+            title = "Data I/O",
+            desc = "Functions for reading and writing data",
+            contents = [starts_with("read_"), starts_with("write_")]
+        ),
+        ReferenceGroup(
+            title = "Processing",
+            desc = "Data processing functions",
+            contents = [starts_with("process_"), contains("transform")]
+        ),
+        ReferenceGroup(
+            title = "Utilities",
+            contents = [ends_with("_util"), ends_with("_helper")]
+        )
+    ],
+
+    articles = ArticleConfig(
+        title = "Guides",
+        dropdown = true
+    ),
+    get_started = "articles/quickstart.qmd",
+
+    news = true,
+
+    theme = ThemeConfig(
+        bootswatch = "cosmo",
+        dark_mode = true,
+        code_highlight = "monokai"
+    ),
+
+    comments = true,
+    giscus_repo = "myuser/MyPackage.jl",
+
+    footer = FooterConfig(
+        left = "MIT License",
+        right = "[Source Code](https://github.com/myuser/MyPackage.jl)"
+    )
+)
+
+quarto_build_site(config)
+```
+
+## Next Steps
+
+- **[Advanced Features](advanced.qmd)**: Learn about articles, news pages, GitHub Actions, and more
+- **[Reference](../reference.qmd)**: Full API documentation

@@ -1,13 +1,13 @@
-
 project:
   type: website
   output-dir: site
+
 execute:
-  freeze: false
-  cache: false
+  freeze: auto
+  cache: true
   warning: false
+
 website:
-  # title: "QuartoDocBuilder.jl"
   page-navigation: true
   bread-crumbs: true
 
@@ -21,22 +21,32 @@ website:
     left:
       - text: "QuartoDocBuilder.jl"
         href: index.qmd
+      - text: "Get Started"
+        href: articles/getting-started.qmd
       - text: "Reference"
         href: reference.qmd
       - text: "Tutorials"
+        menu:
+          - text: "Advanced Features"
+            href: articles/advanced.qmd
+          - text: "Configuration & Customization"
+            href: articles/configuration.qmd
+          - text: "Getting Started"
+            href: articles/getting-started.qmd
+      - text: "Tutorials"
         href: tutorials.qmd
-
+      - text: "News"
+        href: news.qmd
     tools:
-    - icon: github
-      href: https://github.com/vituri/QuartoDocBuilder.jl
-      text: QuartoDocBuilder.jl
-
+      - icon: github
+        href: https://github.com/vituri/QuartoDocBuilder.jl
+        text: "Source"
 
   sidebar:
     - title: "Reference"
       style: "docked"
       background: light
-      contents: 
+      contents:
         - reference.qmd
         - auto: "reference/*"
 
@@ -46,7 +56,12 @@ website:
       contents:
         - tutorials.qmd
         - auto: "tutorials/*"
-        
+    - title: "Tutorials"
+      style: "docked"
+      background: light
+      contents:
+        - articles.qmd
+        - auto: "articles/*"
 
   comments:
     giscus:
@@ -55,19 +70,22 @@ website:
       loading: lazy
       mapping: pathname
 
-
-  page-footer: "Website generated with [Quarto](https://quarto.org/) and [Pkgdown.jl](https://github.com/vituri/Pkgdown.jl)"
-
+  page-footer:
+    left: "Developed by [G. Vituri](https://github.com/vituri)"
+    right: "Built with [QuartoDocBuilder.jl](https://github.com/vituri/QuartoDocBuilder.jl)"
 
 engine: julia
 
 format:
   html:
-    theme: flatly
     css: styles.css
     code-copy: true
     code-overflow: wrap
     preview-links: true
     toc: true
     toc-depth: 3
-    toc-expand: true 
+    toc-expand: true
+    theme:
+      light: flatly
+      dark: darkly
+    highlight-style: github

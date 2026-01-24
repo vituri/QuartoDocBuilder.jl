@@ -10,36 +10,66 @@ engine: julia
 
 ```{julia}
 #| eval: false
-quarto_build_site(module_name; kwargs...)
+Symbol(x...) -> Symbol
 
 ```
 
-Create all the files necessary to build the Quarto  website for the first time.
+Create a [`Symbol`](@ref) by concatenating the string representations of the arguments together.
  
 
-### Arguments
+### Examples
     
-  * `module_name`: your module's name.
-  * `kwargs...`: kwargs passed to `quarto_yaml`.
 
-### Details
+```{julia}
+#| eval: false
+julia> Symbol("my", "name")
+:myname
+
+julia> Symbol("day", 4)
+:day4
+
+```
+
+
+
+:::
     
-This function does a lot of things!
+
+ --- 
  
-  * Create the `docs` directory, if it doesn't exist.
-  * Create docs/_quarto.yaml, which is the file that
-contains all information about how to render the  website as a Quarto project.
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+Symbol
+
+```
+
+The type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). `Symbol`s can be entered using the `:` quote operator:
  
-  * Create the directory `docs/reference` and the file
-docs/reference.qmd if they don't exist.
+
+```{julia}
+#| eval: false
+julia> :name
+:name
+
+julia> typeof(:name)
+Symbol
+
+julia> x = 42
+42
+
+julia> eval(:x)
+42
+
+```
+
+`Symbol`s can also be constructed from strings or other values by calling the constructor `Symbol(x...)`.
  
-  * Create the directory `docs/tutorials` and the file
-docs/tutorials.qmd if they don't exist, together with docs/tutorials/tutorial-01.qmd.
+`Symbol`s are immutable and their implementation re-uses the same object for all `Symbol`s with the same name.
  
-  * Copy your README.md file as docs/index.qmd.
-  * Create docs/styles.css with some predefined styles.
-  * Create a .qmd file in docs/reference for each object
-in `module_name`.
+Unlike strings, `Symbol`s are "atomic" or "scalar" entities that do not support iteration over characters.
  
 
 

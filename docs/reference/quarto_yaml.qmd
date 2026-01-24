@@ -10,36 +10,66 @@ engine: julia
 
 ```{julia}
 #| eval: false
-quarto_yaml(
-  module_name
-  ;output_dir = "site"
-  ,freeze = "auto"
-  ,cache = "true"
-  ,warning = "false"
-  ,comments = "true"
-  ,repo = "USERNAME/REPOSITORY"
-  ,theme = "flatly"
-  )
+Symbol(x...) -> Symbol
 
 ```
 
-Generate the _quarto.yaml file.
+Create a [`Symbol`](@ref) by concatenating the string representations of the arguments together.
  
 
-### Arguments
+### Examples
     
-  * `module_name`: the name of the current module.
-  * `output_dir`: the directory of the output, inside /docs/ .
-  * `freeze`, `cache`, `warning`: execution options in Quarto.
-  * `comments`: if the comment section with Discus is enabled.
-  * `repo`: string in the format USERNAME/REPOSITORY so your
-comment section work with Discus.
- 
-  * `theme`: one of the bootswatch themes available in Quarto.
 
-### Details
+```{julia}
+#| eval: false
+julia> Symbol("my", "name")
+:myname
+
+julia> Symbol("day", 4)
+:day4
+
+```
+
+
+
+:::
     
-This function creates the docs/_quarto.yaml file. See   https://quarto.org/docs/reference/projects/websites.html for more details.
+
+ --- 
+ 
+::: {.callout-note appearance="simple" title="docblock" collapse=false}    
+
+
+```{julia}
+#| eval: false
+Symbol
+
+```
+
+The type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). `Symbol`s can be entered using the `:` quote operator:
+ 
+
+```{julia}
+#| eval: false
+julia> :name
+:name
+
+julia> typeof(:name)
+Symbol
+
+julia> x = 42
+42
+
+julia> eval(:x)
+42
+
+```
+
+`Symbol`s can also be constructed from strings or other values by calling the constructor `Symbol(x...)`.
+ 
+`Symbol`s are immutable and their implementation re-uses the same object for all `Symbol`s with the same name.
+ 
+Unlike strings, `Symbol`s are "atomic" or "scalar" entities that do not support iteration over characters.
  
 
 
