@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Set up automatic deployment with GitHub Actions">
 
-<title>is_type_symbol</title>
+<title>Deploy to GitHub Pages</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +66,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../reference/link_julia_docs.html" rel="next">
-<link href="../reference/is_function_symbol.html" rel="prev">
+<link href="../how-to/customize-theme.html" rel="next">
+<link href="../how-to.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -296,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Get Started</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../reference.html" aria-current="page"> 
+    <a class="nav-link" href="../reference.html"> 
 <span class="menu-text">Reference</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -365,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/is_type_symbol.html">is_type_symbol</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../how-to/deploy-github-pages.html">Deploy to GitHub Pages</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -379,482 +380,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reference</span></a>
+  <a href="../how-to.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How-to Guides</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/apply_selector.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">apply_selector</span></a>
+  <a href="../how-to/deploy-github-pages.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Deploy to GitHub Pages</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/ArticleConfig.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ArticleConfig</span></a>
+  <a href="../how-to/customize-theme.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Customize Theme</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/ArticleInfo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ArticleInfo</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/auto_group_objects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">auto_group_objects</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/autolink_cross_package.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">autolink_cross_package</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/autolink_references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">autolink_references</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/build_articles_navbar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">build_articles_navbar</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/build_articles_yaml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">build_articles_yaml</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/build_reference_index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">build_reference_index</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/contains.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">contains</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/create_article_template.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">create_article_template</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/create_articles_directory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">create_articles_directory</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/create_news_template.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">create_news_template</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/create_reference_report.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">create_reference_report</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/default_config.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">default_config</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/detect_get_started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">detect_get_started</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/detect_repo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">detect_repo</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/discover_articles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">discover_articles</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/discover_articles_recursive.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">discover_articles_recursive</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/ends_with.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ends_with</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/filter_objects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">filter_objects</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/find_undefined_references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">find_undefined_references</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/FooterConfig.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">FooterConfig</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/format_news_item.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">format_news_item</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/get_article_info.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">get_article_info</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/get_article_order.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">get_article_order</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/get_article_title.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">get_article_title</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/get_dark_theme.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">get_dark_theme</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/get_objects_from_module.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">get_objects_from_module</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/group_objects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">group_objects</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/has_docstring.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">has_docstring</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/has_news.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">has_news</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/is_const_symbol.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">is_const_symbol</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/is_exported.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">is_exported</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/is_function_symbol.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">is_function_symbol</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/is_type_symbol.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">is_type_symbol</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/link_julia_docs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">link_julia_docs</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/linkify_github_refs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">linkify_github_refs</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/load_config.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">load_config</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/matches.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">matches</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/merge_config.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">merge_config</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/NavbarItem.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">NavbarItem</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/news_summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">news_summary</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/NewsVersion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">NewsVersion</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/parse_content_selector.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">parse_content_selector</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/parse_news.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">parse_news</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_articles_index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_articles_index</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_articles_index_manual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_articles_index_manual</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_build_refpage.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_build_refpage</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_build_refpage_grouped.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_build_refpage_grouped</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_build_site.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_build_site</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_callout_block.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_callout_block</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_doc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_doc</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_doc_page.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_doc_page</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_doc_short.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_doc_short</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_docs_project_toml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_docs_project_toml</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_format.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_format</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_github_action.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_github_action</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_github_action_simple.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_github_action_simple</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_index</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_makejl_template.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_makejl_template</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_news_page.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_news_page</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_rebuild_all.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_rebuild_all</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_rebuild_reference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_rebuild_reference</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_setup_instructions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_setup_instructions</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_styles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_styles</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_styles_from_config.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_styles_from_config</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_yaml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_yaml</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_yaml_from_config.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_yaml_from_config</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/QuartoConfig.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">QuartoConfig</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/QuartoDocBuilder.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">QuartoDocBuilder</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/ReferenceGroup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ReferenceGroup</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/ReferenceIndex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ReferenceIndex</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/resolve_reference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">resolve_reference</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/SectionConfig.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SectionConfig</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/setup_documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">setup_documentation</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/starts_with.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">starts_with</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/ThemeConfig.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ThemeConfig</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/validate_config.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">validate_config</span></a>
+  <a href="../how-to/organize-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Organize Reference Page</span></a>
   </div>
 </li>
     </ul>
@@ -867,86 +412,159 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sec-doc" id="toc-sec-doc" class="nav-link active" data-scroll-target="#sec-doc">is_type_symbol</a></li>
+  <li><a href="#deploy-to-github-pages" id="toc-deploy-to-github-pages" class="nav-link active" data-scroll-target="#deploy-to-github-pages">Deploy to GitHub Pages</a>
+  <ul class="collapse">
+  <li><a href="#generate-github-actions-workflow" id="toc-generate-github-actions-workflow" class="nav-link" data-scroll-target="#generate-github-actions-workflow">Generate GitHub Actions Workflow</a></li>
+  <li><a href="#workflow-contents" id="toc-workflow-contents" class="nav-link" data-scroll-target="#workflow-contents">Workflow Contents</a></li>
+  <li><a href="#enable-github-pages" id="toc-enable-github-pages" class="nav-link" data-scroll-target="#enable-github-pages">Enable GitHub Pages</a></li>
+  <li><a href="#custom-domain" id="toc-custom-domain" class="nav-link" data-scroll-target="#custom-domain">Custom Domain</a></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a>
+  <ul class="collapse">
+  <li><a href="#build-fails" id="toc-build-fails" class="nav-link" data-scroll-target="#build-fails">Build Fails</a></li>
+  <li><a href="#pages-not-updating" id="toc-pages-not-updating" class="nav-link" data-scroll-target="#pages-not-updating">Pages Not Updating</a></li>
+  <li><a href="#errors" id="toc-errors" class="nav-link" data-scroll-target="#errors">404 Errors</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
 
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Deploy to GitHub Pages</h1>
+</div>
+
+<div>
+  <div class="description">
+    Set up automatic deployment with GitHub Actions
+  </div>
+</div>
 
 
+<div class="quarto-title-meta">
 
-<section id="sec-doc" class="level1">
-<h1>is_type_symbol</h1>
-<div class="callout callout-style-simple callout-note callout-titled" title="docblock">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-docblock
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div id="2" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Symbol</span>(x<span class="op">...</span>) <span class="op">-&gt;</span> <span class="dt">Symbol</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Create a <a href="@ref"><code>Symbol</code></a> by concatenating the string representations of the arguments together.</p>
-<section id="examples" class="level3">
-<h3 class="anchored" data-anchor-id="examples">Examples</h3>
-<div id="4" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">Symbol</span>(<span class="st">"my"</span>, <span class="st">"name"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>myname</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">Symbol</span>(<span class="st">"day"</span>, <span class="fl">4</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>day4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="deploy-to-github-pages" class="level1">
+<h1>Deploy to GitHub Pages</h1>
+<p>This guide shows how to automatically deploy your documentation to GitHub Pages.</p>
+<section id="generate-github-actions-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="generate-github-actions-workflow">Generate GitHub Actions Workflow</h2>
+<p>QuartoDocBuilder can generate a GitHub Actions workflow for you:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">QuartoDocBuilder</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_github_action</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This creates <code>.github/workflows/documentation.yml</code>.</p>
 </section>
-</div>
-</div>
-</div>
-<hr>
-<div class="callout callout-style-simple callout-note callout-titled" title="docblock">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-docblock
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div id="6" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Symbol</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g.&nbsp;as a dictionary key). <code>Symbol</code>s can be entered using the <code>:</code> quote operator:</p>
-<div id="8" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="op">:</span>name</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">:</span>name</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(<span class="op">:</span>name)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">Symbol</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x <span class="op">=</span> <span class="fl">42</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fl">42</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">eval</span>(<span class="op">:</span>x)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fl">42</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><code>Symbol</code>s can also be constructed from strings or other values by calling the constructor <code>Symbol(x...)</code>.</p>
-<p><code>Symbol</code>s are immutable and their implementation re-uses the same object for all <code>Symbol</code>s with the same name.</p>
-<p>Unlike strings, <code>Symbol</code>s are “atomic” or “scalar” entities that do not support iteration over characters.</p>
-</div>
-</div>
-</div>
+<section id="workflow-contents" class="level2">
+<h2 class="anchored" data-anchor-id="workflow-contents">Workflow Contents</h2>
+<p>The generated workflow:</p>
+<ol type="1">
+<li>Triggers on pushes to <code>main</code> branch</li>
+<li>Installs Julia and Quarto</li>
+<li>Builds documentation</li>
+<li>Deploys to GitHub Pages</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Documentation</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">permissions</span><span class="kw">:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">contents</span><span class="kw">:</span><span class="at"> read</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pages</span><span class="kw">:</span><span class="at"> write</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">id-token</span><span class="kw">:</span><span class="at"> write</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build</span><span class="kw">:</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> julia-actions/setup-julia@v1</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> quarto-dev/quarto-actions/setup@v2</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Build documentation</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>          julia --project=docs -e '</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            using Pkg</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>            Pkg.develop(path=".")</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>            Pkg.instantiate()</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>            include("docs/make.jl")</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>          '</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>          cd docs &amp;&amp; quarto render</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/upload-pages-artifact@v3</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">path</span><span class="kw">:</span><span class="at"> docs/site</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">deploy</span><span class="kw">:</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">needs</span><span class="kw">:</span><span class="at"> build</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">name</span><span class="kw">:</span><span class="at"> github-pages</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">url</span><span class="kw">:</span><span class="at"> ${{ steps.deployment.outputs.page_url }}</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/deploy-pages@v4</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">id</span><span class="kw">:</span><span class="at"> deployment</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="enable-github-pages" class="level2">
+<h2 class="anchored" data-anchor-id="enable-github-pages">Enable GitHub Pages</h2>
+<ol type="1">
+<li>Go to your repository <strong>Settings</strong></li>
+<li>Click <strong>Pages</strong> in the sidebar</li>
+<li>Under “Build and deployment”, select <strong>GitHub Actions</strong></li>
+<li>Push to <code>main</code> to trigger the first build</li>
+</ol>
+</section>
+<section id="custom-domain" class="level2">
+<h2 class="anchored" data-anchor-id="custom-domain">Custom Domain</h2>
+<p>To use a custom domain:</p>
+<ol type="1">
+<li>Add a <code>CNAME</code> file to <code>docs/</code> with your domain</li>
+<li>Configure DNS records for your domain</li>
+<li>Enable HTTPS in GitHub Pages settings</li>
+</ol>
+</section>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
+<section id="build-fails" class="level3">
+<h3 class="anchored" data-anchor-id="build-fails">Build Fails</h3>
+<p>Check the Actions log for errors. Common issues:</p>
+<ul>
+<li>Missing dependencies in <code>docs/Project.toml</code></li>
+<li>Quarto rendering errors</li>
+<li>Julia compilation errors</li>
+</ul>
+</section>
+<section id="pages-not-updating" class="level3">
+<h3 class="anchored" data-anchor-id="pages-not-updating">Pages Not Updating</h3>
+<ul>
+<li>Ensure the workflow completed successfully</li>
+<li>Check that <code>docs/site/</code> is being uploaded</li>
+<li>Wait a few minutes for GitHub to deploy</li>
+</ul>
+</section>
+<section id="errors" class="level3">
+<h3 class="anchored" data-anchor-id="errors">404 Errors</h3>
+<ul>
+<li>Verify <code>output_dir = "site"</code> in your config</li>
+<li>Check that <code>_quarto.yml</code> is generated correctly</li>
+</ul>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1396,13 +1014,13 @@ docblock
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../reference/is_function_symbol.html" class="pagination-link" aria-label="is_function_symbol">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">is_function_symbol</span>
+      <a href="../how-to.html" class="pagination-link" aria-label="How-to Guides">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">How-to Guides</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../reference/link_julia_docs.html" class="pagination-link" aria-label="link_julia_docs">
-        <span class="nav-page-text">link_julia_docs</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../how-to/customize-theme.html" class="pagination-link" aria-label="Customize Theme">
+        <span class="nav-page-text">Customize Theme</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Change colors, fonts, and appearance">
 
-<title>tutorial-01</title>
+<title>Customize Theme</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +66,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../tutorials/tutorial-02.html" rel="next">
-<link href="../tutorials.html" rel="prev">
+<link href="../how-to/organize-reference.html" rel="next">
+<link href="../how-to/deploy-github-pages.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -292,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">QuartoDocBuilder.jl</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../articles/getting-started.html"> 
+    <a class="nav-link" href="../tutorials/getting-started.html"> 
 <span class="menu-text">Get Started</span></a>
   </li>  
   <li class="nav-item">
@@ -305,23 +306,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
         <li>
-    <a class="dropdown-item" href="../articles/advanced.html">
- <span class="dropdown-text">Advanced Features</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../articles/configuration.html">
- <span class="dropdown-text">Configuration &amp; Customization</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../articles/getting-started.html">
+    <a class="dropdown-item" href="../tutorials/getting-started.html">
  <span class="dropdown-text">Getting Started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../tutorials/multiple-sections.html">
+ <span class="dropdown-text">Multiple Navbar Sections</span></a>
   </li>  
     </ul>
   </li>
-  <li class="nav-item">
-    <a class="nav-link active" href="../tutorials.html" aria-current="page"> 
-<span class="menu-text">Tutorials</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-explanation" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Explanation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-explanation">    
+        <li>
+    <a class="dropdown-item" href="../explanation/architecture.html">
+ <span class="dropdown-text">Architecture Overview</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../explanation/docstring-processing.html">
+ <span class="dropdown-text">Docstring Processing</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-how-to-guides" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">How-to Guides</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-how-to-guides">    
+        <li>
+    <a class="dropdown-item" href="../how-to/customize-theme.html">
+ <span class="dropdown-text">Customize Theme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/deploy-github-pages.html">
+ <span class="dropdown-text">Deploy to GitHub Pages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/organize-reference.html">
+ <span class="dropdown-text">Organize Reference Page</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="../news.html"> 
 <span class="menu-text">News</span></a>
@@ -339,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/tutorial-01.html">From zero to nice docs!</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../how-to/customize-theme.html">Customize Theme</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -353,20 +380,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Tutorials</span></a>
+  <a href="../how-to.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How-to Guides</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/tutorial-01.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">From zero to nice docs!</span></a>
+  <a href="../how-to/deploy-github-pages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Deploy to GitHub Pages</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/tutorial-02.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Adding content</span></a>
+  <a href="../how-to/customize-theme.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Customize Theme</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../how-to/organize-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Organize Reference Page</span></a>
   </div>
 </li>
     </ul>
@@ -379,128 +412,238 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#from-zero-to-nice-docs" id="toc-from-zero-to-nice-docs" class="nav-link active" data-scroll-target="#from-zero-to-nice-docs">From zero to nice docs!</a>
+  <li><a href="#customize-theme" id="toc-customize-theme" class="nav-link active" data-scroll-target="#customize-theme">Customize Theme</a>
   <ul class="collapse">
-  <li><a href="#first-steps" id="toc-first-steps" class="nav-link" data-scroll-target="#first-steps">First steps</a>
+  <li><a href="#basic-theme-selection" id="toc-basic-theme-selection" class="nav-link" data-scroll-target="#basic-theme-selection">Basic Theme Selection</a>
   <ul class="collapse">
-  <li><a href="#the-docs-folder" id="toc-the-docs-folder" class="nav-link" data-scroll-target="#the-docs-folder">The docs folder</a></li>
-  <li><a href="#changing-the-environment" id="toc-changing-the-environment" class="nav-link" data-scroll-target="#changing-the-environment">Changing the environment</a></li>
-  <li><a href="#creating-the-files" id="toc-creating-the-files" class="nav-link" data-scroll-target="#creating-the-files">Creating the files</a></li>
-  <li><a href="#installing-quarto" id="toc-installing-quarto" class="nav-link" data-scroll-target="#installing-quarto">Installing Quarto</a></li>
-  <li><a href="#creating-the-website" id="toc-creating-the-website" class="nav-link" data-scroll-target="#creating-the-website">Creating the website</a></li>
-  <li><a href="#enabling-comment-sections-optional" id="toc-enabling-comment-sections-optional" class="nav-link" data-scroll-target="#enabling-comment-sections-optional">Enabling comment sections (optional)</a></li>
-  <li><a href="#publishing-your-website" id="toc-publishing-your-website" class="nav-link" data-scroll-target="#publishing-your-website">Publishing your website</a></li>
-  <li><a href="#setting-your-default-github-pages" id="toc-setting-your-default-github-pages" class="nav-link" data-scroll-target="#setting-your-default-github-pages">Setting your default Github Pages</a></li>
-  <li><a href="#ready-to-go" id="toc-ready-to-go" class="nav-link" data-scroll-target="#ready-to-go">Ready to go!</a></li>
+  <li><a href="#available-light-themes" id="toc-available-light-themes" class="nav-link" data-scroll-target="#available-light-themes">Available Light Themes</a></li>
   </ul></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next steps</a></li>
+  <li><a href="#dark-mode" id="toc-dark-mode" class="nav-link" data-scroll-target="#dark-mode">Dark Mode</a></li>
+  <li><a href="#custom-colors" id="toc-custom-colors" class="nav-link" data-scroll-target="#custom-colors">Custom Colors</a></li>
+  <li><a href="#custom-fonts" id="toc-custom-fonts" class="nav-link" data-scroll-target="#custom-fonts">Custom Fonts</a></li>
+  <li><a href="#syntax-highlighting" id="toc-syntax-highlighting" class="nav-link" data-scroll-target="#syntax-highlighting">Syntax Highlighting</a></li>
+  <li><a href="#custom-css" id="toc-custom-css" class="nav-link" data-scroll-target="#custom-css">Custom CSS</a></li>
+  <li><a href="#custom-scss-variables" id="toc-custom-scss-variables" class="nav-link" data-scroll-target="#custom-scss-variables">Custom SCSS Variables</a></li>
+  <li><a href="#complete-example" id="toc-complete-example" class="nav-link" data-scroll-target="#complete-example">Complete Example</a></li>
+  <li><a href="#preview-changes" id="toc-preview-changes" class="nav-link" data-scroll-target="#preview-changes">Preview Changes</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
 
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Customize Theme</h1>
+</div>
+
+<div>
+  <div class="description">
+    Change colors, fonts, and appearance
+  </div>
+</div>
 
 
+<div class="quarto-title-meta">
 
-<section id="from-zero-to-nice-docs" class="level1">
-<h1>From zero to nice docs!</h1>
-<p>In this tutorial I will explain the steps to build your docs without too much of a headache! I will use my package <a href="https://github.com/TidierOrg/TidierIteration.jl">TidierIteration.jl</a> as an example.</p>
-<section id="first-steps" class="level2">
-<h2 class="anchored" data-anchor-id="first-steps">First steps</h2>
-<section id="the-docs-folder" class="level3">
-<h3 class="anchored" data-anchor-id="the-docs-folder">The docs folder</h3>
-<p>In your package directory (in my case, Github/TidierIteration), create a <code>docs</code> directory.</p>
-<p>Now create a Julia script named <code>make.jl</code> inside <code>docs</code> with the following content:</p>
-<div id="2" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">TidierIteration</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">QuartoDocBuilder</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_site</span>(TidierIteration, repo <span class="op">=</span> <span class="st">"TidierOrg/TidierIteration.jl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="changing-the-environment" class="level3">
-<h3 class="anchored" data-anchor-id="changing-the-environment">Changing the environment</h3>
-<p>I don’t want to make <code>QuartoDocBuilder</code> a dependency on <code>TidierIteration</code>! So I have to change my environment to use this package. To do this is easy: go to the REPL and type</p>
-<div id="4" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>] activate docs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The output is</p>
-<pre><code>  Activating new project at `~/Documentos/GitHub/TidierIteration.jl/docs`</code></pre>
-<p>Now you add these two packages as dependencies to the <code>docs</code> environment:</p>
-<div id="6" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>] add <span class="op">../</span>TidierIteration.jl<span class="op">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>and</p>
-<div id="8" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>] add https<span class="op">://</span>github.com<span class="op">/</span>vituri<span class="op">/</span>QuartoDocBuilder.jl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Note: here <code>]</code> denote the <code>pkg</code> mode in the REPL. If you are already in <code>pkg</code> mode, don’t need to type <code>]</code>.</p>
-</section>
-<section id="creating-the-files" class="level3">
-<h3 class="anchored" data-anchor-id="creating-the-files">Creating the files</h3>
-<p>Now we are good to go! Just run the <code>docs/make.jl</code> (line by line in VSCode, for example).</p>
-<p>If everything went smoothly (I hope so!), your <code>docs/</code> folder will looks like this:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="tutorial-01-files.png" class="img-fluid figure-img"></p>
-<figcaption>A nice docs folder.</figcaption>
-</figure>
-</div>
-</section>
-<section id="installing-quarto" class="level3">
-<h3 class="anchored" data-anchor-id="installing-quarto">Installing Quarto</h3>
-<p>All these .qmd files are useless if we don’t have Quarto installed! Go to https://quarto.org/docs/download/ and install. <strong>Important</strong>: you need to install the latest pre-release version, otherwise you won’t have the <code>julia</code> engine!</p>
-<p>If you use VSCode, I strongly suggest that you also install the Quarto extension.</p>
-</section>
-<section id="creating-the-website" class="level3">
-<h3 class="anchored" data-anchor-id="creating-the-website">Creating the website</h3>
-<p>Now is the best part: open <code>docs/index.qmd</code> and press the “preview” button on VSCode</p>
-<p><img src="tutorial-01-preview.png" class="img-fluid"></p>
-<p>The magic will start to happen and all .qmd files will be rendered into pages:</p>
-<p><img src="tutorial-01-rendering.png" class="img-fluid"></p>
-<p>If everything went alright, you will see this interactive viewer:</p>
-<p><img src="tutorial-01-viewer.png" class="img-fluid"></p>
-<p>In this case, I needed to copy the <code>assets/</code> directory to the <code>docs/</code> folder.</p>
-</section>
-<section id="enabling-comment-sections-optional" class="level3">
-<h3 class="anchored" data-anchor-id="enabling-comment-sections-optional">Enabling comment sections (optional)</h3>
-<p>Comment sections are a great way to see if people are having trouble to understand your docs! By default, QuartoDocBuilder enables the comment section using Discus. You need to give permission to Discus interact with your Discussion section on Github.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="tutorial-01-discussions.png" class="img-fluid figure-img"></p>
-<figcaption>Enabling the Discussion tab on your repository.</figcaption>
-</figure>
-</div>
-<p>Go to <a href="https://github.com/apps/giscus">https://github.com/apps/giscus</a> and allow Discus to access your repo:</p>
-<p><img src="tutorial-01-discus1.png" class="img-fluid"></p>
-<p><img src="tutorial-01-discus2.png" class="img-fluid"></p>
-<p><img src="tutorial-01-discus3.png" class="img-fluid"></p>
-<p><img src="tutorial-01-discus4.png" class="img-fluid"></p>
-</section>
-<section id="publishing-your-website" class="level3">
-<h3 class="anchored" data-anchor-id="publishing-your-website">Publishing your website</h3>
-<p>Now it’s time to shine! Use the <code>bash</code> and go to your <code>docs/</code> folder. Simply run the following command:</p>
-<pre><code>quarto publish</code></pre>
-<p><img src="tutorial-01-publish.png" class="img-fluid"></p>
-<p>Choose Github Pages and you are good to go!</p>
-</section>
-<section id="setting-your-default-github-pages" class="level3">
-<h3 class="anchored" data-anchor-id="setting-your-default-github-pages">Setting your default Github Pages</h3>
-<p>Check if your Github Pages is set to use the branch gh-pages and the folder “/” (root).</p>
-<p><img src="tutorial-01-ghpages.png" class="img-fluid"></p>
-</section>
-<section id="ready-to-go" class="level3">
-<h3 class="anchored" data-anchor-id="ready-to-go">Ready to go!</h3>
-<p>After all this trouble, your Quarto website is online! You will see something like this:</p>
-<p><img src="tutorial-01-website.png" class="img-fluid"></p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="customize-theme" class="level1">
+<h1>Customize Theme</h1>
+<p>QuartoDocBuilder supports extensive theme customization through <code>ThemeConfig</code>.</p>
+<section id="basic-theme-selection" class="level2">
+<h2 class="anchored" data-anchor-id="basic-theme-selection">Basic Theme Selection</h2>
+<p>Choose from Bootswatch themes:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>theme <span class="op">=</span> <span class="fu">ThemeConfig</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    bootswatch <span class="op">=</span> <span class="st">"cosmo"</span>  <span class="co"># or flatly, journal, lumen, etc.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="available-light-themes" class="level3">
+<h3 class="anchored" data-anchor-id="available-light-themes">Available Light Themes</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Theme</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>flatly</code></td>
+<td>Flat and clean</td>
+</tr>
+<tr class="even">
+<td><code>cosmo</code></td>
+<td>Modern and professional</td>
+</tr>
+<tr class="odd">
+<td><code>journal</code></td>
+<td>News/article style</td>
+</tr>
+<tr class="even">
+<td><code>litera</code></td>
+<td>Readable and light</td>
+</tr>
+<tr class="odd">
+<td><code>lumen</code></td>
+<td>Bright and cheerful</td>
+</tr>
+<tr class="even">
+<td><code>minty</code></td>
+<td>Fresh green accent</td>
+</tr>
+<tr class="odd">
+<td><code>pulse</code></td>
+<td>Purple accent</td>
+</tr>
+<tr class="even">
+<td><code>sandstone</code></td>
+<td>Warm earth tones</td>
+</tr>
+<tr class="odd">
+<td><code>yeti</code></td>
+<td>Bootstrap default look</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
-<section id="next-steps" class="level2">
-<h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>
-<p>What now? How can I make my docs even better, add tutorials and examples? This is the content of the next tutorial…</p>
+<section id="dark-mode" class="level2">
+<h2 class="anchored" data-anchor-id="dark-mode">Dark Mode</h2>
+<p>Enable automatic light/dark mode toggle:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>theme <span class="op">=</span> <span class="fu">ThemeConfig</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    bootswatch <span class="op">=</span> <span class="st">"flatly"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    dark_mode <span class="op">=</span> <span class="cn">true</span>  <span class="co"># Adds theme toggle, pairs with "darkly"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Dark themes are automatically paired:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Light</th>
+<th>Dark</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>flatly</td>
+<td>darkly</td>
+</tr>
+<tr class="even">
+<td>cosmo</td>
+<td>cyborg</td>
+</tr>
+<tr class="odd">
+<td>journal</td>
+<td>slate</td>
+</tr>
+<tr class="even">
+<td>lumen</td>
+<td>solar</td>
+</tr>
+<tr class="odd">
+<td>minty</td>
+<td>vapor</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="custom-colors" class="level2">
+<h2 class="anchored" data-anchor-id="custom-colors">Custom Colors</h2>
+<p>Override default colors:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>theme <span class="op">=</span> <span class="fu">ThemeConfig</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    bootswatch <span class="op">=</span> <span class="st">"flatly"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    primary <span class="op">=</span> <span class="st">"#007bff"</span>,    <span class="co"># Primary brand color</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    accent <span class="op">=</span> <span class="st">"#28a745"</span>,     <span class="co"># Links and accents</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    bg <span class="op">=</span> <span class="st">"#ffffff"</span>,         <span class="co"># Background</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    fg <span class="op">=</span> <span class="st">"#212529"</span>          <span class="co"># Text color</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="custom-fonts" class="level2">
+<h2 class="anchored" data-anchor-id="custom-fonts">Custom Fonts</h2>
+<p>Specify font families:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>theme <span class="op">=</span> <span class="fu">ThemeConfig</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    font_base <span class="op">=</span> <span class="st">"Open Sans, sans-serif"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    font_heading <span class="op">=</span> <span class="st">"Montserrat, sans-serif"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    font_code <span class="op">=</span> <span class="st">"Fira Code, monospace"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="syntax-highlighting" class="level2">
+<h2 class="anchored" data-anchor-id="syntax-highlighting">Syntax Highlighting</h2>
+<p>Choose a code highlighting theme:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>theme <span class="op">=</span> <span class="fu">ThemeConfig</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    code_highlight <span class="op">=</span> <span class="st">"github"</span>  <span class="co"># or monokai, dracula, nord, etc.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="custom-css" class="level2">
+<h2 class="anchored" data-anchor-id="custom-css">Custom CSS</h2>
+<p>Add custom CSS rules:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>theme <span class="op">=</span> <span class="fu">ThemeConfig</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    bootswatch <span class="op">=</span> <span class="st">"flatly"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    custom_css <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">    /* Custom navbar gradient */</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">    .navbar {</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">    /* Custom code block style */</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">    pre code {</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">        border-radius: 8px;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="st">    /* Highlight callouts */</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="st">    .callout-note {</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="st">        border-left-color: #007bff;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="custom-scss-variables" class="level2">
+<h2 class="anchored" data-anchor-id="custom-scss-variables">Custom SCSS Variables</h2>
+<p>For advanced customization, use SCSS:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>theme <span class="op">=</span> <span class="fu">ThemeConfig</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    custom_scss <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">    </span><span class="sc">$</span>primary<span class="st">: #667eea;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">    </span><span class="sc">$</span>link<span class="st">-color: #764ba2;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="st">    </span><span class="sc">$</span>border<span class="st">-radius: 0.5rem;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="complete-example" class="level2">
+<h2 class="anchored" data-anchor-id="complete-example">Complete Example</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> <span class="fu">QuartoConfig</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    module_name <span class="op">=</span> MyPackage,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    repo <span class="op">=</span> <span class="st">"user/MyPackage.jl"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    theme <span class="op">=</span> <span class="fu">ThemeConfig</span>(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        bootswatch <span class="op">=</span> <span class="st">"cosmo"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        dark_mode <span class="op">=</span> <span class="cn">true</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        primary <span class="op">=</span> <span class="st">"#6366f1"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        accent <span class="op">=</span> <span class="st">"#8b5cf6"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        code_highlight <span class="op">=</span> <span class="st">"nord"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        font_heading <span class="op">=</span> <span class="st">"Inter, sans-serif"</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        custom_css <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="st">        .navbar-brand {</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="st">            font-weight: 700;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="st">        }</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="st">        """</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="preview-changes" class="level2">
+<h2 class="anchored" data-anchor-id="preview-changes">Preview Changes</h2>
+<p>After modifying the theme, rebuild and preview:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">julia</span> <span class="at">--project</span><span class="op">=</span>docs docs/make.jl</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> docs <span class="kw">&amp;&amp;</span> <span class="ex">quarto</span> preview</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The preview server will hot-reload CSS changes.</p>
 
 
 </section>
@@ -953,13 +1096,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../tutorials.html" class="pagination-link" aria-label="Tutorials">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorials</span>
+      <a href="../how-to/deploy-github-pages.html" class="pagination-link" aria-label="Deploy to GitHub Pages">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Deploy to GitHub Pages</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../tutorials/tutorial-02.html" class="pagination-link" aria-label="Adding content">
-        <span class="nav-page-text">Adding content</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../how-to/organize-reference.html" class="pagination-link" aria-label="Organize Reference Page">
+        <span class="nav-page-text">Organize Reference Page</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

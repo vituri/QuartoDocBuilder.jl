@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Learn how to create multiple dropdown sections like Rhino documentation">
 
-<title>tutorial-02</title>
+<title>Multiple Navbar Sections</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../tutorials/tutorial-01.html" rel="prev">
+<link href="../tutorials/getting-started.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -291,7 +292,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">QuartoDocBuilder.jl</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../articles/getting-started.html"> 
+    <a class="nav-link active" href="../tutorials/getting-started.html" aria-current="page"> 
 <span class="menu-text">Get Started</span></a>
   </li>  
   <li class="nav-item">
@@ -304,23 +305,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
         <li>
-    <a class="dropdown-item" href="../articles/advanced.html">
- <span class="dropdown-text">Advanced Features</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../articles/configuration.html">
- <span class="dropdown-text">Configuration &amp; Customization</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../articles/getting-started.html">
+    <a class="dropdown-item" href="../tutorials/getting-started.html">
  <span class="dropdown-text">Getting Started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../tutorials/multiple-sections.html">
+ <span class="dropdown-text">Multiple Navbar Sections</span></a>
   </li>  
     </ul>
   </li>
-  <li class="nav-item">
-    <a class="nav-link active" href="../tutorials.html" aria-current="page"> 
-<span class="menu-text">Tutorials</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-explanation" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Explanation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-explanation">    
+        <li>
+    <a class="dropdown-item" href="../explanation/architecture.html">
+ <span class="dropdown-text">Architecture Overview</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../explanation/docstring-processing.html">
+ <span class="dropdown-text">Docstring Processing</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-how-to-guides" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">How-to Guides</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-how-to-guides">    
+        <li>
+    <a class="dropdown-item" href="../how-to/customize-theme.html">
+ <span class="dropdown-text">Customize Theme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/deploy-github-pages.html">
+ <span class="dropdown-text">Deploy to GitHub Pages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/organize-reference.html">
+ <span class="dropdown-text">Organize Reference Page</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="../news.html"> 
 <span class="menu-text">News</span></a>
@@ -338,7 +365,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/tutorial-02.html">Adding content</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/multiple-sections.html">Multiple Navbar Sections</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -358,14 +385,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/tutorial-01.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">From zero to nice docs!</span></a>
+  <a href="../tutorials/getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting Started</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/tutorial-02.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Adding content</span></a>
+  <a href="../tutorials/multiple-sections.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Multiple Navbar Sections</span></a>
   </div>
 </li>
     </ul>
@@ -378,67 +405,219 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#adding-content" id="toc-adding-content" class="nav-link active" data-scroll-target="#adding-content">Adding content</a>
+  <li><a href="#multiple-navbar-sections" id="toc-multiple-navbar-sections" class="nav-link active" data-scroll-target="#multiple-navbar-sections">Multiple Navbar Sections</a>
   <ul class="collapse">
-  <li><a href="#the-julia-engine" id="toc-the-julia-engine" class="nav-link" data-scroll-target="#the-julia-engine">The julia engine</a></li>
-  <li><a href="#adding-tutorials" id="toc-adding-tutorials" class="nav-link" data-scroll-target="#adding-tutorials">Adding tutorials</a></li>
-  <li><a href="#adding-more-function-to-the-reference-page" id="toc-adding-more-function-to-the-reference-page" class="nav-link" data-scroll-target="#adding-more-function-to-the-reference-page">Adding more function to the Reference page</a></li>
-  <li><a href="#creating-more-tabs-adjusting-the-layout-and-so-on" id="toc-creating-more-tabs-adjusting-the-layout-and-so-on" class="nav-link" data-scroll-target="#creating-more-tabs-adjusting-the-layout-and-so-on">Creating more tabs, adjusting the layout and so on</a></li>
+  <li><a href="#using-sectionconfig" id="toc-using-sectionconfig" class="nav-link" data-scroll-target="#using-sectionconfig">Using SectionConfig</a></li>
+  <li><a href="#sectionconfig-options" id="toc-sectionconfig-options" class="nav-link" data-scroll-target="#sectionconfig-options">SectionConfig Options</a></li>
+  <li><a href="#directory-structure" id="toc-directory-structure" class="nav-link" data-scroll-target="#directory-structure">Directory Structure</a></li>
+  <li><a href="#toml-configuration" id="toc-toml-configuration" class="nav-link" data-scroll-target="#toml-configuration">TOML Configuration</a></li>
+  <li><a href="#controlling-dropdown-behavior" id="toc-controlling-dropdown-behavior" class="nav-link" data-scroll-target="#controlling-dropdown-behavior">Controlling Dropdown Behavior</a></li>
+  <li><a href="#example-this-documentation" id="toc-example-this-documentation" class="nav-link" data-scroll-target="#example-this-documentation">Example: This Documentation</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
 
 
-
-
-
-<section id="adding-content" class="level1">
-<h1>Adding content</h1>
-<p>After the first tutorial, we have a basic Quarto website running. But what if we want to add more things?</p>
-<section id="the-julia-engine" class="level2">
-<h2 class="anchored" data-anchor-id="the-julia-engine">The julia engine</h2>
-<p>At the start of every .qmd file you create, add the lines</p>
-<pre><code>
----
-engine: julia
----
-
-</code></pre>
-<p>so Quarto will use the <code>julia</code> engine (and not the jupyter one).</p>
-</section>
-<section id="adding-tutorials" class="level2">
-<h2 class="anchored" data-anchor-id="adding-tutorials">Adding tutorials</h2>
-<p>All .qmd files in the <code>docs/tutorials</code> folder will be rendered and put together on the Tutorials tab. If you want more control over which .qmd files will be rendered and in which order, you will need to edit the file <code>docs/_quarto.yaml</code>. See more details at <a href="https://quarto.org/docs/websites/">the Quarto official documentation</a>.</p>
-<p>In TidierIteration.jl, I added the following files</p>
-<p><img src="tutorial-02-files.png" class="img-fluid"></p>
-<p>which rendered as follows</p>
-<p><img src="tutorial-02-rendered.png" class="img-fluid"></p>
-</section>
-<section id="adding-more-function-to-the-reference-page" class="level2">
-<h2 class="anchored" data-anchor-id="adding-more-function-to-the-reference-page">Adding more function to the Reference page</h2>
-<p>If you kept developing your package and added more functions (or modified some existent ones), it is a good idea to remake all .qmd files on the <code>docs/reference/</code> folder. To do that, activate the <code>docs/</code> environment like in the previous tutorial and run the following:</p>
-<div id="2" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">.TidierIteration</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">QuartoDocBuilder</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>objs <span class="op">=</span> <span class="fu">get_objects_from_module</span>(module_name)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>objs <span class="op">.|&gt;</span> quarto_doc_page</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Multiple Navbar Sections</h1>
 </div>
-<p>This can also be written in the <code>docs/make.jl</code> file. If you want to rewrite the <code>docs/reference.qmd</code> file, add the following line:</p>
-<div id="4" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_refpage</span>(TidierIteration)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div>
+  <div class="description">
+    Learn how to create multiple dropdown sections like Rhino documentation
+  </div>
 </div>
-<p>Be careful: this will overwrite your current <code>docs/reference.qmd</code> file! In case you want to write the content of this file into another file, pass the optional argument <code>output</code>:</p>
-<div id="6" class="cell" data-execution_count="0">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_refpage</span>(TidierIteration, output <span class="op">=</span> <span class="st">"docs/reference2.qmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="multiple-navbar-sections" class="level1">
+<h1>Multiple Navbar Sections</h1>
+<p>QuartoDocBuilder supports multiple dropdown sections in the navbar, similar to <a href="https://appsilon.github.io/rhino/">Rhino documentation</a>. This allows you to organize your documentation into logical categories like “Tutorials”, “Explanation”, and “How-to Guides”.</p>
+<section id="using-sectionconfig" class="level2">
+<h2 class="anchored" data-anchor-id="using-sectionconfig">Using SectionConfig</h2>
+<p>To create multiple sections, use the <code>sections</code> field in <code>QuartoConfig</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">QuartoDocBuilder</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> <span class="fu">QuartoConfig</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    module_name <span class="op">=</span> MyPackage,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    repo <span class="op">=</span> <span class="st">"user/MyPackage.jl"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define multiple sections - each gets a dropdown in the navbar</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    sections <span class="op">=</span> [</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">SectionConfig</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            title <span class="op">=</span> <span class="st">"Tutorials"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            dir <span class="op">=</span> <span class="st">"tutorials"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            desc <span class="op">=</span> <span class="st">"Step-by-step guides to get started."</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            order <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">SectionConfig</span>(</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            title <span class="op">=</span> <span class="st">"Explanation"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            dir <span class="op">=</span> <span class="st">"explanation"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            desc <span class="op">=</span> <span class="st">"Understand how things work."</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            order <span class="op">=</span> <span class="fl">2</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">SectionConfig</span>(</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            title <span class="op">=</span> <span class="st">"How-to Guides"</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            dir <span class="op">=</span> <span class="st">"how-to"</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            desc <span class="op">=</span> <span class="st">"Task-oriented guides."</span>,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>            order <span class="op">=</span> <span class="fl">3</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_site</span>(config)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="creating-more-tabs-adjusting-the-layout-and-so-on" class="level2">
-<h2 class="anchored" data-anchor-id="creating-more-tabs-adjusting-the-layout-and-so-on">Creating more tabs, adjusting the layout and so on</h2>
-<p>All this can be done by modifying the <code>docs/_quarto.yaml</code> file. Learn how to do it <a href="https://quarto.org/docs/reference/projects/websites.html">here</a>. For example, <a href="https://quarto.org/docs/websites/website-navigation.html">here</a> are different ways to navigate in your site, <a href="https://quarto.org/docs/websites/website-tools.html">changing the header</a> and so on.</p>
+<section id="sectionconfig-options" class="level2">
+<h2 class="anchored" data-anchor-id="sectionconfig-options">SectionConfig Options</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 17%">
+<col style="width: 25%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>title</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>Display title in navbar</td>
+</tr>
+<tr class="even">
+<td><code>dir</code></td>
+<td>String</td>
+<td>“”</td>
+<td>Directory containing <code>.qmd</code> files</td>
+</tr>
+<tr class="odd">
+<td><code>desc</code></td>
+<td>String</td>
+<td>“”</td>
+<td>Description for the section index page</td>
+</tr>
+<tr class="even">
+<td><code>dropdown</code></td>
+<td>Bool</td>
+<td>true</td>
+<td>Show as dropdown menu</td>
+</tr>
+<tr class="odd">
+<td><code>dropdown_limit</code></td>
+<td>Int</td>
+<td>15</td>
+<td>Max items before falling back to index link</td>
+</tr>
+<tr class="even">
+<td><code>index_file</code></td>
+<td>String</td>
+<td>“”</td>
+<td>Custom index file name (defaults to <code>{dir}.qmd</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>sidebar</code></td>
+<td>Bool</td>
+<td>true</td>
+<td>Show sidebar when browsing this section</td>
+</tr>
+<tr class="even">
+<td><code>order</code></td>
+<td>Int</td>
+<td>100</td>
+<td>Position in navbar (lower = more left)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="directory-structure" class="level2">
+<h2 class="anchored" data-anchor-id="directory-structure">Directory Structure</h2>
+<p>When you define sections, create corresponding directories:</p>
+<pre><code>docs/
+├── tutorials/
+│   ├── getting-started.qmd
+│   ├── basic-usage.qmd
+│   └── advanced.qmd
+├── explanation/
+│   ├── architecture.qmd
+│   └── how-it-works.qmd
+├── how-to/
+│   ├── deploy-github.qmd
+│   └── custom-theme.qmd
+└── make.jl</code></pre>
+<p>QuartoDocBuilder will automatically:</p>
+<ol type="1">
+<li>Create dropdown menus for each section in the navbar</li>
+<li>Generate index pages (e.g., <code>tutorials.qmd</code>, <code>explanation.qmd</code>)</li>
+<li>Create sidebars for navigation within each section</li>
+</ol>
+</section>
+<section id="toml-configuration" class="level2">
+<h2 class="anchored" data-anchor-id="toml-configuration">TOML Configuration</h2>
+<p>You can also configure sections via <code>_quartodoc.toml</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[[sections]]</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">title</span> <span class="op">=</span> <span class="st">"Tutorials"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">dir</span> <span class="op">=</span> <span class="st">"tutorials"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">order</span> <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">[[sections]]</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="dt">title</span> <span class="op">=</span> <span class="st">"Explanation"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="dt">dir</span> <span class="op">=</span> <span class="st">"explanation"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="dt">order</span> <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">[[sections]]</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="dt">title</span> <span class="op">=</span> <span class="st">"How-to Guides"</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="dt">dir</span> <span class="op">=</span> <span class="st">"how-to"</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="dt">order</span> <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="dt">dropdown_limit</span> <span class="op">=</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="controlling-dropdown-behavior" class="level2">
+<h2 class="anchored" data-anchor-id="controlling-dropdown-behavior">Controlling Dropdown Behavior</h2>
+<p>By default, sections with fewer than 15 items show as dropdown menus. For sections with many items, the dropdown falls back to linking to an index page.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This section will always show as a dropdown (up to 50 items)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">SectionConfig</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="st">"How-to Guides"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    dir <span class="op">=</span> <span class="st">"how-to"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    dropdown_limit <span class="op">=</span> <span class="fl">50</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># This section will never show as a dropdown</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">SectionConfig</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="st">"Examples"</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    dir <span class="op">=</span> <span class="st">"examples"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    dropdown <span class="op">=</span> <span class="cn">false</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-this-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="example-this-documentation">Example: This Documentation</h2>
+<p>This very documentation uses multiple sections:</p>
+<ul>
+<li><strong>Tutorials</strong> - Getting started guides</li>
+<li><strong>Explanation</strong> - How QuartoDocBuilder works</li>
+<li><strong>How-to Guides</strong> - Task-oriented guides</li>
+</ul>
+<p>Check out the <a href="https://github.com/vituri/QuartoDocBuilder.jl/blob/main/docs/make.jl">make.jl</a> for the complete configuration.</p>
 
 
 </section>
@@ -891,8 +1070,8 @@ engine: julia
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../tutorials/tutorial-01.html" class="pagination-link" aria-label="From zero to nice docs!">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">From zero to nice docs!</span>
+      <a href="../tutorials/getting-started.html" class="pagination-link" aria-label="Getting Started">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Getting Started</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

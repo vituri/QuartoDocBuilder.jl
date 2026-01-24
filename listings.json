@@ -1,10 +1,24 @@
 [
   {
-    "listing": "/articles.html",
+    "listing": "/explanation.html",
     "items": [
-      "/articles/getting-started.html",
-      "/articles/configuration.html",
-      "/articles/advanced.html"
+      "/explanation/architecture.html",
+      "/explanation/docstring-processing.html"
+    ]
+  },
+  {
+    "listing": "/how-to.html",
+    "items": [
+      "/how-to/deploy-github-pages.html",
+      "/how-to/customize-theme.html",
+      "/how-to/organize-reference.html"
+    ]
+  },
+  {
+    "listing": "/tutorials.html",
+    "items": [
+      "/tutorials/getting-started.html",
+      "/tutorials/multiple-sections.html"
     ]
   }
 ]

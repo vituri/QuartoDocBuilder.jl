@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Quick start guide for creating documentation with QuartoDocBuilder.jl">
+<meta name="description" content="Group and organize your API reference documentation">
 
-<title>Getting Started</title>
+<title>Organize Reference Page</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,8 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../articles/configuration.html" rel="next">
-<link href="../articles.html" rel="prev">
+<link href="../how-to/customize-theme.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -293,7 +292,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">QuartoDocBuilder.jl</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../articles/getting-started.html" aria-current="page"> 
+    <a class="nav-link" href="../tutorials/getting-started.html"> 
 <span class="menu-text">Get Started</span></a>
   </li>  
   <li class="nav-item">
@@ -306,23 +305,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
         <li>
-    <a class="dropdown-item" href="../articles/advanced.html">
- <span class="dropdown-text">Advanced Features</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../articles/configuration.html">
- <span class="dropdown-text">Configuration &amp; Customization</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../articles/getting-started.html">
+    <a class="dropdown-item" href="../tutorials/getting-started.html">
  <span class="dropdown-text">Getting Started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../tutorials/multiple-sections.html">
+ <span class="dropdown-text">Multiple Navbar Sections</span></a>
   </li>  
     </ul>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="../tutorials.html"> 
-<span class="menu-text">Tutorials</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-explanation" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Explanation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-explanation">    
+        <li>
+    <a class="dropdown-item" href="../explanation/architecture.html">
+ <span class="dropdown-text">Architecture Overview</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../explanation/docstring-processing.html">
+ <span class="dropdown-text">Docstring Processing</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-how-to-guides" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">How-to Guides</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-how-to-guides">    
+        <li>
+    <a class="dropdown-item" href="../how-to/customize-theme.html">
+ <span class="dropdown-text">Customize Theme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/deploy-github-pages.html">
+ <span class="dropdown-text">Deploy to GitHub Pages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/organize-reference.html">
+ <span class="dropdown-text">Organize Reference Page</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="../news.html"> 
 <span class="menu-text">News</span></a>
@@ -340,7 +365,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../articles/getting-started.html">Getting Started</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../how-to/organize-reference.html">Organize Reference Page</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -354,26 +379,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../articles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Tutorials</span></a>
+  <a href="../how-to.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How-to Guides</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../articles/getting-started.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Getting Started</span></a>
+  <a href="../how-to/deploy-github-pages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Deploy to GitHub Pages</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../articles/configuration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Configuration &amp; Customization</span></a>
+  <a href="../how-to/customize-theme.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Customize Theme</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../articles/advanced.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Features</span></a>
+  <a href="../how-to/organize-reference.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Organize Reference Page</span></a>
   </div>
 </li>
     </ul>
@@ -386,26 +411,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#getting-started-with-quartodocbuilder.jl" id="toc-getting-started-with-quartodocbuilder.jl" class="nav-link active" data-scroll-target="#getting-started-with-quartodocbuilder.jl">Getting Started with QuartoDocBuilder.jl</a>
+  <li><a href="#organize-reference-page" id="toc-organize-reference-page" class="nav-link active" data-scroll-target="#organize-reference-page">Organize Reference Page</a>
   <ul class="collapse">
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
-  <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick Start</a>
+  <li><a href="#basic-grouping" id="toc-basic-grouping" class="nav-link" data-scroll-target="#basic-grouping">Basic Grouping</a></li>
+  <li><a href="#using-selectors" id="toc-using-selectors" class="nav-link" data-scroll-target="#using-selectors">Using Selectors</a>
   <ul class="collapse">
-  <li><a href="#step-1-create-a-build-script" id="toc-step-1-create-a-build-script" class="nav-link" data-scroll-target="#step-1-create-a-build-script">Step 1: Create a build script</a></li>
-  <li><a href="#step-2-run-the-build-script" id="toc-step-2-run-the-build-script" class="nav-link" data-scroll-target="#step-2-run-the-build-script">Step 2: Run the build script</a></li>
-  <li><a href="#step-3-preview-locally" id="toc-step-3-preview-locally" class="nav-link" data-scroll-target="#step-3-preview-locally">Step 3: Preview locally</a></li>
-  <li><a href="#step-4-build-the-final-site" id="toc-step-4-build-the-final-site" class="nav-link" data-scroll-target="#step-4-build-the-final-site">Step 4: Build the final site</a></li>
+  <li><a href="#starts_with" id="toc-starts_with" class="nav-link" data-scroll-target="#starts_with"><code>starts_with</code></a></li>
+  <li><a href="#ends_with" id="toc-ends_with" class="nav-link" data-scroll-target="#ends_with"><code>ends_with</code></a></li>
+  <li><a href="#matches" id="toc-matches" class="nav-link" data-scroll-target="#matches"><code>matches</code></a></li>
+  <li><a href="#contains" id="toc-contains" class="nav-link" data-scroll-target="#contains"><code>contains</code></a></li>
   </ul></li>
-  <li><a href="#what-gets-generated" id="toc-what-gets-generated" class="nav-link" data-scroll-target="#what-gets-generated">What Gets Generated</a></li>
-  <li><a href="#adding-tutorials" id="toc-adding-tutorials" class="nav-link" data-scroll-target="#adding-tutorials">Adding Tutorials</a></li>
-  <li><a href="#publishing-to-github-pages" id="toc-publishing-to-github-pages" class="nav-link" data-scroll-target="#publishing-to-github-pages">Publishing to GitHub Pages</a>
-  <ul class="collapse">
-  <li><a href="#option-1-github-actions-recommended" id="toc-option-1-github-actions-recommended" class="nav-link" data-scroll-target="#option-1-github-actions-recommended">Option 1: GitHub Actions (Recommended)</a></li>
-  <li><a href="#option-2-manual-deployment" id="toc-option-2-manual-deployment" class="nav-link" data-scroll-target="#option-2-manual-deployment">Option 2: Manual Deployment</a></li>
-  </ul></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#combining-selectors" id="toc-combining-selectors" class="nav-link" data-scroll-target="#combining-selectors">Combining Selectors</a></li>
+  <li><a href="#adding-descriptions" id="toc-adding-descriptions" class="nav-link" data-scroll-target="#adding-descriptions">Adding Descriptions</a></li>
+  <li><a href="#complete-example" id="toc-complete-example" class="nav-link" data-scroll-target="#complete-example">Complete Example</a></li>
+  <li><a href="#automatic-grouping" id="toc-automatic-grouping" class="nav-link" data-scroll-target="#automatic-grouping">Automatic Grouping</a></li>
+  <li><a href="#order-matters" id="toc-order-matters" class="nav-link" data-scroll-target="#order-matters">Order Matters</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -416,12 +436,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Getting Started</h1>
+<h1 class="title">Organize Reference Page</h1>
 </div>
 
 <div>
   <div class="description">
-    Quick start guide for creating documentation with QuartoDocBuilder.jl
+    Group and organize your API reference documentation
   </div>
 </div>
 
@@ -438,194 +458,137 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="getting-started-with-quartodocbuilder.jl" class="level1">
-<h1>Getting Started with QuartoDocBuilder.jl</h1>
-<p>QuartoDocBuilder.jl is a Julia package that generates beautiful documentation websites for your Julia packages using <a href="https://quarto.org/">Quarto</a>. It’s inspired by R’s <a href="https://pkgdown.r-lib.org/">pkgdown</a> and provides similar features.</p>
-<section id="prerequisites" class="level2">
-<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<p>Before you begin, make sure you have:</p>
-<ol type="1">
-<li><strong>Julia 1.6+</strong> installed</li>
-<li><strong>Quarto</strong> installed (<a href="https://quarto.org/docs/get-started/">download here</a>)</li>
-<li>A Julia package with documented functions (docstrings)</li>
-</ol>
+<section id="organize-reference-page" class="level1">
+<h1>Organize Reference Page</h1>
+<p>By default, QuartoDocBuilder lists all documented functions alphabetically. You can organize them into logical groups using <code>ReferenceGroup</code>.</p>
+<section id="basic-grouping" class="level2">
+<h2 class="anchored" data-anchor-id="basic-grouping">Basic Grouping</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>reference <span class="op">=</span> [</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ReferenceGroup</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">"Core Functions"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        contents <span class="op">=</span> [<span class="op">:</span>main_func, <span class="op">:</span>helper_func, <span class="op">:</span>process_data]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ReferenceGroup</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">"Utilities"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        contents <span class="op">=</span> [<span class="op">:</span>format_output, <span class="op">:</span>validate_input]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> <span class="fu">QuartoConfig</span>(</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    module_name <span class="op">=</span> MyPackage,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    reference <span class="op">=</span> reference</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="installation" class="level2">
-<h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<p>Add QuartoDocBuilder to your package’s documentation environment:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In your package directory</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="im">using</span> <span class="bu">Pkg</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="st">"docs"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="bu">Pkg</span>.<span class="fu">add</span>(<span class="st">"QuartoDocBuilder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Or add it to your <code>docs/Project.toml</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[deps]</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">QuartoDocBuilder</span> <span class="op">=</span> <span class="st">"164f4f01-dadb-4e86-a767-9a3bba57cbbb"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="using-selectors" class="level2">
+<h2 class="anchored" data-anchor-id="using-selectors">Using Selectors</h2>
+<p>Instead of listing every function, use pattern-based selectors:</p>
+<section id="starts_with" class="level3">
+<h3 class="anchored" data-anchor-id="starts_with"><code>starts_with</code></h3>
+<p>Match functions by name prefix:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ReferenceGroup</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="st">"Data Processing"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    contents <span class="op">=</span> [<span class="fu">starts_with</span>(<span class="st">"process_"</span>)]  <span class="co"># process_data, process_file, etc.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="quick-start" class="level2">
-<h2 class="anchored" data-anchor-id="quick-start">Quick Start</h2>
-<section id="step-1-create-a-build-script" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-create-a-build-script">Step 1: Create a build script</h3>
-<p>Create a file <code>docs/make.jl</code> with:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">MyPackage</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">QuartoDocBuilder</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Build documentation with default settings</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_site</span>(MyPackage; repo<span class="op">=</span><span class="st">"username/MyPackage.jl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="ends_with" class="level3">
+<h3 class="anchored" data-anchor-id="ends_with"><code>ends_with</code></h3>
+<p>Match functions by name suffix:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ReferenceGroup</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="st">"Utilities"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    contents <span class="op">=</span> [<span class="fu">ends_with</span>(<span class="st">"_util"</span>)]  <span class="co"># format_util, string_util, etc.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="step-2-run-the-build-script" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-run-the-build-script">Step 2: Run the build script</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">julia</span> <span class="at">--project</span><span class="op">=</span>docs docs/make.jl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This generates the following structure:</p>
-<pre><code>docs/
-├── _quarto.yml       # Quarto configuration
-├── index.qmd         # Home page (from README.md)
-├── reference.qmd     # API reference index
-├── reference/        # Individual function docs
-│   ├── my_function.qmd
-│   └── ...
-├── tutorials.qmd     # Tutorials index
-├── tutorials/        # Tutorial files
-└── styles.css        # Custom CSS</code></pre>
+<section id="matches" class="level3">
+<h3 class="anchored" data-anchor-id="matches"><code>matches</code></h3>
+<p>Use regex patterns:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ReferenceGroup</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="st">"Getters &amp; Setters"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    contents <span class="op">=</span> [<span class="fu">matches</span>(<span class="st">r"^</span><span class="ch">(</span><span class="st">get</span><span class="ch">|</span><span class="st">set</span><span class="ch">)</span><span class="st">_"</span>)]  <span class="co"># get_value, set_config, etc.</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="step-3-preview-locally" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-preview-locally">Step 3: Preview locally</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> docs</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This starts a local server at <code>http://localhost:4200</code> where you can see your documentation.</p>
-</section>
-<section id="step-4-build-the-final-site" class="level3">
-<h3 class="anchored" data-anchor-id="step-4-build-the-final-site">Step 4: Build the final site</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> docs</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The rendered HTML site will be in <code>docs/site/</code> by default.</p>
+<section id="contains" class="level3">
+<h3 class="anchored" data-anchor-id="contains"><code>contains</code></h3>
+<p>Match substring anywhere in name:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ReferenceGroup</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="st">"Helper Functions"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    contents <span class="op">=</span> [<span class="fu">contains</span>(<span class="st">"helper"</span>)]  <span class="co"># my_helper, string_helper_func, etc.</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="what-gets-generated" class="level2">
-<h2 class="anchored" data-anchor-id="what-gets-generated">What Gets Generated</h2>
-<p>QuartoDocBuilder automatically creates:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 34%">
-<col style="width: 25%">
-<col style="width: 40%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Component</th>
-<th>Source</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Home page</strong></td>
-<td><code>README.md</code></td>
-<td>Your package’s README becomes the landing page</td>
-</tr>
-<tr class="even">
-<td><strong>Reference pages</strong></td>
-<td>Docstrings</td>
-<td>Every documented function gets its own page</td>
-</tr>
-<tr class="odd">
-<td><strong>Reference index</strong></td>
-<td>Auto-generated</td>
-<td>Lists all functions with descriptions</td>
-</tr>
-<tr class="even">
-<td><strong>Tutorials</strong></td>
-<td><code>docs/tutorials/</code></td>
-<td>Your tutorial files (you create these)</td>
-</tr>
-<tr class="odd">
-<td><strong>Styles</strong></td>
-<td>Auto-generated</td>
-<td>Professional CSS styling</td>
-</tr>
-<tr class="even">
-<td><strong>Navigation</strong></td>
-<td>Auto-generated</td>
-<td>Navbar with links to all sections</td>
-</tr>
-</tbody>
-</table>
+<section id="combining-selectors" class="level2">
+<h2 class="anchored" data-anchor-id="combining-selectors">Combining Selectors</h2>
+<p>Mix explicit symbols with selectors:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ReferenceGroup</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="st">"Data I/O"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    contents <span class="op">=</span> [</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="op">:</span>read_data,              <span class="co"># Explicit symbol</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="op">:</span>write_data,             <span class="co"># Explicit symbol</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">starts_with</span>(<span class="st">"load_"</span>),    <span class="co"># All load_* functions</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">starts_with</span>(<span class="st">"save_"</span>)     <span class="co"># All save_* functions</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="adding-tutorials" class="level2">
-<h2 class="anchored" data-anchor-id="adding-tutorials">Adding Tutorials</h2>
-<p>Create <code>.qmd</code> files in <code>docs/tutorials/</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "My First Tutorial"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu"># Welcome</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>This is a tutorial for MyPackage...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="adding-descriptions" class="level2">
+<h2 class="anchored" data-anchor-id="adding-descriptions">Adding Descriptions</h2>
+<p>Each group can have a description:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ReferenceGroup</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="st">"Configuration"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    desc <span class="op">=</span> <span class="st">"Functions for setting up and configuring the package."</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    contents <span class="op">=</span> [<span class="op">:</span>QuartoConfig, <span class="op">:</span>ThemeConfig, <span class="op">:</span>load_config]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="publishing-to-github-pages" class="level2">
-<h2 class="anchored" data-anchor-id="publishing-to-github-pages">Publishing to GitHub Pages</h2>
-<section id="option-1-github-actions-recommended" class="level3">
-<h3 class="anchored" data-anchor-id="option-1-github-actions-recommended">Option 1: GitHub Actions (Recommended)</h3>
-<p>Generate a workflow file:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">QuartoDocBuilder</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_github_action</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Then:</p>
-<ol type="1">
-<li>Push to GitHub</li>
-<li>Go to Settings &gt; Pages</li>
-<li>Select “GitHub Actions” as the source</li>
-</ol>
+<section id="complete-example" class="level2">
+<h2 class="anchored" data-anchor-id="complete-example">Complete Example</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>reference <span class="op">=</span> [</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ReferenceGroup</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">"Configuration"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        desc <span class="op">=</span> <span class="st">"Types and functions for configuring documentation."</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        contents <span class="op">=</span> [<span class="op">:</span>QuartoConfig, <span class="op">:</span>SectionConfig, <span class="op">:</span>ThemeConfig,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                   <span class="op">:</span>load_config, <span class="op">:</span>default_config]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ReferenceGroup</span>(</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">"Site Building"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        desc <span class="op">=</span> <span class="st">"Core functions for generating documentation sites."</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        contents <span class="op">=</span> [<span class="op">:</span>quarto_build_site, <span class="fu">starts_with</span>(<span class="st">"quarto_"</span>)]</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ReferenceGroup</span>(</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">"Content Selectors"</span>,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        desc <span class="op">=</span> <span class="st">"Helpers for organizing reference pages."</span>,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        contents <span class="op">=</span> [<span class="op">:</span>starts_with, <span class="op">:</span>ends_with, <span class="op">:</span>matches, <span class="op">:</span>contains]</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ReferenceGroup</span>(</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">"Utilities"</span>,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        contents <span class="op">=</span> [<span class="fu">ends_with</span>(<span class="st">"_util"</span>), <span class="fu">contains</span>(<span class="st">"helper"</span>)]</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="option-2-manual-deployment" class="level3">
-<h3 class="anchored" data-anchor-id="option-2-manual-deployment">Option 2: Manual Deployment</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> docs</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Upload docs/site/ to your hosting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="next-steps" class="level2">
-<h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
+<section id="automatic-grouping" class="level2">
+<h2 class="anchored" data-anchor-id="automatic-grouping">Automatic Grouping</h2>
+<p>If you don’t specify <code>reference</code>, QuartoDocBuilder auto-groups by type:</p>
 <ul>
-<li><strong><a href="../articles/configuration.html">Configuration Guide</a></strong>: Learn how to customize your documentation</li>
-<li><strong><a href="../articles/advanced.html">Advanced Features</a></strong>: Articles, news pages, auto-linking, and more</li>
-<li><strong><a href="../reference.html">Reference</a></strong>: Full API documentation</li>
+<li><strong>Functions</strong> - All function symbols</li>
+<li><strong>Types</strong> - All struct/type definitions</li>
+<li><strong>Constants</strong> - All constant values</li>
 </ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This will auto-group</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> <span class="fu">QuartoConfig</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    module_name <span class="op">=</span> MyPackage,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    reference <span class="op">=</span> []  <span class="co"># Empty = auto-group</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="example" class="level2">
-<h2 class="anchored" data-anchor-id="example">Example</h2>
-<p>Here’s a complete example <code>docs/make.jl</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">MyPackage</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">QuartoDocBuilder</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple usage</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_site</span>(MyPackage;</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    repo <span class="op">=</span> <span class="st">"myuser/MyPackage.jl"</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    theme <span class="op">=</span> <span class="st">"flatly"</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Or with full configuration</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> <span class="fu">QuartoConfig</span>(</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    module_name <span class="op">=</span> MyPackage,</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    repo <span class="op">=</span> <span class="st">"myuser/MyPackage.jl"</span>,</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    theme <span class="op">=</span> <span class="fu">ThemeConfig</span>(</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>        bootswatch <span class="op">=</span> <span class="st">"flatly"</span>,</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        dark_mode <span class="op">=</span> <span class="cn">true</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    comments <span class="op">=</span> <span class="cn">true</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_site</span>(config)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Pro Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Run <code>quarto_build_refpage(MyPackage)</code> after adding new functions to update the reference index without rebuilding everything.</p>
-</div>
-</div>
+<section id="order-matters" class="level2">
+<h2 class="anchored" data-anchor-id="order-matters">Order Matters</h2>
+<p>Functions are assigned to the <strong>first</strong> matching group. Order your groups from most specific to most general:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>reference <span class="op">=</span> [</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Specific first</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ReferenceGroup</span>(title <span class="op">=</span> <span class="st">"Core"</span>, contents <span class="op">=</span> [<span class="op">:</span>main_func]),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Pattern-based second</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ReferenceGroup</span>(title <span class="op">=</span> <span class="st">"Processing"</span>, contents <span class="op">=</span> [<span class="fu">starts_with</span>(<span class="st">"process_"</span>)]),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Catch-all last</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ReferenceGroup</span>(title <span class="op">=</span> <span class="st">"Other"</span>, contents <span class="op">=</span> [<span class="fu">matches</span>(<span class="st">r"</span><span class="sc">.*</span><span class="st">"</span>)])</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
@@ -1078,14 +1041,11 @@ Pro Tip
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../articles.html" class="pagination-link" aria-label="Tutorials">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorials</span>
+      <a href="../how-to/customize-theme.html" class="pagination-link" aria-label="Customize Theme">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Customize Theme</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../articles/configuration.html" class="pagination-link" aria-label="Configuration &amp; Customization">
-        <span class="nav-page-text">Configuration &amp; Customization</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

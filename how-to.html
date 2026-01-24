@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Tutorials</title>
+<title>How-to Guides</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./articles/getting-started.html" rel="next">
+<link href="./how-to/deploy-github-pages.html" rel="next">
 <script src="site_libs/quarto-listing/list.min.js"></script>
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -77,20 +77,20 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-articles-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-how-to-listing .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-title','listing-description','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-articles-listing'] = new List('listing-articles-listing', options);
+    window['quarto-listings']['listing-how-to-listing'] = new List('listing-how-to-listing', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -316,7 +316,7 @@ window.Quarto = {
 <span class="menu-text">QuartoDocBuilder.jl</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./articles/getting-started.html" aria-current="page"> 
+    <a class="nav-link" href="./tutorials/getting-started.html"> 
 <span class="menu-text">Get Started</span></a>
   </li>  
   <li class="nav-item">
@@ -329,23 +329,49 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
         <li>
-    <a class="dropdown-item" href="./articles/advanced.html">
- <span class="dropdown-text">Advanced Features</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./articles/configuration.html">
- <span class="dropdown-text">Configuration &amp; Customization</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./articles/getting-started.html">
+    <a class="dropdown-item" href="./tutorials/getting-started.html">
  <span class="dropdown-text">Getting Started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorials/multiple-sections.html">
+ <span class="dropdown-text">Multiple Navbar Sections</span></a>
   </li>  
     </ul>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="./tutorials.html"> 
-<span class="menu-text">Tutorials</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-explanation" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Explanation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-explanation">    
+        <li>
+    <a class="dropdown-item" href="./explanation/architecture.html">
+ <span class="dropdown-text">Architecture Overview</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./explanation/docstring-processing.html">
+ <span class="dropdown-text">Docstring Processing</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-how-to-guides" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">How-to Guides</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-how-to-guides">    
+        <li>
+    <a class="dropdown-item" href="./how-to/customize-theme.html">
+ <span class="dropdown-text">Customize Theme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./how-to/deploy-github-pages.html">
+ <span class="dropdown-text">Deploy to GitHub Pages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./how-to/organize-reference.html">
+ <span class="dropdown-text">Organize Reference Page</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./news.html"> 
 <span class="menu-text">News</span></a>
@@ -363,7 +389,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./articles.html">Tutorials</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./how-to.html">How-to Guides</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -377,26 +403,26 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./articles.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Tutorials</span></a>
+  <a href="./how-to.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">How-to Guides</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./articles/getting-started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Getting Started</span></a>
+  <a href="./how-to/deploy-github-pages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Deploy to GitHub Pages</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./articles/configuration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Configuration &amp; Customization</span></a>
+  <a href="./how-to/customize-theme.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Customize Theme</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./articles/advanced.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advanced Features</span></a>
+  <a href="./how-to/organize-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Organize Reference Page</span></a>
   </div>
 </li>
     </ul>
@@ -404,16 +430,16 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div></div></div>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Tutorials</h1>
+<h1 class="title">How-to Guides</h1>
 </div>
 
 
@@ -430,48 +456,63 @@ window.Quarto = {
 </header>
 
 
-<p>Learn how to use QuartoDocBuilder to create beautiful documentation for your Julia packages.</p>
-<div id="listing-articles-listing" class="quarto-listing quarto-listing-container-default">
+<p>Task-oriented guides for common documentation tasks.</p>
+<div id="listing-how-to-listing" class="quarto-listing quarto-listing-container-default">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1769237611961" data-listing-reading-time-sort="3" data-listing-word-count-sort="462">
+<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1769240532701" data-listing-reading-time-sort="2" data-listing-word-count-sort="397">
+<div class="thumbnail"><a href="./how-to/deploy-github-pages.html" class="no-external">
+
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./articles/getting-started.html" class="no-external">Getting Started</a>
+<a href="./how-to/deploy-github-pages.html" class="no-external">Deploy to GitHub Pages</a>
 </h3>
-<div class="delink listing-description"><a href="./articles/getting-started.html" class="no-external">
-<p>Quick start guide for creating documentation with QuartoDocBuilder.jl</p>
+<div class="delink listing-description"><a href="./how-to/deploy-github-pages.html" class="no-external">
+<p>Set up automatic deployment with GitHub Actions</p>
 </a></div>
 </div>
 <div class="metadata">
-<a href="./articles/getting-started.html" class="no-external">
+<a href="./how-to/deploy-github-pages.html" class="no-external">
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1769237651089" data-listing-reading-time-sort="9" data-listing-word-count-sort="1620">
+<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1769240549901" data-listing-reading-time-sort="3" data-listing-word-count-sort="562">
+<div class="thumbnail"><a href="./how-to/customize-theme.html" class="no-external">
+
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./articles/configuration.html" class="no-external">Configuration &amp; Customization</a>
+<a href="./how-to/customize-theme.html" class="no-external">Customize Theme</a>
 </h3>
-<div class="delink listing-description"><a href="./articles/configuration.html" class="no-external">
-<p>Complete guide to configuring and customizing your documentation</p>
+<div class="delink listing-description"><a href="./how-to/customize-theme.html" class="no-external">
+<p>Change colors, fonts, and appearance</p>
 </a></div>
 </div>
 <div class="metadata">
-<a href="./articles/configuration.html" class="no-external">
+<a href="./how-to/customize-theme.html" class="no-external">
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1769237700088" data-listing-reading-time-sort="5" data-listing-word-count-sort="942">
+<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1769240568395" data-listing-reading-time-sort="4" data-listing-word-count-sort="630">
+<div class="thumbnail"><a href="./how-to/organize-reference.html" class="no-external">
+
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./articles/advanced.html" class="no-external">Advanced Features</a>
+<a href="./how-to/organize-reference.html" class="no-external">Organize Reference Page</a>
 </h3>
-<div class="delink listing-description"><a href="./articles/advanced.html" class="no-external">
-<p>Articles, news pages, GitHub Actions, auto-linking, and more</p>
+<div class="delink listing-description"><a href="./how-to/organize-reference.html" class="no-external">
+<p>Group and organize your API reference documentation</p>
 </a></div>
 </div>
 <div class="metadata">
-<a href="./articles/advanced.html" class="no-external">
+<a href="./how-to/organize-reference.html" class="no-external">
 </a>
 </div>
 </div>
@@ -931,8 +972,8 @@ window.Quarto = {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./articles/getting-started.html" class="pagination-link" aria-label="Getting Started">
-        <span class="nav-page-text">Getting Started</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./how-to/deploy-github-pages.html" class="pagination-link" aria-label="Deploy to GitHub Pages">
+        <span class="nav-page-text">Deploy to GitHub Pages</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

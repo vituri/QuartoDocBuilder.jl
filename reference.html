@@ -256,7 +256,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">QuartoDocBuilder.jl</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./articles/getting-started.html"> 
+    <a class="nav-link" href="./tutorials/getting-started.html"> 
 <span class="menu-text">Get Started</span></a>
   </li>  
   <li class="nav-item">
@@ -269,23 +269,49 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
         <li>
-    <a class="dropdown-item" href="./articles/advanced.html">
- <span class="dropdown-text">Advanced Features</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./articles/configuration.html">
- <span class="dropdown-text">Configuration &amp; Customization</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./articles/getting-started.html">
+    <a class="dropdown-item" href="./tutorials/getting-started.html">
  <span class="dropdown-text">Getting Started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./tutorials/multiple-sections.html">
+ <span class="dropdown-text">Multiple Navbar Sections</span></a>
   </li>  
     </ul>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="./tutorials.html"> 
-<span class="menu-text">Tutorials</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-explanation" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Explanation</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-explanation">    
+        <li>
+    <a class="dropdown-item" href="./explanation/architecture.html">
+ <span class="dropdown-text">Architecture Overview</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./explanation/docstring-processing.html">
+ <span class="dropdown-text">Docstring Processing</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-how-to-guides" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">How-to Guides</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-how-to-guides">    
+        <li>
+    <a class="dropdown-item" href="./how-to/customize-theme.html">
+ <span class="dropdown-text">Customize Theme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./how-to/deploy-github-pages.html">
+ <span class="dropdown-text">Deploy to GitHub Pages</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./how-to/organize-reference.html">
+ <span class="dropdown-text">Organize Reference Page</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./news.html"> 
 <span class="menu-text">News</span></a>
@@ -767,6 +793,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./reference/SectionConfig.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SectionConfig</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./reference/setup_documentation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">setup_documentation</span></a>
   </div>
@@ -845,24 +877,24 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./reference/ArticleConfig.html"><code>ArticleConfig</code></a></td>
-<td>Configuration for articles/vignettes section.</td>
-</tr>
-<tr class="even">
 <td><a href="./reference/FooterConfig.html"><code>FooterConfig</code></a></td>
 <td>Configuration for page footer.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="./reference/NavbarItem.html"><code>NavbarItem</code></a></td>
 <td>Configuration for navbar items.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="./reference/QuartoConfig.html"><code>QuartoConfig</code></a></td>
 <td>Main configuration struct for QuartoDocBuilder.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="./reference/ReferenceGroup.html"><code>ReferenceGroup</code></a></td>
 <td>Configuration for a reference section group.</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/SectionConfig.html"><code>SectionConfig</code></a></td>
+<td>Configuration for a navbar section (supports multiple dropdowns like Rhino).</td>
 </tr>
 <tr class="even">
 <td><a href="./reference/ThemeConfig.html"><code>ThemeConfig</code></a></td>
