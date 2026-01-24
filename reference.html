@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.37">
+<meta name="generator" content="quarto-1.7.31">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>reference</title>
+<title>Reference</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,16 +30,21 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./reference/quarto_build_refpage.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<link href="./reference/apply_selector.html" rel="next">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-4a990d8dcb58f517c7c86712b8f2ac7c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-46f4cc9626f044588a66931b604fc9c8.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-4a990d8dcb58f517c7c86712b8f2ac7c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-7c221a09ff833b0f999913862826d38e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-8d19c22301e6398b23705ed330673080.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-7c221a09ff833b0f999913862826d38e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,7 +77,169 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -89,17 +256,45 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">QuartoDocBuilder.jl</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./articles/getting-started.html"> 
+<span class="menu-text">Get Started</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link active" href="./reference.html" aria-current="page"> 
 <span class="menu-text">Reference</span></a>
   </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tutorials" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tutorials</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tutorials">    
+        <li>
+    <a class="dropdown-item" href="./articles/advanced.html">
+ <span class="dropdown-text">Advanced Features</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./articles/configuration.html">
+ <span class="dropdown-text">Configuration &amp; Customization</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./articles/getting-started.html">
+ <span class="dropdown-text">Getting Started</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./tutorials.html"> 
 <span class="menu-text">Tutorials</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./news.html"> 
+<span class="menu-text">News</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-    <a href="https://github.com/vituri/QuartoDocBuilder.jl" title="QuartoDocBuilder.jl" class="quarto-navigation-tool px-1" aria-label="QuartoDocBuilder.jl"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/vituri/QuartoDocBuilder.jl" title="Source" class="quarto-navigation-tool px-1" aria-label="Source"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -128,8 +323,302 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./reference/apply_selector.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">apply_selector</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/ArticleConfig.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ArticleConfig</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/ArticleInfo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ArticleInfo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/auto_group_objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">auto_group_objects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/autolink_cross_package.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">autolink_cross_package</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/autolink_references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">autolink_references</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/build_articles_navbar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">build_articles_navbar</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/build_articles_yaml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">build_articles_yaml</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/build_reference_index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">build_reference_index</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/contains.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">contains</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/create_article_template.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">create_article_template</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/create_articles_directory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">create_articles_directory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/create_news_template.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">create_news_template</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/create_reference_report.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">create_reference_report</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/default_config.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">default_config</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/detect_get_started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">detect_get_started</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/detect_repo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">detect_repo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/discover_articles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">discover_articles</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/discover_articles_recursive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">discover_articles_recursive</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/ends_with.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ends_with</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/filter_objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">filter_objects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/find_undefined_references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">find_undefined_references</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/FooterConfig.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FooterConfig</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/format_news_item.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">format_news_item</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/get_article_info.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">get_article_info</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/get_article_order.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">get_article_order</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/get_article_title.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">get_article_title</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/get_dark_theme.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">get_dark_theme</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/get_objects_from_module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">get_objects_from_module</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/group_objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">group_objects</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/has_docstring.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">has_docstring</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/has_news.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">has_news</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/is_const_symbol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">is_const_symbol</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/is_exported.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">is_exported</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/is_function_symbol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">is_function_symbol</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/is_type_symbol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">is_type_symbol</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/link_julia_docs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">link_julia_docs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/linkify_github_refs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">linkify_github_refs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/load_config.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">load_config</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/matches.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">matches</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/merge_config.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">merge_config</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/NavbarItem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NavbarItem</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/news_summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">news_summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/NewsVersion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NewsVersion</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/parse_content_selector.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">parse_content_selector</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/parse_news.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">parse_news</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_articles_index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_articles_index</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_articles_index_manual.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_articles_index_manual</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./reference/quarto_build_refpage.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_build_refpage</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_build_refpage_grouped.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_build_refpage_grouped</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -164,8 +653,26 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_docs_project_toml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_docs_project_toml</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./reference/quarto_format.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_format</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_github_action.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_github_action</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_github_action_simple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_github_action_simple</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -176,14 +683,110 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_makejl_template.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_makejl_template</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_news_page.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_news_page</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_rebuild_all.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_rebuild_all</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_rebuild_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_rebuild_reference</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_setup_instructions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_setup_instructions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./reference/quarto_styles.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_styles</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_styles_from_config.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_styles_from_config</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./reference/quarto_yaml.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_yaml</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/quarto_yaml_from_config.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_yaml_from_config</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/QuartoConfig.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">QuartoConfig</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/QuartoDocBuilder.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">QuartoDocBuilder</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/ReferenceGroup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ReferenceGroup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/ReferenceIndex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ReferenceIndex</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/resolve_reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">resolve_reference</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/setup_documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">setup_documentation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/starts_with.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">starts_with</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/ThemeConfig.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ThemeConfig</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reference/validate_config.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">validate_config</span></a>
   </div>
 </li>
     </ul>
@@ -195,8 +798,15 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
     <h2 id="toc-title">On this page</h2>
    
-  <ul>
-  <li><a href="#reference" id="toc-reference" class="nav-link active" data-scroll-target="#reference">Reference</a></li>
+  <ul class="collapse">
+  <li><a href="#sec-configuration" id="toc-sec-configuration" class="nav-link active" data-scroll-target="#sec-configuration">Configuration</a></li>
+  <li><a href="#sec-content-selectors" id="toc-sec-content-selectors" class="nav-link" data-scroll-target="#sec-content-selectors">Content Selectors</a></li>
+  <li><a href="#sec-site-building" id="toc-sec-site-building" class="nav-link" data-scroll-target="#sec-site-building">Site Building</a></li>
+  <li><a href="#sec-docstring-processing" id="toc-sec-docstring-processing" class="nav-link" data-scroll-target="#sec-docstring-processing">Docstring Processing</a></li>
+  <li><a href="#articles-news-sec-articles--news" id="toc-articles-news-sec-articles--news" class="nav-link" data-scroll-target="#articles-news-sec-articles--news">Articles &amp; News {#sec-articles-&amp;-news}</a></li>
+  <li><a href="#sec-auto-linking" id="toc-sec-auto-linking" class="nav-link" data-scroll-target="#sec-auto-linking">Auto-linking</a></li>
+  <li><a href="#styles-themes-sec-styles--themes" id="toc-styles-themes-sec-styles--themes" class="nav-link" data-scroll-target="#styles-themes-sec-styles--themes">Styles &amp; Themes {#sec-styles-&amp;-themes}</a></li>
+  <li><a href="#sec-github-integration" id="toc-sec-github-integration" class="nav-link" data-scroll-target="#sec-github-integration">GitHub Integration</a></li>
   </ul>
 </nav>
     </div>
@@ -204,329 +814,683 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Reference</h1>
+</div>
 
 
-<section id="reference" class="level1">
-<h1>Reference</h1>
-<p><a href="./reference/quarto_format.html">quarto_format(m::Markdown.Code, eval = false)</a></p>
-<blockquote class="blockquote">
-<p>Format a block of markdown code to Quarto.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_format.html">quarto_format(m)</a></p>
-<blockquote class="blockquote">
-<p>Return a plain text from <code>m</code>.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_format.html">quarto_format(m::Markdown.Paragraph)</a></p>
-<blockquote class="blockquote">
-<p>Return a plain text of <code>m</code> and a line break.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_format.html">quarto_format(m::AbstractString)</a></p>
-<blockquote class="blockquote">
-<p>Returns <code>m</code>.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_format.html">quarto_format(m::Markdown.Header{1})</a></p>
-<blockquote class="blockquote">
-<p>Take a level 1 header and write it as a level 3 header.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_format.html">quarto_format(md::Markdown.MD)</a></p>
-<blockquote class="blockquote">
-<p>Given a markdown block, apply <code>quarto_format</code> to each of its elements and concatenate the resulting string.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_format.html">quarto_format(md::Markdown.Admonition)</a></p>
-<blockquote class="blockquote">
-<p>Format a Markdown.Admonition into a callout block in Quarto.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_yaml.html">quarto_yaml( module_name ;output_dir = “site” ,freeze = “auto” ,cache = “true” ,warning = “false” ,comments = “true” ,repo = “USERNAME/REPOSITORY” ,theme = “flatly” )</a></p>
-<blockquote class="blockquote">
-<p>Generate the _quarto.yaml file.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_doc.html">quarto_doc(s::Symbol)</a></p>
-<blockquote class="blockquote">
-<p>Create the documentation of a symbol (function, object, etc) <code>s</code>.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_doc_page.html">quarto_doc_page(s; dir = “docs/reference”)</a></p>
-<blockquote class="blockquote">
-<p>Given a symbol <code>s</code>, write its .qmd doc into the folder <code>dir</code>.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_doc_short.html">quarto_doc_short(s::Symbol)</a></p>
-<blockquote class="blockquote">
-<p>Create a short description of the object. Used to build the Reference page.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_build_site.html">quarto_build_site(module_name; kwargs…)</a></p>
-<blockquote class="blockquote">
-<p>Create all the files necessary to build the Quarto website for the first time.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_styles.html">quarto_styles()</a></p>
-<blockquote class="blockquote">
-<p>Create the docs/styles.css file with some suggested css classes.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_callout_block.html">quarto_callout_block(s)</a></p>
-<blockquote class="blockquote">
-<p>Create a callout block with the string <code>s</code>.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_index.html">quarto_index()</a></p>
-<blockquote class="blockquote">
-<p>Generate the index.qmd file. It is just a copy of the README.md file.</p>
-</blockquote>
-<hr>
-<p><a href="./reference/quarto_build_refpage.html">quarto_build_refpage(module_name; output = “docs/reference.qmd”)</a></p>
-<blockquote class="blockquote">
-<p>Build the docs/reference.qmd file with a short description of each object.</p>
-</blockquote>
-<hr>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-configuration" class="level2">
+<h2 class="anchored" data-anchor-id="sec-configuration">Configuration</h2>
+<p>Types and functions for configuring documentation generation.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="./reference/ArticleConfig.html"><code>ArticleConfig</code></a></td>
+<td>Configuration for articles/vignettes section.</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/FooterConfig.html"><code>FooterConfig</code></a></td>
+<td>Configuration for page footer.</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/NavbarItem.html"><code>NavbarItem</code></a></td>
+<td>Configuration for navbar items.</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/QuartoConfig.html"><code>QuartoConfig</code></a></td>
+<td>Main configuration struct for QuartoDocBuilder.</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/ReferenceGroup.html"><code>ReferenceGroup</code></a></td>
+<td>Configuration for a reference section group.</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/ThemeConfig.html"><code>ThemeConfig</code></a></td>
+<td>Configuration for theming and appearance.</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/default_config.html"><code>default_config</code></a></td>
+<td>default_config(module_name::Module) -&gt; QuartoConfig</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/detect_repo.html"><code>detect_repo</code></a></td>
+<td>detect_repo() -&gt; String</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/get_dark_theme.html"><code>get_dark_theme</code></a></td>
+<td>get_dark_theme(light_theme::String) -&gt; String</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/load_config.html"><code>load_config</code></a></td>
+<td>load_config(path::String=“_quartodoc.toml”) -&gt; Union{QuartoConfig, Nothing}</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/merge_config.html"><code>merge_config</code></a></td>
+<td>merge_config(base::QuartoConfig, overrides::QuartoConfig) -&gt; QuartoConfig</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/validate_config.html"><code>validate_config</code></a></td>
+<td>validate_config(config::QuartoConfig) -&gt; Bool</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sec-content-selectors" class="level2">
+<h2 class="anchored" data-anchor-id="sec-content-selectors">Content Selectors</h2>
+<p>pkgdown-style helpers for organizing reference pages by matching function names.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="./reference/apply_selector.html"><code>apply_selector</code></a></td>
+<td>apply_selector(selector, symbols::Vector{Symbol}) -&gt; Vector{Symbol}</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/auto_group_objects.html"><code>auto_group_objects</code></a></td>
+<td>auto_group_objects(module_name::Module) -&gt; Vector{Tuple{ReferenceGroup, Vector{Symbol}}}</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/contains.html"><code>contains</code></a></td>
+<td>contains(substring::String) -&gt; Function</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/ends_with.html"><code>ends_with</code></a></td>
+<td>ends_with(suffix::String) -&gt; Function</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/filter_objects.html"><code>filter_objects</code></a></td>
+<td>filter_objects(module_name::Module, selectors::Vector) -&gt; Vector{Symbol}</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/group_objects.html"><code>group_objects</code></a></td>
+<td>group_objects(module_name::Module, groups::Vector{ReferenceGroup}) -&gt; Vector{Tuple{ReferenceGroup…</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/has_docstring.html"><code>has_docstring</code></a></td>
+<td>has_docstring(module_name::Module) -&gt; Function</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/is_exported.html"><code>is_exported</code></a></td>
+<td>is_exported(module_name::Module) -&gt; Function</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/is_function_symbol.html"><code>is_function_symbol</code></a></td>
+<td>is_function_symbol(module_name::Module) -&gt; Function</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/is_type_symbol.html"><code>is_type_symbol</code></a></td>
+<td>is_type_symbol(module_name::Module) -&gt; Function</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/matches.html"><code>matches</code></a></td>
+<td>matches(pattern::Union{String, Regex}) -&gt; Function</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/parse_content_selector.html"><code>parse_content_selector</code></a></td>
+<td>parse_content_selector(s::String) -&gt; Union{Symbol, Function}</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/starts_with.html"><code>starts_with</code></a></td>
+<td>starts_with(prefix::String) -&gt; Function</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sec-site-building" class="level2">
+<h2 class="anchored" data-anchor-id="sec-site-building">Site Building</h2>
+<p>Core functions for generating documentation sites.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="./reference/quarto_build_refpage.html"><code>quarto_build_refpage</code></a></td>
+<td>quarto_build_refpage(module_name; output = “docs/reference.qmd”)</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/quarto_build_refpage_grouped.html"><code>quarto_build_refpage_grouped</code></a></td>
+<td>quarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String=“docs/refe…</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/quarto_build_site.html"><code>quarto_build_site</code></a></td>
+<td>quarto_build_site(module_name; kwargs…)</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/quarto_index.html"><code>quarto_index</code></a></td>
+<td>quarto_index()</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/quarto_rebuild_all.html"><code>quarto_rebuild_all</code></a></td>
+<td>quarto_rebuild_all(module_name::Module; kwargs…)</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/quarto_rebuild_reference.html"><code>quarto_rebuild_reference</code></a></td>
+<td>quarto_rebuild_reference(module_name::Module)</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/quarto_yaml.html"><code>quarto_yaml</code></a></td>
+<td>quarto_yaml(</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/quarto_yaml_from_config.html"><code>quarto_yaml_from_config</code></a></td>
+<td>quarto_yaml_from_config(config::QuartoConfig; force::Bool=false)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sec-docstring-processing" class="level2">
+<h2 class="anchored" data-anchor-id="sec-docstring-processing">Docstring Processing</h2>
+<p>Functions for extracting and formatting Julia docstrings to Quarto format.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="./reference/get_objects_from_module.html"><code>get_objects_from_module</code></a></td>
+<td>get_objects_from_module(m::Module) -&gt; Vector{Symbol}</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/quarto_callout_block.html"><code>quarto_callout_block</code></a></td>
+<td>quarto_callout_block(s)</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/quarto_doc.html"><code>quarto_doc</code></a></td>
+<td>quarto_doc(s::Symbol)</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/quarto_doc_page.html"><code>quarto_doc_page</code></a></td>
+<td>quarto_doc_page(s; dir = “docs/reference”)</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/quarto_doc_short.html"><code>quarto_doc_short</code></a></td>
+<td>quarto_doc_short(s::Symbol)</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/quarto_format.html"><code>quarto_format</code></a></td>
+<td>quarto_format(m::Markdown.Code, eval = false)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="articles-news-sec-articles--news" class="level2">
+<h2 class="anchored" data-anchor-id="articles-news-sec-articles--news">Articles &amp; News {#sec-articles-&amp;-news}</h2>
+<p>Article discovery and changelog generation.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="./reference/ArticleInfo.html"><code>ArticleInfo</code></a></td>
+<td>ArticleInfo</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/NewsVersion.html"><code>NewsVersion</code></a></td>
+<td>NewsVersion</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/build_articles_navbar.html"><code>build_articles_navbar</code></a></td>
+<td>build_articles_navbar(config::QuartoConfig) -&gt; Dict</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/build_articles_yaml.html"><code>build_articles_yaml</code></a></td>
+<td>build_articles_yaml(config::QuartoConfig) -&gt; String</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/create_article_template.html"><code>create_article_template</code></a></td>
+<td>create_article_template(filepath::String; title::String=““, order::Int=999)</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/create_articles_directory.html"><code>create_articles_directory</code></a></td>
+<td>create_articles_directory(config::QuartoConfig)</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/create_news_template.html"><code>create_news_template</code></a></td>
+<td>create_news_template(path::String=“NEWS.md”; package_name::String=“Package”)</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/detect_get_started.html"><code>detect_get_started</code></a></td>
+<td>detect_get_started(module_name::Module; dir::String=“docs/articles”) -&gt; Union{String, Nothing}</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/discover_articles.html"><code>discover_articles</code></a></td>
+<td>discover_articles(dir::String=“docs/articles”) -&gt; Vector{String}</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/discover_articles_recursive.html"><code>discover_articles_recursive</code></a></td>
+<td>discover_articles_recursive(dir::String=“docs/articles”) -&gt; Vector{String}</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/get_article_info.html"><code>get_article_info</code></a></td>
+<td>get_article_info(filepath::String) -&gt; ArticleInfo</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/get_article_title.html"><code>get_article_title</code></a></td>
+<td>get_article_title(filepath::String) -&gt; String</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/has_news.html"><code>has_news</code></a></td>
+<td>has_news(config::QuartoConfig) -&gt; Bool</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/linkify_github_refs.html"><code>linkify_github_refs</code></a></td>
+<td>linkify_github_refs(text::String, repo::String) -&gt; String</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/news_summary.html"><code>news_summary</code></a></td>
+<td>news_summary(config::QuartoConfig) -&gt; String</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/parse_news.html"><code>parse_news</code></a></td>
+<td>parse_news(path::String=“NEWS.md”) -&gt; Vector{NewsVersion}</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/quarto_articles_index.html"><code>quarto_articles_index</code></a></td>
+<td>quarto_articles_index(config::QuartoConfig; output::String=“docs/articles.qmd”)</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/quarto_articles_index_manual.html"><code>quarto_articles_index_manual</code></a></td>
+<td>quarto_articles_index_manual(config::QuartoConfig; output::String=“docs/articles.qmd”)</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/quarto_news_page.html"><code>quarto_news_page</code></a></td>
+<td>quarto_news_page(config::QuartoConfig; output::String=“docs/news.qmd”)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sec-auto-linking" class="level2">
+<h2 class="anchored" data-anchor-id="sec-auto-linking">Auto-linking</h2>
+<p>Automatic cross-reference linking in documentation.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="./reference/ReferenceIndex.html"><code>ReferenceIndex</code></a></td>
+<td>ReferenceIndex</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/autolink_references.html"><code>autolink_references</code></a></td>
+<td>autolink_references(text::String, index::ReferenceIndex) -&gt; String</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/build_reference_index.html"><code>build_reference_index</code></a></td>
+<td>build_reference_index(module_name::Module; base_path::String=“reference”) -&gt; ReferenceIndex</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/create_reference_report.html"><code>create_reference_report</code></a></td>
+<td>create_reference_report(module_name::Module) -&gt; String</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/find_undefined_references.html"><code>find_undefined_references</code></a></td>
+<td>find_undefined_references(text::String, index::ReferenceIndex) -&gt; Vector{String}</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/link_julia_docs.html"><code>link_julia_docs</code></a></td>
+<td>link_julia_docs(text::String) -&gt; String</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/resolve_reference.html"><code>resolve_reference</code></a></td>
+<td>resolve_reference(name::String, index::ReferenceIndex) -&gt; Union{String, Nothing}</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="styles-themes-sec-styles--themes" class="level2">
+<h2 class="anchored" data-anchor-id="styles-themes-sec-styles--themes">Styles &amp; Themes {#sec-styles-&amp;-themes}</h2>
+<p>CSS generation and theme customization.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="./reference/quarto_styles.html"><code>quarto_styles</code></a></td>
+<td>quarto_styles()</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/quarto_styles_from_config.html"><code>quarto_styles_from_config</code></a></td>
+<td>quarto_styles_from_config(config::QuartoConfig)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sec-github-integration" class="level2">
+<h2 class="anchored" data-anchor-id="sec-github-integration">GitHub Integration</h2>
+<p>CI/CD workflow generation and deployment helpers.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="./reference/quarto_docs_project_toml.html"><code>quarto_docs_project_toml</code></a></td>
+<td>quarto_docs_project_toml(module_name::Module)</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/quarto_github_action.html"><code>quarto_github_action</code></a></td>
+<td>quarto_github_action(; kwargs…)</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/quarto_github_action_simple.html"><code>quarto_github_action_simple</code></a></td>
+<td>quarto_github_action_simple(; kwargs…)</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/quarto_makejl_template.html"><code>quarto_makejl_template</code></a></td>
+<td>quarto_makejl_template(module_name::Module; config_file::String=““)</td>
+</tr>
+<tr class="odd">
+<td><a href="./reference/quarto_setup_instructions.html"><code>quarto_setup_instructions</code></a></td>
+<td>quarto_setup_instructions() -&gt; String</td>
+</tr>
+<tr class="even">
+<td><a href="./reference/setup_documentation.html"><code>setup_documentation</code></a></td>
+<td>setup_documentation(module_name::Module; repo::String=““, kwargs…)</td>
+</tr>
+</tbody>
+</table>
 
 
 </section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/vituri\.github\.io\/QuartoDocBuilder\.jl\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -534,195 +1498,199 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
-<script src="https://giscus.app/client.js" data-repo="vituri/QuartoDocBuilder.jl" data-repo-id="R_kgDOL_6KUA" data-category="General" data-category-id="DIC_kwDOL_6KUM4CflsE" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "vituri/QuartoDocBuilder.jl";
+    script.dataset.repoId = "R_kgDOL_6KUA";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOL_6KUM4CflsE";
+    script.dataset.mapping = "pathname";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./reference/quarto_build_refpage.html" class="pagination-link" aria-label="quarto_build_refpage">
-        <span class="nav-page-text">quarto_build_refpage</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./reference/apply_selector.html" class="pagination-link" aria-label="apply_selector">
+        <span class="nav-page-text">apply_selector</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -730,14 +1698,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
-    </div>   
+<p>Developed by <a href="https://github.com/vituri">G. Vituri</a></p>
+</div>   
     <div class="nav-footer-center">
-<p>Website generated with <a href="https://quarto.org/">Quarto</a> and <a href="https://github.com/vituri/Pkgdown.jl">Pkgdown.jl</a></p>
-</div>
-    <div class="nav-footer-right">
       &nbsp;
     </div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://github.com/vituri/QuartoDocBuilder.jl">QuartoDocBuilder.jl</a></p>
+</div>
   </div>
 </footer>
 

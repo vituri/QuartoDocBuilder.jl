@@ -1,67 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "QuartoDocBuilder.jl",
-    "section": "",
-    "text": "QuartoDocBuilder.jl\nQuartoDocBuilder.jl is a package inspired by R pkgdown. It provides an easy way to generate a website with documentation and vignettes, by creating a Quarto project.\nBeing powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted. This website doc even has a comment section! Check some examples here and the complete list of options here.\nThe Quarto website itself is written with Quarto! Check the github repo here to get some inspiration.\n\n\nFeatures\n\n\n\nEasy configuration\nInstall the latest Quarto version, ]add QuartoDocBuilder, run quarto_build_site and you are done. It’s up to you write the best doc ever!\n\nLearn more »\n\n\n\nComment section\nEvery page can have a commentary section. Let people speak! By default, QuartoDocBuilder.jl provides Discus, which is the easiest to configure.\n\nLearn more »\n\n\n\nScientific Markdown\nInline code, LaTeX equations and citations, cross-references, figure panels, callouts, advanced page layout, comment sections and so on. It’s time to write some \\(e^{i \\pi} + 1 = 0\\)!\n\nLearn more »\n\n\n\nWebsites and Books\nWant to publish your really nice tutorial in an online book? Or make a blog? Or a Word document? Or a pdf with LaTeX? Well, use the same files and render the project with Quarto!\n\nLearn more »\n\n\n\nCustomization\nWith a bit of .css magic you can customize almost everything! Why not put a spinning raccoon in the middle of a serious text?\n\n\n\n\n\nLearn more »\n\n\n\nMultilanguage\nBy default, QuartoDocBuilder uses the julia engine provided by QuartoNotebookRunner.jl, but you can use Jupyter and be able to run R and Python code along with Julia in the same document!\n\nLearn more »"
-  },
-  {
-    "objectID": "reference/quarto_index.html",
-    "href": "reference/quarto_index.html",
-    "title": "quarto_index",
-    "section": "",
-    "text": "quarto_index\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_index()\n\nGenerate the index.qmd file. It is just a copy of the README.md file.",
-    "crumbs": [
-      "Reference",
-      "quarto_index"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_build_site.html",
-    "href": "reference/quarto_build_site.html",
-    "title": "quarto_build_site",
-    "section": "",
-    "text": "quarto_build_site\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_build_site(module_name; kwargs...)\n\nCreate all the files necessary to build the Quarto website for the first time.\n\nArguments\n\nmodule_name: your module’s name.\nkwargs...: kwargs passed to quarto_yaml.\n\n\n\nDetails\nThis function does a lot of things!\n\nCreate the docs directory, if it doesn’t exist.\nCreate docs/_quarto.yaml, which is the file that contains all information about how to render the website as a Quarto project.\nCreate the directory docs/reference and the file docs/reference.qmd if they don’t exist.\nCreate the directory docs/tutorials and the file docs/tutorials.qmd if they don’t exist, together with docs/tutorials/tutorial-01.qmd.\nCopy your README.md file as docs/index.qmd.\nCreate docs/styles.css with some predefined styles.\nCreate a .qmd file in docs/reference for each object in module_name.",
-    "crumbs": [
-      "Reference",
-      "quarto_build_site"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_styles.html",
-    "href": "reference/quarto_styles.html",
-    "title": "quarto_styles",
-    "section": "",
-    "text": "quarto_styles\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_styles()\n\nCreate the docs/styles.css file with some suggested css classes.",
-    "crumbs": [
-      "Reference",
-      "quarto_styles"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_yaml.html",
-    "href": "reference/quarto_yaml.html",
-    "title": "quarto_yaml",
-    "section": "",
-    "text": "quarto_yaml\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_yaml(\n  module_name\n  ;output_dir = \"site\"\n  ,freeze = \"auto\"\n  ,cache = \"true\"\n  ,warning = \"false\"\n  ,comments = \"true\"\n  ,repo = \"USERNAME/REPOSITORY\"\n  ,theme = \"flatly\"\n  )\n\nGenerate the _quarto.yaml file.\n\nArguments\n\nmodule_name: the name of the current module.\noutput_dir: the directory of the output, inside /docs/ .\nfreeze, cache, warning: execution options in Quarto.\ncomments: if the comment section with Discus is enabled.\nrepo: string in the format USERNAME/REPOSITORY so your comment section work with Discus.\ntheme: one of the bootswatch themes available in Quarto.\n\n\n\nDetails\nThis function creates the docs/_quarto.yaml file. See https://quarto.org/docs/reference/projects/websites.html for more details.",
-    "crumbs": [
-      "Reference",
-      "quarto_yaml"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_callout_block.html",
-    "href": "reference/quarto_callout_block.html",
-    "title": "quarto_callout_block",
-    "section": "",
-    "text": "quarto_callout_block\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_callout_block(s)\n\nCreate a callout block with the string s.",
-    "crumbs": [
-      "Reference",
-      "quarto_callout_block"
-    ]
-  },
-  {
     "objectID": "tutorials/tutorial-01.html",
     "href": "tutorials/tutorial-01.html",
     "title": "From zero to nice docs!",
@@ -103,6 +41,1305 @@
     "crumbs": [
       "Tutorials"
     ]
+  },
+  {
+    "objectID": "reference.html",
+    "href": "reference.html",
+    "title": "Reference",
+    "section": "",
+    "text": "Types and functions for configuring documentation generation.\n\n\n\nFunction\nDescription\n\n\n\n\nArticleConfig\nConfiguration for articles/vignettes section.\n\n\nFooterConfig\nConfiguration for page footer.\n\n\nNavbarItem\nConfiguration for navbar items.\n\n\nQuartoConfig\nMain configuration struct for QuartoDocBuilder.\n\n\nReferenceGroup\nConfiguration for a reference section group.\n\n\nThemeConfig\nConfiguration for theming and appearance.\n\n\ndefault_config\ndefault_config(module_name::Module) -&gt; QuartoConfig\n\n\ndetect_repo\ndetect_repo() -&gt; String\n\n\nget_dark_theme\nget_dark_theme(light_theme::String) -&gt; String\n\n\nload_config\nload_config(path::String=“_quartodoc.toml”) -&gt; Union{QuartoConfig, Nothing}\n\n\nmerge_config\nmerge_config(base::QuartoConfig, overrides::QuartoConfig) -&gt; QuartoConfig\n\n\nvalidate_config\nvalidate_config(config::QuartoConfig) -&gt; Bool",
+    "crumbs": [
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "reference.html#sec-configuration",
+    "href": "reference.html#sec-configuration",
+    "title": "Reference",
+    "section": "",
+    "text": "Types and functions for configuring documentation generation.\n\n\n\nFunction\nDescription\n\n\n\n\nArticleConfig\nConfiguration for articles/vignettes section.\n\n\nFooterConfig\nConfiguration for page footer.\n\n\nNavbarItem\nConfiguration for navbar items.\n\n\nQuartoConfig\nMain configuration struct for QuartoDocBuilder.\n\n\nReferenceGroup\nConfiguration for a reference section group.\n\n\nThemeConfig\nConfiguration for theming and appearance.\n\n\ndefault_config\ndefault_config(module_name::Module) -&gt; QuartoConfig\n\n\ndetect_repo\ndetect_repo() -&gt; String\n\n\nget_dark_theme\nget_dark_theme(light_theme::String) -&gt; String\n\n\nload_config\nload_config(path::String=“_quartodoc.toml”) -&gt; Union{QuartoConfig, Nothing}\n\n\nmerge_config\nmerge_config(base::QuartoConfig, overrides::QuartoConfig) -&gt; QuartoConfig\n\n\nvalidate_config\nvalidate_config(config::QuartoConfig) -&gt; Bool",
+    "crumbs": [
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "reference.html#sec-content-selectors",
+    "href": "reference.html#sec-content-selectors",
+    "title": "Reference",
+    "section": "Content Selectors",
+    "text": "Content Selectors\npkgdown-style helpers for organizing reference pages by matching function names.\n\n\n\nFunction\nDescription\n\n\n\n\napply_selector\napply_selector(selector, symbols::Vector{Symbol}) -&gt; Vector{Symbol}\n\n\nauto_group_objects\nauto_group_objects(module_name::Module) -&gt; Vector{Tuple{ReferenceGroup, Vector{Symbol}}}\n\n\ncontains\ncontains(substring::String) -&gt; Function\n\n\nends_with\nends_with(suffix::String) -&gt; Function\n\n\nfilter_objects\nfilter_objects(module_name::Module, selectors::Vector) -&gt; Vector{Symbol}\n\n\ngroup_objects\ngroup_objects(module_name::Module, groups::Vector{ReferenceGroup}) -&gt; Vector{Tuple{ReferenceGroup…\n\n\nhas_docstring\nhas_docstring(module_name::Module) -&gt; Function\n\n\nis_exported\nis_exported(module_name::Module) -&gt; Function\n\n\nis_function_symbol\nis_function_symbol(module_name::Module) -&gt; Function\n\n\nis_type_symbol\nis_type_symbol(module_name::Module) -&gt; Function\n\n\nmatches\nmatches(pattern::Union{String, Regex}) -&gt; Function\n\n\nparse_content_selector\nparse_content_selector(s::String) -&gt; Union{Symbol, Function}\n\n\nstarts_with\nstarts_with(prefix::String) -&gt; Function",
+    "crumbs": [
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "reference.html#sec-site-building",
+    "href": "reference.html#sec-site-building",
+    "title": "Reference",
+    "section": "Site Building",
+    "text": "Site Building\nCore functions for generating documentation sites.\n\n\n\nFunction\nDescription\n\n\n\n\nquarto_build_refpage\nquarto_build_refpage(module_name; output = “docs/reference.qmd”)\n\n\nquarto_build_refpage_grouped\nquarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String=“docs/refe…\n\n\nquarto_build_site\nquarto_build_site(module_name; kwargs…)\n\n\nquarto_index\nquarto_index()\n\n\nquarto_rebuild_all\nquarto_rebuild_all(module_name::Module; kwargs…)\n\n\nquarto_rebuild_reference\nquarto_rebuild_reference(module_name::Module)\n\n\nquarto_yaml\nquarto_yaml(\n\n\nquarto_yaml_from_config\nquarto_yaml_from_config(config::QuartoConfig; force::Bool=false)",
+    "crumbs": [
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "reference.html#sec-docstring-processing",
+    "href": "reference.html#sec-docstring-processing",
+    "title": "Reference",
+    "section": "Docstring Processing",
+    "text": "Docstring Processing\nFunctions for extracting and formatting Julia docstrings to Quarto format.\n\n\n\nFunction\nDescription\n\n\n\n\nget_objects_from_module\nget_objects_from_module(m::Module) -&gt; Vector{Symbol}\n\n\nquarto_callout_block\nquarto_callout_block(s)\n\n\nquarto_doc\nquarto_doc(s::Symbol)\n\n\nquarto_doc_page\nquarto_doc_page(s; dir = “docs/reference”)\n\n\nquarto_doc_short\nquarto_doc_short(s::Symbol)\n\n\nquarto_format\nquarto_format(m::Markdown.Code, eval = false)",
+    "crumbs": [
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "reference.html#articles-news-sec-articles--news",
+    "href": "reference.html#articles-news-sec-articles--news",
+    "title": "Reference",
+    "section": "Articles & News {#sec-articles-&-news}",
+    "text": "Articles & News {#sec-articles-&-news}\nArticle discovery and changelog generation.\n\n\n\nFunction\nDescription\n\n\n\n\nArticleInfo\nArticleInfo\n\n\nNewsVersion\nNewsVersion\n\n\nbuild_articles_navbar\nbuild_articles_navbar(config::QuartoConfig) -&gt; Dict\n\n\nbuild_articles_yaml\nbuild_articles_yaml(config::QuartoConfig) -&gt; String\n\n\ncreate_article_template\ncreate_article_template(filepath::String; title::String=““, order::Int=999)\n\n\ncreate_articles_directory\ncreate_articles_directory(config::QuartoConfig)\n\n\ncreate_news_template\ncreate_news_template(path::String=“NEWS.md”; package_name::String=“Package”)\n\n\ndetect_get_started\ndetect_get_started(module_name::Module; dir::String=“docs/articles”) -&gt; Union{String, Nothing}\n\n\ndiscover_articles\ndiscover_articles(dir::String=“docs/articles”) -&gt; Vector{String}\n\n\ndiscover_articles_recursive\ndiscover_articles_recursive(dir::String=“docs/articles”) -&gt; Vector{String}\n\n\nget_article_info\nget_article_info(filepath::String) -&gt; ArticleInfo\n\n\nget_article_title\nget_article_title(filepath::String) -&gt; String\n\n\nhas_news\nhas_news(config::QuartoConfig) -&gt; Bool\n\n\nlinkify_github_refs\nlinkify_github_refs(text::String, repo::String) -&gt; String\n\n\nnews_summary\nnews_summary(config::QuartoConfig) -&gt; String\n\n\nparse_news\nparse_news(path::String=“NEWS.md”) -&gt; Vector{NewsVersion}\n\n\nquarto_articles_index\nquarto_articles_index(config::QuartoConfig; output::String=“docs/articles.qmd”)\n\n\nquarto_articles_index_manual\nquarto_articles_index_manual(config::QuartoConfig; output::String=“docs/articles.qmd”)\n\n\nquarto_news_page\nquarto_news_page(config::QuartoConfig; output::String=“docs/news.qmd”)",
+    "crumbs": [
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "reference.html#sec-auto-linking",
+    "href": "reference.html#sec-auto-linking",
+    "title": "Reference",
+    "section": "Auto-linking",
+    "text": "Auto-linking\nAutomatic cross-reference linking in documentation.\n\n\n\nFunction\nDescription\n\n\n\n\nReferenceIndex\nReferenceIndex\n\n\nautolink_references\nautolink_references(text::String, index::ReferenceIndex) -&gt; String\n\n\nbuild_reference_index\nbuild_reference_index(module_name::Module; base_path::String=“reference”) -&gt; ReferenceIndex\n\n\ncreate_reference_report\ncreate_reference_report(module_name::Module) -&gt; String\n\n\nfind_undefined_references\nfind_undefined_references(text::String, index::ReferenceIndex) -&gt; Vector{String}\n\n\nlink_julia_docs\nlink_julia_docs(text::String) -&gt; String\n\n\nresolve_reference\nresolve_reference(name::String, index::ReferenceIndex) -&gt; Union{String, Nothing}",
+    "crumbs": [
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "reference.html#styles-themes-sec-styles--themes",
+    "href": "reference.html#styles-themes-sec-styles--themes",
+    "title": "Reference",
+    "section": "Styles & Themes {#sec-styles-&-themes}",
+    "text": "Styles & Themes {#sec-styles-&-themes}\nCSS generation and theme customization.\n\n\n\nFunction\nDescription\n\n\n\n\nquarto_styles\nquarto_styles()\n\n\nquarto_styles_from_config\nquarto_styles_from_config(config::QuartoConfig)",
+    "crumbs": [
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "reference.html#sec-github-integration",
+    "href": "reference.html#sec-github-integration",
+    "title": "Reference",
+    "section": "GitHub Integration",
+    "text": "GitHub Integration\nCI/CD workflow generation and deployment helpers.\n\n\n\nFunction\nDescription\n\n\n\n\nquarto_docs_project_toml\nquarto_docs_project_toml(module_name::Module)\n\n\nquarto_github_action\nquarto_github_action(; kwargs…)\n\n\nquarto_github_action_simple\nquarto_github_action_simple(; kwargs…)\n\n\nquarto_makejl_template\nquarto_makejl_template(module_name::Module; config_file::String=““)\n\n\nquarto_setup_instructions\nquarto_setup_instructions() -&gt; String\n\n\nsetup_documentation\nsetup_documentation(module_name::Module; repo::String=““, kwargs…)",
+    "crumbs": [
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "articles/getting-started.html",
+    "href": "articles/getting-started.html",
+    "title": "Getting Started",
+    "section": "",
+    "text": "QuartoDocBuilder.jl is a Julia package that generates beautiful documentation websites for your Julia packages using Quarto. It’s inspired by R’s pkgdown and provides similar features.\n\n\nBefore you begin, make sure you have:\n\nJulia 1.6+ installed\nQuarto installed (download here)\nA Julia package with documented functions (docstrings)\n\n\n\n\nAdd QuartoDocBuilder to your package’s documentation environment:\n# In your package directory\njulia&gt; using Pkg\njulia&gt; Pkg.activate(\"docs\")\njulia&gt; Pkg.add(\"QuartoDocBuilder\")\nOr add it to your docs/Project.toml:\n[deps]\nQuartoDocBuilder = \"164f4f01-dadb-4e86-a767-9a3bba57cbbb\"\n\n\n\n\n\nCreate a file docs/make.jl with:\nusing MyPackage\nusing QuartoDocBuilder\n\n# Build documentation with default settings\nquarto_build_site(MyPackage; repo=\"username/MyPackage.jl\")\n\n\n\njulia --project=docs docs/make.jl\nThis generates the following structure:\ndocs/\n├── _quarto.yml       # Quarto configuration\n├── index.qmd         # Home page (from README.md)\n├── reference.qmd     # API reference index\n├── reference/        # Individual function docs\n│   ├── my_function.qmd\n│   └── ...\n├── tutorials.qmd     # Tutorials index\n├── tutorials/        # Tutorial files\n└── styles.css        # Custom CSS\n\n\n\ncd docs\nquarto preview\nThis starts a local server at http://localhost:4200 where you can see your documentation.\n\n\n\ncd docs\nquarto render\nThe rendered HTML site will be in docs/site/ by default.\n\n\n\n\nQuartoDocBuilder automatically creates:\n\n\n\n\n\n\n\n\nComponent\nSource\nDescription\n\n\n\n\nHome page\nREADME.md\nYour package’s README becomes the landing page\n\n\nReference pages\nDocstrings\nEvery documented function gets its own page\n\n\nReference index\nAuto-generated\nLists all functions with descriptions\n\n\nTutorials\ndocs/tutorials/\nYour tutorial files (you create these)\n\n\nStyles\nAuto-generated\nProfessional CSS styling\n\n\nNavigation\nAuto-generated\nNavbar with links to all sections\n\n\n\n\n\n\nCreate .qmd files in docs/tutorials/:\n---\ntitle: \"My First Tutorial\"\n---\n\n# Welcome\n\nThis is a tutorial for MyPackage...\n\n\n\n\n\nGenerate a workflow file:\nusing QuartoDocBuilder\nquarto_github_action()\nThen:\n\nPush to GitHub\nGo to Settings &gt; Pages\nSelect “GitHub Actions” as the source\n\n\n\n\ncd docs\nquarto render\n# Upload docs/site/ to your hosting\n\n\n\n\n\nConfiguration Guide: Learn how to customize your documentation\nAdvanced Features: Articles, news pages, auto-linking, and more\nReference: Full API documentation\n\n\n\n\nHere’s a complete example docs/make.jl:\nusing MyPackage\nusing QuartoDocBuilder\n\n# Simple usage\nquarto_build_site(MyPackage;\n    repo = \"myuser/MyPackage.jl\",\n    theme = \"flatly\"\n)\n\n# Or with full configuration\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"myuser/MyPackage.jl\",\n    theme = ThemeConfig(\n        bootswatch = \"flatly\",\n        dark_mode = true\n    ),\n    comments = true\n)\nquarto_build_site(config)\n\n\n\n\n\n\nPro Tip\n\n\n\nRun quarto_build_refpage(MyPackage) after adding new functions to update the reference index without rebuilding everything.",
+    "crumbs": [
+      "Get Started",
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "articles/getting-started.html#prerequisites",
+    "href": "articles/getting-started.html#prerequisites",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Before you begin, make sure you have:\n\nJulia 1.6+ installed\nQuarto installed (download here)\nA Julia package with documented functions (docstrings)",
+    "crumbs": [
+      "Get Started",
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "articles/getting-started.html#installation",
+    "href": "articles/getting-started.html#installation",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Add QuartoDocBuilder to your package’s documentation environment:\n# In your package directory\njulia&gt; using Pkg\njulia&gt; Pkg.activate(\"docs\")\njulia&gt; Pkg.add(\"QuartoDocBuilder\")\nOr add it to your docs/Project.toml:\n[deps]\nQuartoDocBuilder = \"164f4f01-dadb-4e86-a767-9a3bba57cbbb\"",
+    "crumbs": [
+      "Get Started",
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "articles/getting-started.html#quick-start",
+    "href": "articles/getting-started.html#quick-start",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Create a file docs/make.jl with:\nusing MyPackage\nusing QuartoDocBuilder\n\n# Build documentation with default settings\nquarto_build_site(MyPackage; repo=\"username/MyPackage.jl\")\n\n\n\njulia --project=docs docs/make.jl\nThis generates the following structure:\ndocs/\n├── _quarto.yml       # Quarto configuration\n├── index.qmd         # Home page (from README.md)\n├── reference.qmd     # API reference index\n├── reference/        # Individual function docs\n│   ├── my_function.qmd\n│   └── ...\n├── tutorials.qmd     # Tutorials index\n├── tutorials/        # Tutorial files\n└── styles.css        # Custom CSS\n\n\n\ncd docs\nquarto preview\nThis starts a local server at http://localhost:4200 where you can see your documentation.\n\n\n\ncd docs\nquarto render\nThe rendered HTML site will be in docs/site/ by default.",
+    "crumbs": [
+      "Get Started",
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "articles/getting-started.html#what-gets-generated",
+    "href": "articles/getting-started.html#what-gets-generated",
+    "title": "Getting Started",
+    "section": "",
+    "text": "QuartoDocBuilder automatically creates:\n\n\n\n\n\n\n\n\nComponent\nSource\nDescription\n\n\n\n\nHome page\nREADME.md\nYour package’s README becomes the landing page\n\n\nReference pages\nDocstrings\nEvery documented function gets its own page\n\n\nReference index\nAuto-generated\nLists all functions with descriptions\n\n\nTutorials\ndocs/tutorials/\nYour tutorial files (you create these)\n\n\nStyles\nAuto-generated\nProfessional CSS styling\n\n\nNavigation\nAuto-generated\nNavbar with links to all sections",
+    "crumbs": [
+      "Get Started",
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "articles/getting-started.html#adding-tutorials",
+    "href": "articles/getting-started.html#adding-tutorials",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Create .qmd files in docs/tutorials/:\n---\ntitle: \"My First Tutorial\"\n---\n\n# Welcome\n\nThis is a tutorial for MyPackage...",
+    "crumbs": [
+      "Get Started",
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "articles/getting-started.html#publishing-to-github-pages",
+    "href": "articles/getting-started.html#publishing-to-github-pages",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Generate a workflow file:\nusing QuartoDocBuilder\nquarto_github_action()\nThen:\n\nPush to GitHub\nGo to Settings &gt; Pages\nSelect “GitHub Actions” as the source\n\n\n\n\ncd docs\nquarto render\n# Upload docs/site/ to your hosting",
+    "crumbs": [
+      "Get Started",
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "articles/getting-started.html#next-steps",
+    "href": "articles/getting-started.html#next-steps",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Configuration Guide: Learn how to customize your documentation\nAdvanced Features: Articles, news pages, auto-linking, and more\nReference: Full API documentation",
+    "crumbs": [
+      "Get Started",
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "articles/getting-started.html#example",
+    "href": "articles/getting-started.html#example",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Here’s a complete example docs/make.jl:\nusing MyPackage\nusing QuartoDocBuilder\n\n# Simple usage\nquarto_build_site(MyPackage;\n    repo = \"myuser/MyPackage.jl\",\n    theme = \"flatly\"\n)\n\n# Or with full configuration\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"myuser/MyPackage.jl\",\n    theme = ThemeConfig(\n        bootswatch = \"flatly\",\n        dark_mode = true\n    ),\n    comments = true\n)\nquarto_build_site(config)\n\n\n\n\n\n\nPro Tip\n\n\n\nRun quarto_build_refpage(MyPackage) after adding new functions to update the reference index without rebuilding everything.",
+    "crumbs": [
+      "Get Started",
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "reference/autolink_cross_package.html",
+    "href": "reference/autolink_cross_package.html",
+    "title": "autolink_cross_package",
+    "section": "",
+    "text": "autolink_cross_package\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "autolink_cross_package"
+    ]
+  },
+  {
+    "objectID": "reference/NewsVersion.html",
+    "href": "reference/NewsVersion.html",
+    "title": "NewsVersion",
+    "section": "",
+    "text": "NewsVersion\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "NewsVersion"
+    ]
+  },
+  {
+    "objectID": "reference/discover_articles_recursive.html",
+    "href": "reference/discover_articles_recursive.html",
+    "title": "discover_articles_recursive",
+    "section": "",
+    "text": "discover_articles_recursive\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "discover_articles_recursive"
+    ]
+  },
+  {
+    "objectID": "reference/ReferenceGroup.html",
+    "href": "reference/ReferenceGroup.html",
+    "title": "ReferenceGroup",
+    "section": "",
+    "text": "ReferenceGroup\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "ReferenceGroup"
+    ]
+  },
+  {
+    "objectID": "reference/setup_documentation.html",
+    "href": "reference/setup_documentation.html",
+    "title": "setup_documentation",
+    "section": "",
+    "text": "setup_documentation\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "setup_documentation"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_github_action.html",
+    "href": "reference/quarto_github_action.html",
+    "title": "quarto_github_action",
+    "section": "",
+    "text": "quarto_github_action\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_github_action"
+    ]
+  },
+  {
+    "objectID": "reference/filter_objects.html",
+    "href": "reference/filter_objects.html",
+    "title": "filter_objects",
+    "section": "",
+    "text": "filter_objects\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "filter_objects"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_styles.html",
+    "href": "reference/quarto_styles.html",
+    "title": "quarto_styles",
+    "section": "",
+    "text": "quarto_styles\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_styles"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_setup_instructions.html",
+    "href": "reference/quarto_setup_instructions.html",
+    "title": "quarto_setup_instructions",
+    "section": "",
+    "text": "quarto_setup_instructions\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_setup_instructions"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_docs_project_toml.html",
+    "href": "reference/quarto_docs_project_toml.html",
+    "title": "quarto_docs_project_toml",
+    "section": "",
+    "text": "quarto_docs_project_toml\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_docs_project_toml"
+    ]
+  },
+  {
+    "objectID": "reference/news_summary.html",
+    "href": "reference/news_summary.html",
+    "title": "news_summary",
+    "section": "",
+    "text": "news_summary\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "news_summary"
+    ]
+  },
+  {
+    "objectID": "reference/create_articles_directory.html",
+    "href": "reference/create_articles_directory.html",
+    "title": "create_articles_directory",
+    "section": "",
+    "text": "create_articles_directory\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "create_articles_directory"
+    ]
+  },
+  {
+    "objectID": "reference/starts_with.html",
+    "href": "reference/starts_with.html",
+    "title": "starts_with",
+    "section": "",
+    "text": "starts_with\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "starts_with"
+    ]
+  },
+  {
+    "objectID": "reference/auto_group_objects.html",
+    "href": "reference/auto_group_objects.html",
+    "title": "auto_group_objects",
+    "section": "",
+    "text": "auto_group_objects\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "auto_group_objects"
+    ]
+  },
+  {
+    "objectID": "reference/get_article_info.html",
+    "href": "reference/get_article_info.html",
+    "title": "get_article_info",
+    "section": "",
+    "text": "get_article_info\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "get_article_info"
+    ]
+  },
+  {
+    "objectID": "reference/get_objects_from_module.html",
+    "href": "reference/get_objects_from_module.html",
+    "title": "get_objects_from_module",
+    "section": "",
+    "text": "get_objects_from_module\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "get_objects_from_module"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_rebuild_all.html",
+    "href": "reference/quarto_rebuild_all.html",
+    "title": "quarto_rebuild_all",
+    "section": "",
+    "text": "quarto_rebuild_all\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_rebuild_all"
+    ]
+  },
+  {
+    "objectID": "reference/parse_news.html",
+    "href": "reference/parse_news.html",
+    "title": "parse_news",
+    "section": "",
+    "text": "parse_news\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "parse_news"
+    ]
+  },
+  {
+    "objectID": "reference/QuartoDocBuilder.html",
+    "href": "reference/QuartoDocBuilder.html",
+    "title": "QuartoDocBuilder",
+    "section": "",
+    "text": "QuartoDocBuilder\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "QuartoDocBuilder"
+    ]
+  },
+  {
+    "objectID": "reference/get_dark_theme.html",
+    "href": "reference/get_dark_theme.html",
+    "title": "get_dark_theme",
+    "section": "",
+    "text": "get_dark_theme\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "get_dark_theme"
+    ]
+  },
+  {
+    "objectID": "reference/detect_get_started.html",
+    "href": "reference/detect_get_started.html",
+    "title": "detect_get_started",
+    "section": "",
+    "text": "detect_get_started\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "detect_get_started"
+    ]
+  },
+  {
+    "objectID": "reference/discover_articles.html",
+    "href": "reference/discover_articles.html",
+    "title": "discover_articles",
+    "section": "",
+    "text": "discover_articles\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "discover_articles"
+    ]
+  },
+  {
+    "objectID": "reference/is_type_symbol.html",
+    "href": "reference/is_type_symbol.html",
+    "title": "is_type_symbol",
+    "section": "",
+    "text": "is_type_symbol\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "is_type_symbol"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_rebuild_reference.html",
+    "href": "reference/quarto_rebuild_reference.html",
+    "title": "quarto_rebuild_reference",
+    "section": "",
+    "text": "quarto_rebuild_reference\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_rebuild_reference"
+    ]
+  },
+  {
+    "objectID": "reference/has_docstring.html",
+    "href": "reference/has_docstring.html",
+    "title": "has_docstring",
+    "section": "",
+    "text": "has_docstring\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "has_docstring"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_github_action_simple.html",
+    "href": "reference/quarto_github_action_simple.html",
+    "title": "quarto_github_action_simple",
+    "section": "",
+    "text": "quarto_github_action_simple\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_github_action_simple"
+    ]
+  },
+  {
+    "objectID": "reference/is_function_symbol.html",
+    "href": "reference/is_function_symbol.html",
+    "title": "is_function_symbol",
+    "section": "",
+    "text": "is_function_symbol\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "is_function_symbol"
+    ]
+  },
+  {
+    "objectID": "reference/has_news.html",
+    "href": "reference/has_news.html",
+    "title": "has_news",
+    "section": "",
+    "text": "has_news\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "has_news"
+    ]
+  },
+  {
+    "objectID": "reference/detect_repo.html",
+    "href": "reference/detect_repo.html",
+    "title": "detect_repo",
+    "section": "",
+    "text": "detect_repo\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "detect_repo"
+    ]
+  },
+  {
+    "objectID": "reference/create_reference_report.html",
+    "href": "reference/create_reference_report.html",
+    "title": "create_reference_report",
+    "section": "",
+    "text": "create_reference_report\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "create_reference_report"
+    ]
+  },
+  {
+    "objectID": "reference/create_news_template.html",
+    "href": "reference/create_news_template.html",
+    "title": "create_news_template",
+    "section": "",
+    "text": "create_news_template\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "create_news_template"
+    ]
+  },
+  {
+    "objectID": "reference/is_const_symbol.html",
+    "href": "reference/is_const_symbol.html",
+    "title": "is_const_symbol",
+    "section": "",
+    "text": "is_const_symbol\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "is_const_symbol"
+    ]
+  },
+  {
+    "objectID": "reference/resolve_reference.html",
+    "href": "reference/resolve_reference.html",
+    "title": "resolve_reference",
+    "section": "",
+    "text": "resolve_reference\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "resolve_reference"
+    ]
+  },
+  {
+    "objectID": "reference/matches.html",
+    "href": "reference/matches.html",
+    "title": "matches",
+    "section": "",
+    "text": "matches\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "matches"
+    ]
+  },
+  {
+    "objectID": "reference/group_objects.html",
+    "href": "reference/group_objects.html",
+    "title": "group_objects",
+    "section": "",
+    "text": "group_objects\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "group_objects"
+    ]
+  },
+  {
+    "objectID": "reference/validate_config.html",
+    "href": "reference/validate_config.html",
+    "title": "validate_config",
+    "section": "",
+    "text": "validate_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "validate_config"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_articles_index.html",
+    "href": "reference/quarto_articles_index.html",
+    "title": "quarto_articles_index",
+    "section": "",
+    "text": "quarto_articles_index\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_articles_index"
+    ]
+  },
+  {
+    "objectID": "reference/get_article_title.html",
+    "href": "reference/get_article_title.html",
+    "title": "get_article_title",
+    "section": "",
+    "text": "get_article_title\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "get_article_title"
+    ]
+  },
+  {
+    "objectID": "reference/ReferenceIndex.html",
+    "href": "reference/ReferenceIndex.html",
+    "title": "ReferenceIndex",
+    "section": "",
+    "text": "ReferenceIndex\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "ReferenceIndex"
+    ]
+  },
+  {
+    "objectID": "articles.html",
+    "href": "articles.html",
+    "title": "Tutorials",
+    "section": "",
+    "text": "Learn how to use QuartoDocBuilder to create beautiful documentation for your Julia packages.\n\n\n\n\n\nGetting Started\n\n\nQuick start guide for creating documentation with QuartoDocBuilder.jl\n\n\n\n\n\n\n\n\n\n\nConfiguration & Customization\n\n\nComplete guide to configuring and customizing your documentation\n\n\n\n\n\n\n\n\n\n\nAdvanced Features\n\n\nArticles, news pages, GitHub Actions, auto-linking, and more\n\n\n\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Get Started",
+      "Tutorials"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "QuartoDocBuilder.jl",
+    "section": "",
+    "text": "QuartoDocBuilder.jl\nQuartoDocBuilder.jl is a package inspired by R pkgdown. It provides an easy way to generate a website with documentation and vignettes, by creating a Quarto project.\nBeing powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted. This website doc even has a comment section! Check some examples here and the complete list of options here.\nThe Quarto website itself is written with Quarto! Check the github repo here to get some inspiration.\n\n\nFeatures\n\n\n\nEasy configuration\nInstall the latest Quarto version, ]add QuartoDocBuilder, run quarto_build_site and you are done. It’s up to you write the best doc ever!\n\nLearn more »\n\n\n\nComment section\nEvery page can have a commentary section. Let people speak! By default, QuartoDocBuilder.jl provides Discus, which is the easiest to configure.\n\nLearn more »\n\n\n\nScientific Markdown\nInline code, LaTeX equations and citations, cross-references, figure panels, callouts, advanced page layout, comment sections and so on. It’s time to write some \\(e^{i \\pi} + 1 = 0\\)!\n\nLearn more »\n\n\n\nWebsites and Books\nWant to publish your really nice tutorial in an online book? Or make a blog? Or a Word document? Or a pdf with LaTeX? Well, use the same files and render the project with Quarto!\n\nLearn more »\n\n\n\nCustomization\nWith a bit of .css magic you can customize almost everything! Why not put a spinning raccoon in the middle of a serious text?\n\n\n\n\n\nLearn more »\n\n\n\nMultilanguage\nBy default, QuartoDocBuilder uses the julia engine provided by QuartoNotebookRunner.jl, but you can use Jupyter and be able to run R and Python code along with Julia in the same document!\n\nLearn more »"
+  },
+  {
+    "objectID": "reference/linkify_github_refs.html",
+    "href": "reference/linkify_github_refs.html",
+    "title": "linkify_github_refs",
+    "section": "",
+    "text": "linkify_github_refs\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "linkify_github_refs"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_build_site.html",
+    "href": "reference/quarto_build_site.html",
+    "title": "quarto_build_site",
+    "section": "",
+    "text": "quarto_build_site\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_build_site"
+    ]
+  },
+  {
+    "objectID": "reference/ArticleConfig.html",
+    "href": "reference/ArticleConfig.html",
+    "title": "ArticleConfig",
+    "section": "",
+    "text": "ArticleConfig\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "ArticleConfig"
+    ]
+  },
+  {
+    "objectID": "reference/load_config.html",
+    "href": "reference/load_config.html",
+    "title": "load_config",
+    "section": "",
+    "text": "load_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "load_config"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_makejl_template.html",
+    "href": "reference/quarto_makejl_template.html",
+    "title": "quarto_makejl_template",
+    "section": "",
+    "text": "quarto_makejl_template\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_makejl_template"
+    ]
+  },
+  {
+    "objectID": "reference/create_article_template.html",
+    "href": "reference/create_article_template.html",
+    "title": "create_article_template",
+    "section": "",
+    "text": "create_article_template\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "create_article_template"
+    ]
+  },
+  {
+    "objectID": "reference/find_undefined_references.html",
+    "href": "reference/find_undefined_references.html",
+    "title": "find_undefined_references",
+    "section": "",
+    "text": "find_undefined_references\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "find_undefined_references"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_yaml_from_config.html",
+    "href": "reference/quarto_yaml_from_config.html",
+    "title": "quarto_yaml_from_config",
+    "section": "",
+    "text": "quarto_yaml_from_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_yaml_from_config"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_yaml.html",
+    "href": "reference/quarto_yaml.html",
+    "title": "quarto_yaml",
+    "section": "",
+    "text": "quarto_yaml\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_yaml"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_callout_block.html",
+    "href": "reference/quarto_callout_block.html",
+    "title": "quarto_callout_block",
+    "section": "",
+    "text": "quarto_callout_block\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_callout_block"
+    ]
+  },
+  {
+    "objectID": "reference/link_julia_docs.html",
+    "href": "reference/link_julia_docs.html",
+    "title": "link_julia_docs",
+    "section": "",
+    "text": "link_julia_docs\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "link_julia_docs"
+    ]
+  },
+  {
+    "objectID": "reference/ends_with.html",
+    "href": "reference/ends_with.html",
+    "title": "ends_with",
+    "section": "",
+    "text": "ends_with\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "ends_with"
+    ]
+  },
+  {
+    "objectID": "reference/NavbarItem.html",
+    "href": "reference/NavbarItem.html",
+    "title": "NavbarItem",
+    "section": "",
+    "text": "NavbarItem\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "NavbarItem"
+    ]
+  },
+  {
+    "objectID": "reference/ArticleInfo.html",
+    "href": "reference/ArticleInfo.html",
+    "title": "ArticleInfo",
+    "section": "",
+    "text": "ArticleInfo\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "ArticleInfo"
+    ]
+  },
+  {
+    "objectID": "reference/build_articles_yaml.html",
+    "href": "reference/build_articles_yaml.html",
+    "title": "build_articles_yaml",
+    "section": "",
+    "text": "build_articles_yaml\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "build_articles_yaml"
+    ]
+  },
+  {
+    "objectID": "reference/contains.html",
+    "href": "reference/contains.html",
+    "title": "contains",
+    "section": "",
+    "text": "contains\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "contains"
+    ]
+  },
+  {
+    "objectID": "reference/default_config.html",
+    "href": "reference/default_config.html",
+    "title": "default_config",
+    "section": "",
+    "text": "default_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "default_config"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_styles_from_config.html",
+    "href": "reference/quarto_styles_from_config.html",
+    "title": "quarto_styles_from_config",
+    "section": "",
+    "text": "quarto_styles_from_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_styles_from_config"
+    ]
+  },
+  {
+    "objectID": "reference/build_reference_index.html",
+    "href": "reference/build_reference_index.html",
+    "title": "build_reference_index",
+    "section": "",
+    "text": "build_reference_index\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "build_reference_index"
+    ]
+  },
+  {
+    "objectID": "reference/QuartoConfig.html",
+    "href": "reference/QuartoConfig.html",
+    "title": "QuartoConfig",
+    "section": "",
+    "text": "QuartoConfig\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "QuartoConfig"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_build_refpage_grouped.html",
+    "href": "reference/quarto_build_refpage_grouped.html",
+    "title": "quarto_build_refpage_grouped",
+    "section": "",
+    "text": "quarto_build_refpage_grouped\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_build_refpage_grouped"
+    ]
+  },
+  {
+    "objectID": "reference/merge_config.html",
+    "href": "reference/merge_config.html",
+    "title": "merge_config",
+    "section": "",
+    "text": "merge_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "merge_config"
+    ]
+  },
+  {
+    "objectID": "reference/is_exported.html",
+    "href": "reference/is_exported.html",
+    "title": "is_exported",
+    "section": "",
+    "text": "is_exported\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "is_exported"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_doc_page.html",
+    "href": "reference/quarto_doc_page.html",
+    "title": "quarto_doc_page",
+    "section": "",
+    "text": "quarto_doc_page\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_doc_page"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_articles_index_manual.html",
+    "href": "reference/quarto_articles_index_manual.html",
+    "title": "quarto_articles_index_manual",
+    "section": "",
+    "text": "quarto_articles_index_manual\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_articles_index_manual"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_index.html",
+    "href": "reference/quarto_index.html",
+    "title": "quarto_index",
+    "section": "",
+    "text": "quarto_index\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_index"
+    ]
+  },
+  {
+    "objectID": "reference/parse_content_selector.html",
+    "href": "reference/parse_content_selector.html",
+    "title": "parse_content_selector",
+    "section": "",
+    "text": "parse_content_selector\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "parse_content_selector"
+    ]
+  },
+  {
+    "objectID": "reference/FooterConfig.html",
+    "href": "reference/FooterConfig.html",
+    "title": "FooterConfig",
+    "section": "",
+    "text": "FooterConfig\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "FooterConfig"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_doc.html",
+    "href": "reference/quarto_doc.html",
+    "title": "quarto_doc",
+    "section": "",
+    "text": "quarto_doc\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_doc"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_format.html",
+    "href": "reference/quarto_format.html",
+    "title": "quarto_format",
+    "section": "",
+    "text": "quarto_format\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_format"
+    ]
+  },
+  {
+    "objectID": "reference/format_news_item.html",
+    "href": "reference/format_news_item.html",
+    "title": "format_news_item",
+    "section": "",
+    "text": "format_news_item\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "format_news_item"
+    ]
+  },
+  {
+    "objectID": "reference/ThemeConfig.html",
+    "href": "reference/ThemeConfig.html",
+    "title": "ThemeConfig",
+    "section": "",
+    "text": "ThemeConfig\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "ThemeConfig"
+    ]
+  },
+  {
+    "objectID": "reference/apply_selector.html",
+    "href": "reference/apply_selector.html",
+    "title": "apply_selector",
+    "section": "",
+    "text": "apply_selector\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "apply_selector"
+    ]
+  },
+  {
+    "objectID": "reference/build_articles_navbar.html",
+    "href": "reference/build_articles_navbar.html",
+    "title": "build_articles_navbar",
+    "section": "",
+    "text": "build_articles_navbar\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "build_articles_navbar"
+    ]
+  },
+  {
+    "objectID": "reference/get_article_order.html",
+    "href": "reference/get_article_order.html",
+    "title": "get_article_order",
+    "section": "",
+    "text": "get_article_order\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "get_article_order"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_doc_short.html",
+    "href": "reference/quarto_doc_short.html",
+    "title": "quarto_doc_short",
+    "section": "",
+    "text": "quarto_doc_short\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_doc_short"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_news_page.html",
+    "href": "reference/quarto_news_page.html",
+    "title": "quarto_news_page",
+    "section": "",
+    "text": "quarto_news_page\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_news_page"
+    ]
+  },
+  {
+    "objectID": "reference/autolink_references.html",
+    "href": "reference/autolink_references.html",
+    "title": "autolink_references",
+    "section": "",
+    "text": "autolink_references\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "autolink_references"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_build_refpage.html",
+    "href": "reference/quarto_build_refpage.html",
+    "title": "quarto_build_refpage",
+    "section": "",
+    "text": "quarto_build_refpage\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol(x...) -&gt; Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia&gt; Symbol(\"my\", \"name\")\n:myname\n\njulia&gt; Symbol(\"day\", 4)\n:day4\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nSymbol\n\nThe type of object used to represent identifiers in parsed julia code (ASTs). Also often used as a name or label to identify an entity (e.g. as a dictionary key). Symbols can be entered using the : quote operator:\n\njulia&gt; :name\n:name\n\njulia&gt; typeof(:name)\nSymbol\n\njulia&gt; x = 42\n42\n\njulia&gt; eval(:x)\n42\n\nSymbols can also be constructed from strings or other values by calling the constructor Symbol(x...).\nSymbols are immutable and their implementation re-uses the same object for all Symbols with the same name.\nUnlike strings, Symbols are “atomic” or “scalar” entities that do not support iteration over characters.",
+    "crumbs": [
+      "Reference",
+      "quarto_build_refpage"
+    ]
+  },
+  {
+    "objectID": "articles/advanced.html",
+    "href": "articles/advanced.html",
+    "title": "Advanced Features",
+    "section": "",
+    "text": "This guide covers QuartoDocBuilder’s advanced features for creating comprehensive documentation.\n\n\nArticles (also called vignettes) are long-form documentation pages for tutorials, guides, and explanations.\n\n\n\nCreate a directory: docs/articles/\nAdd .qmd files with YAML frontmatter:\n\n---\ntitle: \"My Article\"\ndescription: \"A detailed guide\"\norder: 1\n---\n\n# My Article\n\nContent goes here...\n\n\n\nQuartoDocBuilder automatically discovers articles in docs/articles/:\n# Find all articles\narticles = discover_articles(\"docs/articles\")\n\n# Find recursively (including subdirectories)\narticles = discover_articles_recursive(\"docs/articles\")\n\n\n\nIf you have an article named after your package (e.g., mypackage.qmd) or named getting-started.qmd, it’s automatically detected:\n# Auto-detect \"Get Started\" article\nget_started_path = detect_get_started(MyPackage)\n\n\n\nArticles can appear as a dropdown menu in the navbar:\narticles = ArticleConfig(\n    title = \"Guides\",\n    dropdown = true   # Show as dropdown menu\n)\nWhen dropdown = true and you have 10 or fewer articles, they appear directly in a dropdown. With more articles, a link to the articles index is shown instead.\n\n\n\nGenerate an articles index automatically:\nquarto_articles_index(config)\nThis creates docs/articles.qmd with a Quarto listing of all articles.\n\n\n\n\nQuartoDocBuilder can parse your NEWS.md file and generate a formatted changelog page.\n\n\nCreate NEWS.md in your package root:\n# MyPackage 1.2.0 (2024-06-15)\n\n## Features\n\n- Added new `process_data()` function (#42)\n- Improved performance by 50% (@contributor)\n\n## Bug Fixes\n\n- Fixed crash when input is empty (#38)\n- Corrected documentation typos\n\n## Breaking Changes\n\n- Renamed `old_func()` to `new_func()`\n\n# MyPackage 1.1.0 (2024-03-01)\n\n## Features\n\n- Initial feature set\nSupported formats:\n\n# Package 1.0.0 (date) - Package name with version and optional date\n# v1.0.0 - Version only\n# 1.0.0 - date - Version with date after dash\n\n\n\n\nReferences are automatically linked:\n\n#123 → Link to issue/PR #123\n@username → Link to GitHub user profile\nuser/repo#456 → Cross-repo issue link\n\n# Example\ntext = \"Fixed bug #42 reported by @contributor\"\nlinked = linkify_github_refs(text, \"user/repo\")\n# \"Fixed bug [#42](https://github.com/user/repo/issues/42) reported by [@contributor](https://github.com/contributor)\"\n\n\n\nThe news page is generated automatically when news = true:\nconfig = QuartoConfig(\n    # ...\n    news = true,\n    news_file = \"NEWS.md\"  # Default\n)\nquarto_build_site(config)\nOr generate it manually:\nquarto_news_page(config)\nThe generated page shows:\n\nLatest version expanded\nOlder versions in collapsible sections\nCategories (Features, Bug Fixes, etc.) as subsections\nAutomatic GitHub links\n\n\n\n\n\nQuartoDocBuilder can generate GitHub Actions workflows for automated documentation deployment.\n\n\nusing QuartoDocBuilder\n\n# Modern GitHub Pages deployment\nquarto_github_action()\n\n# Traditional gh-pages branch deployment\nquarto_github_action_simple(branch=\"gh-pages\")\nThis creates .github/workflows/docs.yml.\n\n\n\nquarto_github_action(\n    quarto_version = \"pre-release\",  # Quarto version\n    julia_version = \"1\",              # Julia version\n    output_dir = \"site\",              # Output directory\n    trigger_branches = [\"main\"]       # Branches that trigger build\n)\n\n\n\nAfter generating the workflow:\n\nPush to GitHub\nGo to Settings → Pages\nUnder “Build and deployment”, select GitHub Actions\nYour docs will be at https://username.github.io/repo\n\n\n\n\nUse the one-stop setup function:\nsetup_documentation(MyPackage; repo=\"user/MyPackage.jl\")\nThis creates:\n\ndocs/make.jl - Build script\ndocs/Project.toml - Dependencies\n.github/workflows/docs.yml - CI workflow\nInitial documentation structure\n\n\n\n\n\nQuartoDocBuilder can automatically convert function references in documentation to clickable links.\n\n\nReferences in backticks are converted to links:\nUse `my_function()` to process data.\nBecomes:\nUse [`my_function()`](reference/my_function.qmd) to process data.\n\n\n\n# Build reference index\nindex = build_reference_index(MyPackage)\n\n# Auto-link text\ntext = \"Use `my_function()` for processing.\"\nlinked = autolink_references(text, index)\n\n\n\nCheck for references that don’t have documentation:\nundefined = find_undefined_references(text, index)\n# Returns: [\"undefined_func\", \"missing_func\"]\n\n\n\n\n\n\ntheme = ThemeConfig(\n    # ...\n    custom_css = \"\"\"\n    /* Custom styles */\n    .my-class {\n        color: blue;\n    }\n\n    .callout-note {\n        border-left-color: #007bff;\n    }\n    \"\"\"\n)\n\n\n\nFor advanced theming, use SCSS variables:\ntheme = ThemeConfig(\n    # ...\n    custom_scss = \"\"\"\n    \\$primary: #007bff;\n    \\$link-color: #28a745;\n    \\$font-family-sans-serif: \"Inter\", sans-serif;\n    \"\"\"\n)\nWhen custom colors are specified, QuartoDocBuilder generates docs/custom.scss with the variables.\n\n\n\nYou can also add custom files:\n\ndocs/styles.css - Main stylesheet (auto-generated, you can modify)\ndocs/custom.scss - SCSS variables (auto-generated if custom colors used)\n\n\n\n\n\n\n\nWhen you add new functions:\nquarto_rebuild_reference(MyPackage)\n# or\nquarto_rebuild_reference(config)\n\n\n\nTo regenerate everything:\nquarto_rebuild_all(MyPackage; repo=\"user/repo\")\n# or\nquarto_rebuild_all(config)\n\n\n\n\nA typical development workflow:\n# Initial setup\nsetup_documentation(MyPackage; repo=\"user/MyPackage.jl\")\n\n# After adding new functions\nquarto_rebuild_reference(MyPackage)\n\n# After changing configuration\nquarto_rebuild_all(config)\n\n# Preview changes\n# Run: cd docs && quarto preview\n\n\n\n\n\nQuartoDocBuilder extracts docstrings, so well-written docstrings make better docs:\n\"\"\"\n    my_function(x, y; option=true)\n\nShort description of what the function does.\n\n# Arguments\n- `x`: Description of x\n- `y`: Description of y\n- `option`: What this option controls\n\n# Returns\nWhat the function returns.\n\n# Examples\n```julia\nresult = my_function(1, 2)",
+    "crumbs": [
+      "Get Started",
+      "Advanced Features"
+    ]
+  },
+  {
+    "objectID": "articles/advanced.html#articles-system",
+    "href": "articles/advanced.html#articles-system",
+    "title": "Advanced Features",
+    "section": "",
+    "text": "Articles (also called vignettes) are long-form documentation pages for tutorials, guides, and explanations.\n\n\n\nCreate a directory: docs/articles/\nAdd .qmd files with YAML frontmatter:\n\n---\ntitle: \"My Article\"\ndescription: \"A detailed guide\"\norder: 1\n---\n\n# My Article\n\nContent goes here...\n\n\n\nQuartoDocBuilder automatically discovers articles in docs/articles/:\n# Find all articles\narticles = discover_articles(\"docs/articles\")\n\n# Find recursively (including subdirectories)\narticles = discover_articles_recursive(\"docs/articles\")\n\n\n\nIf you have an article named after your package (e.g., mypackage.qmd) or named getting-started.qmd, it’s automatically detected:\n# Auto-detect \"Get Started\" article\nget_started_path = detect_get_started(MyPackage)\n\n\n\nArticles can appear as a dropdown menu in the navbar:\narticles = ArticleConfig(\n    title = \"Guides\",\n    dropdown = true   # Show as dropdown menu\n)\nWhen dropdown = true and you have 10 or fewer articles, they appear directly in a dropdown. With more articles, a link to the articles index is shown instead.\n\n\n\nGenerate an articles index automatically:\nquarto_articles_index(config)\nThis creates docs/articles.qmd with a Quarto listing of all articles.",
+    "crumbs": [
+      "Get Started",
+      "Advanced Features"
+    ]
+  },
+  {
+    "objectID": "articles/advanced.html#news-changelog",
+    "href": "articles/advanced.html#news-changelog",
+    "title": "Advanced Features",
+    "section": "",
+    "text": "QuartoDocBuilder can parse your NEWS.md file and generate a formatted changelog page.\n\n\nCreate NEWS.md in your package root:\n# MyPackage 1.2.0 (2024-06-15)\n\n## Features\n\n- Added new `process_data()` function (#42)\n- Improved performance by 50% (@contributor)\n\n## Bug Fixes\n\n- Fixed crash when input is empty (#38)\n- Corrected documentation typos\n\n## Breaking Changes\n\n- Renamed `old_func()` to `new_func()`\n\n# MyPackage 1.1.0 (2024-03-01)\n\n## Features\n\n- Initial feature set\nSupported formats:\n\n# Package 1.0.0 (date) - Package name with version and optional date\n# v1.0.0 - Version only\n# 1.0.0 - date - Version with date after dash\n\n\n\n\nReferences are automatically linked:\n\n#123 → Link to issue/PR #123\n@username → Link to GitHub user profile\nuser/repo#456 → Cross-repo issue link\n\n# Example\ntext = \"Fixed bug #42 reported by @contributor\"\nlinked = linkify_github_refs(text, \"user/repo\")\n# \"Fixed bug [#42](https://github.com/user/repo/issues/42) reported by [@contributor](https://github.com/contributor)\"\n\n\n\nThe news page is generated automatically when news = true:\nconfig = QuartoConfig(\n    # ...\n    news = true,\n    news_file = \"NEWS.md\"  # Default\n)\nquarto_build_site(config)\nOr generate it manually:\nquarto_news_page(config)\nThe generated page shows:\n\nLatest version expanded\nOlder versions in collapsible sections\nCategories (Features, Bug Fixes, etc.) as subsections\nAutomatic GitHub links",
+    "crumbs": [
+      "Get Started",
+      "Advanced Features"
+    ]
+  },
+  {
+    "objectID": "articles/advanced.html#github-actions-integration",
+    "href": "articles/advanced.html#github-actions-integration",
+    "title": "Advanced Features",
+    "section": "",
+    "text": "QuartoDocBuilder can generate GitHub Actions workflows for automated documentation deployment.\n\n\nusing QuartoDocBuilder\n\n# Modern GitHub Pages deployment\nquarto_github_action()\n\n# Traditional gh-pages branch deployment\nquarto_github_action_simple(branch=\"gh-pages\")\nThis creates .github/workflows/docs.yml.\n\n\n\nquarto_github_action(\n    quarto_version = \"pre-release\",  # Quarto version\n    julia_version = \"1\",              # Julia version\n    output_dir = \"site\",              # Output directory\n    trigger_branches = [\"main\"]       # Branches that trigger build\n)\n\n\n\nAfter generating the workflow:\n\nPush to GitHub\nGo to Settings → Pages\nUnder “Build and deployment”, select GitHub Actions\nYour docs will be at https://username.github.io/repo\n\n\n\n\nUse the one-stop setup function:\nsetup_documentation(MyPackage; repo=\"user/MyPackage.jl\")\nThis creates:\n\ndocs/make.jl - Build script\ndocs/Project.toml - Dependencies\n.github/workflows/docs.yml - CI workflow\nInitial documentation structure",
+    "crumbs": [
+      "Get Started",
+      "Advanced Features"
+    ]
+  },
+  {
+    "objectID": "articles/advanced.html#auto-linking",
+    "href": "articles/advanced.html#auto-linking",
+    "title": "Advanced Features",
+    "section": "",
+    "text": "QuartoDocBuilder can automatically convert function references in documentation to clickable links.\n\n\nReferences in backticks are converted to links:\nUse `my_function()` to process data.\nBecomes:\nUse [`my_function()`](reference/my_function.qmd) to process data.\n\n\n\n# Build reference index\nindex = build_reference_index(MyPackage)\n\n# Auto-link text\ntext = \"Use `my_function()` for processing.\"\nlinked = autolink_references(text, index)\n\n\n\nCheck for references that don’t have documentation:\nundefined = find_undefined_references(text, index)\n# Returns: [\"undefined_func\", \"missing_func\"]",
+    "crumbs": [
+      "Get Started",
+      "Advanced Features"
+    ]
+  },
+  {
+    "objectID": "articles/advanced.html#custom-css-and-scss",
+    "href": "articles/advanced.html#custom-css-and-scss",
+    "title": "Advanced Features",
+    "section": "",
+    "text": "theme = ThemeConfig(\n    # ...\n    custom_css = \"\"\"\n    /* Custom styles */\n    .my-class {\n        color: blue;\n    }\n\n    .callout-note {\n        border-left-color: #007bff;\n    }\n    \"\"\"\n)\n\n\n\nFor advanced theming, use SCSS variables:\ntheme = ThemeConfig(\n    # ...\n    custom_scss = \"\"\"\n    \\$primary: #007bff;\n    \\$link-color: #28a745;\n    \\$font-family-sans-serif: \"Inter\", sans-serif;\n    \"\"\"\n)\nWhen custom colors are specified, QuartoDocBuilder generates docs/custom.scss with the variables.\n\n\n\nYou can also add custom files:\n\ndocs/styles.css - Main stylesheet (auto-generated, you can modify)\ndocs/custom.scss - SCSS variables (auto-generated if custom colors used)",
+    "crumbs": [
+      "Get Started",
+      "Advanced Features"
+    ]
+  },
+  {
+    "objectID": "articles/advanced.html#rebuilding-documentation",
+    "href": "articles/advanced.html#rebuilding-documentation",
+    "title": "Advanced Features",
+    "section": "",
+    "text": "When you add new functions:\nquarto_rebuild_reference(MyPackage)\n# or\nquarto_rebuild_reference(config)\n\n\n\nTo regenerate everything:\nquarto_rebuild_all(MyPackage; repo=\"user/repo\")\n# or\nquarto_rebuild_all(config)",
+    "crumbs": [
+      "Get Started",
+      "Advanced Features"
+    ]
+  },
+  {
+    "objectID": "articles/advanced.html#incremental-workflow",
+    "href": "articles/advanced.html#incremental-workflow",
+    "title": "Advanced Features",
+    "section": "",
+    "text": "A typical development workflow:\n# Initial setup\nsetup_documentation(MyPackage; repo=\"user/MyPackage.jl\")\n\n# After adding new functions\nquarto_rebuild_reference(MyPackage)\n\n# After changing configuration\nquarto_rebuild_all(config)\n\n# Preview changes\n# Run: cd docs && quarto preview",
+    "crumbs": [
+      "Get Started",
+      "Advanced Features"
+    ]
+  },
+  {
+    "objectID": "articles/advanced.html#tips-and-best-practices",
+    "href": "articles/advanced.html#tips-and-best-practices",
+    "title": "Advanced Features",
+    "section": "",
+    "text": "QuartoDocBuilder extracts docstrings, so well-written docstrings make better docs:\n\"\"\"\n    my_function(x, y; option=true)\n\nShort description of what the function does.\n\n# Arguments\n- `x`: Description of x\n- `y`: Description of y\n- `option`: What this option controls\n\n# Returns\nWhat the function returns.\n\n# Examples\n```julia\nresult = my_function(1, 2)",
+    "crumbs": [
+      "Get Started",
+      "Advanced Features"
+    ]
+  },
+  {
+    "objectID": "articles/advanced.html#troubleshooting",
+    "href": "articles/advanced.html#troubleshooting",
+    "title": "Advanced Features",
+    "section": "Troubleshooting",
+    "text": "Troubleshooting\n\nCommon Issues\n“Module not found”: Make sure to activate the docs environment:\nusing Pkg\nPkg.activate(\"docs\")\nPkg.develop(path=dirname(@__DIR__))\n**“_quarto.yml already exists”**: Delete it or use force=true:\nquarto_yaml_from_config(config; force=true)\n“Julia engine not available”: Install Quarto pre-release for Julia support:\nquarto install tinytex  # If needed\n\n\nGetting Help\n\nGitHub Issues\nQuarto Documentation",
+    "crumbs": [
+      "Get Started",
+      "Advanced Features"
+    ]
+  },
+  {
+    "objectID": "articles/configuration.html",
+    "href": "articles/configuration.html",
+    "title": "Configuration & Customization",
+    "section": "",
+    "text": "QuartoDocBuilder offers extensive customization through the QuartoConfig struct. This guide covers all configuration options.\n\n\nThe main configuration is done through QuartoConfig:\nconfig = QuartoConfig(\n    module_name = MyPackage,        # Required: your module\n    repo = \"user/MyPackage.jl\",     # GitHub repository\n    output_dir = \"site\",            # Output directory\n\n    # Reference page organization\n    reference = [...],              # Vector of ReferenceGroup\n\n    # Articles\n    articles = ArticleConfig(...),\n    get_started = \"articles/intro.qmd\",\n\n    # News\n    news = true,\n    news_file = \"NEWS.md\",\n\n    # Theme\n    theme = ThemeConfig(...),\n\n    # Comments\n    comments = true,\n    giscus_repo = \"user/repo\",\n\n    # Footer\n    footer = FooterConfig(...)\n)\n\n\n\nThe reference page can be organized into groups using ReferenceGroup:\nreference = [\n    ReferenceGroup(\n        title = \"Core Functions\",\n        desc = \"Main package functionality\",\n        contents = [:main_function, :helper_function]\n    ),\n    ReferenceGroup(\n        title = \"Utilities\",\n        contents = [:util_a, :util_b]\n    )\n]\n\n\nInstead of listing every function manually, use selector functions:\n\n\n\n\n\n\n\n\nSelector\nDescription\nExample\n\n\n\n\nstarts_with(prefix)\nFunctions starting with prefix\nstarts_with(\"process_\")\n\n\nends_with(suffix)\nFunctions ending with suffix\nends_with(\"_util\")\n\n\nmatches(pattern)\nFunctions matching regex\nmatches(r\"^get\")\n\n\ncontains(substring)\nFunctions containing substring\ncontains(\"helper\")\n\n\n\nExample:\nreference = [\n    ReferenceGroup(\n        title = \"Data Processing\",\n        desc = \"Functions for processing data\",\n        contents = [\n            :main_process,           # Explicit symbol\n            starts_with(\"process_\"), # All functions starting with \"process_\"\n            ends_with(\"_data\")       # All functions ending with \"_data\"\n        ]\n    ),\n    ReferenceGroup(\n        title = \"Getters & Setters\",\n        contents = [matches(r\"^(get|set)_\")]\n    ),\n    ReferenceGroup(\n        title = \"Utilities\",\n        contents = [contains(\"util\"), contains(\"helper\")]\n    )\n]\n\n\n\nIf you don’t specify reference, QuartoDocBuilder auto-groups by type:\n\nFunctions - All function symbols\nTypes - All struct/type definitions\nConstants - All constant values\n\n\n\n\n\n\n\ntheme = ThemeConfig(\n    bootswatch = \"flatly\",       # Bootswatch theme name\n    dark_mode = true,            # Enable light/dark toggle\n    primary = \"#446E9B\",         # Primary color (optional)\n    bg = \"\",                     # Background color (optional)\n    fg = \"\",                     # Foreground color (optional)\n    accent = \"\",                 # Accent/link color (optional)\n    font_base = \"\",              # Base font family (optional)\n    font_heading = \"\",           # Heading font family (optional)\n    font_code = \"\",              # Code font family (optional)\n    code_highlight = \"github\",   # Syntax highlighting theme\n    custom_css = \"\",             # Additional CSS\n    custom_scss = \"\"             # Additional SCSS variables\n)\n\n\n\nLight themes (automatically paired with dark variants):\n\n\n\nLight Theme\nDark Variant\n\n\n\n\nflatly\ndarkly\n\n\ncosmo\ncyborg\n\n\njournal\nslate\n\n\nlitera\nsuperhero\n\n\nlumen\nsolar\n\n\nminty\nvapor\n\n\npulse\nquartz\n\n\nsandstone\nslate\n\n\nyeti\nslate\n\n\n\n\n\n\nAdd custom colors using CSS color values:\ntheme = ThemeConfig(\n    bootswatch = \"flatly\",\n    primary = \"#007bff\",         # Custom primary color\n    accent = \"#28a745\",          # Custom link color\n    custom_css = \"\"\"\n    .navbar {\n        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n    }\n    \"\"\"\n)\n\n\n\nWhen dark_mode = true, QuartoDocBuilder:\n\nAdds a theme toggle button to the navbar\nAutomatically pairs your light theme with a matching dark theme\nRespects user’s system preference\n\nTo disable:\ntheme = ThemeConfig(\n    bootswatch = \"flatly\",\n    dark_mode = false    # No toggle, always light theme\n)\n\n\n\n\nfooter = FooterConfig(\n    left = \"Copyright 2024 [Author](https://author.com)\",\n    center = \"\",\n    right = \"Built with QuartoDocBuilder.jl\"\n)\nMarkdown is supported in footer text.\n\n\n\nFor complex configurations, use a _quartodoc.toml file:\n[project]\nrepo = \"user/MyPackage.jl\"\noutput_dir = \"site\"\ncomments = true\n\n[execution]\nfreeze = \"auto\"\ncache = true\n\n[[reference]]\ntitle = \"Core Functions\"\ndesc = \"Main package functionality\"\ncontents = [\"main_func\", \"starts_with:process_\"]\n\n[[reference]]\ntitle = \"Utilities\"\ncontents = [\"ends_with:_util\"]\n\n[articles]\ntitle = \"Tutorials\"\ndropdown = true\nget_started = \"articles/intro.qmd\"\n\n[theme]\nbootswatch = \"flatly\"\ndark_mode = true\ncode_highlight = \"github\"\n\n[footer]\nleft = \"Copyright 2024\"\nright = \"Built with QuartoDocBuilder.jl\"\nLoad and use it:\nusing QuartoDocBuilder\n\n# Load config from file\nconfig = load_config(\"_quartodoc.toml\")\n\n# Set the module (can't be in TOML)\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    # Other fields from loaded config are preserved\n    repo = config.repo,\n    reference = config.reference,\n    theme = config.theme,\n    # ...\n)\n\nquarto_build_site(config)\n\n\n\narticles = ArticleConfig(\n    title = \"Tutorials\",           # Navbar text\n    desc = \"Learn how to use...\",  # Index page description\n    dir = \"articles\",              # Directory name\n    dropdown = true                # Show as dropdown in navbar\n)\n\n\nAdd a prominent “Get Started” link in the navbar:\nconfig = QuartoConfig(\n    # ...\n    get_started = \"articles/getting-started.qmd\"\n)\n\n\n\n\nEnable reader comments using Giscus:\nconfig = QuartoConfig(\n    # ...\n    comments = true,\n    giscus_repo = \"user/repo\"  # Repository with Discussions enabled\n)\nRequirements:\n\nEnable GitHub Discussions on your repository\nInstall the Giscus app\nSet giscus_repo to your repository\n\n\n\n\nHere’s a full configuration example:\nusing MyPackage\nusing QuartoDocBuilder\n\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"myuser/MyPackage.jl\",\n\n    reference = [\n        ReferenceGroup(\n            title = \"Data I/O\",\n            desc = \"Functions for reading and writing data\",\n            contents = [starts_with(\"read_\"), starts_with(\"write_\")]\n        ),\n        ReferenceGroup(\n            title = \"Processing\",\n            desc = \"Data processing functions\",\n            contents = [starts_with(\"process_\"), contains(\"transform\")]\n        ),\n        ReferenceGroup(\n            title = \"Utilities\",\n            contents = [ends_with(\"_util\"), ends_with(\"_helper\")]\n        )\n    ],\n\n    articles = ArticleConfig(\n        title = \"Guides\",\n        dropdown = true\n    ),\n    get_started = \"articles/quickstart.qmd\",\n\n    news = true,\n\n    theme = ThemeConfig(\n        bootswatch = \"cosmo\",\n        dark_mode = true,\n        code_highlight = \"monokai\"\n    ),\n\n    comments = true,\n    giscus_repo = \"myuser/MyPackage.jl\",\n\n    footer = FooterConfig(\n        left = \"MIT License\",\n        right = \"[Source Code](https://github.com/myuser/MyPackage.jl)\"\n    )\n)\n\nquarto_build_site(config)\n\n\n\n\nAdvanced Features: Learn about articles, news pages, GitHub Actions, and more\nReference: Full API documentation",
+    "crumbs": [
+      "Get Started",
+      "Configuration & Customization"
+    ]
+  },
+  {
+    "objectID": "articles/configuration.html#the-quartoconfig-struct",
+    "href": "articles/configuration.html#the-quartoconfig-struct",
+    "title": "Configuration & Customization",
+    "section": "",
+    "text": "The main configuration is done through QuartoConfig:\nconfig = QuartoConfig(\n    module_name = MyPackage,        # Required: your module\n    repo = \"user/MyPackage.jl\",     # GitHub repository\n    output_dir = \"site\",            # Output directory\n\n    # Reference page organization\n    reference = [...],              # Vector of ReferenceGroup\n\n    # Articles\n    articles = ArticleConfig(...),\n    get_started = \"articles/intro.qmd\",\n\n    # News\n    news = true,\n    news_file = \"NEWS.md\",\n\n    # Theme\n    theme = ThemeConfig(...),\n\n    # Comments\n    comments = true,\n    giscus_repo = \"user/repo\",\n\n    # Footer\n    footer = FooterConfig(...)\n)",
+    "crumbs": [
+      "Get Started",
+      "Configuration & Customization"
+    ]
+  },
+  {
+    "objectID": "articles/configuration.html#reference-page-organization",
+    "href": "articles/configuration.html#reference-page-organization",
+    "title": "Configuration & Customization",
+    "section": "",
+    "text": "The reference page can be organized into groups using ReferenceGroup:\nreference = [\n    ReferenceGroup(\n        title = \"Core Functions\",\n        desc = \"Main package functionality\",\n        contents = [:main_function, :helper_function]\n    ),\n    ReferenceGroup(\n        title = \"Utilities\",\n        contents = [:util_a, :util_b]\n    )\n]\n\n\nInstead of listing every function manually, use selector functions:\n\n\n\n\n\n\n\n\nSelector\nDescription\nExample\n\n\n\n\nstarts_with(prefix)\nFunctions starting with prefix\nstarts_with(\"process_\")\n\n\nends_with(suffix)\nFunctions ending with suffix\nends_with(\"_util\")\n\n\nmatches(pattern)\nFunctions matching regex\nmatches(r\"^get\")\n\n\ncontains(substring)\nFunctions containing substring\ncontains(\"helper\")\n\n\n\nExample:\nreference = [\n    ReferenceGroup(\n        title = \"Data Processing\",\n        desc = \"Functions for processing data\",\n        contents = [\n            :main_process,           # Explicit symbol\n            starts_with(\"process_\"), # All functions starting with \"process_\"\n            ends_with(\"_data\")       # All functions ending with \"_data\"\n        ]\n    ),\n    ReferenceGroup(\n        title = \"Getters & Setters\",\n        contents = [matches(r\"^(get|set)_\")]\n    ),\n    ReferenceGroup(\n        title = \"Utilities\",\n        contents = [contains(\"util\"), contains(\"helper\")]\n    )\n]\n\n\n\nIf you don’t specify reference, QuartoDocBuilder auto-groups by type:\n\nFunctions - All function symbols\nTypes - All struct/type definitions\nConstants - All constant values",
+    "crumbs": [
+      "Get Started",
+      "Configuration & Customization"
+    ]
+  },
+  {
+    "objectID": "articles/configuration.html#theme-customization",
+    "href": "articles/configuration.html#theme-customization",
+    "title": "Configuration & Customization",
+    "section": "",
+    "text": "theme = ThemeConfig(\n    bootswatch = \"flatly\",       # Bootswatch theme name\n    dark_mode = true,            # Enable light/dark toggle\n    primary = \"#446E9B\",         # Primary color (optional)\n    bg = \"\",                     # Background color (optional)\n    fg = \"\",                     # Foreground color (optional)\n    accent = \"\",                 # Accent/link color (optional)\n    font_base = \"\",              # Base font family (optional)\n    font_heading = \"\",           # Heading font family (optional)\n    font_code = \"\",              # Code font family (optional)\n    code_highlight = \"github\",   # Syntax highlighting theme\n    custom_css = \"\",             # Additional CSS\n    custom_scss = \"\"             # Additional SCSS variables\n)\n\n\n\nLight themes (automatically paired with dark variants):\n\n\n\nLight Theme\nDark Variant\n\n\n\n\nflatly\ndarkly\n\n\ncosmo\ncyborg\n\n\njournal\nslate\n\n\nlitera\nsuperhero\n\n\nlumen\nsolar\n\n\nminty\nvapor\n\n\npulse\nquartz\n\n\nsandstone\nslate\n\n\nyeti\nslate\n\n\n\n\n\n\nAdd custom colors using CSS color values:\ntheme = ThemeConfig(\n    bootswatch = \"flatly\",\n    primary = \"#007bff\",         # Custom primary color\n    accent = \"#28a745\",          # Custom link color\n    custom_css = \"\"\"\n    .navbar {\n        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n    }\n    \"\"\"\n)\n\n\n\nWhen dark_mode = true, QuartoDocBuilder:\n\nAdds a theme toggle button to the navbar\nAutomatically pairs your light theme with a matching dark theme\nRespects user’s system preference\n\nTo disable:\ntheme = ThemeConfig(\n    bootswatch = \"flatly\",\n    dark_mode = false    # No toggle, always light theme\n)",
+    "crumbs": [
+      "Get Started",
+      "Configuration & Customization"
+    ]
+  },
+  {
+    "objectID": "articles/configuration.html#footer-customization",
+    "href": "articles/configuration.html#footer-customization",
+    "title": "Configuration & Customization",
+    "section": "",
+    "text": "footer = FooterConfig(\n    left = \"Copyright 2024 [Author](https://author.com)\",\n    center = \"\",\n    right = \"Built with QuartoDocBuilder.jl\"\n)\nMarkdown is supported in footer text.",
+    "crumbs": [
+      "Get Started",
+      "Configuration & Customization"
+    ]
+  },
+  {
+    "objectID": "articles/configuration.html#toml-configuration-file",
+    "href": "articles/configuration.html#toml-configuration-file",
+    "title": "Configuration & Customization",
+    "section": "",
+    "text": "For complex configurations, use a _quartodoc.toml file:\n[project]\nrepo = \"user/MyPackage.jl\"\noutput_dir = \"site\"\ncomments = true\n\n[execution]\nfreeze = \"auto\"\ncache = true\n\n[[reference]]\ntitle = \"Core Functions\"\ndesc = \"Main package functionality\"\ncontents = [\"main_func\", \"starts_with:process_\"]\n\n[[reference]]\ntitle = \"Utilities\"\ncontents = [\"ends_with:_util\"]\n\n[articles]\ntitle = \"Tutorials\"\ndropdown = true\nget_started = \"articles/intro.qmd\"\n\n[theme]\nbootswatch = \"flatly\"\ndark_mode = true\ncode_highlight = \"github\"\n\n[footer]\nleft = \"Copyright 2024\"\nright = \"Built with QuartoDocBuilder.jl\"\nLoad and use it:\nusing QuartoDocBuilder\n\n# Load config from file\nconfig = load_config(\"_quartodoc.toml\")\n\n# Set the module (can't be in TOML)\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    # Other fields from loaded config are preserved\n    repo = config.repo,\n    reference = config.reference,\n    theme = config.theme,\n    # ...\n)\n\nquarto_build_site(config)",
+    "crumbs": [
+      "Get Started",
+      "Configuration & Customization"
+    ]
+  },
+  {
+    "objectID": "articles/configuration.html#articles-configuration",
+    "href": "articles/configuration.html#articles-configuration",
+    "title": "Configuration & Customization",
+    "section": "",
+    "text": "articles = ArticleConfig(\n    title = \"Tutorials\",           # Navbar text\n    desc = \"Learn how to use...\",  # Index page description\n    dir = \"articles\",              # Directory name\n    dropdown = true                # Show as dropdown in navbar\n)\n\n\nAdd a prominent “Get Started” link in the navbar:\nconfig = QuartoConfig(\n    # ...\n    get_started = \"articles/getting-started.qmd\"\n)",
+    "crumbs": [
+      "Get Started",
+      "Configuration & Customization"
+    ]
+  },
+  {
+    "objectID": "articles/configuration.html#giscus-comments",
+    "href": "articles/configuration.html#giscus-comments",
+    "title": "Configuration & Customization",
+    "section": "",
+    "text": "Enable reader comments using Giscus:\nconfig = QuartoConfig(\n    # ...\n    comments = true,\n    giscus_repo = \"user/repo\"  # Repository with Discussions enabled\n)\nRequirements:\n\nEnable GitHub Discussions on your repository\nInstall the Giscus app\nSet giscus_repo to your repository",
+    "crumbs": [
+      "Get Started",
+      "Configuration & Customization"
+    ]
+  },
+  {
+    "objectID": "articles/configuration.html#complete-example",
+    "href": "articles/configuration.html#complete-example",
+    "title": "Configuration & Customization",
+    "section": "",
+    "text": "Here’s a full configuration example:\nusing MyPackage\nusing QuartoDocBuilder\n\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"myuser/MyPackage.jl\",\n\n    reference = [\n        ReferenceGroup(\n            title = \"Data I/O\",\n            desc = \"Functions for reading and writing data\",\n            contents = [starts_with(\"read_\"), starts_with(\"write_\")]\n        ),\n        ReferenceGroup(\n            title = \"Processing\",\n            desc = \"Data processing functions\",\n            contents = [starts_with(\"process_\"), contains(\"transform\")]\n        ),\n        ReferenceGroup(\n            title = \"Utilities\",\n            contents = [ends_with(\"_util\"), ends_with(\"_helper\")]\n        )\n    ],\n\n    articles = ArticleConfig(\n        title = \"Guides\",\n        dropdown = true\n    ),\n    get_started = \"articles/quickstart.qmd\",\n\n    news = true,\n\n    theme = ThemeConfig(\n        bootswatch = \"cosmo\",\n        dark_mode = true,\n        code_highlight = \"monokai\"\n    ),\n\n    comments = true,\n    giscus_repo = \"myuser/MyPackage.jl\",\n\n    footer = FooterConfig(\n        left = \"MIT License\",\n        right = \"[Source Code](https://github.com/myuser/MyPackage.jl)\"\n    )\n)\n\nquarto_build_site(config)",
+    "crumbs": [
+      "Get Started",
+      "Configuration & Customization"
+    ]
+  },
+  {
+    "objectID": "articles/configuration.html#next-steps",
+    "href": "articles/configuration.html#next-steps",
+    "title": "Configuration & Customization",
+    "section": "",
+    "text": "Advanced Features: Learn about articles, news pages, GitHub Actions, and more\nReference: Full API documentation",
+    "crumbs": [
+      "Get Started",
+      "Configuration & Customization"
+    ]
+  },
+  {
+    "objectID": "news.html",
+    "href": "news.html",
+    "title": "Changelog",
+    "section": "",
+    "text": "Only uses Julia stdlib packages (Markdown, TOML)\nNo external dependencies required\nMinimum Julia version: 1.6\n\n\n\n\n\nInitial release with pkgdown-like functionality for Julia packages\nConfiguration system with type-safe QuartoConfig struct\nReference page grouping with pkgdown-style selectors (starts_with, ends_with, matches, contains)\nArticles/vignettes system with auto-discovery and navbar dropdowns\nNEWS.md parsing and changelog page generation with GitHub issue linking\nLight/dark mode toggle with automatic theme pairing (flatly/darkly, cosmo/cyborg, etc.)\nAuto-linking of function references in documentation\nGitHub Actions workflow generation for automated deployment\nGiscus comments integration for reader feedback\nCustom theming support (colors, fonts, CSS/SCSS)\nTOML configuration file support (_quartodoc.toml)"
+  },
+  {
+    "objectID": "news.html#version-0.1.0-2026-01-24",
+    "href": "news.html#version-0.1.0-2026-01-24",
+    "title": "Changelog",
+    "section": "",
+    "text": "Only uses Julia stdlib packages (Markdown, TOML)\nNo external dependencies required\nMinimum Julia version: 1.6\n\n\n\n\n\nInitial release with pkgdown-like functionality for Julia packages\nConfiguration system with type-safe QuartoConfig struct\nReference page grouping with pkgdown-style selectors (starts_with, ends_with, matches, contains)\nArticles/vignettes system with auto-discovery and navbar dropdowns\nNEWS.md parsing and changelog page generation with GitHub issue linking\nLight/dark mode toggle with automatic theme pairing (flatly/darkly, cosmo/cyborg, etc.)\nAuto-linking of function references in documentation\nGitHub Actions workflow generation for automated deployment\nGiscus comments integration for reader feedback\nCustom theming support (colors, fonts, CSS/SCSS)\nTOML configuration file support (_quartodoc.toml)"
   },
   {
     "objectID": "tutorials/tutorial-02.html",
@@ -157,71 +1394,6 @@
     "crumbs": [
       "Tutorials",
       "Adding content"
-    ]
-  },
-  {
-    "objectID": "reference.html",
-    "href": "reference.html",
-    "title": "Reference",
-    "section": "",
-    "text": "Reference\nquarto_format(m::Markdown.Code, eval = false)\n\nFormat a block of markdown code to Quarto.\n\n\nquarto_format(m)\n\nReturn a plain text from m.\n\n\nquarto_format(m::Markdown.Paragraph)\n\nReturn a plain text of m and a line break.\n\n\nquarto_format(m::AbstractString)\n\nReturns m.\n\n\nquarto_format(m::Markdown.Header{1})\n\nTake a level 1 header and write it as a level 3 header.\n\n\nquarto_format(md::Markdown.MD)\n\nGiven a markdown block, apply quarto_format to each of its elements and concatenate the resulting string.\n\n\nquarto_format(md::Markdown.Admonition)\n\nFormat a Markdown.Admonition into a callout block in Quarto.\n\n\nquarto_yaml( module_name ;output_dir = “site” ,freeze = “auto” ,cache = “true” ,warning = “false” ,comments = “true” ,repo = “USERNAME/REPOSITORY” ,theme = “flatly” )\n\nGenerate the _quarto.yaml file.\n\n\nquarto_doc(s::Symbol)\n\nCreate the documentation of a symbol (function, object, etc) s.\n\n\nquarto_doc_page(s; dir = “docs/reference”)\n\nGiven a symbol s, write its .qmd doc into the folder dir.\n\n\nquarto_doc_short(s::Symbol)\n\nCreate a short description of the object. Used to build the Reference page.\n\n\nquarto_build_site(module_name; kwargs…)\n\nCreate all the files necessary to build the Quarto website for the first time.\n\n\nquarto_styles()\n\nCreate the docs/styles.css file with some suggested css classes.\n\n\nquarto_callout_block(s)\n\nCreate a callout block with the string s.\n\n\nquarto_index()\n\nGenerate the index.qmd file. It is just a copy of the README.md file.\n\n\nquarto_build_refpage(module_name; output = “docs/reference.qmd”)\n\nBuild the docs/reference.qmd file with a short description of each object.",
-    "crumbs": [
-      "Reference"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_format.html",
-    "href": "reference/quarto_format.html",
-    "title": "quarto_format",
-    "section": "",
-    "text": "quarto_format\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::Markdown.Code, eval = false)\n\nFormat a block of markdown code to Quarto.\n\nArguments\n\nm::Markdown: a block of Markdown.Code.\neval: if false, then the resulting block is not going to be evaluated.\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m)\n\nReturn a plain text from m.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::Markdown.Paragraph)\n\nReturn a plain text of m and a line break.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::AbstractString)\n\nReturns m.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(m::Markdown.Header{1})\n\nTake a level 1 header and write it as a level 3 header.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(md::Markdown.MD)\n\nGiven a markdown block, apply quarto_format to each of its elements and concatenate the resulting string.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_format(md::Markdown.Admonition)\n\nFormat a Markdown.Admonition into a callout block in Quarto.",
-    "crumbs": [
-      "Reference",
-      "quarto_format"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_build_refpage.html",
-    "href": "reference/quarto_build_refpage.html",
-    "title": "quarto_build_refpage",
-    "section": "",
-    "text": "quarto_build_refpage\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_build_refpage(module_name; output = \"docs/reference.qmd\")\n\nBuild the docs/reference.qmd file with a short description of each object.\n\nArguments\n\nmodule_name: the module name.\noutput: the output file. By default, it is “docs/reference.qmd”.",
-    "crumbs": [
-      "Reference",
-      "quarto_build_refpage"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_doc_short.html",
-    "href": "reference/quarto_doc_short.html",
-    "title": "quarto_doc_short",
-    "section": "",
-    "text": "quarto_doc_short\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_doc_short(s::Symbol)\n\nCreate a short description of the object. Used to build the Reference page.",
-    "crumbs": [
-      "Reference",
-      "quarto_doc_short"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_doc_page.html",
-    "href": "reference/quarto_doc_page.html",
-    "title": "quarto_doc_page",
-    "section": "",
-    "text": "quarto_doc_page\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_doc_page(s; dir = \"docs/reference\")\n\nGiven a symbol s, write its .qmd doc into the folder dir.",
-    "crumbs": [
-      "Reference",
-      "quarto_doc_page"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_doc.html",
-    "href": "reference/quarto_doc.html",
-    "title": "quarto_doc",
-    "section": "",
-    "text": "quarto_doc\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n\nquarto_doc(s::Symbol)\n\nCreate the documentation of a symbol (function, object, etc) s.",
-    "crumbs": [
-      "Reference",
-      "quarto_doc"
     ]
   }
 ]

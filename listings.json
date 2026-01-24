@@ -1,0 +1,10 @@
+[
+  {
+    "listing": "/articles.html",
+    "items": [
+      "/articles/getting-started.html",
+      "/articles/configuration.html",
+      "/articles/advanced.html"
+    ]
+  }
+]
