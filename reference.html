@@ -379,18 +379,6 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/build_articles_navbar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">build_articles_navbar</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/build_articles_yaml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">build_articles_yaml</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./reference/build_reference_index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">build_reference_index</span></a>
   </div>
@@ -405,12 +393,6 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./reference/create_article_template.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">create_article_template</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/create_articles_directory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">create_articles_directory</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -619,18 +601,6 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/quarto_articles_index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_articles_index</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/quarto_articles_index_manual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_articles_index_manual</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./reference/quarto_build_refpage.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_build_refpage</span></a>
   </div>
@@ -733,20 +703,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/quarto_styles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_styles</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./reference/quarto_styles_from_config.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_styles_from_config</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./reference/quarto_yaml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_yaml</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -1008,25 +966,21 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="odd">
 <td><a href="./reference/quarto_build_site.html"><code>quarto_build_site</code></a></td>
-<td>quarto_build_site(module_name; kwargs…)</td>
+<td>quarto_build_site(config::QuartoConfig)</td>
 </tr>
 <tr class="even">
 <td><a href="./reference/quarto_index.html"><code>quarto_index</code></a></td>
-<td>quarto_index()</td>
+<td>quarto_index(; title::String=““)</td>
 </tr>
 <tr class="odd">
 <td><a href="./reference/quarto_rebuild_all.html"><code>quarto_rebuild_all</code></a></td>
-<td>quarto_rebuild_all(module_name::Module; kwargs…)</td>
+<td>quarto_rebuild_all(config::QuartoConfig)</td>
 </tr>
 <tr class="even">
 <td><a href="./reference/quarto_rebuild_reference.html"><code>quarto_rebuild_reference</code></a></td>
 <td>quarto_rebuild_reference(module_name::Module)</td>
 </tr>
 <tr class="odd">
-<td><a href="./reference/quarto_yaml.html"><code>quarto_yaml</code></a></td>
-<td>quarto_yaml(</td>
-</tr>
-<tr class="even">
 <td><a href="./reference/quarto_yaml_from_config.html"><code>quarto_yaml_from_config</code></a></td>
 <td>quarto_yaml_from_config(config::QuartoConfig; force::Bool=false)</td>
 </tr>
@@ -1091,70 +1045,50 @@ ul.task-list li input[type="checkbox"] {
 <td>NewsVersion</td>
 </tr>
 <tr class="odd">
-<td><a href="./reference/build_articles_navbar.html"><code>build_articles_navbar</code></a></td>
-<td>build_articles_navbar(config::QuartoConfig) -&gt; Dict</td>
-</tr>
-<tr class="even">
-<td><a href="./reference/build_articles_yaml.html"><code>build_articles_yaml</code></a></td>
-<td>build_articles_yaml(config::QuartoConfig) -&gt; String</td>
-</tr>
-<tr class="odd">
 <td><a href="./reference/create_article_template.html"><code>create_article_template</code></a></td>
 <td>create_article_template(filepath::String; title::String=““, order::Int=999)</td>
 </tr>
 <tr class="even">
-<td><a href="./reference/create_articles_directory.html"><code>create_articles_directory</code></a></td>
-<td>create_articles_directory(config::QuartoConfig)</td>
-</tr>
-<tr class="odd">
 <td><a href="./reference/create_news_template.html"><code>create_news_template</code></a></td>
 <td>create_news_template(path::String=“NEWS.md”; package_name::String=“Package”)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="./reference/detect_get_started.html"><code>detect_get_started</code></a></td>
 <td>detect_get_started(module_name::Module; dir::String=“docs/articles”) -&gt; Union{String, Nothing}</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="./reference/discover_articles.html"><code>discover_articles</code></a></td>
 <td>discover_articles(dir::String=“docs/articles”) -&gt; Vector{String}</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="./reference/discover_articles_recursive.html"><code>discover_articles_recursive</code></a></td>
 <td>discover_articles_recursive(dir::String=“docs/articles”) -&gt; Vector{String}</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="./reference/get_article_info.html"><code>get_article_info</code></a></td>
 <td>get_article_info(filepath::String) -&gt; ArticleInfo</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="./reference/get_article_title.html"><code>get_article_title</code></a></td>
 <td>get_article_title(filepath::String) -&gt; String</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="./reference/has_news.html"><code>has_news</code></a></td>
 <td>has_news(config::QuartoConfig) -&gt; Bool</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="./reference/linkify_github_refs.html"><code>linkify_github_refs</code></a></td>
 <td>linkify_github_refs(text::String, repo::String) -&gt; String</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="./reference/news_summary.html"><code>news_summary</code></a></td>
 <td>news_summary(config::QuartoConfig) -&gt; String</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="./reference/parse_news.html"><code>parse_news</code></a></td>
 <td>parse_news(path::String=“NEWS.md”) -&gt; Vector{NewsVersion}</td>
 </tr>
-<tr class="odd">
-<td><a href="./reference/quarto_articles_index.html"><code>quarto_articles_index</code></a></td>
-<td>quarto_articles_index(config::QuartoConfig; output::String=“docs/articles.qmd”)</td>
-</tr>
 <tr class="even">
-<td><a href="./reference/quarto_articles_index_manual.html"><code>quarto_articles_index_manual</code></a></td>
-<td>quarto_articles_index_manual(config::QuartoConfig; output::String=“docs/articles.qmd”)</td>
-</tr>
-<tr class="odd">
 <td><a href="./reference/quarto_news_page.html"><code>quarto_news_page</code></a></td>
 <td>quarto_news_page(config::QuartoConfig; output::String=“docs/news.qmd”)</td>
 </tr>
@@ -1215,10 +1149,6 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./reference/quarto_styles.html"><code>quarto_styles</code></a></td>
-<td>quarto_styles()</td>
-</tr>
-<tr class="even">
 <td><a href="./reference/quarto_styles_from_config.html"><code>quarto_styles_from_config</code></a></td>
 <td>quarto_styles_from_config(config::QuartoConfig)</td>
 </tr>

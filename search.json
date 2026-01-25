@@ -91,14 +91,14 @@
     "href": "news.html",
     "title": "Changelog",
     "section": "",
-    "text": "Only uses Julia stdlib packages (Markdown, TOML)\nNo external dependencies required\nMinimum Julia version: 1.6\n\n\n\n\n\nInitial release with pkgdown-like functionality for Julia packages\nConfiguration system with type-safe QuartoConfig struct\nReference page grouping with pkgdown-style selectors (starts_with, ends_with, matches, contains)\nArticles/vignettes system with auto-discovery and navbar dropdowns\nNEWS.md parsing and changelog page generation with GitHub issue linking\nLight/dark mode toggle with automatic theme pairing (flatly/darkly, cosmo/cyborg, etc.)\nAuto-linking of function references in documentation\nGitHub Actions workflow generation for automated deployment\nGiscus comments integration for reader feedback\nCustom theming support (colors, fonts, CSS/SCSS)\nTOML configuration file support (_quartodoc.toml)"
+    "text": "Removed deprecated kwarg-based API functions (quarto_yaml, quarto_build_site(module; kwargs...))\nRemoved broken article functions that referenced non-existent config.articles field:\n\n\n\n\n\nFixed code block formatting in docstrings showing raw {julia} markers (#fix)\nFixed browser tab title showing “index” instead of package name on home page\n\n\n\n\n\nquarto_index() now adds proper YAML front matter with the package name as title\nCleaner config-based API is now the only supported approach\nUpdated module docstring with config-based examples\n\n\n\n\n\nOptional default styles: Default QuartoDocBuilder CSS is now only applied when no bootswatch theme is specified\nNew use_default_styles field in ThemeConfig for explicit control over default CSS\nDefault styles are bundled in src/default_styles.css and automatically applied when:\n\n\n\n\n\n\n\n\nVersion 0.1.0 (2026-01-24)\n\n\n\n\n\n\n\n\nOnly uses Julia stdlib packages (Markdown, TOML)\nNo external dependencies required\nMinimum Julia version: 1.6\n\n\n\n\n\nInitial release with pkgdown-like functionality for Julia packages\nConfiguration system with type-safe QuartoConfig struct\nReference page grouping with pkgdown-style selectors (starts_with, ends_with, matches, contains)\nArticles/vignettes system with auto-discovery and navbar dropdowns\nNEWS.md parsing and changelog page generation with GitHub issue linking\nLight/dark mode toggle with automatic theme pairing (flatly/darkly, cosmo/cyborg, etc.)\nAuto-linking of function references in documentation\nGitHub Actions workflow generation for automated deployment\nGiscus comments integration for reader feedback\nCustom theming support (colors, fonts, CSS/SCSS)\nTOML configuration file support (_quartodoc.toml)"
   },
   {
-    "objectID": "news.html#version-0.1.0-2026-01-24",
-    "href": "news.html#version-0.1.0-2026-01-24",
+    "objectID": "news.html#version-0.2.0-2026-01-25",
+    "href": "news.html#version-0.2.0-2026-01-25",
     "title": "Changelog",
     "section": "",
-    "text": "Only uses Julia stdlib packages (Markdown, TOML)\nNo external dependencies required\nMinimum Julia version: 1.6\n\n\n\n\n\nInitial release with pkgdown-like functionality for Julia packages\nConfiguration system with type-safe QuartoConfig struct\nReference page grouping with pkgdown-style selectors (starts_with, ends_with, matches, contains)\nArticles/vignettes system with auto-discovery and navbar dropdowns\nNEWS.md parsing and changelog page generation with GitHub issue linking\nLight/dark mode toggle with automatic theme pairing (flatly/darkly, cosmo/cyborg, etc.)\nAuto-linking of function references in documentation\nGitHub Actions workflow generation for automated deployment\nGiscus comments integration for reader feedback\nCustom theming support (colors, fonts, CSS/SCSS)\nTOML configuration file support (_quartodoc.toml)"
+    "text": "Removed deprecated kwarg-based API functions (quarto_yaml, quarto_build_site(module; kwargs...))\nRemoved broken article functions that referenced non-existent config.articles field:\n\n\n\n\n\nFixed code block formatting in docstrings showing raw {julia} markers (#fix)\nFixed browser tab title showing “index” instead of package name on home page\n\n\n\n\n\nquarto_index() now adds proper YAML front matter with the package name as title\nCleaner config-based API is now the only supported approach\nUpdated module docstring with config-based examples\n\n\n\n\n\nOptional default styles: Default QuartoDocBuilder CSS is now only applied when no bootswatch theme is specified\nNew use_default_styles field in ThemeConfig for explicit control over default CSS\nDefault styles are bundled in src/default_styles.css and automatically applied when:\n\n\n\n\n\n\n\n\nVersion 0.1.0 (2026-01-24)\n\n\n\n\n\n\n\n\nOnly uses Julia stdlib packages (Markdown, TOML)\nNo external dependencies required\nMinimum Julia version: 1.6\n\n\n\n\n\nInitial release with pkgdown-like functionality for Julia packages\nConfiguration system with type-safe QuartoConfig struct\nReference page grouping with pkgdown-style selectors (starts_with, ends_with, matches, contains)\nArticles/vignettes system with auto-discovery and navbar dropdowns\nNEWS.md parsing and changelog page generation with GitHub issue linking\nLight/dark mode toggle with automatic theme pairing (flatly/darkly, cosmo/cyborg, etc.)\nAuto-linking of function references in documentation\nGitHub Actions workflow generation for automated deployment\nGiscus comments integration for reader feedback\nCustom theming support (colors, fonts, CSS/SCSS)\nTOML configuration file support (_quartodoc.toml)"
   },
   {
     "objectID": "explanation/architecture.html",
@@ -185,7 +185,7 @@
     "href": "reference.html#sec-site-building",
     "title": "Reference",
     "section": "Site Building",
-    "text": "Site Building\nCore functions for generating documentation sites.\n\n\n\nFunction\nDescription\n\n\n\n\nquarto_build_refpage\nquarto_build_refpage(module_name; output = “docs/reference.qmd”)\n\n\nquarto_build_refpage_grouped\nquarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String=“docs/refe…\n\n\nquarto_build_site\nquarto_build_site(module_name; kwargs…)\n\n\nquarto_index\nquarto_index()\n\n\nquarto_rebuild_all\nquarto_rebuild_all(module_name::Module; kwargs…)\n\n\nquarto_rebuild_reference\nquarto_rebuild_reference(module_name::Module)\n\n\nquarto_yaml\nquarto_yaml(\n\n\nquarto_yaml_from_config\nquarto_yaml_from_config(config::QuartoConfig; force::Bool=false)",
+    "text": "Site Building\nCore functions for generating documentation sites.\n\n\n\nFunction\nDescription\n\n\n\n\nquarto_build_refpage\nquarto_build_refpage(module_name; output = “docs/reference.qmd”)\n\n\nquarto_build_refpage_grouped\nquarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String=“docs/refe…\n\n\nquarto_build_site\nquarto_build_site(config::QuartoConfig)\n\n\nquarto_index\nquarto_index(; title::String=““)\n\n\nquarto_rebuild_all\nquarto_rebuild_all(config::QuartoConfig)\n\n\nquarto_rebuild_reference\nquarto_rebuild_reference(module_name::Module)\n\n\nquarto_yaml_from_config\nquarto_yaml_from_config(config::QuartoConfig; force::Bool=false)",
     "crumbs": [
       "Reference"
     ]
@@ -205,7 +205,7 @@
     "href": "reference.html#articles-news-sec-articles--news",
     "title": "Reference",
     "section": "Articles & News {#sec-articles-&-news}",
-    "text": "Articles & News {#sec-articles-&-news}\nArticle discovery and changelog generation.\n\n\n\nFunction\nDescription\n\n\n\n\nArticleInfo\nArticleInfo\n\n\nNewsVersion\nNewsVersion\n\n\nbuild_articles_navbar\nbuild_articles_navbar(config::QuartoConfig) -&gt; Dict\n\n\nbuild_articles_yaml\nbuild_articles_yaml(config::QuartoConfig) -&gt; String\n\n\ncreate_article_template\ncreate_article_template(filepath::String; title::String=““, order::Int=999)\n\n\ncreate_articles_directory\ncreate_articles_directory(config::QuartoConfig)\n\n\ncreate_news_template\ncreate_news_template(path::String=“NEWS.md”; package_name::String=“Package”)\n\n\ndetect_get_started\ndetect_get_started(module_name::Module; dir::String=“docs/articles”) -&gt; Union{String, Nothing}\n\n\ndiscover_articles\ndiscover_articles(dir::String=“docs/articles”) -&gt; Vector{String}\n\n\ndiscover_articles_recursive\ndiscover_articles_recursive(dir::String=“docs/articles”) -&gt; Vector{String}\n\n\nget_article_info\nget_article_info(filepath::String) -&gt; ArticleInfo\n\n\nget_article_title\nget_article_title(filepath::String) -&gt; String\n\n\nhas_news\nhas_news(config::QuartoConfig) -&gt; Bool\n\n\nlinkify_github_refs\nlinkify_github_refs(text::String, repo::String) -&gt; String\n\n\nnews_summary\nnews_summary(config::QuartoConfig) -&gt; String\n\n\nparse_news\nparse_news(path::String=“NEWS.md”) -&gt; Vector{NewsVersion}\n\n\nquarto_articles_index\nquarto_articles_index(config::QuartoConfig; output::String=“docs/articles.qmd”)\n\n\nquarto_articles_index_manual\nquarto_articles_index_manual(config::QuartoConfig; output::String=“docs/articles.qmd”)\n\n\nquarto_news_page\nquarto_news_page(config::QuartoConfig; output::String=“docs/news.qmd”)",
+    "text": "Articles & News {#sec-articles-&-news}\nArticle discovery and changelog generation.\n\n\n\nFunction\nDescription\n\n\n\n\nArticleInfo\nArticleInfo\n\n\nNewsVersion\nNewsVersion\n\n\ncreate_article_template\ncreate_article_template(filepath::String; title::String=““, order::Int=999)\n\n\ncreate_news_template\ncreate_news_template(path::String=“NEWS.md”; package_name::String=“Package”)\n\n\ndetect_get_started\ndetect_get_started(module_name::Module; dir::String=“docs/articles”) -&gt; Union{String, Nothing}\n\n\ndiscover_articles\ndiscover_articles(dir::String=“docs/articles”) -&gt; Vector{String}\n\n\ndiscover_articles_recursive\ndiscover_articles_recursive(dir::String=“docs/articles”) -&gt; Vector{String}\n\n\nget_article_info\nget_article_info(filepath::String) -&gt; ArticleInfo\n\n\nget_article_title\nget_article_title(filepath::String) -&gt; String\n\n\nhas_news\nhas_news(config::QuartoConfig) -&gt; Bool\n\n\nlinkify_github_refs\nlinkify_github_refs(text::String, repo::String) -&gt; String\n\n\nnews_summary\nnews_summary(config::QuartoConfig) -&gt; String\n\n\nparse_news\nparse_news(path::String=“NEWS.md”) -&gt; Vector{NewsVersion}\n\n\nquarto_news_page\nquarto_news_page(config::QuartoConfig; output::String=“docs/news.qmd”)",
     "crumbs": [
       "Reference"
     ]
@@ -225,7 +225,7 @@
     "href": "reference.html#styles-themes-sec-styles--themes",
     "title": "Reference",
     "section": "Styles & Themes {#sec-styles-&-themes}",
-    "text": "Styles & Themes {#sec-styles-&-themes}\nCSS generation and theme customization.\n\n\n\nFunction\nDescription\n\n\n\n\nquarto_styles\nquarto_styles()\n\n\nquarto_styles_from_config\nquarto_styles_from_config(config::QuartoConfig)",
+    "text": "Styles & Themes {#sec-styles-&-themes}\nCSS generation and theme customization.\n\n\n\nFunction\nDescription\n\n\n\n\nquarto_styles_from_config\nquarto_styles_from_config(config::QuartoConfig)",
     "crumbs": [
       "Reference"
     ]
@@ -488,7 +488,7 @@
     "href": "reference/quarto_build_refpage.html",
     "title": "quarto_build_refpage",
     "section": "",
-    "text": "quarto_build_refpage\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_build_refpage(module_name; output = \"docs/reference.qmd\")\n```\nBuild the docs/reference.qmd file with a short description of each object.\n\nArguments\n\nmodule_name: the module name.\noutput: the output file. By default, it is “docs/reference.qmd”.",
+    "text": "quarto_build_refpage\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_build_refpage(module_name; output = \"docs/reference.qmd\")\nBuild the docs/reference.qmd file with a short description of each object.\n\nArguments\n\nmodule_name: the module name.\noutput: the output file. By default, it is “docs/reference.qmd”.",
     "crumbs": [
       "Reference",
       "quarto_build_refpage"
@@ -499,7 +499,7 @@
     "href": "reference/autolink_references.html",
     "title": "autolink_references",
     "section": "",
-    "text": "autolink_references\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nautolink_references(text::String, index::ReferenceIndex) -&gt; String\n```\nConvert function references in backticks to hyperlinks.\nPatterns matched:\n\n\\(`function_name()`\\) -&gt; [function_name()](reference/function_name.qmd)\n\\(`function_name`\\) -&gt; [function_name](reference/function_name.qmd) (if in index)\n\n\nArguments\n\ntext::String: Text containing references\nindex::ReferenceIndex: Reference index for lookups\n\n\n\nReturns\nText with references converted to markdown links.\n\n\nExample\n```{julia}\n\nindex = build_reference_index(MyModule)\ntext = \"Use `my_function()` to process data.\"\nautolink_references(text, index)\n# \"Use [`my_function()`](reference/my_function.qmd) to process data.\"\n```\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nautolink_references(text::String, module_name::Module) -&gt; String\n```\nConvenience method that builds the index automatically.\n\nArguments\n\ntext::String: Text containing references\nmodule_name::Module: Module to use for reference lookups",
+    "text": "autolink_references\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nautolink_references(text::String, index::ReferenceIndex) -&gt; String\nConvert function references in backticks to hyperlinks.\nPatterns matched:\n\n\\(`function_name()`\\) -&gt; [function_name()](reference/function_name.qmd)\n\\(`function_name`\\) -&gt; [function_name](reference/function_name.qmd) (if in index)\n\n\nArguments\n\ntext::String: Text containing references\nindex::ReferenceIndex: Reference index for lookups\n\n\n\nReturns\nText with references converted to markdown links.\n\n\nExample\nindex = build_reference_index(MyModule)\ntext = \"Use `my_function()` to process data.\"\nautolink_references(text, index)\n# \"Use [`my_function()`](reference/my_function.qmd) to process data.\"\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nautolink_references(text::String, module_name::Module) -&gt; String\nConvenience method that builds the index automatically.\n\nArguments\n\ntext::String: Text containing references\nmodule_name::Module: Module to use for reference lookups",
     "crumbs": [
       "Reference",
       "autolink_references"
@@ -510,7 +510,7 @@
     "href": "reference/quarto_news_page.html",
     "title": "quarto_news_page",
     "section": "",
-    "text": "quarto_news_page\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_news_page(config::QuartoConfig; output::String=\"docs/news.qmd\")\n```\nGenerate a formatted changelog page from NEWS.md.\nFeatures:\n\nMost recent version expanded, older versions collapsed\nGitHub issue/PR links automatically created\nCategories organized as subsections\n\n\nArguments\n\nconfig::QuartoConfig: Configuration with news settings\noutput::String: Output file path\n\n\n\nExample\n```{julia}\n\nquarto_news_page(config)\n# Creates docs/news.qmd with formatted changelog\n```",
+    "text": "quarto_news_page\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_news_page(config::QuartoConfig; output::String=\"docs/news.qmd\")\nGenerate a formatted changelog page from NEWS.md.\nFeatures:\n\nMost recent version expanded, older versions collapsed\nGitHub issue/PR links automatically created\nCategories organized as subsections\n\n\nArguments\n\nconfig::QuartoConfig: Configuration with news settings\noutput::String: Output file path\n\n\n\nExample\nquarto_news_page(config)\n# Creates docs/news.qmd with formatted changelog",
     "crumbs": [
       "Reference",
       "quarto_news_page"
@@ -521,7 +521,7 @@
     "href": "reference/quarto_doc_short.html",
     "title": "quarto_doc_short",
     "section": "",
-    "text": "quarto_doc_short\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_doc_short(s::Symbol)\n```\nCreate a short description of the object. Used to build the Reference page.",
+    "text": "quarto_doc_short\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_doc_short(s::Symbol)\nCreate a short description of the object. Used to build the Reference page.",
     "crumbs": [
       "Reference",
       "quarto_doc_short"
@@ -532,32 +532,21 @@
     "href": "reference/get_article_order.html",
     "title": "get_article_order",
     "section": "",
-    "text": "get_article_order\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nget_article_order(filepath::String) -&gt; Int\n```\nExtract the order from an article’s YAML frontmatter. Returns 999 as default if not specified.",
+    "text": "get_article_order\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nget_article_order(filepath::String) -&gt; Int\nExtract the order from an article’s YAML frontmatter. Returns 999 as default if not specified.",
     "crumbs": [
       "Reference",
       "get_article_order"
     ]
   },
   {
-    "objectID": "reference/build_articles_navbar.html",
-    "href": "reference/build_articles_navbar.html",
-    "title": "build_articles_navbar",
+    "objectID": "reference/filter_objects.html",
+    "href": "reference/filter_objects.html",
+    "title": "filter_objects",
     "section": "",
-    "text": "build_articles_navbar\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nbuild_articles_navbar(config::QuartoConfig) -&gt; Dict\n```\nGenerate navbar structure for articles with dropdown support. Returns a Dict suitable for inclusion in _quarto.yml.\n\nArguments\n\nconfig::QuartoConfig: Configuration\n\n\n\nReturns\nDict with navbar structure for articles.",
+    "text": "filter_objects\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nfilter_objects(module_name::Module, selectors::Vector) -&gt; Vector{Symbol}\nFilter module objects using a list of selectors. Applies selectors in order and returns unique matches.\n\nArguments\n\nmodule_name::Module: Module to get symbols from\nselectors::Vector: List of selectors (Symbols, Functions, or Strings)\n\n\n\nExample\n# Get all functions starting with \"process_\" or ending with \"_util\"\nsymbols = filter_objects(MyModule, [starts_with(\"process_\"), ends_with(\"_util\")])",
     "crumbs": [
       "Reference",
-      "build_articles_navbar"
-    ]
-  },
-  {
-    "objectID": "reference/apply_selector.html",
-    "href": "reference/apply_selector.html",
-    "title": "apply_selector",
-    "section": "",
-    "text": "apply_selector\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\napply_selector(selector, symbols::Vector{Symbol}) -&gt; Vector{Symbol}\n```\nApply a selector to filter a vector of symbols.\n\nArguments\n\nselector: A Symbol, Function, or String\nsymbols::Vector{Symbol}: Symbols to filter\n\n\n\nReturns\nVector of symbols that match the selector.",
-    "crumbs": [
-      "Reference",
-      "apply_selector"
+      "filter_objects"
     ]
   },
   {
@@ -576,7 +565,7 @@
     "href": "reference/format_news_item.html",
     "title": "format_news_item",
     "section": "",
-    "text": "format_news_item\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nformat_news_item(item::String, repo::String) -&gt; String\n```\nFormat a single news item with GitHub links and proper escaping.",
+    "text": "format_news_item\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nformat_news_item(item::String, repo::String) -&gt; String\nFormat a single news item with GitHub links and proper escaping.",
     "crumbs": [
       "Reference",
       "format_news_item"
@@ -587,7 +576,7 @@
     "href": "reference/quarto_format.html",
     "title": "quarto_format",
     "section": "",
-    "text": "quarto_format\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_format(m::Markdown.Code, eval = false)\n```\nFormat a block of markdown code to Quarto.\n\nArguments\n\nm::Markdown: a block of Markdown.Code.\neval: if false, then the resulting block is not going to be evaluated.\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_format(m)\n```\nReturn a plain text from m.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_format(m::Markdown.Paragraph)\n```\nReturn a plain text of m and a line break.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_format(m::AbstractString)\n```\nReturns m.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_format(m::Markdown.Header{1})\n```\nTake a level 1 header and write it as a level 3 header.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_format(md::Markdown.MD)\n```\nGiven a markdown block, apply quarto_format to each of its elements and concatenate the resulting string.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_format(md::Markdown.Admonition)\n```\nFormat a Markdown.Admonition into a callout block in Quarto.",
+    "text": "quarto_format\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_format(m::Markdown.Code, eval = false)\nFormat a block of markdown code to Quarto.\n\nArguments\n\nm::Markdown: a block of Markdown.Code.\neval: if false, then the resulting block is not going to be evaluated.\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_format(m)\nReturn a plain text from m.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_format(m::Markdown.Paragraph)\nReturn a plain text of m and a line break.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_format(m::AbstractString)\nReturns m.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_format(m::Markdown.Header{1})\nTake a level 1 header and write it as a level 3 header.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_format(md::Markdown.MD)\nGiven a markdown block, apply quarto_format to each of its elements and concatenate the resulting string.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_format(md::Markdown.Admonition)\nFormat a Markdown.Admonition into a callout block in Quarto.",
     "crumbs": [
       "Reference",
       "quarto_format"
@@ -598,54 +587,43 @@
     "href": "reference/quarto_doc.html",
     "title": "quarto_doc",
     "section": "",
-    "text": "quarto_doc\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_doc(s::Symbol)\n```\nCreate the documentation of a symbol (function, object, etc) s.",
+    "text": "quarto_doc\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_doc(s::Symbol)\nCreate the documentation of a symbol (function, object, etc) s.",
     "crumbs": [
       "Reference",
       "quarto_doc"
     ]
   },
   {
-    "objectID": "reference/FooterConfig.html",
-    "href": "reference/FooterConfig.html",
-    "title": "FooterConfig",
+    "objectID": "reference/starts_with.html",
+    "href": "reference/starts_with.html",
+    "title": "starts_with",
     "section": "",
-    "text": "FooterConfig\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nConfiguration for page footer.\n\nFields\n\nleft::String: Left section content (markdown supported)\ncenter::String: Center section content\nright::String: Right section content",
+    "text": "starts_with\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nstarts_with(prefix::String) -&gt; Function\nCreate a selector that matches symbols starting with prefix.\n\nExample\n# Match functions like `process_data`, `process_file`\nselector = starts_with(\"process_\")\nselector(:process_data)  # true\nselector(:other_func)    # false",
     "crumbs": [
       "Reference",
-      "FooterConfig"
+      "starts_with"
     ]
   },
   {
-    "objectID": "reference/parse_content_selector.html",
-    "href": "reference/parse_content_selector.html",
-    "title": "parse_content_selector",
+    "objectID": "reference/auto_group_objects.html",
+    "href": "reference/auto_group_objects.html",
+    "title": "auto_group_objects",
     "section": "",
-    "text": "parse_content_selector\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nparse_content_selector(s::String) -&gt; Union{Symbol, Function}\n```\nParse a content selector string into a selector function or symbol.\nSupported formats:\n\n\"function_name\" -&gt; Symbol(:function_name)\n\"starts_with:prefix\" -&gt; starts_with(“prefix”)\n\"ends_with:suffix\" -&gt; ends_with(“suffix”)\n\"matches:pattern\" -&gt; matches(“pattern”)\n\"contains:substring\" -&gt; contains(“substring”)\n\n\nExample\n```{julia}\n\nsel = parse_content_selector(\"starts_with:process_\")\nsel(:process_data)  # true\n\nsym = parse_content_selector(\"my_function\")\nsym  # :my_function\n```",
+    "text": "auto_group_objects\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nauto_group_objects(module_name::Module) -&gt; Vector{Tuple{ReferenceGroup, Vector{Symbol}}}\nAutomatically group objects by type (functions, types, constants). Used as fallback when no custom grouping is specified.\n\nArguments\n\nmodule_name::Module: Module to analyze",
     "crumbs": [
       "Reference",
-      "parse_content_selector"
+      "auto_group_objects"
     ]
   },
   {
-    "objectID": "reference/quarto_index.html",
-    "href": "reference/quarto_index.html",
-    "title": "quarto_index",
+    "objectID": "reference/get_article_info.html",
+    "href": "reference/get_article_info.html",
+    "title": "get_article_info",
     "section": "",
-    "text": "quarto_index\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_index()\n```\nGenerate the index.qmd file. It is just a copy of the README.md file.",
+    "text": "get_article_info\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nget_article_info(filepath::String) -&gt; ArticleInfo\nExtract metadata from an article file.\n\nArguments\n\nfilepath::String: Path to the .qmd file",
     "crumbs": [
       "Reference",
-      "quarto_index"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_articles_index_manual.html",
-    "href": "reference/quarto_articles_index_manual.html",
-    "title": "quarto_articles_index_manual",
-    "section": "",
-    "text": "quarto_articles_index_manual\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_articles_index_manual(config::QuartoConfig; output::String=\"docs/articles.qmd\")\n```\nGenerate an articles index page with manual listing (no Quarto listing feature). Useful when you want more control over the layout.\n\nArguments\n\nconfig::QuartoConfig: Configuration\noutput::String: Output file path",
-    "crumbs": [
-      "Reference",
-      "quarto_articles_index_manual"
+      "get_article_info"
     ]
   },
   {
@@ -653,7 +631,7 @@
     "href": "reference/quarto_doc_page.html",
     "title": "quarto_doc_page",
     "section": "",
-    "text": "quarto_doc_page\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_doc_page(s; dir = \"docs/reference\")\n```\nGiven a symbol or binding s, write its .qmd doc into the folder dir.",
+    "text": "quarto_doc_page\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_doc_page(s; dir = \"docs/reference\")\nGiven a symbol or binding s, write its .qmd doc into the folder dir.",
     "crumbs": [
       "Reference",
       "quarto_doc_page"
@@ -664,7 +642,7 @@
     "href": "reference/is_exported.html",
     "title": "is_exported",
     "section": "",
-    "text": "is_exported\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nis_exported(module_name::Module) -&gt; Function\n```\nCreate a selector that matches exported symbols.\n\nExample\n```{julia}\n\nselector = is_exported(MyModule)\nselector(:exported_func)    # true if exported\nselector(:internal_func)    # false\n```",
+    "text": "is_exported\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nis_exported(module_name::Module) -&gt; Function\nCreate a selector that matches exported symbols.\n\nExample\nselector = is_exported(MyModule)\nselector(:exported_func)    # true if exported\nselector(:internal_func)    # false",
     "crumbs": [
       "Reference",
       "is_exported"
@@ -675,7 +653,7 @@
     "href": "reference/merge_config.html",
     "title": "merge_config",
     "section": "",
-    "text": "merge_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nmerge_config(base::QuartoConfig, overrides::QuartoConfig) -&gt; QuartoConfig\n```\nMerge two configurations, with overrides taking precedence. Useful for combining file-based config with programmatic options.",
+    "text": "merge_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nmerge_config(base::QuartoConfig, overrides::QuartoConfig) -&gt; QuartoConfig\nMerge two configurations, with overrides taking precedence. Useful for combining file-based config with programmatic options.",
     "crumbs": [
       "Reference",
       "merge_config"
@@ -686,7 +664,7 @@
     "href": "reference/quarto_build_refpage_grouped.html",
     "title": "quarto_build_refpage_grouped",
     "section": "",
-    "text": "quarto_build_refpage_grouped\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String=\"docs/reference.qmd\")\n```\nBuild a grouped reference page with sections, titles, and descriptions. Similar to pkgdown’s reference page organization.\n\nArguments\n\nmodule_name::Module: Module to document\nconfig::QuartoConfig: Configuration with reference groups\noutput::String: Output file path\n\n\n\nExample\n```{julia}\n\nconfig = QuartoConfig(\n    module_name = MyModule,\n    reference = [\n        ReferenceGroup(title=\"Core Functions\", desc=\"Main functionality\", contents=[:func1, :func2]),\n        ReferenceGroup(title=\"Utilities\", contents=[starts_with(\"util_\")])\n    ]\n)\nquarto_build_refpage_grouped(MyModule, config)\n```",
+    "text": "quarto_build_refpage_grouped\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String=\"docs/reference.qmd\")\nBuild a grouped reference page with sections, titles, and descriptions. Similar to pkgdown’s reference page organization.\n\nArguments\n\nmodule_name::Module: Module to document\nconfig::QuartoConfig: Configuration with reference groups\noutput::String: Output file path\n\n\n\nExample\nconfig = QuartoConfig(\n    module_name = MyModule,\n    reference = [\n        ReferenceGroup(title=\"Core Functions\", desc=\"Main functionality\", contents=[:func1, :func2]),\n        ReferenceGroup(title=\"Utilities\", contents=[starts_with(\"util_\")])\n    ]\n)\nquarto_build_refpage_grouped(MyModule, config)",
     "crumbs": [
       "Reference",
       "quarto_build_refpage_grouped"
@@ -697,7 +675,7 @@
     "href": "reference/QuartoConfig.html",
     "title": "QuartoConfig",
     "section": "",
-    "text": "docblock\n\n\n\n\n\nMain configuration struct for QuartoDocBuilder.\n\n\n\n\n\n\nmodule_name::Union{Module, Nothing}: The module to document\noutput_dir::String: Output directory for rendered site (default: “site”)\nrepo::String: GitHub repository in “user/repo” format ## Execution\nfreeze::String: Quarto freeze option (default: “auto”)\ncache::String: Quarto cache option (default: “true”)\nwarning::String: Show warnings (default: “false”) ## Reference\nreference::Vector{ReferenceGroup}: Reference page organization ## Sections (Multiple Navbar Dropdowns)\nsections::Vector{SectionConfig}: Multiple navbar sections with dropdowns\nget_started::String: Path to “Get Started” page (shown prominently in navbar) ## News\nnews::Bool: Generate news page from NEWS.md (default: true)\nnews_file::String: Path to news file (default: “NEWS.md”) ## Navigation\nnavbar_left::Vector{NavbarItem}: Custom left navbar items\nnavbar_right::Vector{NavbarItem}: Custom right navbar items ## Comments\ncomments::Bool: Enable Giscus comments (default: true)\ngiscus_repo::String: Repository for Giscus (defaults to repo) ## Appearance\ntheme::ThemeConfig: Theme configuration ## Footer\nfooter::FooterConfig: Footer configuration\n\n\n\n```{julia}\n\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"user/MyPackage.jl\",\n    reference = [\n        ReferenceGroup(title=\"Core\", contents=[:main_func, :helper_func]),\n        ReferenceGroup(title=\"Utils\", contents=[starts_with(\"util_\")])\n    ],\n    sections = [\n        SectionConfig(title=\"Tutorials\", dir=\"tutorials\", order=1),\n        SectionConfig(title=\"Explanation\", dir=\"explanation\", order=2),\n        SectionConfig(title=\"How-to Guides\", dir=\"how-to\", order=3)\n    ],\n    theme = ThemeConfig(bootswatch=\"cosmo\", dark_mode=true)\n)\n```",
+    "text": "docblock\n\n\n\n\n\nMain configuration struct for QuartoDocBuilder.\n\n\n\n\n\n\nmodule_name::Union{Module, Nothing}: The module to document\noutput_dir::String: Output directory for rendered site (default: “site”)\nrepo::String: GitHub repository in “user/repo” format ## Execution\nfreeze::String: Quarto freeze option (default: “auto”)\ncache::String: Quarto cache option (default: “true”)\nwarning::String: Show warnings (default: “false”) ## Reference\nreference::Vector{ReferenceGroup}: Reference page organization ## Sections (Multiple Navbar Dropdowns)\nsections::Vector{SectionConfig}: Multiple navbar sections with dropdowns\nget_started::String: Path to “Get Started” page (shown prominently in navbar) ## News\nnews::Bool: Generate news page from NEWS.md (default: true)\nnews_file::String: Path to news file (default: “NEWS.md”) ## Navigation\nnavbar_left::Vector{NavbarItem}: Custom left navbar items\nnavbar_right::Vector{NavbarItem}: Custom right navbar items ## Comments\ncomments::Bool: Enable Giscus comments (default: true)\ngiscus_repo::String: Repository for Giscus (defaults to repo) ## Appearance\ntheme::ThemeConfig: Theme configuration ## Footer\nfooter::FooterConfig: Footer configuration\n\n\n\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"user/MyPackage.jl\",\n    reference = [\n        ReferenceGroup(title=\"Core\", contents=[:main_func, :helper_func]),\n        ReferenceGroup(title=\"Utils\", contents=[starts_with(\"util_\")])\n    ],\n    sections = [\n        SectionConfig(title=\"Tutorials\", dir=\"tutorials\", order=1),\n        SectionConfig(title=\"Explanation\", dir=\"explanation\", order=2),\n        SectionConfig(title=\"How-to Guides\", dir=\"how-to\", order=3)\n    ],\n    theme = ThemeConfig(bootswatch=\"cosmo\", dark_mode=true)\n)",
     "crumbs": [
       "Reference",
       "QuartoConfig"
@@ -708,7 +686,7 @@
     "href": "reference/QuartoConfig.html#basic",
     "title": "QuartoConfig",
     "section": "",
-    "text": "module_name::Union{Module, Nothing}: The module to document\noutput_dir::String: Output directory for rendered site (default: “site”)\nrepo::String: GitHub repository in “user/repo” format ## Execution\nfreeze::String: Quarto freeze option (default: “auto”)\ncache::String: Quarto cache option (default: “true”)\nwarning::String: Show warnings (default: “false”) ## Reference\nreference::Vector{ReferenceGroup}: Reference page organization ## Sections (Multiple Navbar Dropdowns)\nsections::Vector{SectionConfig}: Multiple navbar sections with dropdowns\nget_started::String: Path to “Get Started” page (shown prominently in navbar) ## News\nnews::Bool: Generate news page from NEWS.md (default: true)\nnews_file::String: Path to news file (default: “NEWS.md”) ## Navigation\nnavbar_left::Vector{NavbarItem}: Custom left navbar items\nnavbar_right::Vector{NavbarItem}: Custom right navbar items ## Comments\ncomments::Bool: Enable Giscus comments (default: true)\ngiscus_repo::String: Repository for Giscus (defaults to repo) ## Appearance\ntheme::ThemeConfig: Theme configuration ## Footer\nfooter::FooterConfig: Footer configuration\n\n\n\n```{julia}\n\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"user/MyPackage.jl\",\n    reference = [\n        ReferenceGroup(title=\"Core\", contents=[:main_func, :helper_func]),\n        ReferenceGroup(title=\"Utils\", contents=[starts_with(\"util_\")])\n    ],\n    sections = [\n        SectionConfig(title=\"Tutorials\", dir=\"tutorials\", order=1),\n        SectionConfig(title=\"Explanation\", dir=\"explanation\", order=2),\n        SectionConfig(title=\"How-to Guides\", dir=\"how-to\", order=3)\n    ],\n    theme = ThemeConfig(bootswatch=\"cosmo\", dark_mode=true)\n)\n```",
+    "text": "module_name::Union{Module, Nothing}: The module to document\noutput_dir::String: Output directory for rendered site (default: “site”)\nrepo::String: GitHub repository in “user/repo” format ## Execution\nfreeze::String: Quarto freeze option (default: “auto”)\ncache::String: Quarto cache option (default: “true”)\nwarning::String: Show warnings (default: “false”) ## Reference\nreference::Vector{ReferenceGroup}: Reference page organization ## Sections (Multiple Navbar Dropdowns)\nsections::Vector{SectionConfig}: Multiple navbar sections with dropdowns\nget_started::String: Path to “Get Started” page (shown prominently in navbar) ## News\nnews::Bool: Generate news page from NEWS.md (default: true)\nnews_file::String: Path to news file (default: “NEWS.md”) ## Navigation\nnavbar_left::Vector{NavbarItem}: Custom left navbar items\nnavbar_right::Vector{NavbarItem}: Custom right navbar items ## Comments\ncomments::Bool: Enable Giscus comments (default: true)\ngiscus_repo::String: Repository for Giscus (defaults to repo) ## Appearance\ntheme::ThemeConfig: Theme configuration ## Footer\nfooter::FooterConfig: Footer configuration\n\n\n\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"user/MyPackage.jl\",\n    reference = [\n        ReferenceGroup(title=\"Core\", contents=[:main_func, :helper_func]),\n        ReferenceGroup(title=\"Utils\", contents=[starts_with(\"util_\")])\n    ],\n    sections = [\n        SectionConfig(title=\"Tutorials\", dir=\"tutorials\", order=1),\n        SectionConfig(title=\"Explanation\", dir=\"explanation\", order=2),\n        SectionConfig(title=\"How-to Guides\", dir=\"how-to\", order=3)\n    ],\n    theme = ThemeConfig(bootswatch=\"cosmo\", dark_mode=true)\n)",
     "crumbs": [
       "Reference",
       "QuartoConfig"
@@ -719,7 +697,7 @@
     "href": "reference/build_reference_index.html",
     "title": "build_reference_index",
     "section": "",
-    "text": "build_reference_index\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nbuild_reference_index(module_name::Module; base_path::String=\"reference\") -&gt; ReferenceIndex\n```\nBuild a lookup table mapping function names to their reference page URLs.\n\nArguments\n\nmodule_name::Module: Module to index\nbase_path::String: Base path for reference pages (default: “reference”)\n\n\n\nReturns\nA ReferenceIndex with all documented symbols.\n\n\nExample\n```{julia}\n\nindex = build_reference_index(MyModule)\nindex.entries[\"my_function\"]  # \"reference/my_function.qmd\"\n```",
+    "text": "build_reference_index\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nbuild_reference_index(module_name::Module; base_path::String=\"reference\") -&gt; ReferenceIndex\nBuild a lookup table mapping function names to their reference page URLs.\n\nArguments\n\nmodule_name::Module: Module to index\nbase_path::String: Base path for reference pages (default: “reference”)\n\n\n\nReturns\nA ReferenceIndex with all documented symbols.\n\n\nExample\nindex = build_reference_index(MyModule)\nindex.entries[\"my_function\"]  # \"reference/my_function.qmd\"",
     "crumbs": [
       "Reference",
       "build_reference_index"
@@ -730,7 +708,7 @@
     "href": "reference/quarto_styles_from_config.html",
     "title": "quarto_styles_from_config",
     "section": "",
-    "text": "quarto_styles_from_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_styles_from_config(config::QuartoConfig)\n```\nGenerate CSS/SCSS files based on configuration.\nDefault styles are applied only when:\n\nNo bootswatch theme is specified in ThemeConfig\nNo custom CSS/SCSS is provided\nuse_default_styles is true (default) Creates:\ndocs/styles.css - Main CSS file (with default or custom styles)\ndocs/custom.scss - SCSS variables (if custom colors/fonts specified)\n\n\nArguments\n\nconfig::QuartoConfig: Configuration with theme settings\n\n\n\nExamples\n```{julia}\n\n# Default (no theme) - applies default QuartoDocBuilder styles\nconfig = QuartoConfig(module_name=MyModule, theme=ThemeConfig())\nquarto_styles_from_config(config)\n\n# With bootswatch theme - does NOT apply default styles\nconfig = QuartoConfig(module_name=MyModule, theme=ThemeConfig(bootswatch=\"flatly\"))\nquarto_styles_from_config(config)\n\n# Explicitly disable default styles\nconfig = QuartoConfig(module_name=MyModule, theme=ThemeConfig(use_default_styles=false))\nquarto_styles_from_config(config)\n```",
+    "text": "quarto_styles_from_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_styles_from_config(config::QuartoConfig)\nGenerate CSS/SCSS files based on configuration.\nDefault styles are applied only when:\n\nNo bootswatch theme is specified in ThemeConfig\nNo custom CSS/SCSS is provided\nuse_default_styles is true (default) Creates:\ndocs/styles.css - Main CSS file (with default or custom styles)\ndocs/custom.scss - SCSS variables (if custom colors/fonts specified)\n\n\nArguments\n\nconfig::QuartoConfig: Configuration with theme settings\n\n\n\nExamples\n# Default (no theme) - applies default QuartoDocBuilder styles\nconfig = QuartoConfig(module_name=MyModule, theme=ThemeConfig())\nquarto_styles_from_config(config)\n\n# With bootswatch theme - does NOT apply default styles\nconfig = QuartoConfig(module_name=MyModule, theme=ThemeConfig(bootswatch=\"flatly\"))\nquarto_styles_from_config(config)\n\n# Explicitly disable default styles\nconfig = QuartoConfig(module_name=MyModule, theme=ThemeConfig(use_default_styles=false))\nquarto_styles_from_config(config)",
     "crumbs": [
       "Reference",
       "quarto_styles_from_config"
@@ -741,7 +719,7 @@
     "href": "reference/default_config.html",
     "title": "default_config",
     "section": "",
-    "text": "default_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\ndefault_config(module_name::Module) -&gt; QuartoConfig\n```\nGenerate a configuration with sensible defaults for a module. Attempts to auto-detect repository from git remote.\n\nArguments\n\nmodule_name::Module: The module to document\n\n\n\nExample\n```{julia}\n\nconfig = default_config(MyPackage)\n```",
+    "text": "default_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\ndefault_config(module_name::Module) -&gt; QuartoConfig\nGenerate a configuration with sensible defaults for a module. Attempts to auto-detect repository from git remote.\n\nArguments\n\nmodule_name::Module: The module to document\n\n\n\nExample\nconfig = default_config(MyPackage)",
     "crumbs": [
       "Reference",
       "default_config"
@@ -752,32 +730,281 @@
     "href": "reference/contains.html",
     "title": "contains",
     "section": "",
-    "text": "contains\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\ncontains(substring::String) -&gt; Function\n```\nCreate a selector that matches symbols containing substring.\n\nExample\n```{julia}\n\n# Match functions containing \"helper\"\nselector = contains(\"helper\")\nselector(:my_helper_func)  # true\nselector(:other_func)      # false\n```",
+    "text": "contains\n\n\n\n\n\n\ndocblock\n\n\n\n\n\ncontains(substring::String) -&gt; Function\nCreate a selector that matches symbols containing substring.\n\nExample\n# Match functions containing \"helper\"\nselector = contains(\"helper\")\nselector(:my_helper_func)  # true\nselector(:other_func)      # false",
     "crumbs": [
       "Reference",
       "contains"
     ]
   },
   {
-    "objectID": "reference/build_articles_yaml.html",
-    "href": "reference/build_articles_yaml.html",
-    "title": "build_articles_yaml",
+    "objectID": "reference/quarto_github_action_simple.html",
+    "href": "reference/quarto_github_action_simple.html",
+    "title": "quarto_github_action_simple",
     "section": "",
-    "text": "build_articles_yaml\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nbuild_articles_yaml(config::QuartoConfig) -&gt; String\n```\nGenerate YAML string for articles navbar item.\n\nArguments\n\nconfig::QuartoConfig: Configuration\n\n\n\nReturns\nYAML-formatted string for the navbar.",
+    "text": "quarto_github_action_simple\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_github_action_simple(; kwargs...)\nGenerate a simpler GitHub Actions workflow using gh-pages branch deployment. This is the traditional approach that doesn’t require GitHub Pages configuration.\n\nArguments\n\nbranch::String: Branch to deploy to (default: “gh-pages”)\nquarto_version::String: Quarto version to use (default: “pre-release”)\njulia_version::String: Julia version to use (default: “1”)\noutput_dir::String: Output directory from Quarto (default: “site”)",
     "crumbs": [
       "Reference",
-      "build_articles_yaml"
+      "quarto_github_action_simple"
     ]
   },
   {
-    "objectID": "reference/ArticleInfo.html",
-    "href": "reference/ArticleInfo.html",
-    "title": "ArticleInfo",
+    "objectID": "reference/is_function_symbol.html",
+    "href": "reference/is_function_symbol.html",
+    "title": "is_function_symbol",
     "section": "",
-    "text": "ArticleInfo\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nArticleInfo\n```\nInformation about a discovered article.",
+    "text": "is_function_symbol\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nis_function_symbol(module_name::Module) -&gt; Function\nCreate a selector that matches function symbols.",
     "crumbs": [
       "Reference",
-      "ArticleInfo"
+      "is_function_symbol"
+    ]
+  },
+  {
+    "objectID": "reference/has_news.html",
+    "href": "reference/has_news.html",
+    "title": "has_news",
+    "section": "",
+    "text": "has_news\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nhas_news(config::QuartoConfig) -&gt; Bool\nCheck if a NEWS.md file exists.\n\nArguments\n\nconfig::QuartoConfig: Configuration with news_file path",
+    "crumbs": [
+      "Reference",
+      "has_news"
+    ]
+  },
+  {
+    "objectID": "reference/detect_repo.html",
+    "href": "reference/detect_repo.html",
+    "title": "detect_repo",
+    "section": "",
+    "text": "detect_repo\n\n\n\n\n\n\ndocblock\n\n\n\n\n\ndetect_repo() -&gt; String\nTry to detect the GitHub repository from git remote. Returns empty string if not found.",
+    "crumbs": [
+      "Reference",
+      "detect_repo"
+    ]
+  },
+  {
+    "objectID": "reference/create_reference_report.html",
+    "href": "reference/create_reference_report.html",
+    "title": "create_reference_report",
+    "section": "",
+    "text": "create_reference_report\n\n\n\n\n\n\ndocblock\n\n\n\n\n\ncreate_reference_report(module_name::Module) -&gt; String\nGenerate a report of all documented functions and their reference URLs.\n\nArguments\n\nmodule_name::Module: Module to analyze\n\n\n\nReturns\nMarkdown-formatted report.",
+    "crumbs": [
+      "Reference",
+      "create_reference_report"
+    ]
+  },
+  {
+    "objectID": "reference/SectionConfig.html",
+    "href": "reference/SectionConfig.html",
+    "title": "SectionConfig",
+    "section": "",
+    "text": "SectionConfig\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nConfiguration for a navbar section (supports multiple dropdowns).\nEach section can have its own directory of .qmd files that appear as a dropdown in the navbar and as a sidebar when browsing that section.\n\nFields\n\ntitle::String: Display title in navbar (required)\ndir::String: Directory containing .qmd files for this section\ndesc::String: Description for the section index page\ndropdown::Bool: Whether to show as dropdown menu (default: true)\ndropdown_limit::Int: Max items before falling back to index link (default: 15)\nindex_file::String: Name of index file (default: “{dir}.qmd” in docs/)\nsidebar::Bool: Whether to show sidebar when in this section (default: true)\norder::Int: Order in navbar (lower = more left, default: 100)\n\n\n\nExample\nsections = [\n    SectionConfig(title=\"Tutorials\", dir=\"tutorials\", order=1),\n    SectionConfig(title=\"Explanation\", dir=\"explanation\", order=2),\n    SectionConfig(title=\"How-to Guides\", dir=\"how-to\", order=3, dropdown_limit=20)\n]",
+    "crumbs": [
+      "Reference",
+      "SectionConfig"
+    ]
+  },
+  {
+    "objectID": "reference/is_const_symbol.html",
+    "href": "reference/is_const_symbol.html",
+    "title": "is_const_symbol",
+    "section": "",
+    "text": "is_const_symbol\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nis_const_symbol(module_name::Module) -&gt; Function\nCreate a selector that matches constant symbols.",
+    "crumbs": [
+      "Reference",
+      "is_const_symbol"
+    ]
+  },
+  {
+    "objectID": "reference/resolve_reference.html",
+    "href": "reference/resolve_reference.html",
+    "title": "resolve_reference",
+    "section": "",
+    "text": "resolve_reference\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nresolve_reference(name::String, index::ReferenceIndex) -&gt; Union{String, Nothing}\nResolve a function name to its documentation URL.\n\nArguments\n\nname::String: Function name to look up\nindex::ReferenceIndex: Reference index\n\n\n\nReturns\nURL string if found, nothing otherwise.",
+    "crumbs": [
+      "Reference",
+      "resolve_reference"
+    ]
+  },
+  {
+    "objectID": "reference/matches.html",
+    "href": "reference/matches.html",
+    "title": "matches",
+    "section": "",
+    "text": "matches\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nmatches(pattern::Union{String, Regex}) -&gt; Function\nCreate a selector that matches symbols against a regex pattern.\n\nExample\n# Match functions starting with \"get\" or \"set\"\nselector = matches(r\"^(get|set)\")\nselector(:get_value)  # true\nselector(:set_value)  # true\nselector(:update)     # false",
+    "crumbs": [
+      "Reference",
+      "matches"
+    ]
+  },
+  {
+    "objectID": "reference/group_objects.html",
+    "href": "reference/group_objects.html",
+    "title": "group_objects",
+    "section": "",
+    "text": "group_objects\n\n\n\n\n\n\ndocblock\n\n\n\n\n\ngroup_objects(module_name::Module, groups::Vector{ReferenceGroup}) -&gt; Vector{Tuple{ReferenceGroup, Vector{Symbol}}}\nGroup module objects according to ReferenceGroup specifications. Returns a vector of (group, symbols) pairs.\n\nArguments\n\nmodule_name::Module: Module to get symbols from\ngroups::Vector{ReferenceGroup}: Group specifications\n\n\n\nReturns\nVector of tuples, each containing a ReferenceGroup and its matched symbols.",
+    "crumbs": [
+      "Reference",
+      "group_objects"
+    ]
+  },
+  {
+    "objectID": "reference/validate_config.html",
+    "href": "reference/validate_config.html",
+    "title": "validate_config",
+    "section": "",
+    "text": "validate_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nvalidate_config(config::QuartoConfig) -&gt; Bool\nValidate a configuration struct. Returns true if valid. Prints warnings for any issues found.\n\nArguments\n\nconfig::QuartoConfig: Configuration to validate",
+    "crumbs": [
+      "Reference",
+      "validate_config"
+    ]
+  },
+  {
+    "objectID": "reference/get_article_title.html",
+    "href": "reference/get_article_title.html",
+    "title": "get_article_title",
+    "section": "",
+    "text": "get_article_title\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nget_article_title(filepath::String) -&gt; String\nExtract the title from an article’s YAML frontmatter or first header.\n\nArguments\n\nfilepath::String: Path to the .qmd file\n\n\n\nReturns\nThe article title, or the filename (without extension) as fallback.",
+    "crumbs": [
+      "Reference",
+      "get_article_title"
+    ]
+  },
+  {
+    "objectID": "reference/ReferenceIndex.html",
+    "href": "reference/ReferenceIndex.html",
+    "title": "ReferenceIndex",
+    "section": "",
+    "text": "ReferenceIndex\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nReferenceIndex\nIndex of function names to their documentation URLs.",
+    "crumbs": [
+      "Reference",
+      "ReferenceIndex"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "QuartoDocBuilder.jl",
+    "section": "",
+    "text": "QuartoDocBuilder.jl\nQuartoDocBuilder.jl is a package inspired by R pkgdown. It provides an easy way to generate a website with documentation and vignettes, by creating a Quarto project.\nBeing powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted. This website doc even has a comment section! Check some examples here and the complete list of options here.\nThe Quarto website itself is written with Quarto! Check the github repo here to get some inspiration.\n\n\nHow to use\nSee the tutorials at https://vituri.github.io/QuartoDocBuilder.jl/tutorials.html."
+  },
+  {
+    "objectID": "reference/linkify_github_refs.html",
+    "href": "reference/linkify_github_refs.html",
+    "title": "linkify_github_refs",
+    "section": "",
+    "text": "linkify_github_refs\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nlinkify_github_refs(text::String, repo::String) -&gt; String\nConvert GitHub references in text to clickable links.\nConverts:\n\n#123 -&gt; [#123](https://github.com/repo/issues/123)\n@username -&gt; [@username](https://github.com/username)\nuser/repo#123 -&gt; [user/repo#123](https://github.com/user/repo/issues/123)\n\n\nArguments\n\ntext::String: Text containing references\nrepo::String: Repository in “user/repo” format\n\n\n\nReturns\nText with references converted to markdown links.\n\n\nExample\ntext = \"Fixed bug #42 reported by @user\"\nlinkify_github_refs(text, \"myorg/mypackage\")\n# \"Fixed bug [#42](https://github.com/myorg/mypackage/issues/42) reported by [@user](https://github.com/user)\"",
+    "crumbs": [
+      "Reference",
+      "linkify_github_refs"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_build_site.html",
+    "href": "reference/quarto_build_site.html",
+    "title": "quarto_build_site",
+    "section": "",
+    "text": "quarto_build_site\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_build_site(config::QuartoConfig)\nBuild the documentation site from a QuartoConfig struct.\nThis is the config-based alternative to quarto_build_site(module_name; kwargs...). Supports all pkgdown-like features including grouped references, multiple sections, news, etc.\n\nArguments\n\nconfig::QuartoConfig: Full configuration struct\n\n\n\nExample (with multiple sections)\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"user/MyPackage.jl\",\n    reference = [\n        ReferenceGroup(title=\"Core\", contents=[:main_func]),\n        ReferenceGroup(title=\"Utils\", contents=[starts_with(\"util_\")])\n    ],\n    sections = [\n        SectionConfig(title=\"Tutorials\", dir=\"tutorials\", order=1),\n        SectionConfig(title=\"Explanation\", dir=\"explanation\", order=2),\n        SectionConfig(title=\"How-to Guides\", dir=\"how-to\", order=3)\n    ],\n    theme = ThemeConfig(bootswatch=\"cosmo\", dark_mode=true)\n)\nquarto_build_site(config)",
+    "crumbs": [
+      "Reference",
+      "quarto_build_site"
+    ]
+  },
+  {
+    "objectID": "reference/load_config.html",
+    "href": "reference/load_config.html",
+    "title": "load_config",
+    "section": "",
+    "text": "load_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nload_config(path::String=\"_quartodoc.toml\") -&gt; Union{QuartoConfig, Nothing}\nLoad configuration from a TOML file. Returns nothing if the file doesn’t exist.\n\nArguments\n\npath::String: Path to the TOML configuration file\n\n\n\nExample\nconfig = load_config(\"_quartodoc.toml\")\nif config !== nothing\n    quarto_build_site(config)\nend",
+    "crumbs": [
+      "Reference",
+      "load_config"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_makejl_template.html",
+    "href": "reference/quarto_makejl_template.html",
+    "title": "quarto_makejl_template",
+    "section": "",
+    "text": "quarto_makejl_template\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_makejl_template(module_name::Module; config_file::String=\"\")\nGenerate a docs/make.jl template file.\n\nArguments\n\nmodule_name::Module: The module being documented\nconfig_file::String: Optional path to configuration file\n\n\n\nExample\nquarto_makejl_template(MyPackage)\n# Creates docs/make.jl",
+    "crumbs": [
+      "Reference",
+      "quarto_makejl_template"
+    ]
+  },
+  {
+    "objectID": "reference/create_article_template.html",
+    "href": "reference/create_article_template.html",
+    "title": "create_article_template",
+    "section": "",
+    "text": "create_article_template\n\n\n\n\n\n\ndocblock\n\n\n\n\n\ncreate_article_template(filepath::String; title::String=\"\", order::Int=999)\nCreate a template article file.\n\nArguments\n\nfilepath::String: Path where to create the article\ntitle::String: Article title\norder::Int: Sort order",
+    "crumbs": [
+      "Reference",
+      "create_article_template"
+    ]
+  },
+  {
+    "objectID": "reference/find_undefined_references.html",
+    "href": "reference/find_undefined_references.html",
+    "title": "find_undefined_references",
+    "section": "",
+    "text": "find_undefined_references\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nfind_undefined_references(text::String, index::ReferenceIndex) -&gt; Vector{String}\nFind all backtick-quoted identifiers that don’t have documentation. Useful for identifying missing documentation.\n\nArguments\n\ntext::String: Text to scan\nindex::ReferenceIndex: Reference index\n\n\n\nReturns\nVector of undefined reference names.",
+    "crumbs": [
+      "Reference",
+      "find_undefined_references"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_yaml_from_config.html",
+    "href": "reference/quarto_yaml_from_config.html",
+    "title": "quarto_yaml_from_config",
+    "section": "",
+    "text": "quarto_yaml_from_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_yaml_from_config(config::QuartoConfig; force::Bool=false)\nGenerate the _quarto.yml file from a QuartoConfig struct.\nSupports:\n\nLight/dark mode toggle\nDropdown menus for articles\nCustom navbar items\nCustom footer\nTheme pairing (light/dark themes)\n\n\nArguments\n\nconfig::QuartoConfig: Configuration struct\nforce::Bool: Overwrite existing file if true (default: false)",
+    "crumbs": [
+      "Reference",
+      "quarto_yaml_from_config"
+    ]
+  },
+  {
+    "objectID": "reference/create_news_template.html",
+    "href": "reference/create_news_template.html",
+    "title": "create_news_template",
+    "section": "",
+    "text": "create_news_template\n\n\n\n\n\n\ndocblock\n\n\n\n\n\ncreate_news_template(path::String=\"NEWS.md\"; package_name::String=\"Package\")\nCreate a template NEWS.md file.\n\nArguments\n\npath::String: Path where to create the file\npackage_name::String: Name of the package",
+    "crumbs": [
+      "Reference",
+      "create_news_template"
+    ]
+  },
+  {
+    "objectID": "reference/quarto_callout_block.html",
+    "href": "reference/quarto_callout_block.html",
+    "title": "quarto_callout_block",
+    "section": "",
+    "text": "quarto_callout_block\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_callout_block(s)\nCreate a callout block with the string s.",
+    "crumbs": [
+      "Reference",
+      "quarto_callout_block"
+    ]
+  },
+  {
+    "objectID": "reference/link_julia_docs.html",
+    "href": "reference/link_julia_docs.html",
+    "title": "link_julia_docs",
+    "section": "",
+    "text": "link_julia_docs\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nlink_julia_docs(text::String) -&gt; String\nAdd links to Julia Base documentation for common types and functions.\nLinks to https://docs.julialang.org for:\n\nCommon types: String, Int, Float64, Vector, Dict, etc.\nCommon functions: map, filter, reduce, etc.\n\n\nArguments\n\ntext::String: Text to process\n\n\n\nReturns\nText with Julia standard library links added.",
+    "crumbs": [
+      "Reference",
+      "link_julia_docs"
+    ]
+  },
+  {
+    "objectID": "reference/ends_with.html",
+    "href": "reference/ends_with.html",
+    "title": "ends_with",
+    "section": "",
+    "text": "ends_with\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nends_with(suffix::String) -&gt; Function\nCreate a selector that matches symbols ending with suffix.\n\nExample\n# Match functions like `my_util`, `string_util`\nselector = ends_with(\"_util\")\nselector(:my_util)      # true\nselector(:util_helper)  # false",
+    "crumbs": [
+      "Reference",
+      "ends_with"
     ]
   },
   {
@@ -792,296 +1019,14 @@
     ]
   },
   {
-    "objectID": "reference/ends_with.html",
-    "href": "reference/ends_with.html",
-    "title": "ends_with",
+    "objectID": "reference/ArticleInfo.html",
+    "href": "reference/ArticleInfo.html",
+    "title": "ArticleInfo",
     "section": "",
-    "text": "ends_with\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nends_with(suffix::String) -&gt; Function\n```\nCreate a selector that matches symbols ending with suffix.\n\nExample\n```{julia}\n\n# Match functions like `my_util`, `string_util`\nselector = ends_with(\"_util\")\nselector(:my_util)      # true\nselector(:util_helper)  # false\n```",
+    "text": "ArticleInfo\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nArticleInfo\nInformation about a discovered article.",
     "crumbs": [
       "Reference",
-      "ends_with"
-    ]
-  },
-  {
-    "objectID": "reference/link_julia_docs.html",
-    "href": "reference/link_julia_docs.html",
-    "title": "link_julia_docs",
-    "section": "",
-    "text": "link_julia_docs\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nlink_julia_docs(text::String) -&gt; String\n```\nAdd links to Julia Base documentation for common types and functions.\nLinks to https://docs.julialang.org for:\n\nCommon types: String, Int, Float64, Vector, Dict, etc.\nCommon functions: map, filter, reduce, etc.\n\n\nArguments\n\ntext::String: Text to process\n\n\n\nReturns\nText with Julia standard library links added.",
-    "crumbs": [
-      "Reference",
-      "link_julia_docs"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_callout_block.html",
-    "href": "reference/quarto_callout_block.html",
-    "title": "quarto_callout_block",
-    "section": "",
-    "text": "quarto_callout_block\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_callout_block(s)\n```\nCreate a callout block with the string s.",
-    "crumbs": [
-      "Reference",
-      "quarto_callout_block"
-    ]
-  },
-  {
-    "objectID": "reference/create_news_template.html",
-    "href": "reference/create_news_template.html",
-    "title": "create_news_template",
-    "section": "",
-    "text": "create_news_template\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\ncreate_news_template(path::String=\"NEWS.md\"; package_name::String=\"Package\")\n```\nCreate a template NEWS.md file.\n\nArguments\n\npath::String: Path where to create the file\npackage_name::String: Name of the package",
-    "crumbs": [
-      "Reference",
-      "create_news_template"
-    ]
-  },
-  {
-    "objectID": "reference/is_const_symbol.html",
-    "href": "reference/is_const_symbol.html",
-    "title": "is_const_symbol",
-    "section": "",
-    "text": "is_const_symbol\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nis_const_symbol(module_name::Module) -&gt; Function\n```\nCreate a selector that matches constant symbols.",
-    "crumbs": [
-      "Reference",
-      "is_const_symbol"
-    ]
-  },
-  {
-    "objectID": "reference/resolve_reference.html",
-    "href": "reference/resolve_reference.html",
-    "title": "resolve_reference",
-    "section": "",
-    "text": "resolve_reference\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nresolve_reference(name::String, index::ReferenceIndex) -&gt; Union{String, Nothing}\n```\nResolve a function name to its documentation URL.\n\nArguments\n\nname::String: Function name to look up\nindex::ReferenceIndex: Reference index\n\n\n\nReturns\nURL string if found, nothing otherwise.",
-    "crumbs": [
-      "Reference",
-      "resolve_reference"
-    ]
-  },
-  {
-    "objectID": "reference/matches.html",
-    "href": "reference/matches.html",
-    "title": "matches",
-    "section": "",
-    "text": "matches\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nmatches(pattern::Union{String, Regex}) -&gt; Function\n```\nCreate a selector that matches symbols against a regex pattern.\n\nExample\n```{julia}\n\n# Match functions starting with \"get\" or \"set\"\nselector = matches(r\"^(get|set)\")\nselector(:get_value)  # true\nselector(:set_value)  # true\nselector(:update)     # false\n```",
-    "crumbs": [
-      "Reference",
-      "matches"
-    ]
-  },
-  {
-    "objectID": "reference/group_objects.html",
-    "href": "reference/group_objects.html",
-    "title": "group_objects",
-    "section": "",
-    "text": "group_objects\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\ngroup_objects(module_name::Module, groups::Vector{ReferenceGroup}) -&gt; Vector{Tuple{ReferenceGroup, Vector{Symbol}}}\n```\nGroup module objects according to ReferenceGroup specifications. Returns a vector of (group, symbols) pairs.\n\nArguments\n\nmodule_name::Module: Module to get symbols from\ngroups::Vector{ReferenceGroup}: Group specifications\n\n\n\nReturns\nVector of tuples, each containing a ReferenceGroup and its matched symbols.",
-    "crumbs": [
-      "Reference",
-      "group_objects"
-    ]
-  },
-  {
-    "objectID": "reference/validate_config.html",
-    "href": "reference/validate_config.html",
-    "title": "validate_config",
-    "section": "",
-    "text": "validate_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nvalidate_config(config::QuartoConfig) -&gt; Bool\n```\nValidate a configuration struct. Returns true if valid. Prints warnings for any issues found.\n\nArguments\n\nconfig::QuartoConfig: Configuration to validate",
-    "crumbs": [
-      "Reference",
-      "validate_config"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_articles_index.html",
-    "href": "reference/quarto_articles_index.html",
-    "title": "quarto_articles_index",
-    "section": "",
-    "text": "quarto_articles_index\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_articles_index(config::QuartoConfig; output::String=\"docs/articles.qmd\")\n```\nGenerate an articles index page using Quarto’s listing feature.\n\nArguments\n\nconfig::QuartoConfig: Configuration\noutput::String: Output file path\n\n\n\nExample\n```{julia}\n\nquarto_articles_index(config)\n# Creates docs/articles.qmd with a listing of all articles\n```",
-    "crumbs": [
-      "Reference",
-      "quarto_articles_index"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_build_site.html",
-    "href": "reference/quarto_build_site.html",
-    "title": "quarto_build_site",
-    "section": "",
-    "text": "quarto_build_site\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_build_site(module_name; kwargs...)\n```\nCreate all the files necessary to build the Quarto website for the first time.\n\nArguments\n\nmodule_name: your module’s name.\nkwargs...: kwargs passed to quarto_yaml.\n\n\n\nDetails\nThis function does a lot of things!\n\nCreate the docs directory, if it doesn’t exist.\nCreate docs/_quarto.yaml, which is the file that contains all information about how to render the website as a Quarto project.\nCreate the directory docs/reference and the file docs/reference.qmd if they don’t exist.\nCreate the directory docs/tutorials and the file docs/tutorials.qmd if they don’t exist, together with docs/tutorials/tutorial-01.qmd.\nCopy your README.md file as docs/index.qmd.\nCreate docs/styles.css with some predefined styles.\nCreate a .qmd file in docs/reference for each object in module_name.\n\n\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_build_site(config::QuartoConfig)\n```\nBuild the documentation site from a QuartoConfig struct.\nThis is the config-based alternative to quarto_build_site(module_name; kwargs...). Supports all pkgdown-like features including grouped references, multiple sections, news, etc.\n\nArguments\n\nconfig::QuartoConfig: Full configuration struct\n\n\n\nExample (with multiple sections)\n```{julia}\n\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"user/MyPackage.jl\",\n    reference = [\n        ReferenceGroup(title=\"Core\", contents=[:main_func]),\n        ReferenceGroup(title=\"Utils\", contents=[starts_with(\"util_\")])\n    ],\n    sections = [\n        SectionConfig(title=\"Tutorials\", dir=\"tutorials\", order=1),\n        SectionConfig(title=\"Explanation\", dir=\"explanation\", order=2),\n        SectionConfig(title=\"How-to Guides\", dir=\"how-to\", order=3)\n    ],\n    theme = ThemeConfig(bootswatch=\"cosmo\", dark_mode=true)\n)\nquarto_build_site(config)\n```",
-    "crumbs": [
-      "Reference",
-      "quarto_build_site"
-    ]
-  },
-  {
-    "objectID": "reference/linkify_github_refs.html",
-    "href": "reference/linkify_github_refs.html",
-    "title": "linkify_github_refs",
-    "section": "",
-    "text": "linkify_github_refs\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nlinkify_github_refs(text::String, repo::String) -&gt; String\n```\nConvert GitHub references in text to clickable links.\nConverts:\n\n#123 -&gt; [#123](https://github.com/repo/issues/123)\n@username -&gt; [@username](https://github.com/username)\nuser/repo#123 -&gt; [user/repo#123](https://github.com/user/repo/issues/123)\n\n\nArguments\n\ntext::String: Text containing references\nrepo::String: Repository in “user/repo” format\n\n\n\nReturns\nText with references converted to markdown links.\n\n\nExample\n```{julia}\n\ntext = \"Fixed bug #42 reported by @user\"\nlinkify_github_refs(text, \"myorg/mypackage\")\n# \"Fixed bug [#42](https://github.com/myorg/mypackage/issues/42) reported by [@user](https://github.com/user)\"\n```",
-    "crumbs": [
-      "Reference",
-      "linkify_github_refs"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "QuartoDocBuilder.jl",
-    "section": "",
-    "text": "QuartoDocBuilder.jl\nQuartoDocBuilder.jl is a package inspired by R pkgdown. It provides an easy way to generate a website with documentation and vignettes, by creating a Quarto project.\nBeing powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted. This website doc even has a comment section! Check some examples here and the complete list of options here.\nThe Quarto website itself is written with Quarto! Check the github repo here to get some inspiration.\n\n\nHow to use\nSee the tutorials at https://vituri.github.io/QuartoDocBuilder.jl/tutorials.html."
-  },
-  {
-    "objectID": "reference/ReferenceIndex.html",
-    "href": "reference/ReferenceIndex.html",
-    "title": "ReferenceIndex",
-    "section": "",
-    "text": "ReferenceIndex\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nReferenceIndex\n```\nIndex of function names to their documentation URLs.",
-    "crumbs": [
-      "Reference",
-      "ReferenceIndex"
-    ]
-  },
-  {
-    "objectID": "reference/get_article_title.html",
-    "href": "reference/get_article_title.html",
-    "title": "get_article_title",
-    "section": "",
-    "text": "get_article_title\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nget_article_title(filepath::String) -&gt; String\n```\nExtract the title from an article’s YAML frontmatter or first header.\n\nArguments\n\nfilepath::String: Path to the .qmd file\n\n\n\nReturns\nThe article title, or the filename (without extension) as fallback.",
-    "crumbs": [
-      "Reference",
-      "get_article_title"
-    ]
-  },
-  {
-    "objectID": "reference/load_config.html",
-    "href": "reference/load_config.html",
-    "title": "load_config",
-    "section": "",
-    "text": "load_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nload_config(path::String=\"_quartodoc.toml\") -&gt; Union{QuartoConfig, Nothing}\n```\nLoad configuration from a TOML file. Returns nothing if the file doesn’t exist.\n\nArguments\n\npath::String: Path to the TOML configuration file\n\n\n\nExample\n```{julia}\n\nconfig = load_config(\"_quartodoc.toml\")\nif config !== nothing\n    quarto_build_site(config)\nend\n```",
-    "crumbs": [
-      "Reference",
-      "load_config"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_makejl_template.html",
-    "href": "reference/quarto_makejl_template.html",
-    "title": "quarto_makejl_template",
-    "section": "",
-    "text": "quarto_makejl_template\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_makejl_template(module_name::Module; config_file::String=\"\")\n```\nGenerate a docs/make.jl template file.\n\nArguments\n\nmodule_name::Module: The module being documented\nconfig_file::String: Optional path to configuration file\n\n\n\nExample\n```{julia}\n\nquarto_makejl_template(MyPackage)\n# Creates docs/make.jl\n```",
-    "crumbs": [
-      "Reference",
-      "quarto_makejl_template"
-    ]
-  },
-  {
-    "objectID": "reference/create_article_template.html",
-    "href": "reference/create_article_template.html",
-    "title": "create_article_template",
-    "section": "",
-    "text": "create_article_template\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\ncreate_article_template(filepath::String; title::String=\"\", order::Int=999)\n```\nCreate a template article file.\n\nArguments\n\nfilepath::String: Path where to create the article\ntitle::String: Article title\norder::Int: Sort order",
-    "crumbs": [
-      "Reference",
-      "create_article_template"
-    ]
-  },
-  {
-    "objectID": "reference/find_undefined_references.html",
-    "href": "reference/find_undefined_references.html",
-    "title": "find_undefined_references",
-    "section": "",
-    "text": "find_undefined_references\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nfind_undefined_references(text::String, index::ReferenceIndex) -&gt; Vector{String}\n```\nFind all backtick-quoted identifiers that don’t have documentation. Useful for identifying missing documentation.\n\nArguments\n\ntext::String: Text to scan\nindex::ReferenceIndex: Reference index\n\n\n\nReturns\nVector of undefined reference names.",
-    "crumbs": [
-      "Reference",
-      "find_undefined_references"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_yaml_from_config.html",
-    "href": "reference/quarto_yaml_from_config.html",
-    "title": "quarto_yaml_from_config",
-    "section": "",
-    "text": "quarto_yaml_from_config\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_yaml_from_config(config::QuartoConfig; force::Bool=false)\n```\nGenerate the _quarto.yml file from a QuartoConfig struct.\nSupports:\n\nLight/dark mode toggle\nDropdown menus for articles\nCustom navbar items\nCustom footer\nTheme pairing (light/dark themes)\n\n\nArguments\n\nconfig::QuartoConfig: Configuration struct\nforce::Bool: Overwrite existing file if true (default: false)",
-    "crumbs": [
-      "Reference",
-      "quarto_yaml_from_config"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_yaml.html",
-    "href": "reference/quarto_yaml.html",
-    "title": "quarto_yaml",
-    "section": "",
-    "text": "quarto_yaml\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_yaml(\n  module_name\n  ;output_dir = \"site\"\n  ,freeze = \"auto\"\n  ,cache = \"true\"\n  ,warning = \"false\"\n  ,comments = \"true\"\n  ,repo = \"USERNAME/REPOSITORY\"\n  ,theme = \"flatly\"\n  )\n```\nGenerate the _quarto.yaml file.\n\nArguments\n\nmodule_name: the name of the current module.\noutput_dir: the directory of the output, inside /docs/ .\nfreeze, cache, warning: execution options in Quarto.\ncomments: if the comment section with Discus is enabled.\nrepo: string in the format USERNAME/REPOSITORY so your comment section work with Discus. Also used to make the github icon.\ntheme: one of the bootswatch themes available in Quarto.\n\n\n\nDetails\nThis function creates the docs/_quarto.yaml file. See https://quarto.org/docs/reference/projects/websites.html for more details.",
-    "crumbs": [
-      "Reference",
-      "quarto_yaml"
-    ]
-  },
-  {
-    "objectID": "reference/SectionConfig.html",
-    "href": "reference/SectionConfig.html",
-    "title": "SectionConfig",
-    "section": "",
-    "text": "SectionConfig\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nConfiguration for a navbar section (supports multiple dropdowns).\nEach section can have its own directory of .qmd files that appear as a dropdown in the navbar and as a sidebar when browsing that section.\n\nFields\n\ntitle::String: Display title in navbar (required)\ndir::String: Directory containing .qmd files for this section\ndesc::String: Description for the section index page\ndropdown::Bool: Whether to show as dropdown menu (default: true)\ndropdown_limit::Int: Max items before falling back to index link (default: 15)\nindex_file::String: Name of index file (default: “{dir}.qmd” in docs/)\nsidebar::Bool: Whether to show sidebar when in this section (default: true)\norder::Int: Order in navbar (lower = more left, default: 100)\n\n\n\nExample\n```{julia}\n\nsections = [\n    SectionConfig(title=\"Tutorials\", dir=\"tutorials\", order=1),\n    SectionConfig(title=\"Explanation\", dir=\"explanation\", order=2),\n    SectionConfig(title=\"How-to Guides\", dir=\"how-to\", order=3, dropdown_limit=20)\n]\n```",
-    "crumbs": [
-      "Reference",
-      "SectionConfig"
-    ]
-  },
-  {
-    "objectID": "reference/create_reference_report.html",
-    "href": "reference/create_reference_report.html",
-    "title": "create_reference_report",
-    "section": "",
-    "text": "create_reference_report\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\ncreate_reference_report(module_name::Module) -&gt; String\n```\nGenerate a report of all documented functions and their reference URLs.\n\nArguments\n\nmodule_name::Module: Module to analyze\n\n\n\nReturns\nMarkdown-formatted report.",
-    "crumbs": [
-      "Reference",
-      "create_reference_report"
-    ]
-  },
-  {
-    "objectID": "reference/detect_repo.html",
-    "href": "reference/detect_repo.html",
-    "title": "detect_repo",
-    "section": "",
-    "text": "detect_repo\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\ndetect_repo() -&gt; String\n```\nTry to detect the GitHub repository from git remote. Returns empty string if not found.",
-    "crumbs": [
-      "Reference",
-      "detect_repo"
-    ]
-  },
-  {
-    "objectID": "reference/has_news.html",
-    "href": "reference/has_news.html",
-    "title": "has_news",
-    "section": "",
-    "text": "has_news\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nhas_news(config::QuartoConfig) -&gt; Bool\n```\nCheck if a NEWS.md file exists.\n\nArguments\n\nconfig::QuartoConfig: Configuration with news_file path",
-    "crumbs": [
-      "Reference",
-      "has_news"
-    ]
-  },
-  {
-    "objectID": "reference/is_function_symbol.html",
-    "href": "reference/is_function_symbol.html",
-    "title": "is_function_symbol",
-    "section": "",
-    "text": "is_function_symbol\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nis_function_symbol(module_name::Module) -&gt; Function\n```\nCreate a selector that matches function symbols.",
-    "crumbs": [
-      "Reference",
-      "is_function_symbol"
-    ]
-  },
-  {
-    "objectID": "reference/quarto_github_action_simple.html",
-    "href": "reference/quarto_github_action_simple.html",
-    "title": "quarto_github_action_simple",
-    "section": "",
-    "text": "quarto_github_action_simple\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_github_action_simple(; kwargs...)\n```\nGenerate a simpler GitHub Actions workflow using gh-pages branch deployment. This is the traditional approach that doesn’t require GitHub Pages configuration.\n\nArguments\n\nbranch::String: Branch to deploy to (default: “gh-pages”)\nquarto_version::String: Quarto version to use (default: “pre-release”)\njulia_version::String: Julia version to use (default: “1”)\noutput_dir::String: Output directory from Quarto (default: “site”)",
-    "crumbs": [
-      "Reference",
-      "quarto_github_action_simple"
+      "ArticleInfo"
     ]
   },
   {
@@ -1089,7 +1034,7 @@
     "href": "reference/has_docstring.html",
     "title": "has_docstring",
     "section": "",
-    "text": "has_docstring\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nhas_docstring(module_name::Module) -&gt; Function\n```\nCreate a selector that matches symbols with documentation.\n\nExample\n```{julia}\n\nselector = has_docstring(MyModule)\nselector(:documented_func)    # true if has docstring\nselector(:undocumented_func)  # false\n```",
+    "text": "has_docstring\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nhas_docstring(module_name::Module) -&gt; Function\nCreate a selector that matches symbols with documentation.\n\nExample\nselector = has_docstring(MyModule)\nselector(:documented_func)    # true if has docstring\nselector(:undocumented_func)  # false",
     "crumbs": [
       "Reference",
       "has_docstring"
@@ -1100,7 +1045,7 @@
     "href": "reference/quarto_rebuild_reference.html",
     "title": "quarto_rebuild_reference",
     "section": "",
-    "text": "quarto_rebuild_reference\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_rebuild_reference(module_name::Module)\nquarto_rebuild_reference(config::QuartoConfig)\n```\nRebuild only the reference pages (individual function docs and index). Useful for updating docs without regenerating the entire site.",
+    "text": "quarto_rebuild_reference\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_rebuild_reference(module_name::Module)\nquarto_rebuild_reference(config::QuartoConfig)\nRebuild only the reference pages (individual function docs and index). Useful for updating docs without regenerating the entire site.",
     "crumbs": [
       "Reference",
       "quarto_rebuild_reference"
@@ -1111,7 +1056,7 @@
     "href": "reference/is_type_symbol.html",
     "title": "is_type_symbol",
     "section": "",
-    "text": "is_type_symbol\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nis_type_symbol(module_name::Module) -&gt; Function\n```\nCreate a selector that matches type/struct symbols.",
+    "text": "is_type_symbol\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nis_type_symbol(module_name::Module) -&gt; Function\nCreate a selector that matches type/struct symbols.",
     "crumbs": [
       "Reference",
       "is_type_symbol"
@@ -1122,7 +1067,7 @@
     "href": "reference/discover_articles.html",
     "title": "discover_articles",
     "section": "",
-    "text": "discover_articles\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\ndiscover_articles(dir::String=\"docs/articles\") -&gt; Vector{String}\n```\nAuto-discover .qmd article files in the specified directory. Returns paths relative to the docs directory.\n\nArguments\n\ndir::String: Directory to search for articles\n\n\n\nReturns\nVector of article file paths, sorted alphabetically.\n\n\nExample\n```{julia}\n\narticles = discover_articles(\"docs/articles\")\n# [\"articles/getting-started.qmd\", \"articles/advanced.qmd\"]\n```",
+    "text": "discover_articles\n\n\n\n\n\n\ndocblock\n\n\n\n\n\ndiscover_articles(dir::String=\"docs/articles\") -&gt; Vector{String}\nAuto-discover .qmd article files in the specified directory. Returns paths relative to the docs directory.\n\nArguments\n\ndir::String: Directory to search for articles\n\n\n\nReturns\nVector of article file paths, sorted alphabetically.\n\n\nExample\narticles = discover_articles(\"docs/articles\")\n# [\"articles/getting-started.qmd\", \"articles/advanced.qmd\"]",
     "crumbs": [
       "Reference",
       "discover_articles"
@@ -1133,7 +1078,7 @@
     "href": "reference/detect_get_started.html",
     "title": "detect_get_started",
     "section": "",
-    "text": "detect_get_started\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\ndetect_get_started(module_name::Module; dir::String=\"docs/articles\") -&gt; Union{String, Nothing}\n```\nFind a “Get Started” article by looking for files matching common naming patterns.\nSearches for (in order):\n\n{module_name}.qmd (package name)\nget-started.qmd\ngetting-started.qmd\nquickstart.qmd\nintroduction.qmd\nintro.qmd\n\n\nArguments\n\nmodule_name::Module: The module being documented\ndir::String: Directory containing articles\n\n\n\nReturns\nPath to the “Get Started” article, or nothing if not found.\n\n\nExample\n```{julia}\n\nget_started = detect_get_started(MyPackage)\n# \"articles/mypackage.qmd\" or nothing\n```",
+    "text": "detect_get_started\n\n\n\n\n\n\ndocblock\n\n\n\n\n\ndetect_get_started(module_name::Module; dir::String=\"docs/articles\") -&gt; Union{String, Nothing}\nFind a “Get Started” article by looking for files matching common naming patterns.\nSearches for (in order):\n\n{module_name}.qmd (package name)\nget-started.qmd\ngetting-started.qmd\nquickstart.qmd\nintroduction.qmd\nintro.qmd\n\n\nArguments\n\nmodule_name::Module: The module being documented\ndir::String: Directory containing articles\n\n\n\nReturns\nPath to the “Get Started” article, or nothing if not found.\n\n\nExample\nget_started = detect_get_started(MyPackage)\n# \"articles/mypackage.qmd\" or nothing",
     "crumbs": [
       "Reference",
       "detect_get_started"
@@ -1144,7 +1089,7 @@
     "href": "reference/get_dark_theme.html",
     "title": "get_dark_theme",
     "section": "",
-    "text": "get_dark_theme\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nget_dark_theme(light_theme::String) -&gt; String\n```\nGet the corresponding dark theme for a light Bootswatch theme.",
+    "text": "get_dark_theme\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nget_dark_theme(light_theme::String) -&gt; String\nGet the corresponding dark theme for a light Bootswatch theme.",
     "crumbs": [
       "Reference",
       "get_dark_theme"
@@ -1155,7 +1100,7 @@
     "href": "reference/QuartoDocBuilder.html",
     "title": "QuartoDocBuilder",
     "section": "",
-    "text": "QuartoDocBuilder\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nQuartoDocBuilder\n```\nA Julia package for building documentation websites using Quarto, inspired by R’s pkgdown package.\n\nFeatures\n\nGenerate documentation from Julia docstrings\nOrganized reference pages with grouping\nMultiple navbar sections with dropdowns\nArticles/vignettes support\nChangelog generation from NEWS.md\nGitHub Actions integration\nCustomizable themes and navigation\nOptional default styles (applied when no theme is specified)\n\n\n\nQuick Start\n```{julia}\n\nusing MyPackage\nusing QuartoDocBuilder\n\n# Simple usage (uses default styles)\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"user/MyPackage.jl\"\n)\nquarto_build_site(config)\n\n# With Quarto theme (default styles NOT applied)\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"user/MyPackage.jl\",\n    theme = ThemeConfig(bootswatch=\"flatly\", dark_mode=true)\n)\nquarto_build_site(config)\n\n# With multiple sections\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"user/MyPackage.jl\",\n    reference = [\n        ReferenceGroup(title=\"Core\", contents=[:main_func]),\n        ReferenceGroup(title=\"Utils\", contents=[starts_with(\"util_\")])\n    ],\n    sections = [\n        SectionConfig(title=\"Tutorials\", dir=\"tutorials\", order=1),\n        SectionConfig(title=\"Explanation\", dir=\"explanation\", order=2),\n        SectionConfig(title=\"How-to Guides\", dir=\"how-to\", order=3)\n    ]\n)\nquarto_build_site(config)\n```",
+    "text": "QuartoDocBuilder\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nQuartoDocBuilder\nA Julia package for building documentation websites using Quarto, inspired by R’s pkgdown package.\n\nFeatures\n\nGenerate documentation from Julia docstrings\nOrganized reference pages with grouping\nMultiple navbar sections with dropdowns\nArticles/vignettes support\nChangelog generation from NEWS.md\nGitHub Actions integration\nCustomizable themes and navigation\nOptional default styles (applied when no theme is specified)\n\n\n\nQuick Start\nusing MyPackage\nusing QuartoDocBuilder\n\n# Simple usage (uses default styles)\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"user/MyPackage.jl\"\n)\nquarto_build_site(config)\n\n# With Quarto theme (default styles NOT applied)\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"user/MyPackage.jl\",\n    theme = ThemeConfig(bootswatch=\"flatly\", dark_mode=true)\n)\nquarto_build_site(config)\n\n# With multiple sections\nconfig = QuartoConfig(\n    module_name = MyPackage,\n    repo = \"user/MyPackage.jl\",\n    reference = [\n        ReferenceGroup(title=\"Core\", contents=[:main_func]),\n        ReferenceGroup(title=\"Utils\", contents=[starts_with(\"util_\")])\n    ],\n    sections = [\n        SectionConfig(title=\"Tutorials\", dir=\"tutorials\", order=1),\n        SectionConfig(title=\"Explanation\", dir=\"explanation\", order=2),\n        SectionConfig(title=\"How-to Guides\", dir=\"how-to\", order=3)\n    ]\n)\nquarto_build_site(config)",
     "crumbs": [
       "Reference",
       "QuartoDocBuilder"
@@ -1166,7 +1111,7 @@
     "href": "reference/parse_news.html",
     "title": "parse_news",
     "section": "",
-    "text": "parse_news\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nparse_news(path::String=\"NEWS.md\") -&gt; Vector{NewsVersion}\n```\nParse NEWS.md into structured version entries.\nSupports common formats:\n\n# Package 1.0.0 (2024-01-15)\n# v1.0.0\n## Version 1.0.0\n# 1.0.0 - 2024-01-15 Categories are identified by level-2 headers (##).\n\n\nArguments\n\npath::String: Path to the NEWS.md file\n\n\n\nReturns\nVector of NewsVersion structs, most recent first.\n\n\nExample\n```{julia}\n\nversions = parse_news(\"NEWS.md\")\nfor v in versions\n    println(\"Version $(v.version)\")\n    for (cat, items) in v.categories\n        println(\"  $cat: $(length(items)) items\")\n    end\nend\n```",
+    "text": "parse_news\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nparse_news(path::String=\"NEWS.md\") -&gt; Vector{NewsVersion}\nParse NEWS.md into structured version entries.\nSupports common formats:\n\n# Package 1.0.0 (2024-01-15)\n# v1.0.0\n## Version 1.0.0\n# 1.0.0 - 2024-01-15 Categories are identified by level-2 headers (##).\n\n\nArguments\n\npath::String: Path to the NEWS.md file\n\n\n\nReturns\nVector of NewsVersion structs, most recent first.\n\n\nExample\nversions = parse_news(\"NEWS.md\")\nfor v in versions\n    println(\"Version $(v.version)\")\n    for (cat, items) in v.categories\n        println(\"  $cat: $(length(items)) items\")\n    end\nend",
     "crumbs": [
       "Reference",
       "parse_news"
@@ -1177,7 +1122,7 @@
     "href": "reference/quarto_rebuild_all.html",
     "title": "quarto_rebuild_all",
     "section": "",
-    "text": "quarto_rebuild_all\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_rebuild_all(module_name::Module; kwargs...)\nquarto_rebuild_all(config::QuartoConfig)\n```\nRebuild the entire documentation site, overwriting existing files.\n\n\n\n\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_rebuild_all(config::QuartoConfig)\n```\nRebuild the entire documentation site, overwriting existing files.",
+    "text": "quarto_rebuild_all\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_rebuild_all(config::QuartoConfig)\nRebuild the entire documentation site, overwriting existing files.",
     "crumbs": [
       "Reference",
       "quarto_rebuild_all"
@@ -1188,54 +1133,43 @@
     "href": "reference/get_objects_from_module.html",
     "title": "get_objects_from_module",
     "section": "",
-    "text": "get_objects_from_module\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nget_objects_from_module(m::Module) -&gt; Vector{Docs.Binding}\n```\nGet all documented objects from a module using Base.Docs.meta(). Returns a vector of Docs.Binding objects (preserving module context).",
+    "text": "get_objects_from_module\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nget_objects_from_module(m::Module) -&gt; Vector{Docs.Binding}\nGet all documented objects from a module using Base.Docs.meta(). Returns a vector of Docs.Binding objects (preserving module context).",
     "crumbs": [
       "Reference",
       "get_objects_from_module"
     ]
   },
   {
-    "objectID": "reference/get_article_info.html",
-    "href": "reference/get_article_info.html",
-    "title": "get_article_info",
+    "objectID": "reference/quarto_index.html",
+    "href": "reference/quarto_index.html",
+    "title": "quarto_index",
     "section": "",
-    "text": "get_article_info\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nget_article_info(filepath::String) -&gt; ArticleInfo\n```\nExtract metadata from an article file.\n\nArguments\n\nfilepath::String: Path to the .qmd file",
+    "text": "quarto_index\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_index(; title::String=\"\")\nGenerate the index.qmd file from README.md with proper YAML front matter.\n\nArguments\n\ntitle::String: Title for the page (shown in browser tab). Defaults to “Home”.",
     "crumbs": [
       "Reference",
-      "get_article_info"
+      "quarto_index"
     ]
   },
   {
-    "objectID": "reference/auto_group_objects.html",
-    "href": "reference/auto_group_objects.html",
-    "title": "auto_group_objects",
+    "objectID": "reference/parse_content_selector.html",
+    "href": "reference/parse_content_selector.html",
+    "title": "parse_content_selector",
     "section": "",
-    "text": "auto_group_objects\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nauto_group_objects(module_name::Module) -&gt; Vector{Tuple{ReferenceGroup, Vector{Symbol}}}\n```\nAutomatically group objects by type (functions, types, constants). Used as fallback when no custom grouping is specified.\n\nArguments\n\nmodule_name::Module: Module to analyze",
+    "text": "parse_content_selector\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nparse_content_selector(s::String) -&gt; Union{Symbol, Function}\nParse a content selector string into a selector function or symbol.\nSupported formats:\n\n\"function_name\" -&gt; Symbol(:function_name)\n\"starts_with:prefix\" -&gt; starts_with(“prefix”)\n\"ends_with:suffix\" -&gt; ends_with(“suffix”)\n\"matches:pattern\" -&gt; matches(“pattern”)\n\"contains:substring\" -&gt; contains(“substring”)\n\n\nExample\nsel = parse_content_selector(\"starts_with:process_\")\nsel(:process_data)  # true\n\nsym = parse_content_selector(\"my_function\")\nsym  # :my_function",
     "crumbs": [
       "Reference",
-      "auto_group_objects"
+      "parse_content_selector"
     ]
   },
   {
-    "objectID": "reference/starts_with.html",
-    "href": "reference/starts_with.html",
-    "title": "starts_with",
+    "objectID": "reference/FooterConfig.html",
+    "href": "reference/FooterConfig.html",
+    "title": "FooterConfig",
     "section": "",
-    "text": "starts_with\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nstarts_with(prefix::String) -&gt; Function\n```\nCreate a selector that matches symbols starting with prefix.\n\nExample\n```{julia}\n\n# Match functions like `process_data`, `process_file`\nselector = starts_with(\"process_\")\nselector(:process_data)  # true\nselector(:other_func)    # false\n```",
+    "text": "FooterConfig\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nConfiguration for page footer.\n\nFields\n\nleft::String: Left section content (markdown supported)\ncenter::String: Center section content\nright::String: Right section content",
     "crumbs": [
       "Reference",
-      "starts_with"
-    ]
-  },
-  {
-    "objectID": "reference/create_articles_directory.html",
-    "href": "reference/create_articles_directory.html",
-    "title": "create_articles_directory",
-    "section": "",
-    "text": "create_articles_directory\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\ncreate_articles_directory(config::QuartoConfig)\n```\nCreate the articles directory structure if it doesn’t exist.\n\nArguments\n\nconfig::QuartoConfig: Configuration",
-    "crumbs": [
-      "Reference",
-      "create_articles_directory"
+      "FooterConfig"
     ]
   },
   {
@@ -1243,7 +1177,7 @@
     "href": "reference/news_summary.html",
     "title": "news_summary",
     "section": "",
-    "text": "news_summary\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nnews_summary(config::QuartoConfig) -&gt; String\n```\nGet a brief summary of the latest version from NEWS.md. Useful for including in the README or homepage.\n\nArguments\n\nconfig::QuartoConfig: Configuration\n\n\n\nReturns\nA markdown string with the latest version info, or empty string if no news.",
+    "text": "news_summary\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nnews_summary(config::QuartoConfig) -&gt; String\nGet a brief summary of the latest version from NEWS.md. Useful for including in the README or homepage.\n\nArguments\n\nconfig::QuartoConfig: Configuration\n\n\n\nReturns\nA markdown string with the latest version info, or empty string if no news.",
     "crumbs": [
       "Reference",
       "news_summary"
@@ -1254,7 +1188,7 @@
     "href": "reference/quarto_docs_project_toml.html",
     "title": "quarto_docs_project_toml",
     "section": "",
-    "text": "quarto_docs_project_toml\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_docs_project_toml(module_name::Module)\n```\nGenerate a docs/Project.toml for the documentation environment.\n\nArguments\n\nmodule_name::Module: The module being documented",
+    "text": "quarto_docs_project_toml\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_docs_project_toml(module_name::Module)\nGenerate a docs/Project.toml for the documentation environment.\n\nArguments\n\nmodule_name::Module: The module being documented",
     "crumbs": [
       "Reference",
       "quarto_docs_project_toml"
@@ -1265,32 +1199,21 @@
     "href": "reference/quarto_setup_instructions.html",
     "title": "quarto_setup_instructions",
     "section": "",
-    "text": "quarto_setup_instructions\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_setup_instructions() -&gt; String\n```\nReturn setup instructions for GitHub Pages deployment.",
+    "text": "quarto_setup_instructions\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_setup_instructions() -&gt; String\nReturn setup instructions for GitHub Pages deployment.",
     "crumbs": [
       "Reference",
       "quarto_setup_instructions"
     ]
   },
   {
-    "objectID": "reference/quarto_styles.html",
-    "href": "reference/quarto_styles.html",
-    "title": "quarto_styles",
+    "objectID": "reference/apply_selector.html",
+    "href": "reference/apply_selector.html",
+    "title": "apply_selector",
     "section": "",
-    "text": "quarto_styles\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_styles()\n```\nCreate the docs/styles.css file with some suggested css classes.",
+    "text": "apply_selector\n\n\n\n\n\n\ndocblock\n\n\n\n\n\napply_selector(selector, symbols::Vector{Symbol}) -&gt; Vector{Symbol}\nApply a selector to filter a vector of symbols.\n\nArguments\n\nselector: A Symbol, Function, or String\nsymbols::Vector{Symbol}: Symbols to filter\n\n\n\nReturns\nVector of symbols that match the selector.",
     "crumbs": [
       "Reference",
-      "quarto_styles"
-    ]
-  },
-  {
-    "objectID": "reference/filter_objects.html",
-    "href": "reference/filter_objects.html",
-    "title": "filter_objects",
-    "section": "",
-    "text": "filter_objects\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nfilter_objects(module_name::Module, selectors::Vector) -&gt; Vector{Symbol}\n```\nFilter module objects using a list of selectors. Applies selectors in order and returns unique matches.\n\nArguments\n\nmodule_name::Module: Module to get symbols from\nselectors::Vector: List of selectors (Symbols, Functions, or Strings)\n\n\n\nExample\n```{julia}\n\n# Get all functions starting with \"process_\" or ending with \"_util\"\nsymbols = filter_objects(MyModule, [starts_with(\"process_\"), ends_with(\"_util\")])\n```",
-    "crumbs": [
-      "Reference",
-      "filter_objects"
+      "apply_selector"
     ]
   },
   {
@@ -1298,7 +1221,7 @@
     "href": "reference/quarto_github_action.html",
     "title": "quarto_github_action",
     "section": "",
-    "text": "quarto_github_action\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nquarto_github_action(; kwargs...)\n```\nGenerate a GitHub Actions workflow for building and deploying documentation.\n\nArguments\n\nquarto_version::String: Quarto version to use (default: “pre-release” for Julia support)\njulia_version::String: Julia version to use (default: “1”)\noutput_dir::String: Output directory from Quarto (default: “site”)\ntrigger_branches::Vector{String}: Branches that trigger deployment (default: [“main”, “master”])\n\n\n\nExample\n```{julia}\n\nquarto_github_action()\n# Creates .github/workflows/docs.yml\n\nquarto_github_action(julia_version=\"1.10\")\n```",
+    "text": "quarto_github_action\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nquarto_github_action(; kwargs...)\nGenerate a GitHub Actions workflow for building and deploying documentation.\n\nArguments\n\nquarto_version::String: Quarto version to use (default: “pre-release” for Julia support)\njulia_version::String: Julia version to use (default: “1”)\noutput_dir::String: Output directory from Quarto (default: “site”)\ntrigger_branches::Vector{String}: Branches that trigger deployment (default: [“main”, “master”])\n\n\n\nExample\nquarto_github_action()\n# Creates .github/workflows/docs.yml\n\nquarto_github_action(julia_version=\"1.10\")",
     "crumbs": [
       "Reference",
       "quarto_github_action"
@@ -1309,7 +1232,7 @@
     "href": "reference/setup_documentation.html",
     "title": "setup_documentation",
     "section": "",
-    "text": "setup_documentation\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nsetup_documentation(module_name::Module; repo::String=\"\", kwargs...)\n```\nOne-stop setup for documentation infrastructure.\nCreates:\n\ndocs/make.jl\ndocs/Project.toml\n.github/workflows/docs.yml\nInitial documentation structure\n\n\nArguments\n\nmodule_name::Module: The module to document\nrepo::String: GitHub repository in “user/repo” format\nAdditional kwargs passed to quarto_build_site\n\n\n\nExample\n```{julia}\n\nsetup_documentation(MyPackage; repo=\"myuser/MyPackage.jl\")\n```",
+    "text": "setup_documentation\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nsetup_documentation(module_name::Module; repo::String=\"\", kwargs...)\nOne-stop setup for documentation infrastructure.\nCreates:\n\ndocs/make.jl\ndocs/Project.toml\n.github/workflows/docs.yml\nInitial documentation structure\n\n\nArguments\n\nmodule_name::Module: The module to document\nrepo::String: GitHub repository in “user/repo” format\nAdditional kwargs passed to quarto_build_site\n\n\n\nExample\nsetup_documentation(MyPackage; repo=\"myuser/MyPackage.jl\")",
     "crumbs": [
       "Reference",
       "setup_documentation"
@@ -1331,7 +1254,7 @@
     "href": "reference/discover_articles_recursive.html",
     "title": "discover_articles_recursive",
     "section": "",
-    "text": "discover_articles_recursive\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\ndiscover_articles_recursive(dir::String=\"docs/articles\") -&gt; Vector{String}\n```\nRecursively discover .qmd article files in the specified directory and subdirectories.\n\nArguments\n\ndir::String: Root directory to search\n\n\n\nReturns\nVector of article file paths, sorted alphabetically.",
+    "text": "discover_articles_recursive\n\n\n\n\n\n\ndocblock\n\n\n\n\n\ndiscover_articles_recursive(dir::String=\"docs/articles\") -&gt; Vector{String}\nRecursively discover .qmd article files in the specified directory and subdirectories.\n\nArguments\n\ndir::String: Root directory to search\n\n\n\nReturns\nVector of article file paths, sorted alphabetically.",
     "crumbs": [
       "Reference",
       "discover_articles_recursive"
@@ -1342,7 +1265,7 @@
     "href": "reference/NewsVersion.html",
     "title": "NewsVersion",
     "section": "",
-    "text": "NewsVersion\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nNewsVersion\n```\nRepresents a version entry in NEWS.md.\n\nFields\n\nversion::String: Version number (e.g., “1.0.0”)\ndate::String: Release date (if available)\ncategories::Dict{String, Vector{String}}: Categories and their items",
+    "text": "NewsVersion\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nNewsVersion\nRepresents a version entry in NEWS.md.\n\nFields\n\nversion::String: Version number (e.g., “1.0.0”)\ndate::String: Release date (if available)\ncategories::Dict{String, Vector{String}}: Categories and their items",
     "crumbs": [
       "Reference",
       "NewsVersion"
@@ -1353,7 +1276,7 @@
     "href": "reference/autolink_cross_package.html",
     "title": "autolink_cross_package",
     "section": "",
-    "text": "autolink_cross_package\n\n\n\n\n\n\ndocblock\n\n\n\n\n\n```{julia}\n\nautolink_cross_package(text::String, packages::Dict{String, ReferenceIndex}) -&gt; String\n```\nLink references to multiple packages.\n\nArguments\n\ntext::String: Text containing references\npackages::Dict{String, ReferenceIndex}: Map of package names to their indices\n\n\n\nExample\n```{julia}\n\npackages = Dict(\n    \"Base\" =&gt; build_reference_index(Base),\n    \"MyPkg\" =&gt; build_reference_index(MyPkg)\n)\nautolink_cross_package(text, packages)\n```",
+    "text": "autolink_cross_package\n\n\n\n\n\n\ndocblock\n\n\n\n\n\nautolink_cross_package(text::String, packages::Dict{String, ReferenceIndex}) -&gt; String\nLink references to multiple packages.\n\nArguments\n\ntext::String: Text containing references\npackages::Dict{String, ReferenceIndex}: Map of package names to their indices\n\n\n\nExample\npackages = Dict(\n    \"Base\" =&gt; build_reference_index(Base),\n    \"MyPkg\" =&gt; build_reference_index(MyPkg)\n)\nautolink_cross_package(text, packages)",
     "crumbs": [
       "Reference",
       "autolink_cross_package"

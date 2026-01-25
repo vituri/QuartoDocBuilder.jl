@@ -415,18 +415,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/build_articles_navbar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">build_articles_navbar</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/build_articles_yaml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">build_articles_yaml</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../reference/build_reference_index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">build_reference_index</span></a>
   </div>
@@ -441,12 +429,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../reference/create_article_template.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">create_article_template</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/create_articles_directory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">create_articles_directory</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -655,18 +637,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_articles_index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_articles_index</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_articles_index_manual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_articles_index_manual</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../reference/quarto_build_refpage.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_build_refpage</span></a>
   </div>
@@ -769,20 +739,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_styles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_styles</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../reference/quarto_styles_from_config.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_styles_from_config</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../reference/quarto_yaml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">quarto_yaml</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -886,10 +844,7 @@ docblock
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{julia}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_refpage_grouped</span>(module_name<span class="op">::</span><span class="dt">Module</span>, config<span class="op">::</span><span class="dt">QuartoConfig</span>; output<span class="op">::</span><span class="dt">String</span>=<span class="st">"docs/reference.qmd"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_refpage_grouped</span>(module_name<span class="op">::</span><span class="dt">Module</span>, config<span class="op">::</span><span class="dt">QuartoConfig</span>; output<span class="op">::</span><span class="dt">String</span>=<span class="st">"docs/reference.qmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Build a grouped reference page with sections, titles, and descriptions. Similar to pkgdown’s reference page organization.</p>
 <section id="arguments" class="level3">
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
@@ -901,17 +856,14 @@ docblock
 </section>
 <section id="example" class="level3">
 <h3 class="anchored" data-anchor-id="example">Example</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{julia}</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> <span class="fu">QuartoConfig</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    module_name <span class="op">=</span> MyModule,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    reference <span class="op">=</span> [</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ReferenceGroup</span>(title<span class="op">=</span><span class="st">"Core Functions"</span>, desc<span class="op">=</span><span class="st">"Main functionality"</span>, contents<span class="op">=</span>[<span class="op">:</span>func1, <span class="op">:</span>func2]),</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ReferenceGroup</span>(title<span class="op">=</span><span class="st">"Utilities"</span>, contents<span class="op">=</span>[<span class="fu">starts_with</span>(<span class="st">"util_"</span>)])</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_refpage_grouped</span>(MyModule, config)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> <span class="fu">QuartoConfig</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    module_name <span class="op">=</span> MyModule,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    reference <span class="op">=</span> [</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ReferenceGroup</span>(title<span class="op">=</span><span class="st">"Core Functions"</span>, desc<span class="op">=</span><span class="st">"Main functionality"</span>, contents<span class="op">=</span>[<span class="op">:</span>func1, <span class="op">:</span>func2]),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ReferenceGroup</span>(title<span class="op">=</span><span class="st">"Utilities"</span>, contents<span class="op">=</span>[<span class="fu">starts_with</span>(<span class="st">"util_"</span>)])</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_refpage_grouped</span>(MyModule, config)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </div>
 </div>
