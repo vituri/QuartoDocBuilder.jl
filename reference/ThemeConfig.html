@@ -855,7 +855,7 @@ docblock
 <section id="fields" class="level3">
 <h3 class="anchored" data-anchor-id="fields">Fields</h3>
 <ul>
-<li><code>bootswatch::String</code>: Bootswatch theme name (default: “flatly”)</li>
+<li><code>bootswatch::String</code>: Bootswatch theme name (default: “” = use default styles)</li>
 <li><code>dark_mode::Bool</code>: Enable light/dark mode toggle (default: true)</li>
 <li><code>primary::String</code>: Primary color (CSS color value)</li>
 <li><code>bg::String</code>: Background color</li>
@@ -867,7 +867,12 @@ docblock
 <li><code>code_highlight::String</code>: Syntax highlighting theme (default: “github”)</li>
 <li><code>custom_css::String</code>: Additional CSS to include</li>
 <li><code>custom_scss::String</code>: Additional SCSS variables</li>
+<li><code>use_default_styles::Bool</code>: Apply default QuartoDocBuilder CSS (default: true)</li>
 </ul>
+</section>
+<section id="notes" class="level3">
+<h3 class="anchored" data-anchor-id="notes">Notes</h3>
+<p>When <code>bootswatch</code> is empty (default), the default QuartoDocBuilder styles are applied. When any bootswatch theme is specified (e.g., “flatly”, “cosmo”), the default styles are NOT applied.</p>
 </section>
 </div>
 </div>
