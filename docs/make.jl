@@ -107,12 +107,12 @@ config = QuartoConfig(
     news = true,
     news_file = "NEWS.md",
 
-    # Theme configuration
-    theme = ThemeConfig(
-        bootswatch = "flatly",
-        dark_mode = true,
-        code_highlight = "github"
-    ),
+    # # Theme configuration
+    # theme = ThemeConfig(
+    #     bootswatch = "flatly",
+    #     dark_mode = true,
+    #     code_highlight = "github"
+    # ),
 
     # Giscus comments
     comments = true,

@@ -13,18 +13,25 @@ be evaluated.
 """
 function quarto_format(m::Markdown.Code, eval = false)
 
-    l = m.language        
+    l = m.language
     l ∈ ["jldoctest", ""] && (l = "julia")
-        
+
+    if eval == false
 """
 
-```{$l}
-#| eval: $eval
+```$l
 $(m.code)
-
 ```
-
 """
+    else
+"""
+```{$l}
+$(m.code)
+```
+"""
+    end
+        
+
 end
 
 """
@@ -127,17 +134,15 @@ function quarto_doc(b)
     z = Base.doc(b)
     ct = z.content
     
-    if ct[1] isa Markdown.Paragraph        
+    if ct[1] isa Markdown.Paragraph
       return  [
 """
 
-```{{julia}}
-
+```julia
 $(ct[2].content[1].code)
-
 ```
 
-No documentation found! :(
+No documentation found!
 """
         ]
     else 
@@ -189,14 +194,12 @@ function quarto_doc_short(b)
     if ct[1] isa Markdown.Paragraph
         return [
             """
-  
-  ```{{julia}}
-  
-  $(ct[2].content[1].code)
-  
-  ```
-  
-  No documentation found! :(
+
+```julia
+$(ct[2].content[1].code)
+```
+
+No documentation found! :(
             """
         ]
     else

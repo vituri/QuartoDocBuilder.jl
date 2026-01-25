@@ -89,7 +89,7 @@ end
 Configuration for theming and appearance.
 
 # Fields
-- `bootswatch::String`: Bootswatch theme name (default: "flatly")
+- `bootswatch::String`: Bootswatch theme name (default: "" = use default styles)
 - `dark_mode::Bool`: Enable light/dark mode toggle (default: true)
 - `primary::String`: Primary color (CSS color value)
 - `bg::String`: Background color
@@ -101,9 +101,14 @@ Configuration for theming and appearance.
 - `code_highlight::String`: Syntax highlighting theme (default: "github")
 - `custom_css::String`: Additional CSS to include
 - `custom_scss::String`: Additional SCSS variables
+- `use_default_styles::Bool`: Apply default QuartoDocBuilder CSS (default: true)
+
+# Notes
+When `bootswatch` is empty (default), the default QuartoDocBuilder styles are applied.
+When any bootswatch theme is specified (e.g., "flatly", "cosmo"), the default styles are NOT applied.
 """
 Base.@kwdef struct ThemeConfig
-    bootswatch::String = "flatly"
+    bootswatch::String = ""
     dark_mode::Bool = true
     primary::String = ""
     bg::String = ""
@@ -115,6 +120,7 @@ Base.@kwdef struct ThemeConfig
     code_highlight::String = "github"
     custom_css::String = ""
     custom_scss::String = ""
+    use_default_styles::Bool = true
 end
 
 """
@@ -351,7 +357,7 @@ function _toml_to_config(data::Dict)
     # Parse theme section
     theme_data = get(data, "theme", Dict())
     theme = ThemeConfig(
-        bootswatch = get(theme_data, "bootswatch", "flatly"),
+        bootswatch = get(theme_data, "bootswatch", ""),
         dark_mode = get(theme_data, "dark_mode", true),
         primary = get(theme_data, "primary", ""),
         bg = get(theme_data, "bg", ""),
@@ -362,7 +368,8 @@ function _toml_to_config(data::Dict)
         font_code = get(theme_data, "font_code", ""),
         code_highlight = get(theme_data, "code_highlight", "github"),
         custom_css = get(theme_data, "custom_css", ""),
-        custom_scss = get(theme_data, "custom_scss", "")
+        custom_scss = get(theme_data, "custom_scss", ""),
+        use_default_styles = get(theme_data, "use_default_styles", true)
     )
 
     # Parse footer section

@@ -51,11 +51,10 @@ Core functions for generating documentation sites.
 |----------|-------------|
 | [`quarto_build_refpage`](reference/quarto_build_refpage.qmd) | quarto_build_refpage(module_name; output = "docs/reference.qmd") |
 | [`quarto_build_refpage_grouped`](reference/quarto_build_refpage_grouped.qmd) | quarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String="docs/refe... |
-| [`quarto_build_site`](reference/quarto_build_site.qmd) | quarto_build_site(module_name; kwargs...) |
+| [`quarto_build_site`](reference/quarto_build_site.qmd) | quarto_build_site(config::QuartoConfig) |
 | [`quarto_index`](reference/quarto_index.qmd) | quarto_index() |
-| [`quarto_rebuild_all`](reference/quarto_rebuild_all.qmd) | quarto_rebuild_all(module_name::Module; kwargs...) |
+| [`quarto_rebuild_all`](reference/quarto_rebuild_all.qmd) | quarto_rebuild_all(config::QuartoConfig) |
 | [`quarto_rebuild_reference`](reference/quarto_rebuild_reference.qmd) | quarto_rebuild_reference(module_name::Module) |
-| [`quarto_yaml`](reference/quarto_yaml.qmd) | quarto_yaml( |
 | [`quarto_yaml_from_config`](reference/quarto_yaml_from_config.qmd) | quarto_yaml_from_config(config::QuartoConfig; force::Bool=false) |
 
 ## Docstring Processing {#sec-docstring-processing}
@@ -79,10 +78,7 @@ Article discovery and changelog generation.
 |----------|-------------|
 | [`ArticleInfo`](reference/ArticleInfo.qmd) | ArticleInfo |
 | [`NewsVersion`](reference/NewsVersion.qmd) | NewsVersion |
-| [`build_articles_navbar`](reference/build_articles_navbar.qmd) | build_articles_navbar(config::QuartoConfig) -> Dict |
-| [`build_articles_yaml`](reference/build_articles_yaml.qmd) | build_articles_yaml(config::QuartoConfig) -> String |
 | [`create_article_template`](reference/create_article_template.qmd) | create_article_template(filepath::String; title::String="", order::Int=999) |
-| [`create_articles_directory`](reference/create_articles_directory.qmd) | create_articles_directory(config::QuartoConfig) |
 | [`create_news_template`](reference/create_news_template.qmd) | create_news_template(path::String="NEWS.md"; package_name::String="Package") |
 | [`detect_get_started`](reference/detect_get_started.qmd) | detect_get_started(module_name::Module; dir::String="docs/articles") -> Union{String, Nothing} |
 | [`discover_articles`](reference/discover_articles.qmd) | discover_articles(dir::String="docs/articles") -> Vector{String} |
@@ -93,8 +89,6 @@ Article discovery and changelog generation.
 | [`linkify_github_refs`](reference/linkify_github_refs.qmd) | linkify_github_refs(text::String, repo::String) -> String |
 | [`news_summary`](reference/news_summary.qmd) | news_summary(config::QuartoConfig) -> String |
 | [`parse_news`](reference/parse_news.qmd) | parse_news(path::String="NEWS.md") -> Vector{NewsVersion} |
-| [`quarto_articles_index`](reference/quarto_articles_index.qmd) | quarto_articles_index(config::QuartoConfig; output::String="docs/articles.qmd") |
-| [`quarto_articles_index_manual`](reference/quarto_articles_index_manual.qmd) | quarto_articles_index_manual(config::QuartoConfig; output::String="docs/articles.qmd") |
 | [`quarto_news_page`](reference/quarto_news_page.qmd) | quarto_news_page(config::QuartoConfig; output::String="docs/news.qmd") |
 
 ## Auto-linking {#sec-auto-linking}
@@ -117,7 +111,6 @@ CSS generation and theme customization.
 
 | Function | Description |
 |----------|-------------|
-| [`quarto_styles`](reference/quarto_styles.qmd) | quarto_styles() |
 | [`quarto_styles_from_config`](reference/quarto_styles_from_config.qmd) | quarto_styles_from_config(config::QuartoConfig) |
 
 ## GitHub Integration {#sec-github-integration}

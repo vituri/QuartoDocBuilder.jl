@@ -12,14 +12,27 @@ inspired by R's pkgdown package.
 - Changelog generation from NEWS.md
 - GitHub Actions integration
 - Customizable themes and navigation
+- Optional default styles (applied when no theme is specified)
 
 # Quick Start
 ```julia
 using MyPackage
 using QuartoDocBuilder
 
-# Simple usage
-quarto_build_site(MyPackage; repo="user/MyPackage.jl")
+# Simple usage (uses default styles)
+config = QuartoConfig(
+    module_name = MyPackage,
+    repo = "user/MyPackage.jl"
+)
+quarto_build_site(config)
+
+# With Quarto theme (default styles NOT applied)
+config = QuartoConfig(
+    module_name = MyPackage,
+    repo = "user/MyPackage.jl",
+    theme = ThemeConfig(bootswatch="flatly", dark_mode=true)
+)
+quarto_build_site(config)
 
 # With multiple sections
 config = QuartoConfig(
@@ -33,8 +46,7 @@ config = QuartoConfig(
         SectionConfig(title="Tutorials", dir="tutorials", order=1),
         SectionConfig(title="Explanation", dir="explanation", order=2),
         SectionConfig(title="How-to Guides", dir="how-to", order=3)
-    ],
-    theme = ThemeConfig(bootswatch="flatly", dark_mode=true)
+    ]
 )
 quarto_build_site(config)
 ```
@@ -91,10 +103,8 @@ export quarto_format, quarto_doc, quarto_callout_block, quarto_doc_short, quarto
 include("articles.jl")
 
 export discover_articles, discover_articles_recursive, detect_get_started
-export get_article_title, get_article_info, ArticleInfo
-export quarto_articles_index, quarto_articles_index_manual
-export build_articles_navbar, build_articles_yaml
-export create_articles_directory, create_article_template
+export get_article_title, get_article_info, ArticleInfo, get_article_order
+export create_article_template
 
 # ============================================================================
 # News/Changelog System
@@ -118,14 +128,14 @@ export link_julia_docs
 # ============================================================================
 include("styles.jl")
 
-export quarto_styles, quarto_styles_from_config
+export quarto_styles_from_config
 
 # ============================================================================
 # Site Building (depends on all above)
 # ============================================================================
 include("build.jl")
 
-export quarto_yaml, quarto_yaml_from_config
+export quarto_yaml_from_config
 export quarto_index, quarto_git_ignore
 export quarto_build_site, quarto_build_refpage, quarto_build_refpage_grouped
 export quarto_rebuild_reference, quarto_rebuild_all
