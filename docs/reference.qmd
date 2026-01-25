@@ -52,7 +52,7 @@ Core functions for generating documentation sites.
 | [`quarto_build_refpage`](reference/quarto_build_refpage.qmd) | quarto_build_refpage(module_name; output = "docs/reference.qmd") |
 | [`quarto_build_refpage_grouped`](reference/quarto_build_refpage_grouped.qmd) | quarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String="docs/refe... |
 | [`quarto_build_site`](reference/quarto_build_site.qmd) | quarto_build_site(config::QuartoConfig) |
-| [`quarto_index`](reference/quarto_index.qmd) | quarto_index() |
+| [`quarto_index`](reference/quarto_index.qmd) | quarto_index(; title::String="") |
 | [`quarto_rebuild_all`](reference/quarto_rebuild_all.qmd) | quarto_rebuild_all(config::QuartoConfig) |
 | [`quarto_rebuild_reference`](reference/quarto_rebuild_reference.qmd) | quarto_rebuild_reference(module_name::Module) |
 | [`quarto_yaml_from_config`](reference/quarto_yaml_from_config.qmd) | quarto_yaml_from_config(config::QuartoConfig; force::Bool=false) |
