@@ -131,8 +131,7 @@ function quarto_doc(b)
       return  [
 """
 
-```{julia}
-#| eval: false
+```{{julia}}
 
 $(ct[2].content[1].code)
 
@@ -161,7 +160,7 @@ function quarto_doc_page(s; dir = "docs/reference")
 
     qmd = """
       ---
-      engine: julia
+      engine: markdown
       ---
 
       # $(st) {#sec-doc}
@@ -191,8 +190,7 @@ function quarto_doc_short(b)
         return [
             """
   
-  ```{julia}
-  #| eval: false
+  ```{{julia}}
   
   $(ct[2].content[1].code)
   

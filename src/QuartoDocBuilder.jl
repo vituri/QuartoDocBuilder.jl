@@ -67,13 +67,13 @@ export parse_content_selector, apply_selector, filter_objects, group_objects, au
 # ============================================================================
 
 """
-    get_objects_from_module(m::Module) -> Vector{Symbol}
+    get_objects_from_module(m::Module) -> Vector{Docs.Binding}
 
 Get all documented objects from a module using Base.Docs.meta().
-Returns a vector of Symbol names.
+Returns a vector of Docs.Binding objects (preserving module context).
 """
 function get_objects_from_module(m::Module)
-    Symbol[k.var for (k, _) in Base.Docs.meta(m)]
+    [k for (k, _) in Base.Docs.meta(m)]
 end
 
 export get_objects_from_module

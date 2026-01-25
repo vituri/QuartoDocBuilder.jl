@@ -14,7 +14,7 @@ Types and functions for configuring documentation generation.
 | [`NavbarItem`](reference/NavbarItem.qmd) | Configuration for navbar items. |
 | [`QuartoConfig`](reference/QuartoConfig.qmd) | Main configuration struct for QuartoDocBuilder. |
 | [`ReferenceGroup`](reference/ReferenceGroup.qmd) | Configuration for a reference section group. |
-| [`SectionConfig`](reference/SectionConfig.qmd) | Configuration for a navbar section (supports multiple dropdowns like Rhino). |
+| [`SectionConfig`](reference/SectionConfig.qmd) | Configuration for a navbar section (supports multiple dropdowns). |
 | [`ThemeConfig`](reference/ThemeConfig.qmd) | Configuration for theming and appearance. |
 | [`default_config`](reference/default_config.qmd) | default_config(module_name::Module) -> QuartoConfig |
 | [`detect_repo`](reference/detect_repo.qmd) | detect_repo() -> String |
@@ -64,7 +64,7 @@ Functions for extracting and formatting Julia docstrings to Quarto format.
 
 | Function | Description |
 |----------|-------------|
-| [`get_objects_from_module`](reference/get_objects_from_module.qmd) | get_objects_from_module(m::Module) -> Vector{Symbol} |
+| [`get_objects_from_module`](reference/get_objects_from_module.qmd) | get_objects_from_module(m::Module) -> Vector{Docs.Binding} |
 | [`quarto_callout_block`](reference/quarto_callout_block.qmd) | quarto_callout_block(s) |
 | [`quarto_doc`](reference/quarto_doc.qmd) | quarto_doc(s::Symbol) |
 | [`quarto_doc_page`](reference/quarto_doc_page.qmd) | quarto_doc_page(s; dir = "docs/reference") |

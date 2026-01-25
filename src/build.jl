@@ -424,6 +424,7 @@ end
 Internal: Build navbar YAML section.
 
 Supports multiple dropdown sections.
+"""
 function _build_navbar_yaml(config::QuartoConfig, module_str::String)
     repo = config.repo
 
