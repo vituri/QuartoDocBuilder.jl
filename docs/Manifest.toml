@@ -2,7 +2,7 @@
 
 julia_version = "1.12.4"
 manifest_format = "2.0"
-project_hash = "6c02d6315d482c38992ba7f1a1108e1b7c7095ce"
+project_hash = "679a19fa3620e3393e3fbfe3015c0f9821c2d669"
 
 [[deps.Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
@@ -30,9 +30,9 @@ version = "1.11.0"
 
 [[deps.QuartoDocBuilder]]
 deps = ["Markdown", "TOML"]
-path = "."
+path = "/home/vituri/Documents/Github/QuartoDocBuilder.jl"
 uuid = "164f4f01-dadb-4e86-a767-9a3bba57cbbb"
-version = "0.1.0"
+version = "0.2.0"
 
 [[deps.StyledStrings]]
 uuid = "f489334b-da3d-4c2e-b8f0-e476e12c162b"

@@ -13,18 +13,25 @@ be evaluated.
 """
 function quarto_format(m::Markdown.Code, eval = false)
 
-    l = m.language        
+    l = m.language
     l ∈ ["jldoctest", ""] && (l = "julia")
-        
+
+    if eval == false
 """
 
-```{$l}
-#| eval: $eval
+```$l
 $(m.code)
-
 ```
-
 """
+    else
+"""
+```{$l}
+$(m.code)
+```
+"""
+    end
+        
+
 end
 
 """
@@ -127,18 +134,15 @@ function quarto_doc(b)
     z = Base.doc(b)
     ct = z.content
     
-    if ct[1] isa Markdown.Paragraph        
+    if ct[1] isa Markdown.Paragraph
       return  [
 """
 
-```{julia}
-#| eval: false
-
+```julia
 $(ct[2].content[1].code)
-
 ```
 
-No documentation found! :(
+No documentation found!
 """
         ]
     else 
@@ -151,16 +155,17 @@ end
 """
     quarto_doc_page(s; dir = "docs/reference")
 
-Given a symbol `s`, write its .qmd doc into the folder `dir`.
+Given a symbol or binding `s`, write its .qmd doc into the folder `dir`.
 """
 function quarto_doc_page(s; dir = "docs/reference")
 
     blocks = quarto_doc(s) .|> quarto_callout_block
-    st = string(s.var)
+    # Handle both Symbol and Binding inputs
+    st = s isa Symbol ? string(s) : string(s.var)
 
     qmd = """
       ---
-      engine: julia
+      engine: markdown
       ---
 
       # $(st) {#sec-doc}
@@ -189,15 +194,12 @@ function quarto_doc_short(b)
     if ct[1] isa Markdown.Paragraph
         return [
             """
-  
-  ```{julia}
-  #| eval: false
-  
-  $(ct[2].content[1].code)
-  
-  ```
-  
-  No documentation found! :(
+
+```julia
+$(ct[2].content[1].code)
+```
+
+No documentation found! :(
             """
         ]
     else

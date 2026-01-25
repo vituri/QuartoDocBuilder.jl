@@ -1,0 +1,141 @@
+---
+title: "Docstring Processing"
+description: "How Julia docstrings are converted to Quarto documentation"
+order: 2
+---
+
+# Docstring Processing
+
+QuartoDocBuilder automatically extracts and formats Julia docstrings for Quarto.
+
+## How It Works
+
+### 1. Extracting Documentation
+
+Julia stores documentation in `Base.Docs.meta()`. QuartoDocBuilder iterates through all documented symbols:
+
+```julia
+# Get all documented symbols from a module
+symbols = get_objects_from_module(MyModule)
+```
+
+### 2. Converting to Markdown
+
+Each docstring is parsed and converted to Quarto-compatible markdown:
+
+- **Code blocks** → Wrapped in proper fences with language hints
+- **Headers** → Adjusted to appropriate levels
+- **Admonitions** → Converted to Quarto callout blocks
+- **Examples** → Preserved with `#| eval: false` to prevent execution
+
+### 3. Generating Pages
+
+Each documented function gets its own page in `docs/reference/`:
+
+```
+docs/reference/
+├── my_function.qmd
+├── another_function.qmd
+└── MyType.qmd
+```
+
+## Supported Docstring Elements
+
+### Code Blocks
+
+```julia
+"""
+    my_function(x)
+
+Example:
+```julia
+result = my_function(42)
+```
+"""
+```
+
+Becomes a Quarto code block with `eval: false`.
+
+### Admonitions
+
+```julia
+"""
+!!! warning "Performance Note"
+    This function is O(n²) for large inputs.
+"""
+```
+
+Becomes a Quarto callout:
+
+```markdown
+::: {.callout-warning title="Performance Note"}
+This function is O(n²) for large inputs.
+:::
+```
+
+### Multiple Signatures
+
+Functions with multiple methods have all signatures documented:
+
+```julia
+"""
+    process(x::Int)
+    process(x::String)
+
+Process different types of input.
+"""
+```
+
+## Customizing Output
+
+### Reference Page Grouping
+
+Use `ReferenceGroup` to organize the reference page:
+
+```julia
+reference = [
+    ReferenceGroup(
+        title = "Core Functions",
+        desc = "Main package functionality",
+        contents = [:main_func, :helper_func]
+    ),
+    ReferenceGroup(
+        title = "Utilities",
+        contents = [starts_with("util_")]
+    )
+]
+```
+
+### Short Descriptions
+
+The reference index shows short descriptions extracted from the first line of each docstring.
+
+## Best Practices
+
+### Write Good Docstrings
+
+1. **First line** should be a brief summary
+2. **Signature** should be included
+3. **Arguments** section for parameters
+4. **Examples** for usage
+
+```julia
+"""
+    process_data(input; normalize=true)
+
+Process input data with optional normalization.
+
+# Arguments
+- `input`: The data to process
+- `normalize`: Whether to normalize output (default: true)
+
+# Returns
+A processed DataFrame.
+
+# Examples
+```julia
+result = process_data(my_data)
+result = process_data(my_data, normalize=false)
+```
+"""
+```

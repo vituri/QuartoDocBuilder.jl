@@ -1,0 +1,428 @@
+---
+title: "Advanced Features"
+description: "Articles, news pages, GitHub Actions, auto-linking, and more"
+order: 3
+---
+
+# Advanced Features
+
+This guide covers QuartoDocBuilder's advanced features for creating comprehensive documentation.
+
+## Articles System
+
+Articles (also called vignettes) are long-form documentation pages for tutorials, guides, and explanations.
+
+### Creating Articles
+
+1. Create a directory: `docs/articles/`
+2. Add `.qmd` files with YAML frontmatter:
+
+```markdown
+---
+title: "My Article"
+description: "A detailed guide"
+order: 1
+---
+
+# My Article
+
+Content goes here...
+```
+
+### Article Discovery
+
+QuartoDocBuilder automatically discovers articles in `docs/articles/`:
+
+```julia
+# Find all articles
+articles = discover_articles("docs/articles")
+
+# Find recursively (including subdirectories)
+articles = discover_articles_recursive("docs/articles")
+```
+
+### "Get Started" Detection
+
+If you have an article named after your package (e.g., `mypackage.qmd`) or named `getting-started.qmd`, it's automatically detected:
+
+```julia
+# Auto-detect "Get Started" article
+get_started_path = detect_get_started(MyPackage)
+```
+
+### Navbar Dropdowns
+
+Articles can appear as a dropdown menu in the navbar:
+
+```julia
+articles = ArticleConfig(
+    title = "Guides",
+    dropdown = true   # Show as dropdown menu
+)
+```
+
+When `dropdown = true` and you have 10 or fewer articles, they appear directly in a dropdown. With more articles, a link to the articles index is shown instead.
+
+### Articles Index Page
+
+Generate an articles index automatically:
+
+```julia
+quarto_articles_index(config)
+```
+
+This creates `docs/articles.qmd` with a Quarto listing of all articles.
+
+## News / Changelog
+
+QuartoDocBuilder can parse your `NEWS.md` file and generate a formatted changelog page.
+
+### NEWS.md Format
+
+Create `NEWS.md` in your package root:
+
+```markdown
+# MyPackage 1.2.0 (2024-06-15)
+
+## Features
+
+- Added new `process_data()` function (#42)
+- Improved performance by 50% (@contributor)
+
+## Bug Fixes
+
+- Fixed crash when input is empty (#38)
+- Corrected documentation typos
+
+## Breaking Changes
+
+- Renamed `old_func()` to `new_func()`
+
+# MyPackage 1.1.0 (2024-03-01)
+
+## Features
+
+- Initial feature set
+```
+
+Supported formats:
+
+- `# Package 1.0.0 (date)` - Package name with version and optional date
+- `# v1.0.0` - Version only
+- `# 1.0.0 - date` - Version with date after dash
+
+### GitHub Linking
+
+References are automatically linked:
+
+- `#123` → Link to issue/PR #123
+- `@username` → Link to GitHub user profile
+- `user/repo#456` → Cross-repo issue link
+
+```julia
+# Example
+text = "Fixed bug #42 reported by @contributor"
+linked = linkify_github_refs(text, "user/repo")
+# "Fixed bug [#42](https://github.com/user/repo/issues/42) reported by [@contributor](https://github.com/contributor)"
+```
+
+### Generating the News Page
+
+The news page is generated automatically when `news = true`:
+
+```julia
+config = QuartoConfig(
+    # ...
+    news = true,
+    news_file = "NEWS.md"  # Default
+)
+quarto_build_site(config)
+```
+
+Or generate it manually:
+
+```julia
+quarto_news_page(config)
+```
+
+The generated page shows:
+
+- Latest version expanded
+- Older versions in collapsible sections
+- Categories (Features, Bug Fixes, etc.) as subsections
+- Automatic GitHub links
+
+## GitHub Actions Integration
+
+QuartoDocBuilder can generate GitHub Actions workflows for automated documentation deployment.
+
+### Generate Workflow
+
+```julia
+using QuartoDocBuilder
+
+# Modern GitHub Pages deployment
+quarto_github_action()
+
+# Traditional gh-pages branch deployment
+quarto_github_action_simple(branch="gh-pages")
+```
+
+This creates `.github/workflows/docs.yml`.
+
+### Workflow Options
+
+```julia
+quarto_github_action(
+    quarto_version = "pre-release",  # Quarto version
+    julia_version = "1",              # Julia version
+    output_dir = "site",              # Output directory
+    trigger_branches = ["main"]       # Branches that trigger build
+)
+```
+
+### GitHub Pages Setup
+
+After generating the workflow:
+
+1. Push to GitHub
+2. Go to **Settings → Pages**
+3. Under "Build and deployment", select **GitHub Actions**
+4. Your docs will be at `https://username.github.io/repo`
+
+### Complete Setup Helper
+
+Use the one-stop setup function:
+
+```julia
+setup_documentation(MyPackage; repo="user/MyPackage.jl")
+```
+
+This creates:
+
+- `docs/make.jl` - Build script
+- `docs/Project.toml` - Dependencies
+- `.github/workflows/docs.yml` - CI workflow
+- Initial documentation structure
+
+## Auto-linking
+
+QuartoDocBuilder can automatically convert function references in documentation to clickable links.
+
+### How It Works
+
+References in backticks are converted to links:
+
+```markdown
+Use `my_function()` to process data.
+```
+
+Becomes:
+
+```markdown
+Use [`my_function()`](reference/my_function.qmd) to process data.
+```
+
+### Usage
+
+```julia
+# Build reference index
+index = build_reference_index(MyPackage)
+
+# Auto-link text
+text = "Use `my_function()` for processing."
+linked = autolink_references(text, index)
+```
+
+### Finding Undefined References
+
+Check for references that don't have documentation:
+
+```julia
+undefined = find_undefined_references(text, index)
+# Returns: ["undefined_func", "missing_func"]
+```
+
+## Custom CSS and SCSS
+
+### Adding Custom CSS
+
+```julia
+theme = ThemeConfig(
+    # ...
+    custom_css = """
+    /* Custom styles */
+    .my-class {
+        color: blue;
+    }
+
+    .callout-note {
+        border-left-color: #007bff;
+    }
+    """
+)
+```
+
+### SCSS Variables
+
+For advanced theming, use SCSS variables:
+
+```julia
+theme = ThemeConfig(
+    # ...
+    custom_scss = """
+    \$primary: #007bff;
+    \$link-color: #28a745;
+    \$font-family-sans-serif: "Inter", sans-serif;
+    """
+)
+```
+
+When custom colors are specified, QuartoDocBuilder generates `docs/custom.scss` with the variables.
+
+### CSS Files
+
+You can also add custom files:
+
+- `docs/styles.css` - Main stylesheet (auto-generated, you can modify)
+- `docs/custom.scss` - SCSS variables (auto-generated if custom colors used)
+
+## Rebuilding Documentation
+
+### Rebuild Reference Only
+
+When you add new functions:
+
+```julia
+quarto_rebuild_reference(MyPackage)
+# or
+quarto_rebuild_reference(config)
+```
+
+### Full Rebuild
+
+To regenerate everything:
+
+```julia
+quarto_rebuild_all(MyPackage; repo="user/repo")
+# or
+quarto_rebuild_all(config)
+```
+
+## Incremental Workflow
+
+A typical development workflow:
+
+```julia
+# Initial setup
+setup_documentation(MyPackage; repo="user/MyPackage.jl")
+
+# After adding new functions
+quarto_rebuild_reference(MyPackage)
+
+# After changing configuration
+quarto_rebuild_all(config)
+
+# Preview changes
+# Run: cd docs && quarto preview
+```
+
+## Tips and Best Practices
+
+### 1. Write Good Docstrings
+
+QuartoDocBuilder extracts docstrings, so well-written docstrings make better docs:
+
+```julia
+"""
+    my_function(x, y; option=true)
+
+Short description of what the function does.
+
+# Arguments
+- `x`: Description of x
+- `y`: Description of y
+- `option`: What this option controls
+
+# Returns
+What the function returns.
+
+# Examples
+```julia
+result = my_function(1, 2)
+```
+
+# See Also
+- [`related_function`](@ref)
+"""
+function my_function(x, y; option=true)
+    # ...
+end
+```
+
+### 2. Organize with Reference Groups
+
+Group related functions for easier navigation:
+
+```julia
+reference = [
+    ReferenceGroup(title="Public API", contents=[...]),
+    ReferenceGroup(title="Internal", desc="Not part of public API", contents=[...])
+]
+```
+
+### 3. Use Semantic Versioning in NEWS.md
+
+Follow [SemVer](https://semver.org/) and document:
+
+- **Features** - New functionality
+- **Bug Fixes** - Fixes to existing functionality
+- **Breaking Changes** - Changes that break backwards compatibility
+- **Deprecations** - Features that will be removed
+
+### 4. Preview Before Publishing
+
+Always preview locally before pushing:
+
+```bash
+cd docs
+quarto preview
+```
+
+### 5. Keep README.md Updated
+
+Your `README.md` becomes the landing page, so keep it:
+
+- Clear and welcoming
+- With installation instructions
+- With a quick example
+- With links to full documentation
+
+## Troubleshooting
+
+### Common Issues
+
+**"Module not found"**: Make sure to activate the docs environment:
+
+```julia
+using Pkg
+Pkg.activate("docs")
+Pkg.develop(path=dirname(@__DIR__))
+```
+
+**"_quarto.yml already exists"**: Delete it or use `force=true`:
+
+```julia
+quarto_yaml_from_config(config; force=true)
+```
+
+**"Julia engine not available"**: Install Quarto pre-release for Julia support:
+
+```bash
+quarto install tinytex  # If needed
+```
+
+### Getting Help
+
+- [GitHub Issues](https://github.com/vituri/QuartoDocBuilder.jl/issues)
+- [Quarto Documentation](https://quarto.org/docs/guide/)

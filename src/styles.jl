@@ -1,629 +1,159 @@
-"""
-    quarto_styles()
+# Styles management for QuartoDocBuilder.jl
+# Provides CSS generation with optional default styles
 
-Create the docs/styles.css file with some suggested css classes.
-"""
-function quarto_styles()
-    s = """
-
-
-.content-block {
-    padding-top: 20px;
-    padding-bottom: 10px;
-    margin-left: 30px;
-    margin-right: 30px;
-  }
-  
-  
-  @media(min-width: 900px) {
-  .content-block {
-    margin-left: 50px;
-    margin-right: 50px;
-  }
-  }
-  
-  @media (min-width: 1200px) {
-  .content-block {
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  }
-  
-  .hero-banner {
-    position: relative;
-    background-color: rgb(240,245,249);
-    display: flex;
-    justify-content: center;
-  }
-  
-  .hero-banner h1 {
-    color: #39729E;
-    font-size: 2.5rem;
-  }
-  
-  
-  .hero-banner .hero-image {
-    position: absolute;
-    display: none;
-    height: auto;
-  }
-  
-  .hero-banner .content-block {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .hero-banner .content-block .hero-text {
-    width: 65%;
-  }
-  
-  .hero-banner .content-block .hero-animation {
-    margin-left: 40px;
-    margin-top: 45px;
-    width: 350px;
-    height: 455px;
-  }
-  
-  .hero-banner .content-block .hero-animation video {
-    width: 350px;
-    height: 455px;
-  }
-  
-  @media (min-width: 1000px) {
-  .hero-banner .hero-image {
-    display: initial;
-    width: 270px;
-  }
-  }
-  
-  @media (min-width: 1200px) {
-  .hero-banner .hero-image {
-    width: 340px;
-  }
-  }
-  
-  @media (min-width: 1400px) {
-  .hero-banner .hero-image {
-    width: 440px;
-  }
-  }
-  
-  .hero-banner .hero-image p {
-    margin-bottom: 0;
-  }
-  
-  .hero-banner .hero-image-left {
-    left: 0;
-    bottom: 0;
-  }
-  
-  .hero-banner .hero-image-right {
-    right: 0;
-    bottom: 0;
-  }
-  
-  
-  .hero-banner .content-block {
-    z-index: 2;
-  }
-  
-  @media (prefers-reduced-motion: reduce) {
-    .hero-banner .content-block {
-      max-width: 660px;
-    }
-    .hero-banner .content-block .hero-text {
-      width: 100%;
-    }
-    
-    .hero-banner .content-block .hero-animation {
-      display: none;
-    }
-  }
-  
-  @media (max-width: 1200px)  {
-    .hero-banner .content-block {
-      max-width: 660px;
-    }
-    .hero-banner .content-block .hero-text {
-      width: 100%;
-    }
-    
-    .hero-banner .content-block .hero-animation {
-      display: none;
-    }
-  }
-  
-  
-  .hero-banner a {
-    text-decoration: none;
-  }
-  
-  .hero-banner h3 {
-    margin-top: 1.3rem;
-    margin-bottom: 1.3rem;
-  }
-  
-  .hero-banner h4 {
-    margin-top: 0;
-  }
-  
-  .hero-banner a[role="button"] {
-    margin-right: 17px;
-    margin-top: 0.6rem;
-    margin-bottom: 1.6rem;
-  }
-  
-  
-  .hero-banner #btn-guide {
-    background-color: #959595 !important;
-    border: none;
-  }
-  
-  
-  
-  
-  .hero-banner ul {
-    padding-inline-start: 21px;
-    font-size: 1.1rem;
-  }
-  
-  .hero-banner ul li {
-    padding-bottom: 0.4rem;
-  }
-  
-  
-  .alt-background {
-    background-color: rgb(247,249,251);
-    border-top: 1px solid #dee2e6;
-    border-bottom: 1px solid #dee2e6;
-  }
-  
-  .hello-quarto {
-    padding-bottom: 1rem;
-  }
-  
-  @media (min-width: 600px) {
-  .hello-quarto-banner {
-    display: inline-flex;
-    align-content: center;
-    justify-content: center;
-  }
-  
-  .hello-quarto-banner h1 {
-    margin-right: 40px;
-  }
-  }
-  
-  .hello-quarto-banner .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    border: none;
-    border-bottom: 2px solid #39729E !important;
-    color: #39729E;
-    background-color: transparent;
-    
-  }
-  
-  .hello-quarto-banner .nav-pills button {
-    width: 125px;
-  }
-  
-  .hello-quarto .tab-content {
-    border: none;
-    padding: 0;
-    color: rgb(84, 85, 85);
-  }
-  
-  .hello-quarto .tab-content p {
-    font-size: 1.1em;
-    margin-bottom: 1.5em;
-  }
-  
-  .hello-quarto div.sourceCode {
-    background-color: white;
-    border: 1px solid #dee2e6;
-  }
-  
-  .hello-output {
-    background-color: white;
-    border: 1px solid #dee2e6;
-    max-height: 660px;
-  }
-  
-  .features {
-    padding-bottom: 2em;
-  }
-  
-  .feature {
-    margin-top: 20px;
-  }
-  
-  @media (min-width: 800px) { 
-  .features {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 0 0 0 -30px;
-    width: calc(100% + 30px);
-  }
-  .feature {
-    width: calc(33% - 30px);
-    margin: 20px 0 0 30px;
-  }
-  }
-  
-  .feature h3 {
-    margin-top: 0;
-  }
-  
-  .feature p:first-of-type {
-    margin-bottom: 0.2rem;
-    color: rgb(84, 85, 85);
-  }
-  
-  .get-started {
-     text-align: center;
-     padding-bottom: 2rem;
-  }
-  
-  .get-started h3 {
-     margin-top: 1rem;
-     margin-bottom: 2rem;
-  }
-  
-  nav.page-navigation {
-    display: none;
-  }
-  
-  .nav-footer {
-    border-top: none !important; 
-  }
-  
-  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: #fff;
-    background-color: #ff7518;
-  }
-
-@media (min-width: 1020px) {
-    .navbar-brand-container {
-      margin-right: 1em;
-    }
-    }
-    
-    
-    
-    @media (max-width: 1060px) and (min-width: 991.98px) {
-    
-    #navbarCollapse ul:last-of-type a.nav-link {
-      padding-left: .25em;
-      padding-right: .25em;
-    }
-    
-    .navbar #quarto-search {
-      margin-left: .1em;
-    }
-    
-    .navbar .bi-twitter,
-    .navbar .bi-github,
-    .navbar .bi-rss
-     {
-      font-size: .8em;
-    }
-    }
-    
-    
-    @media (min-width: 991.98px) {
-    #quarto-header {
-      border-bottom: 1px solid #dee2e6;
-    }
-    }
-    
-    .navbar-brand > img {
-      max-height: 36px;
-    }
-    
-    
-    .platform-table td {
-      vertical-align: middle;
-    }
-    
-    .platform-table td > div.sourceCode {
-      margin-top: 0.3rem;
-      margin-bottom: 0.3rem;
-    }
-    
-    
-    .document-example {
-      opacity: 0.9;
-      padding: 6px; 
-      font-weight: 500;
-      margin-bottom: 1rem;
-    }
-    
-    .document-example div {
-      padding: 5px;
-    }
-    
-    
-    .document-example .citation {
-      color: blue;
-    }
-    
-    .trademark {
-      font-size: 0.6rem;
-      display: inline-block;
-      margin-left: -3px;
-    }
-    
-    .search-attribution {
-      margin-top: 20px;
-      padding-bottom: 20px;
-      height: 40px;
-    }
-    
-    .download-button {
-      margin-top: 1em;
-    }
-    
-    .download-table {
-      margin-bottom: 2em;  
-    }
-    
-    .download-table p {
-      margin-bottom: 0;
-    }
-    
-    .download-table .checksum {
-      color: var(--bs-primary);
-      font-size: .775em;
-      cursor: pointer;
-      padding-top: 4px;
-    }
-    
-    .download-button {
-      display:flex;
-      padding-bottom: 10px;
-      padding-top: 10px;
-    }
-    
-    .download-button .secondary {
-      font-size: .775em;
-      margin-bottom: 0;
-    }
-    
-    .download-button .container {
-      display: flex;
-      padding-left: 10px;
-      padding-right: 40px;
-    }
-    
-    .download-button .icon-container {
-      fill: white;
-      width: 30px;
-      margin-right: 15px;
-    }
-    
-    iframe.reveal-demo {
-      width: 100%;
-      height: 350px;
-      outline: none;
-    }
-    
-    
-    .slide-deck {
-      border: 3px solid #dee2e6;
-      width: 100%;
-      height: 475px;
-    }
-    
-    @media only screen and (max-width: 600px) {
-     .slide-deck {
-        height: 400px;
-      }
-    }
-    
-    
-    @media (max-width: 575px) {
-    
-    .link-cards .card {
-      margin-bottom: 20px;
-      margin-right: 35px;
-    }
-    
-    }
-    
-    @media (min-width: 576px) { 
-    .link-cards {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-    
-    .link-cards .card {
-      width: 190px;
-      margin: 0 20px 12px 0;
-    }
-    
-    
-    }
-    
-    
-    .link-cards .card {
-      border: none;
-      padding: 0;
-    }
-    
-    .link-cards .card-title h4 {
-      margin-top: 0;
-    }
-    
-    .link-cards .card-title p {
-      margin-bottom: 0;
-    }
-    
-    .link-cards .card-subtitle {
-      margin-bottom: 0.7rem;
-    }
-    
-    .link-cards .card-body {
-      padding: 0.5rem;
-      padding-left: 0.1rem;
-    }
-    
-    .link-cards .card-body ul {
-      margin-bottom: 0;
-      padding-left: 0;
-      list-style-type: none;
-    }
-    
-    .link-cards .card-body ul a {
-      text-decoration: none;
-    }
-    
-    .link-cards .card-body ul li {
-      padding-bottom: 0.2rem;
-    }
-    
-    
-    .card .source-code {
-      margin-top: 3px;
-    }
-    
-    .carousel.card {
-      font-size: 16px;
-      padding-top: 2em;
-    }
-    
-    .carousel.card a {
-      text-decoration: none;
-    }
-    
-    .carousel img {
-      width: 70%;
-      margin-bottom: 110px;
-    }
-    
-    .carousel .carousel-control-prev-icon, 
-    .carousel .carousel-control-next-icon {
-      margin-bottom: 110px;
-    }
-    
-    
-    .gallery-category {
-      column-gap: 10px;
-    }
-    
-    .btn-action-primary {
-      color: white;
-      background-color: #447099 !important;
-    }
-    
-    .btn-action-primary:hover {
-      color: white;
-    }
-    
-    .btn-action {
-      min-width: 165px;
-      border-radius: 30px;
-      border: none;
-    }
-    
-    .panel-tabset[data-group="tools-tabset"] .choose-your-tool {
-      max-width: 90px;
-      margin-right: 25px;
-      margin-top: 30px;
-      font-weight: 300;
-      font-size: 1.3rem;
-      text-align: left;
-      vertical-align: center;
-    }
-    
-    .panel-tabset[data-group="tools-tabset"] .tab-content {
-      border: none;
-      padding-left: 5px;
-    }
-    
-    .panel-tabset[data-group="tools-tabset"] .nav-tabs {
-      border-bottom: none;
-    }
-    
-    .panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link {
-      text-align: center;
-      margin-right: 10px;
-      margin-top: 10px;
-      color: inherit;
-      width: 102px;
-      font-size: 0.8em;
-    }
-    
-    .panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link, 
-    .panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link.active, 
-    .panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-item.show .nav-link {
-      border: 1px solid  rgb(222, 226, 230);
-      border-radius: 10px;
-    }
-    .panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link:hover {
-       border-color: rgb(80,146,221);
-       border-width: 1px;
-    } 
-    
-    .panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link.active, 
-    .panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-item.show .nav-link {
-      border-color: rgb(80,146,221);
-      border-width: 2px;
-    }
-    
-    .panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link img {
-      width: 65px;
-      height: 65px;
-      display: block;
-      margin-bottom: 2px;
-    }
-    
-    /*
-    .panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link {
-      text-align: center;
-      margin-right: 10px;
-      margin-top: 10px;
-      color: inherit;
-      width: 102px;
-      font-size: 0.8em;
-    }
-     
-    .panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link img {
-      width: 45px;
-      height: 45px;
-      margin-left: 10px;
-      display: block;
-      margin-bottom: 2px;
-    }
-    */
-    
-    
-    .download-text {
-      font-size: 1.1em;
-      font-weight: 500;  
-    }
-    
-    .preview-image-grid {
-      gap: .75em;
-    }
-    
-    .preview-image-grid p {
-      margin-bottom: 0;
-    }
-    
-    .preview-image-label {
-      text-align: center;
-      font-size: .75em;
-      font-weight: 600;
-    }
-    
-    .illustration {
-      border: 1px solid #dee2e6;
-    }
+# Path to bundled default CSS
+const DEFAULT_CSS_PATH = joinpath(@__DIR__, "default_styles.css")
 
 """
+    _base_styles() -> String
 
-write("docs/styles.css", s)
+Read the default CSS styles from the bundled file.
+Returns an empty string if the file is not found.
+"""
+function _base_styles()
+    if isfile(DEFAULT_CSS_PATH)
+        return read(DEFAULT_CSS_PATH, String)
+    else
+        # Fallback: return minimal CSS comment
+        return "/* QuartoDocBuilder - No default styles found */\n"
+    end
+end
 
+"""
+    _should_apply_default_styles(theme::ThemeConfig) -> Bool
+
+Determine whether default QuartoDocBuilder styles should be applied.
+
+Returns `true` only when:
+- `use_default_styles` is `true` (default)
+- No bootswatch theme is specified (user wants default styles)
+- No custom CSS is specified
+- No custom SCSS is specified
+"""
+function _should_apply_default_styles(theme::ThemeConfig)::Bool
+    # Don't apply if explicitly disabled
+    if !theme.use_default_styles
+        return false
+    end
+
+    # Don't apply if user specified custom CSS (they want full control)
+    if !isempty(theme.custom_css)
+        return false
+    end
+
+    # Don't apply if user specified custom SCSS
+    if !isempty(theme.custom_scss)
+        return false
+    end
+
+    # Don't apply if user specified ANY bootswatch theme
+    # (even "flatly" - if explicitly set, user wants Quarto's theme system)
+    if !isempty(theme.bootswatch)
+        return false
+    end
+
+    return true
+end
+
+"""
+    quarto_styles_from_config(config::QuartoConfig)
+
+Generate CSS/SCSS files based on configuration.
+
+Default styles are applied only when:
+- No bootswatch theme is specified in ThemeConfig
+- No custom CSS/SCSS is provided
+- `use_default_styles` is true (default)
+
+Creates:
+- `docs/styles.css` - Main CSS file (with default or custom styles)
+- `docs/custom.scss` - SCSS variables (if custom colors/fonts specified)
+
+# Arguments
+- `config::QuartoConfig`: Configuration with theme settings
+
+# Examples
+```julia
+# Default (no theme) - applies default QuartoDocBuilder styles
+config = QuartoConfig(module_name=MyModule, theme=ThemeConfig())
+quarto_styles_from_config(config)
+
+# With bootswatch theme - does NOT apply default styles
+config = QuartoConfig(module_name=MyModule, theme=ThemeConfig(bootswatch="flatly"))
+quarto_styles_from_config(config)
+
+# Explicitly disable default styles
+config = QuartoConfig(module_name=MyModule, theme=ThemeConfig(use_default_styles=false))
+quarto_styles_from_config(config)
+```
+"""
+function quarto_styles_from_config(config::QuartoConfig)
+    theme = config.theme
+
+    # Generate SCSS variables if custom colors/fonts specified
+    has_custom_scss = !isempty(theme.primary) || !isempty(theme.bg) ||
+                      !isempty(theme.fg) || !isempty(theme.accent) ||
+                      !isempty(theme.font_base) || !isempty(theme.font_heading) ||
+                      !isempty(theme.font_code) || !isempty(theme.custom_scss)
+
+    if has_custom_scss
+        scss = "// Custom theme variables generated by QuartoDocBuilder\n\n"
+
+        !isempty(theme.primary) && (scss *= "\$primary: $(theme.primary);\n")
+        !isempty(theme.bg) && (scss *= "\$body-bg: $(theme.bg);\n")
+        !isempty(theme.fg) && (scss *= "\$body-color: $(theme.fg);\n")
+        !isempty(theme.accent) && (scss *= "\$link-color: $(theme.accent);\n")
+        !isempty(theme.font_base) && (scss *= "\$font-family-sans-serif: $(theme.font_base);\n")
+        !isempty(theme.font_heading) && (scss *= "\$headings-font-family: $(theme.font_heading);\n")
+        !isempty(theme.font_code) && (scss *= "\$font-family-monospace: $(theme.font_code);\n")
+
+        if !isempty(theme.custom_scss)
+            scss *= "\n// Custom SCSS\n$(theme.custom_scss)\n"
+        end
+
+        write("docs/custom.scss", scss)
+        @info "Created docs/custom.scss with theme customizations"
+    end
+
+    # Determine if we should apply default styles
+    should_apply_defaults = _should_apply_default_styles(theme)
+
+    # Generate CSS
+    if should_apply_defaults
+        css = _base_styles()
+    else
+        css = "/* QuartoDocBuilder - Using Quarto theme: $(isempty(theme.bootswatch) ? "default" : theme.bootswatch) */\n"
+    end
+
+    # Add CSS for custom primary color (as CSS variables for runtime)
+    if !isempty(theme.primary)
+        css *= """
+
+/* Custom primary color */
+:root {
+  --primary-color: $(theme.primary);
+}
+
+a {
+  color: var(--primary-color);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+"""
+    end
+
+    # Add custom CSS
+    if !isempty(theme.custom_css)
+        css *= "\n/* Custom CSS */\n$(theme.custom_css)\n"
+    end
+
+    write("docs/styles.css", css)
+    if should_apply_defaults
+        @info "Created docs/styles.css with default QuartoDocBuilder styles"
+    else
+        @info "Created docs/styles.css (minimal - using Quarto theme)"
+    end
 end

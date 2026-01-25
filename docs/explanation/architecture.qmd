@@ -1,0 +1,125 @@
+---
+title: "Architecture Overview"
+description: "How QuartoDocBuilder is structured internally"
+order: 1
+---
+
+# Architecture Overview
+
+QuartoDocBuilder is designed to be modular and extensible. This document explains the internal architecture.
+
+## Core Components
+
+### 1. Configuration System (`config.jl`)
+
+The configuration system provides type-safe structs for all settings:
+
+- **`QuartoConfig`** - Main configuration struct
+- **`SectionConfig`** - Navbar section configuration
+- **`ReferenceGroup`** - Reference page grouping
+- **`ThemeConfig`** - Theme and appearance settings
+- **`FooterConfig`** - Footer customization
+
+### 2. Content Selectors (`selectors.jl`)
+
+Inspired by R's pkgdown, selectors allow flexible organization of reference pages:
+
+```julia
+# Match functions by name patterns
+starts_with("process_")  # All functions starting with "process_"
+ends_with("_util")       # All functions ending with "_util"
+matches(r"^get")         # Regex matching
+contains("helper")       # Contains substring
+```
+
+### 3. Docstring Processing (`quarto_format.jl`)
+
+Converts Julia docstrings to Quarto-compatible markdown:
+
+- Handles code blocks with proper fencing
+- Converts admonitions to callout blocks
+- Preserves formatting and structure
+
+### 4. Site Building (`build.jl`)
+
+The main build orchestrator:
+
+1. Generates `_quarto.yml` configuration
+2. Creates section directories and index files
+3. Generates reference pages for each documented function
+4. Creates navigation structure (navbar, sidebars)
+
+### 5. Articles System (`articles.jl`)
+
+Discovers and organizes content files:
+
+- Auto-discovers `.qmd` files in section directories
+- Extracts titles and metadata from YAML frontmatter
+- Sorts by `order` field or alphabetically
+
+## Data Flow
+
+```
+                    ┌─────────────────┐
+                    │  QuartoConfig   │
+                    └────────┬────────┘
+                             │
+            ┌────────────────┼────────────────┐
+            │                │                │
+            ▼                ▼                ▼
+    ┌───────────────┐ ┌───────────────┐ ┌───────────────┐
+    │  _quarto.yml  │ │   reference/  │ │   sections/   │
+    │  (navbar,     │ │   (function   │ │   (tutorials, │
+    │   sidebars)   │ │   docs)       │ │   guides)     │
+    └───────────────┘ └───────────────┘ └───────────────┘
+            │                │                │
+            └────────────────┼────────────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │  Quarto render  │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │   HTML Site     │
+                    └─────────────────┘
+```
+
+## Extension Points
+
+### Custom Selectors
+
+You can create custom selector functions:
+
+```julia
+# Create a selector that matches documented functions only
+my_selector = sym -> begin
+    obj = getfield(MyModule, sym)
+    return obj isa Function && hasmethod(obj, Tuple{})
+end
+```
+
+### Custom Theme
+
+Extend the theme with custom CSS/SCSS:
+
+```julia
+theme = ThemeConfig(
+    bootswatch = "flatly",
+    custom_css = """
+    .my-custom-class {
+        color: red;
+    }
+    """
+)
+```
+
+## Dependencies
+
+QuartoDocBuilder only depends on Julia standard library:
+
+- `Markdown` - Parsing docstrings
+- `TOML` - Configuration files
+
+No external packages required!

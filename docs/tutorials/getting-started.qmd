@@ -1,0 +1,89 @@
+---
+title: "Getting Started"
+description: "Quick start guide for creating documentation with QuartoDocBuilder.jl"
+order: 1
+---
+
+# Getting Started with QuartoDocBuilder.jl
+
+QuartoDocBuilder.jl is a Julia package that generates beautiful documentation websites for your Julia packages using [Quarto](https://quarto.org/). It's inspired by R's [pkgdown](https://pkgdown.r-lib.org/) and provides similar features.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+1. **Julia 1.6+** installed
+2. **Quarto** installed ([download here](https://quarto.org/docs/get-started/))
+3. A Julia package with documented functions (docstrings)
+
+## Installation
+
+Add QuartoDocBuilder to your package's documentation environment:
+
+```julia
+# In your package directory
+julia> using Pkg
+julia> Pkg.activate("docs")
+julia> Pkg.add("QuartoDocBuilder")
+```
+
+## Quick Start
+
+### Step 1: Create a build script
+
+Create a file `docs/make.jl` with:
+
+```julia
+using MyPackage
+using QuartoDocBuilder
+
+# Build documentation with default settings
+quarto_build_site(MyPackage; repo="username/MyPackage.jl")
+```
+
+### Step 2: Run the build script
+
+```bash
+julia --project=docs docs/make.jl
+```
+
+### Step 3: Preview locally
+
+```bash
+cd docs
+quarto preview
+```
+
+This starts a local server at `http://localhost:4200` where you can see your documentation.
+
+### Step 4: Build the final site
+
+```bash
+cd docs
+quarto render
+```
+
+The rendered HTML site will be in `docs/site/` by default.
+
+## What Gets Generated
+
+QuartoDocBuilder automatically creates:
+
+| Component | Source | Description |
+|-----------|--------|-------------|
+| **Home page** | `README.md` | Your package's README becomes the landing page |
+| **Reference pages** | Docstrings | Every documented function gets its own page |
+| **Reference index** | Auto-generated | Lists all functions with descriptions |
+| **Sections** | Your `.qmd` files | Organized by directories you define |
+| **Styles** | Auto-generated | Professional CSS styling |
+| **Navigation** | Auto-generated | Navbar with dropdowns for each section |
+
+## Next Steps
+
+- **[Multiple Sections](multiple-sections.qmd)**: Learn how to organize your docs with multiple navbar dropdowns
+- **[Reference](../reference.qmd)**: Full API documentation
+
+::: {.callout-tip}
+## Pro Tip
+Run `quarto_build_refpage(MyPackage)` after adding new functions to update the reference index without rebuilding everything.
+:::

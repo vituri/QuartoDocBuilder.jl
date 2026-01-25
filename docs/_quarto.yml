@@ -1,13 +1,13 @@
-
 project:
   type: website
   output-dir: site
+
 execute:
-  freeze: false
-  cache: false
+  freeze: auto
+  cache: true
   warning: false
+
 website:
-  # title: "QuartoDocBuilder.jl"
   page-navigation: true
   bread-crumbs: true
 
@@ -21,32 +21,62 @@ website:
     left:
       - text: "QuartoDocBuilder.jl"
         href: index.qmd
+      - text: "Get Started"
+        href: tutorials/getting-started.qmd
       - text: "Reference"
         href: reference.qmd
       - text: "Tutorials"
-        href: tutorials.qmd
-
+        menu:
+          - text: "Getting Started"
+            href: tutorials/getting-started.qmd
+          - text: "Multiple Navbar Sections"
+            href: tutorials/multiple-sections.qmd
+      - text: "Explanation"
+        menu:
+          - text: "Architecture Overview"
+            href: explanation/architecture.qmd
+          - text: "Docstring Processing"
+            href: explanation/docstring-processing.qmd
+      - text: "How-to Guides"
+        menu:
+          - text: "Customize Theme"
+            href: how-to/customize-theme.qmd
+          - text: "Deploy to GitHub Pages"
+            href: how-to/deploy-github-pages.qmd
+          - text: "Organize Reference Page"
+            href: how-to/organize-reference.qmd
+      - text: "News"
+        href: news.qmd
     tools:
-    - icon: github
-      href: https://github.com/vituri/QuartoDocBuilder.jl
-      text: QuartoDocBuilder.jl
-
+      - icon: github
+        href: https://github.com/vituri/QuartoDocBuilder.jl
+        text: "Source"
 
   sidebar:
     - title: "Reference"
       style: "docked"
       background: light
-      contents: 
+      contents:
         - reference.qmd
         - auto: "reference/*"
-
     - title: "Tutorials"
       style: "docked"
       background: light
       contents:
         - tutorials.qmd
         - auto: "tutorials/*"
-        
+    - title: "Explanation"
+      style: "docked"
+      background: light
+      contents:
+        - explanation.qmd
+        - auto: "explanation/*"
+    - title: "How-to Guides"
+      style: "docked"
+      background: light
+      contents:
+        - how-to.qmd
+        - auto: "how-to/*"
 
   comments:
     giscus:
@@ -55,19 +85,22 @@ website:
       loading: lazy
       mapping: pathname
 
-
-  page-footer: "Website generated with [Quarto](https://quarto.org/) and [Pkgdown.jl](https://github.com/vituri/Pkgdown.jl)"
-
+  page-footer:
+    left: "Developed by [G. Vituri](https://github.com/vituri)"
+    right: "Built with [QuartoDocBuilder.jl](https://github.com/vituri/QuartoDocBuilder.jl)"
 
 engine: julia
 
 format:
   html:
-    theme: flatly
     css: styles.css
     code-copy: true
     code-overflow: wrap
     preview-links: true
     toc: true
     toc-depth: 3
-    toc-expand: true 
+    toc-expand: true
+    theme:
+      light: flatly
+      dark: darkly
+    highlight-style: github

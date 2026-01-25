@@ -1,0 +1,12 @@
+---
+title: "Explanation"
+listing:
+  - id: explanation-listing
+    contents: "explanation/*.qmd"
+    type: default
+---
+
+Understand how QuartoDocBuilder works under the hood.
+
+::: {#explanation-listing}
+:::

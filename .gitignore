@@ -1,1 +1,5 @@
-/docs old
+/docs/site
+/docs/_freeze
+/docs/.quarto
+/docs/*/.cache
+/docs/reference/

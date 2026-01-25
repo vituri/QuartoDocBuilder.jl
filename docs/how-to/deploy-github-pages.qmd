@@ -1,0 +1,110 @@
+---
+title: "Deploy to GitHub Pages"
+description: "Set up automatic deployment with GitHub Actions"
+order: 1
+---
+
+# Deploy to GitHub Pages
+
+This guide shows how to automatically deploy your documentation to GitHub Pages.
+
+## Generate GitHub Actions Workflow
+
+QuartoDocBuilder can generate a GitHub Actions workflow for you:
+
+```julia
+using QuartoDocBuilder
+quarto_github_action()
+```
+
+This creates `.github/workflows/documentation.yml`.
+
+## Workflow Contents
+
+The generated workflow:
+
+1. Triggers on pushes to `main` branch
+2. Installs Julia and Quarto
+3. Builds documentation
+4. Deploys to GitHub Pages
+
+```yaml
+name: Documentation
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v1
+      - uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Build documentation
+        run: |
+          julia --project=docs -e '
+            using Pkg
+            Pkg.develop(path=".")
+            Pkg.instantiate()
+            include("docs/make.jl")
+          '
+          cd docs && quarto render
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
+```
+
+## Enable GitHub Pages
+
+1. Go to your repository **Settings**
+2. Click **Pages** in the sidebar
+3. Under "Build and deployment", select **GitHub Actions**
+4. Push to `main` to trigger the first build
+
+## Custom Domain
+
+To use a custom domain:
+
+1. Add a `CNAME` file to `docs/` with your domain
+2. Configure DNS records for your domain
+3. Enable HTTPS in GitHub Pages settings
+
+## Troubleshooting
+
+### Build Fails
+
+Check the Actions log for errors. Common issues:
+
+- Missing dependencies in `docs/Project.toml`
+- Quarto rendering errors
+- Julia compilation errors
+
+### Pages Not Updating
+
+- Ensure the workflow completed successfully
+- Check that `docs/site/` is being uploaded
+- Wait a few minutes for GitHub to deploy
+
+### 404 Errors
+
+- Verify `output_dir = "site"` in your config
+- Check that `_quarto.yml` is generated correctly
