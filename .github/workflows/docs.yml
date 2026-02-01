@@ -1,0 +1,236 @@
+name: Build and Deploy Versioned Documentation
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - 'v*.*.*'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version_path: ${{ steps.version.outputs.path }}
+      is_release: ${{ steps.version.outputs.is_release }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine version path
+        id: version
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/v* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/}
+            echo "path=$VERSION" >> $GITHUB_OUTPUT
+            echo "is_release=true" >> $GITHUB_OUTPUT
+          else
+            echo "path=dev" >> $GITHUB_OUTPUT
+            echo "is_release=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set up Julia
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: '1'
+
+      - name: Cache Julia packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.julia/artifacts
+            ~/.julia/compiled
+            ~/.julia/packages
+          key: ${{ runner.os }}-julia-${{ hashFiles('**/Project.toml', '**/Manifest.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-julia-
+
+      - name: Install Julia dependencies
+        run: |
+          julia --project=docs -e '
+            using Pkg
+            Pkg.develop(PackageSpec(path=pwd()))
+            Pkg.instantiate()
+          '
+
+      - name: Build documentation (Julia)
+        env:
+          DOC_VERSION: ${{ steps.version.outputs.path }}
+        run: |
+          julia --project=docs docs/make.jl
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: pre-release
+
+      - name: Render Quarto site
+        run: |
+          cd docs && quarto render
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-${{ steps.version.outputs.path }}
+          path: docs/site/
+          retention-days: 1
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+        continue-on-error: true
+
+      - name: Create gh-pages branch if missing
+        run: |
+          if [ ! -d "gh-pages" ]; then
+            mkdir gh-pages
+            cd gh-pages
+            git init
+            git checkout -b gh-pages
+          fi
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: docs-${{ needs.build.outputs.version_path }}
+          path: new-docs
+
+      - name: Deploy versioned docs
+        run: |
+          VERSION_PATH="${{ needs.build.outputs.version_path }}"
+          IS_RELEASE="${{ needs.build.outputs.is_release }}"
+
+          # Remove old version if exists
+          rm -rf "gh-pages/$VERSION_PATH"
+
+          # Copy new docs
+          cp -r new-docs "gh-pages/$VERSION_PATH"
+
+          # Update stable symlink for releases
+          if [ "$IS_RELEASE" = "true" ]; then
+            rm -rf gh-pages/stable
+            ln -s "$VERSION_PATH" gh-pages/stable
+          fi
+
+          # Update versions.json
+          cd gh-pages
+          python3 << 'EOF'
+import json
+import os
+from pathlib import Path
+
+versions = []
+for p in Path('.').iterdir():
+    if p.is_dir() and not p.name.startswith('.'):
+        if p.name.startswith('v') or p.name == 'dev':
+            if not p.is_symlink():
+                versions.append(p.name)
+
+# Sort versions (dev first, then semver descending)
+def sort_key(v):
+    if v == 'dev':
+        return (0, [0, 0, 0])
+    elif v.startswith('v'):
+        try:
+            parts = v[1:].split('.')
+            return (1, [-int(p) for p in parts[:3]])
+        except:
+            return (2, [0, 0, 0])
+    return (2, [0, 0, 0])
+
+versions.sort(key=sort_key)
+
+# Keep only N versions plus dev
+keep = 5
+kept = ['dev'] if 'dev' in versions else []
+semvers = [v for v in versions if v.startswith('v')][:keep]
+versions = kept + semvers
+
+# Remove old versions
+for p in Path('.').iterdir():
+    if p.is_dir() and not p.name.startswith('.') and not p.is_symlink():
+        if p.name not in versions and p.name not in ['stable']:
+            print(f"Removing old version: {p.name}")
+            import shutil
+            shutil.rmtree(p)
+
+# Find stable
+stable = None
+if os.path.islink('stable'):
+    stable = os.readlink('stable')
+
+# Build manifest
+manifest = {
+    'stable': stable,
+    'dev': 'dev',
+    'versions': []
+}
+
+if stable:
+    manifest['versions'].append({
+        'version': 'stable',
+        'url': '/stable/',
+        'aliases': [stable]
+    })
+
+for v in versions:
+    manifest['versions'].append({
+        'version': v,
+        'url': f'/{v}/'
+    })
+
+with open('versions.json', 'w') as f:
+    json.dump(manifest, f, indent=2)
+
+print("Updated versions.json")
+EOF
+
+      - name: Create root redirect
+        run: |
+          cat > gh-pages/index.html << 'EOF'
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0; url=stable/">
+  <link rel="canonical" href="stable/">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Redirecting to <a href="stable/">stable documentation</a>...</p>
+</body>
+</html>
+EOF
+
+      - name: Commit and push
+        run: |
+          cd gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Deploy docs: ${{ needs.build.outputs.version_path }}"
+            git push origin gh-pages --force
+          fi

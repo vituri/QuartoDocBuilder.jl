@@ -1,7 +1,7 @@
 name = "QuartoDocBuilder"
 uuid = "164f4f01-dadb-4e86-a767-9a3bba57cbbb"
 authors = ["G. Vituri <56522687+vituri@users.noreply.github.com>"]
-version = "0.2.0"
+version = "0.3.0"
 
 [deps]
 Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"

@@ -1,12 +1,11 @@
 ---
 title: "Multiple Navbar Sections"
-description: "Learn how to create multiple dropdown sections like Rhino documentation"
+description: "Learn how to create multiple dropdown sections in your documentation"
 order: 2
----
 
 # Multiple Navbar Sections
 
-QuartoDocBuilder supports multiple dropdown sections in the navbar, similar to [Rhino documentation](https://appsilon.github.io/rhino/). This allows you to organize your documentation into logical categories like "Tutorials", "Explanation", and "How-to Guides".
+QuartoDocBuilder supports multiple dropdown sections in the navbar. This allows you to organize your documentation into logical categories like "Tutorials", "Explanation", and "How-to Guides".
 
 ## Using SectionConfig
 
