@@ -86,6 +86,50 @@ Base.@kwdef struct FooterConfig
 end
 
 """
+Configuration for multi-version documentation.
+
+When enabled, documentation is deployed to versioned paths (e.g., `/stable/`, `/dev/`, `/v1.0.0/`)
+with a dropdown selector to switch between versions.
+
+# Fields
+- `enabled::Bool`: Enable versioned documentation (default: false)
+- `current::String`: Current version being built (auto-detected from Project.toml if empty)
+- `dev_url::String`: URL segment for development docs (default: "dev")
+- `stable_url::String`: URL segment for stable release (default: "stable")
+- `versions::Vector{String}`: List of versions to show in selector (empty = auto-detect)
+- `keep_versions::Int`: Number of older versions to keep (default: 5, 0 = all)
+- `dev_branch::String`: Branch that triggers "dev" deployment (default: "main")
+
+# Example
+```julia
+config = QuartoConfig(
+    module_name = MyPackage,
+    version = VersionConfig(
+        enabled = true,
+        dev_branch = "main",
+        keep_versions = 5
+    )
+)
+```
+
+# URL Structure
+When enabled, documentation is deployed as:
+- `/stable/` - Symlink to latest release
+- `/dev/` - Development branch documentation
+- `/v1.0.0/` - Specific version documentation
+- `versions.json` - Manifest of all available versions
+"""
+Base.@kwdef struct VersionConfig
+    enabled::Bool = false
+    current::String = ""
+    dev_url::String = "dev"
+    stable_url::String = "stable"
+    versions::Vector{String} = String[]
+    keep_versions::Int = 5
+    dev_branch::String = "main"
+end
+
+"""
 Configuration for theming and appearance.
 
 # Fields
@@ -162,6 +206,9 @@ Main configuration struct for QuartoDocBuilder.
 ## Footer
 - `footer::FooterConfig`: Footer configuration
 
+## Versioning
+- `version::VersionConfig`: Multi-version documentation configuration
+
 # Example (with multiple sections)
 
 ```julia
@@ -216,6 +263,9 @@ Base.@kwdef struct QuartoConfig
 
     # Footer
     footer::FooterConfig = FooterConfig()
+
+    # Versioning
+    version::VersionConfig = VersionConfig()
 end
 
 # Theme pairing for light/dark modes
@@ -263,6 +313,98 @@ function detect_repo()
     catch
         return ""
     end
+end
+
+"""
+    detect_version() -> String
+
+Detect the current package version from Project.toml.
+Searches in current directory and parent directory.
+Returns empty string if not found.
+"""
+function detect_version()
+    for path in ["Project.toml", "../Project.toml"]
+        if isfile(path)
+            try
+                toml = TOML.parsefile(path)
+                return get(toml, "version", "")
+            catch
+                continue
+            end
+        end
+    end
+    return ""
+end
+
+"""
+    is_release_tag() -> Bool
+
+Check if current git state is a release tag (v*.*.*)
+"""
+function is_release_tag()
+    try
+        tag = strip(read(`git describe --exact-match --tags HEAD`, String))
+        return occursin(r"^v\d+\.\d+\.\d+", tag)
+    catch
+        return false
+    end
+end
+
+"""
+    get_current_tag() -> String
+
+Get the current git tag if on a tagged commit.
+Returns empty string if not on a tag.
+"""
+function get_current_tag()
+    try
+        return strip(read(`git describe --exact-match --tags HEAD`, String))
+    catch
+        return ""
+    end
+end
+
+"""
+    get_current_branch() -> String
+
+Get the current git branch name.
+Returns empty string if not in a git repository.
+"""
+function get_current_branch()
+    try
+        return strip(read(`git rev-parse --abbrev-ref HEAD`, String))
+    catch
+        return ""
+    end
+end
+
+"""
+    determine_version_segment(config::VersionConfig) -> String
+
+Determine the version segment for the URL path based on git state.
+Returns "dev", "vX.Y.Z", or "stable" depending on context.
+"""
+function determine_version_segment(vc::VersionConfig)
+    # If current is explicitly set, use it
+    if !isempty(vc.current)
+        return vc.current
+    end
+
+    # Check if we're on a release tag
+    if is_release_tag()
+        tag = get_current_tag()
+        return tag  # e.g., "v1.0.0"
+    end
+
+    # Check if we're on the dev branch
+    branch = get_current_branch()
+    if branch == vc.dev_branch
+        return vc.dev_url  # e.g., "dev"
+    end
+
+    # Fallback: use version from Project.toml or dev
+    version = detect_version()
+    return !isempty(version) ? "v$version" : vc.dev_url
 end
 
 """
@@ -382,7 +524,17 @@ function _toml_to_config(data::Dict)
 
     # Parse news section
     news_data = get(data, "news", Dict())
-
+    # Parse version section
+    version_data = get(data, "version", Dict())
+    version = VersionConfig(
+        enabled = get(version_data, "enabled", false),
+        current = get(version_data, "current", ""),
+        dev_url = get(version_data, "dev_url", "dev"),
+        stable_url = get(version_data, "stable_url", "stable"),
+        versions = get(version_data, "versions", String[]),
+        keep_versions = get(version_data, "keep_versions", 5),
+        dev_branch = get(version_data, "dev_branch", "main")
+    )
     # Build config
     repo = get(project, "repo", "")
     QuartoConfig(
@@ -400,7 +552,8 @@ function _toml_to_config(data::Dict)
         comments = get(project, "comments", true),
         giscus_repo = get(project, "giscus_repo", repo),
         theme = theme,
-        footer = footer
+        footer = footer,
+        version = version
     )
 end
 
@@ -462,6 +615,7 @@ function merge_config(base::QuartoConfig, overrides::QuartoConfig)
         comments = overrides.comments,
         giscus_repo = !isempty(overrides.giscus_repo) ? overrides.giscus_repo : base.giscus_repo,
         theme = overrides.theme,
-        footer = overrides.footer
+        footer = overrides.footer,
+        version = overrides.version.enabled ? overrides.version : base.version
     )
 end

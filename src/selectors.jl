@@ -343,3 +343,171 @@ function auto_group_objects(module_name::Module)
 
     result
 end
+
+"""
+    autodocs_group(module_name::Module; title::String="API Reference", desc::String="", filter=nothing) -> ReferenceGroup
+
+Create a ReferenceGroup that automatically includes all documented symbols from a module.
+Similar to Documenter.jl's @autodocs macro.
+
+# Arguments
+- `module_name::Module`: Module to document
+- `title::String`: Group title (default: "API Reference")
+- `desc::String`: Group description
+- `filter`: Optional filter function (e.g., `is_exported(MyModule)`)
+
+# Example
+```julia
+# Include all documented symbols
+group = autodocs_group(MyModule)
+
+# Include only exported, documented symbols
+group = autodocs_group(MyModule;
+    title="Public API",
+    filter=is_exported(MyModule)
+)
+
+# Use in config
+config = QuartoConfig(
+    module_name = MyModule,
+    reference = [autodocs_group(MyModule)]
+)
+```
+"""
+function autodocs_group(module_name::Module;
+    title::String = "API Reference",
+    desc::String = "",
+    filter = nothing
+)
+    # Get all documented symbols
+    all_symbols = Symbol[k.var for (k, _) in Base.Docs.meta(module_name)]
+
+    # Apply filter if provided
+    if filter !== nothing
+        all_symbols = Base.filter(filter, all_symbols)
+    end
+
+    # Sort alphabetically
+    sort!(all_symbols)
+
+    ReferenceGroup(
+        title = title,
+        desc = desc,
+        contents = all_symbols
+    )
+end
+
+"""
+    check_missing_docstrings(module_name::Module; exported_only::Bool=true, warn::Bool=true) -> Vector{Symbol}
+
+Check for exported symbols that are missing documentation.
+Returns a list of undocumented symbols.
+
+# Arguments
+- `module_name::Module`: Module to check
+- `exported_only::Bool`: Only check exported symbols (default: true)
+- `warn::Bool`: Print warnings for missing docstrings (default: true)
+
+# Returns
+Vector of symbols that are missing documentation.
+
+# Example
+```julia
+# Check and warn about missing docstrings
+missing = check_missing_docstrings(MyModule)
+
+# Check without warnings
+missing = check_missing_docstrings(MyModule; warn=false)
+
+# Check all symbols, not just exported
+missing = check_missing_docstrings(MyModule; exported_only=false)
+```
+"""
+function check_missing_docstrings(module_name::Module;
+    exported_only::Bool = true,
+    warn::Bool = true
+)
+    # Get documented symbols
+    documented = Set(k.var for (k, _) in Base.Docs.meta(module_name))
+
+    # Get symbols to check
+    if exported_only
+        symbols_to_check = names(module_name)
+    else
+        symbols_to_check = names(module_name; all=true)
+    end
+
+    # Filter out internal symbols (starting with #)
+    symbols_to_check = filter(s -> !startswith(string(s), "#"), symbols_to_check)
+
+    # Filter out the module name itself
+    symbols_to_check = filter(s -> s != nameof(module_name), symbols_to_check)
+
+    # Find missing docstrings
+    missing = Symbol[]
+    for sym in symbols_to_check
+        if !(sym in documented)
+            push!(missing, sym)
+            if warn
+                @warn "Missing docstring for $(exported_only ? "exported " : "")symbol: $sym"
+            end
+        end
+    end
+
+    sort!(missing)
+    return missing
+end
+
+"""
+    documentation_coverage(module_name::Module; exported_only::Bool=true) -> NamedTuple
+
+Calculate documentation coverage statistics for a module.
+
+# Arguments
+- `module_name::Module`: Module to analyze
+- `exported_only::Bool`: Only consider exported symbols (default: true)
+
+# Returns
+NamedTuple with fields:
+- `total::Int`: Total number of symbols
+- `documented::Int`: Number of documented symbols
+- `missing::Int`: Number of undocumented symbols
+- `coverage::Float64`: Coverage percentage (0-100)
+- `missing_symbols::Vector{Symbol}`: List of undocumented symbols
+
+# Example
+```julia
+stats = documentation_coverage(MyModule)
+println("Documentation coverage: \$(stats.coverage)%")
+println("Missing: \$(stats.missing_symbols)")
+```
+"""
+function documentation_coverage(module_name::Module; exported_only::Bool=true)
+    # Get documented symbols
+    documented_set = Set(k.var for (k, _) in Base.Docs.meta(module_name))
+
+    # Get symbols to check
+    if exported_only
+        symbols_to_check = collect(names(module_name))
+    else
+        symbols_to_check = collect(names(module_name; all=true))
+    end
+
+    # Filter out internal symbols and module name
+    symbols_to_check = filter(s -> !startswith(string(s), "#"), symbols_to_check)
+    symbols_to_check = filter(s -> s != nameof(module_name), symbols_to_check)
+
+    total = length(symbols_to_check)
+    documented = count(s -> s in documented_set, symbols_to_check)
+    missing_syms = filter(s -> !(s in documented_set), symbols_to_check)
+
+    coverage = total > 0 ? (documented / total) * 100 : 100.0
+
+    return (
+        total = total,
+        documented = documented,
+        missing = length(missing_syms),
+        coverage = round(coverage; digits=1),
+        missing_symbols = sort(missing_syms)
+    )
+end

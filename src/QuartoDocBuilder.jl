@@ -2,7 +2,7 @@
     QuartoDocBuilder
 
 A Julia package for building documentation websites using Quarto,
-inspired by R's pkgdown package.
+inspired by R's pkgdown package and Documenter.jl.
 
 # Features
 - Generate documentation from Julia docstrings
@@ -13,6 +13,12 @@ inspired by R's pkgdown package.
 - GitHub Actions integration
 - Customizable themes and navigation
 - Optional default styles (applied when no theme is specified)
+- **Multi-version documentation** with version selector dropdown
+- **Edit on GitHub links** for easy contributions
+- **Auto-documentation** of all module symbols (`autodocs_group`)
+- **Missing docstring detection** (`check_missing_docstrings`)
+- **External cross-references** to other packages' documentation
+- **Link checking** for broken URLs
 
 # Quick Start
 ```julia
@@ -49,6 +55,21 @@ config = QuartoConfig(
     ]
 )
 quarto_build_site(config)
+
+# With versioned documentation (like DataFrames.jl)
+config = QuartoConfig(
+    module_name = MyPackage,
+    repo = "user/MyPackage.jl",
+    version = VersionConfig(
+        enabled = true,
+        dev_branch = "main",
+        keep_versions = 5
+    )
+)
+quarto_build_site(config)
+
+# Then generate the versioned GitHub Actions workflow:
+quarto_github_action_versioned()
 ```
 """
 module QuartoDocBuilder
@@ -61,9 +82,10 @@ using TOML
 # ============================================================================
 include("config.jl")
 
-export QuartoConfig, ReferenceGroup, SectionConfig, ThemeConfig, FooterConfig, NavbarItem
+export QuartoConfig, ReferenceGroup, SectionConfig, ThemeConfig, FooterConfig, NavbarItem, VersionConfig
 export load_config, default_config, validate_config, merge_config
-export get_dark_theme, detect_repo
+export get_dark_theme, detect_repo, detect_version, determine_version_segment
+export is_release_tag, get_current_tag, get_current_branch
 
 # ============================================================================
 # Content Selectors
@@ -73,6 +95,7 @@ include("selectors.jl")
 export starts_with, ends_with, matches, contains
 export has_docstring, is_exported, is_function_symbol, is_type_symbol, is_const_symbol
 export parse_content_selector, apply_selector, filter_objects, group_objects, auto_group_objects
+export autodocs_group, check_missing_docstrings, documentation_coverage
 
 # ============================================================================
 # Core Utilities
@@ -122,6 +145,9 @@ include("autolink.jl")
 export ReferenceIndex, build_reference_index, autolink_references
 export resolve_reference, find_undefined_references, create_reference_report
 export link_julia_docs
+export ExternalDocsRegistry, register_external_docs, get_external_docs_url
+export clear_external_docs, list_external_docs, register_common_packages
+export autolink_external, ExternalRef, parse_external_ref, resolve_external_ref
 
 # ============================================================================
 # Styles
@@ -129,6 +155,22 @@ export link_julia_docs
 include("styles.jl")
 
 export quarto_styles_from_config
+
+# ============================================================================
+# Version Selector
+# ============================================================================
+include("version_selector.jl")
+
+export write_version_selector_assets, generate_versions_manifest, read_versions_manifest
+
+# ============================================================================
+# Link Checking
+# ============================================================================
+include("linkcheck.jl")
+
+export LinkCheckResult, LinkCheckReport
+export extract_links, extract_links_from_file, check_link
+export check_links, check_internal_links, format_linkcheck_report
 
 # ============================================================================
 # Site Building (depends on all above)
@@ -145,7 +187,7 @@ export quarto_rebuild_reference, quarto_rebuild_all
 # ============================================================================
 include("github_actions.jl")
 
-export quarto_github_action, quarto_github_action_simple
+export quarto_github_action, quarto_github_action_simple, quarto_github_action_versioned
 export quarto_makejl_template, quarto_docs_project_toml
 export quarto_setup_instructions, setup_documentation
 

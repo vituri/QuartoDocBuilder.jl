@@ -405,3 +405,306 @@ function setup_documentation(module_name::Module; repo::String="", kwargs...)
     For more info: quarto_setup_instructions()
     """
 end
+
+"""
+    quarto_github_action_versioned(; kwargs...)
+
+Generate a GitHub Actions workflow for building and deploying versioned documentation.
+
+This workflow supports:
+- `/dev/` documentation on push to main/master branch
+- `/vX.Y.Z/` documentation on release tags
+- `/stable/` symlink pointing to latest release
+- Automatic `versions.json` manifest updates
+- Old version cleanup (configurable retention)
+
+# Arguments
+- `quarto_version::String`: Quarto version to use (default: "pre-release")
+- `julia_version::String`: Julia version to use (default: "1")
+- `output_dir::String`: Output directory from Quarto (default: "site")
+- `dev_branch::String`: Branch for dev docs (default: "main")
+- `keep_versions::Int`: Number of old versions to keep (default: 5)
+
+# Example
+```julia
+quarto_github_action_versioned()
+# Creates .github/workflows/docs.yml with versioned deployment
+
+quarto_github_action_versioned(keep_versions=10, dev_branch="develop")
+```
+
+# URL Structure
+The workflow deploys to:
+- `/stable/` - Symlink to latest release tag
+- `/dev/` - Development branch documentation
+- `/vX.Y.Z/` - Specific version documentation (from tags)
+- `versions.json` - Manifest of all available versions
+"""
+function quarto_github_action_versioned(;
+    quarto_version::String = "pre-release",
+    julia_version::String = "1",
+    output_dir::String = "site",
+    dev_branch::String = "main",
+    keep_versions::Int = 5
+)
+    workflow = """name: Build and Deploy Versioned Documentation
+
+on:
+  push:
+    branches: [$dev_branch]
+    tags:
+      - 'v*.*.*'
+  pull_request:
+    branches: [$dev_branch]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages-\${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version_path: \${{ steps.version.outputs.path }}
+      is_release: \${{ steps.version.outputs.is_release }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine version path
+        id: version
+        run: |
+          if [[ "\${{ github.ref }}" == refs/tags/v* ]]; then
+            VERSION=\${GITHUB_REF#refs/tags/}
+            echo "path=\$VERSION" >> \$GITHUB_OUTPUT
+            echo "is_release=true" >> \$GITHUB_OUTPUT
+          else
+            echo "path=dev" >> \$GITHUB_OUTPUT
+            echo "is_release=false" >> \$GITHUB_OUTPUT
+          fi
+
+      - name: Set up Julia
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: '$julia_version'
+
+      - name: Cache Julia packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.julia/artifacts
+            ~/.julia/compiled
+            ~/.julia/packages
+          key: \${{ runner.os }}-julia-\${{ hashFiles('**/Project.toml', '**/Manifest.toml') }}
+          restore-keys: |
+            \${{ runner.os }}-julia-
+
+      - name: Install Julia dependencies
+        run: |
+          julia --project=docs -e '
+            using Pkg
+            Pkg.develop(PackageSpec(path=pwd()))
+            Pkg.instantiate()
+          '
+
+      - name: Build documentation (Julia)
+        env:
+          DOC_VERSION: \${{ steps.version.outputs.path }}
+        run: |
+          julia --project=docs docs/make.jl
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: $quarto_version
+
+      - name: Render Quarto site
+        run: |
+          cd docs && quarto render
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-\${{ steps.version.outputs.path }}
+          path: docs/$output_dir/
+          retention-days: 1
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+        continue-on-error: true
+
+      - name: Create gh-pages branch if missing
+        run: |
+          if [ ! -d "gh-pages" ]; then
+            mkdir gh-pages
+            cd gh-pages
+            git init
+            git checkout -b gh-pages
+          fi
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: docs-\${{ needs.build.outputs.version_path }}
+          path: new-docs
+
+      - name: Deploy versioned docs
+        run: |
+          VERSION_PATH="\${{ needs.build.outputs.version_path }}"
+          IS_RELEASE="\${{ needs.build.outputs.is_release }}"
+
+          # Remove old version if exists
+          rm -rf "gh-pages/\$VERSION_PATH"
+
+          # Copy new docs
+          cp -r new-docs "gh-pages/\$VERSION_PATH"
+
+          # Update stable symlink for releases
+          if [ "\$IS_RELEASE" = "true" ]; then
+            rm -rf gh-pages/stable
+            ln -s "\$VERSION_PATH" gh-pages/stable
+          fi
+
+          # Update versions.json
+          cd gh-pages
+          python3 << 'EOF'
+import json
+import os
+from pathlib import Path
+
+versions = []
+for p in Path('.').iterdir():
+    if p.is_dir() and not p.name.startswith('.'):
+        if p.name.startswith('v') or p.name == 'dev':
+            if not p.is_symlink():
+                versions.append(p.name)
+
+# Sort versions (dev first, then semver descending)
+def sort_key(v):
+    if v == 'dev':
+        return (0, [0, 0, 0])
+    elif v.startswith('v'):
+        try:
+            parts = v[1:].split('.')
+            return (1, [-int(p) for p in parts[:3]])
+        except:
+            return (2, [0, 0, 0])
+    return (2, [0, 0, 0])
+
+versions.sort(key=sort_key)
+
+# Keep only N versions plus dev
+keep = $keep_versions
+kept = ['dev'] if 'dev' in versions else []
+semvers = [v for v in versions if v.startswith('v')][:keep]
+versions = kept + semvers
+
+# Remove old versions
+for p in Path('.').iterdir():
+    if p.is_dir() and not p.name.startswith('.') and not p.is_symlink():
+        if p.name not in versions and p.name not in ['stable']:
+            print(f"Removing old version: {p.name}")
+            import shutil
+            shutil.rmtree(p)
+
+# Find stable
+stable = None
+if os.path.islink('stable'):
+    stable = os.readlink('stable')
+
+# Build manifest
+manifest = {
+    'stable': stable,
+    'dev': 'dev',
+    'versions': []
+}
+
+if stable:
+    manifest['versions'].append({
+        'version': 'stable',
+        'url': '/stable/',
+        'aliases': [stable]
+    })
+
+for v in versions:
+    manifest['versions'].append({
+        'version': v,
+        'url': f'/{v}/'
+    })
+
+with open('versions.json', 'w') as f:
+    json.dump(manifest, f, indent=2)
+
+print("Updated versions.json")
+EOF
+
+      - name: Create root redirect
+        run: |
+          cat > gh-pages/index.html << 'EOF'
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0; url=stable/">
+  <link rel="canonical" href="stable/">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Redirecting to <a href="stable/">stable documentation</a>...</p>
+</body>
+</html>
+EOF
+
+      - name: Commit and push
+        run: |
+          cd gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Deploy docs: \${{ needs.build.outputs.version_path }}"
+            git push origin gh-pages --force
+          fi
+"""
+
+    mkpath(".github/workflows")
+    write(".github/workflows/docs.yml", workflow)
+    @info "GitHub Actions versioned workflow created at .github/workflows/docs.yml"
+    @info """
+    Versioned documentation workflow configured!
+
+    This workflow will:
+    - Deploy to /dev/ on push to $dev_branch branch
+    - Deploy to /vX.Y.Z/ on release tags (e.g., v1.0.0)
+    - Update /stable/ symlink to latest release
+    - Keep the last $keep_versions versions
+    - Auto-update versions.json manifest
+
+    To create a new release:
+    1. Tag your commit: git tag v1.0.0
+    2. Push the tag: git push origin v1.0.0
+
+    GitHub Pages Setup:
+    - Go to Settings > Pages
+    - Select 'Deploy from a branch'
+    - Choose 'gh-pages' branch, '/ (root)' folder
+    """
+end

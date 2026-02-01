@@ -128,7 +128,7 @@ execute:
 """)
 
     # Website section
-    push!(yaml, """
+    website_yaml = """
 website:
   page-navigation: true
   bread-crumbs: true
@@ -136,7 +136,18 @@ website:
   search:
     show-item-context: true
     type: overlay
-""")
+"""
+
+    # Add repo URL and edit links if repo is configured
+    if !isempty(repo)
+        website_yaml *= """
+  repo-url: https://github.com/$repo
+  repo-actions: [edit, issue]
+  repo-branch: main
+"""
+    end
+
+    push!(yaml, website_yaml)
 
     # Build navbar
     navbar_yaml = _build_navbar_yaml(config, module_str)
@@ -259,7 +270,19 @@ function _build_navbar_yaml(config::QuartoConfig, module_str::String)
         text: "Source"
 """
     end
-
+    # Version selector (added via right section if enabled)
+    if config.version.enabled
+        yaml *= """
+    right:
+      - text: |
+          <div class="version-selector-container">
+            <label for="version-selector">Version:</label>
+            <select id="version-selector" aria-label="Select documentation version">
+              <option value="#">Loading...</option>
+            </select>
+          </div>
+"""
+    end
     yaml
 end
 
@@ -329,11 +352,17 @@ Internal: Build format YAML section with theme support.
 """
 function _build_format_yaml(config::QuartoConfig)
     theme = config.theme
+    # Build CSS list
+    css_files = ["styles.css"]
+    if config.version.enabled
+        push!(css_files, "version-selector.css")
+    end
+    css_yaml = "[" * join(["\"$f\"" for f in css_files], ", ") * "]"
 
     yaml = """
 format:
   html:
-    css: styles.css
+    css: $css_yaml
     code-copy: true
     code-overflow: wrap
     preview-links: true
@@ -341,7 +370,13 @@ format:
     toc-depth: 3
     toc-expand: true
 """
-
+    # Add version selector JS if enabled
+    if config.version.enabled
+        yaml *= """    include-after-body:
+      - text: |
+          <script src="version-selector.js"></script>
+"""
+    end
     # Use default theme if none specified
     bootswatch = isempty(theme.bootswatch) ? "flatly" : theme.bootswatch
 
@@ -474,7 +509,14 @@ $desc
 
     # Generate styles
     quarto_styles_from_config(config)
+    # Generate version selector assets if versioning is enabled
+    if config.version.enabled
+        write_version_selector_assets("docs")
 
+        # Determine current version for info
+        version_segment = determine_version_segment(config.version)
+        @info "Version selector enabled. Building for version: $version_segment"
+    end
     @info "Documentation site built successfully!"
     @info "Run 'cd docs && quarto preview' to preview locally."
 end

@@ -1,6 +1,6 @@
 # Documentation build script for QuartoDocBuilder.jl
 # This script uses QuartoDocBuilder to document itself!
-# Showcases the multiple sections feature (like Rhino documentation)
+# Showcases the multiple sections feature
 
 using Pkg
 Pkg.activate(@__DIR__)
@@ -77,7 +77,7 @@ config = QuartoConfig(
         )
     ],
 
-    # MULTIPLE SECTIONS - like Rhino documentation!
+    # MULTIPLE SECTIONS
     # Each section gets its own dropdown in the navbar
     sections = [
         SectionConfig(

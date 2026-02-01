@@ -1,5 +1,8 @@
+
 /docs/site
 /docs/_freeze
 /docs/.quarto
 /docs/*/.cache
 /docs/reference/
+/docs/site_libs/
+docs/index.html
