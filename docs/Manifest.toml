@@ -32,7 +32,7 @@ version = "1.11.0"
 deps = ["Markdown", "TOML"]
 path = "/home/vituri/Documents/Github/QuartoDocBuilder.jl"
 uuid = "164f4f01-dadb-4e86-a767-9a3bba57cbbb"
-version = "0.2.0"
+version = "0.3.0"
 
 [[deps.StyledStrings]]
 uuid = "f489334b-da3d-4c2e-b8f0-e476e12c162b"

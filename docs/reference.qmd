@@ -65,7 +65,6 @@ Functions for extracting and formatting Julia docstrings to Quarto format.
 |----------|-------------|
 | [`get_objects_from_module`](reference/get_objects_from_module.qmd) | get_objects_from_module(m::Module) -> Vector{Docs.Binding} |
 | [`quarto_callout_block`](reference/quarto_callout_block.qmd) | quarto_callout_block(s) |
-| [`quarto_doc`](reference/quarto_doc.qmd) | quarto_doc(s::Symbol) |
 | [`quarto_doc_page`](reference/quarto_doc_page.qmd) | quarto_doc_page(s; dir = "docs/reference") |
 | [`quarto_doc_short`](reference/quarto_doc_short.qmd) | quarto_doc_short(s::Symbol) |
 | [`quarto_format`](reference/quarto_format.qmd) | quarto_format(m::Markdown.Code, eval = false) |

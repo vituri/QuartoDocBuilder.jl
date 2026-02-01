@@ -130,8 +130,27 @@ end
 
 Create the documentation of a symbol (function, object, etc) `s`.
 """
+function _doc_target(b)
+    if b isa Base.Docs.Binding
+        return isdefined(b.mod, b.var) ? getfield(b.mod, b.var) : nothing
+    end
+    return b
+end
+
 function quarto_doc(b)
-    z = Base.doc(b)
+    target = _doc_target(b)
+    if target === nothing
+        return ["""
+
+```julia
+$(b)
+```
+
+No documentation found!
+"""]
+    end
+
+    z = Base.doc(target)
     ct = z.content
     
     if ct[1] isa Markdown.Paragraph
@@ -188,7 +207,21 @@ Create a short description of the object. Used to build
 the Reference page.
 """
 function quarto_doc_short(b)
-    z = Base.doc(b)
+    target = _doc_target(b)
+    if target === nothing
+        return [
+            """
+
+```julia
+$(b)
+```
+
+No documentation found! :(
+            """
+        ]
+    end
+
+    z = Base.doc(target)
     ct = z.content
   
     if ct[1] isa Markdown.Paragraph
