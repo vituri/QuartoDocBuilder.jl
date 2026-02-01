@@ -14,6 +14,9 @@ website:
   search:
     show-item-context: true
     type: overlay
+  repo-url: https://github.com/vituri/QuartoDocBuilder.jl
+  repo-actions: [edit, issue]
+  repo-branch: main
 
   navbar:
     background: primary
@@ -51,6 +54,14 @@ website:
       - icon: github
         href: https://github.com/vituri/QuartoDocBuilder.jl
         text: "Source"
+    right:
+      - text: |
+          <div class="version-selector-container">
+            <label for="version-selector">Version:</label>
+            <select id="version-selector" aria-label="Select documentation version">
+              <option value="#">Loading...</option>
+            </select>
+          </div>
 
   sidebar:
     - title: "Reference"
@@ -85,21 +96,22 @@ website:
       loading: lazy
       mapping: pathname
 
-  page-footer:
-    left: "Developed by [G. Vituri](https://github.com/vituri)"
-    right: "Built with [QuartoDocBuilder.jl](https://github.com/vituri/QuartoDocBuilder.jl)"
+  page-footer: "Website generated with [Quarto](https://quarto.org/) and [QuartoDocBuilder.jl](https://github.com/vituri/QuartoDocBuilder.jl)"
 
 engine: julia
 
 format:
   html:
-    css: styles.css
+    css: ["styles.css", "version-selector.css"]
     code-copy: true
     code-overflow: wrap
     preview-links: true
     toc: true
     toc-depth: 3
     toc-expand: true
+    include-after-body:
+      - text: |
+          <script src="version-selector.js"></script>
     theme:
       light: flatly
       dark: darkly
