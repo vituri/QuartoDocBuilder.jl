@@ -135,92 +135,92 @@ jobs:
           # Update versions.json
           cd gh-pages
           python3 << 'EOF'
-import json
-import os
-from pathlib import Path
-
-versions = []
-for p in Path('.').iterdir():
-    if p.is_dir() and not p.name.startswith('.'):
-        if p.name.startswith('v') or p.name == 'dev':
-            if not p.is_symlink():
-                versions.append(p.name)
-
-# Sort versions (dev first, then semver descending)
-def sort_key(v):
-    if v == 'dev':
-        return (0, [0, 0, 0])
-    elif v.startswith('v'):
-        try:
-            parts = v[1:].split('.')
-            return (1, [-int(p) for p in parts[:3]])
-        except:
-            return (2, [0, 0, 0])
-    return (2, [0, 0, 0])
-
-versions.sort(key=sort_key)
-
-# Keep only N versions plus dev
-keep = 5
-kept = ['dev'] if 'dev' in versions else []
-semvers = [v for v in versions if v.startswith('v')][:keep]
-versions = kept + semvers
-
-# Remove old versions
-for p in Path('.').iterdir():
-    if p.is_dir() and not p.name.startswith('.') and not p.is_symlink():
-        if p.name not in versions and p.name not in ['stable']:
-            print(f"Removing old version: {p.name}")
-            import shutil
-            shutil.rmtree(p)
-
-# Find stable
-stable = None
-if os.path.islink('stable'):
-    stable = os.readlink('stable')
-
-# Build manifest
-manifest = {
-    'stable': stable,
-    'dev': 'dev',
-    'versions': []
-}
-
-if stable:
-    manifest['versions'].append({
-        'version': 'stable',
-        'url': '/stable/',
-        'aliases': [stable]
-    })
-
-for v in versions:
-    manifest['versions'].append({
-        'version': v,
-        'url': f'/{v}/'
-    })
-
-with open('versions.json', 'w') as f:
-    json.dump(manifest, f, indent=2)
-
-print("Updated versions.json")
-EOF
+          import json
+          import os
+          from pathlib import Path
+          
+          versions = []
+          for p in Path('.').iterdir():
+              if p.is_dir() and not p.name.startswith('.'):
+                  if p.name.startswith('v') or p.name == 'dev':
+                      if not p.is_symlink():
+                          versions.append(p.name)
+          
+          # Sort versions (dev first, then semver descending)
+          def sort_key(v):
+              if v == 'dev':
+                  return (0, [0, 0, 0])
+              elif v.startswith('v'):
+                  try:
+                      parts = v[1:].split('.')
+                      return (1, [-int(p) for p in parts[:3]])
+                  except:
+                      return (2, [0, 0, 0])
+              return (2, [0, 0, 0])
+          
+          versions.sort(key=sort_key)
+          
+          # Keep only N versions plus dev
+          keep = 5
+          kept = ['dev'] if 'dev' in versions else []
+          semvers = [v for v in versions if v.startswith('v')][:keep]
+          versions = kept + semvers
+          
+          # Remove old versions
+          for p in Path('.').iterdir():
+              if p.is_dir() and not p.name.startswith('.') and not p.is_symlink():
+                  if p.name not in versions and p.name not in ['stable']:
+                      print(f"Removing old version: {p.name}")
+                      import shutil
+                      shutil.rmtree(p)
+          
+          # Find stable
+          stable = None
+          if os.path.islink('stable'):
+              stable = os.readlink('stable')
+          
+          # Build manifest
+          manifest = {
+              'stable': stable,
+              'dev': 'dev',
+              'versions': []
+          }
+          
+          if stable:
+              manifest['versions'].append({
+                  'version': 'stable',
+                  'url': '/stable/',
+                  'aliases': [stable]
+              })
+          
+          for v in versions:
+              manifest['versions'].append({
+                  'version': v,
+                  'url': f'/{v}/'
+              })
+          
+          with open('versions.json', 'w') as f:
+              json.dump(manifest, f, indent=2)
+          
+          print("Updated versions.json")
+          EOF
 
       - name: Create root redirect
         run: |
           cat > gh-pages/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=stable/">
-  <link rel="canonical" href="stable/">
-  <title>Redirecting...</title>
-</head>
-<body>
-  <p>Redirecting to <a href="stable/">stable documentation</a>...</p>
-</body>
-</html>
-EOF
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <meta http-equiv="refresh" content="0; url=stable/">
+            <link rel="canonical" href="stable/">
+            <title>Redirecting...</title>
+          </head>
+          <body>
+            <p>Redirecting to <a href="stable/">stable documentation</a>...</p>
+          </body>
+          </html>
+          EOF
 
       - name: Commit and push
         run: |
