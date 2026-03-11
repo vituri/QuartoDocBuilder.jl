@@ -1,0 +1,10 @@
+{
+  "stable": null,
+  "dev": "dev",
+  "versions": [
+    {
+      "version": "dev",
+      "url": "/dev/"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "listing": "/how-to.html",
+    "items": [
+      "/how-to/deploy-github-pages.html",
+      "/how-to/customize-theme.html",
+      "/how-to/organize-reference.html"
+    ]
+  },
+  {
+    "listing": "/tutorials.html",
+    "items": [
+      "/tutorials/getting-started.html",
+      "/tutorials/multiple-sections.html"
+    ]
+  },
+  {
+    "listing": "/explanation.html",
+    "items": [
+      "/explanation/architecture.html",
+      "/explanation/docstring-processing.html"
+    ]
+  }
+]
