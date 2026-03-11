@@ -11,6 +11,15 @@ struct ReferenceIndex
     module_name::Union{Module, Nothing}
 end
 
+function _reference_name(item)
+    if item isa Base.Docs.Binding
+        return string(item.var)
+    elseif item isa Symbol
+        return string(item)
+    end
+    return string(item)
+end
+
 """
     build_reference_index(module_name::Module; base_path::String="reference") -> ReferenceIndex
 
@@ -33,7 +42,7 @@ function build_reference_index(module_name::Module; base_path::String="reference
     entries = Dict{String, String}()
 
     for (sym, _) in Base.Docs.meta(module_name)
-        name = string(sym)
+        name = _reference_name(sym)
         url = "$base_path/$name.qmd"
         entries[name] = url
     end
@@ -66,43 +75,17 @@ autolink_references(text, index)
 ```
 """
 function autolink_references(text::String, index::ReferenceIndex)
-    result = text
+    pattern = r"`([A-Za-z_][\w\.]*)(\(\))?`"
+    replace(text, pattern => function(token)
+        m = match(pattern, token)
+        m === nothing && return token
 
-    # Pattern for function calls with parentheses: `func_name()`
-    # This is the most common pattern in docstrings
-    result = replace(result, r"`(\w+)\(\)`" => function(m)
-        func_match = match(r"`(\w+)\(\)`", m)
-        if func_match === nothing
-            return m
-        end
-        func_name = func_match.captures[1]
-        if haskey(index.entries, func_name)
-            return "[`$func_name()`]($(index.entries[func_name]))"
-        else
-            return m
-        end
+        name = m.captures[1]
+        suffix = m.captures[2] === nothing ? "" : m.captures[2]
+        url = resolve_reference(name * suffix, index)
+
+        url === nothing ? token : "[`$(name)$(suffix)`]($url)"
     end)
-
-    # Pattern for identifiers without parentheses: `func_name`
-    # Only link if it's in our index (to avoid linking random words)
-    result = replace(result, r"`(\w+)`" => function(m)
-        # Skip if already a link
-        if occursin("]($m", result)
-            return m
-        end
-        func_match = match(r"`(\w+)`", m)
-        if func_match === nothing
-            return m
-        end
-        func_name = func_match.captures[1]
-        if haskey(index.entries, func_name)
-            return "[`$func_name`]($(index.entries[func_name]))"
-        else
-            return m
-        end
-    end)
-
-    result
 end
 
 """
@@ -160,15 +143,12 @@ Resolve a function name to its documentation URL.
 URL string if found, `nothing` otherwise.
 """
 function resolve_reference(name::String, index::ReferenceIndex)
-    # Try exact match first
-    if haskey(index.entries, name)
-        return index.entries[name]
-    end
-
-    # Try without trailing parentheses
     clean_name = replace(name, r"\(\)$" => "")
-    if haskey(index.entries, clean_name)
-        return index.entries[clean_name]
+
+    for candidate in (clean_name, split(clean_name, ".")[end])
+        if haskey(index.entries, candidate)
+            return index.entries[candidate]
+        end
     end
 
     nothing
@@ -189,11 +169,12 @@ Vector of undefined reference names.
 """
 function find_undefined_references(text::String, index::ReferenceIndex)
     undefined = String[]
+    pattern = r"`([A-Za-z_][\w\.]*)(?:\(\))?`"
 
     # Find all backtick-quoted identifiers
-    for m in eachmatch(r"`(\w+)(?:\(\))?`", text)
+    for m in eachmatch(pattern, text)
         name = m.captures[1]
-        if !haskey(index.entries, name) && !(name in undefined)
+        if resolve_reference(name, index) === nothing && !(name in undefined)
             push!(undefined, name)
         end
     end

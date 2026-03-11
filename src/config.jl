@@ -268,6 +268,86 @@ Base.@kwdef struct QuartoConfig
     version::VersionConfig = VersionConfig()
 end
 
+function _is_default_theme(theme::ThemeConfig)
+    theme.bootswatch == "" &&
+    theme.dark_mode == true &&
+    theme.primary == "" &&
+    theme.bg == "" &&
+    theme.fg == "" &&
+    theme.accent == "" &&
+    theme.font_base == "" &&
+    theme.font_heading == "" &&
+    theme.font_code == "" &&
+    theme.code_highlight == "github" &&
+    theme.custom_css == "" &&
+    theme.custom_scss == "" &&
+    theme.use_default_styles == true
+end
+
+function _is_default_footer(footer::FooterConfig)
+    footer.left == "" && footer.center == "" && footer.right == ""
+end
+
+function _is_default_version(version::VersionConfig)
+    version.enabled == false &&
+    version.current == "" &&
+    version.dev_url == "dev" &&
+    version.stable_url == "stable" &&
+    isempty(version.versions) &&
+    version.keep_versions == 5 &&
+    version.dev_branch == "main"
+end
+
+function _merge_theme_config(base::ThemeConfig, overrides::ThemeConfig)
+    if _is_default_theme(overrides)
+        return base
+    end
+
+    ThemeConfig(
+        bootswatch = !isempty(overrides.bootswatch) ? overrides.bootswatch : base.bootswatch,
+        dark_mode = overrides.dark_mode != true ? overrides.dark_mode : base.dark_mode,
+        primary = !isempty(overrides.primary) ? overrides.primary : base.primary,
+        bg = !isempty(overrides.bg) ? overrides.bg : base.bg,
+        fg = !isempty(overrides.fg) ? overrides.fg : base.fg,
+        accent = !isempty(overrides.accent) ? overrides.accent : base.accent,
+        font_base = !isempty(overrides.font_base) ? overrides.font_base : base.font_base,
+        font_heading = !isempty(overrides.font_heading) ? overrides.font_heading : base.font_heading,
+        font_code = !isempty(overrides.font_code) ? overrides.font_code : base.font_code,
+        code_highlight = overrides.code_highlight != "github" ? overrides.code_highlight : base.code_highlight,
+        custom_css = !isempty(overrides.custom_css) ? overrides.custom_css : base.custom_css,
+        custom_scss = !isempty(overrides.custom_scss) ? overrides.custom_scss : base.custom_scss,
+        use_default_styles = overrides.use_default_styles != true ? overrides.use_default_styles : base.use_default_styles
+    )
+end
+
+function _merge_footer_config(base::FooterConfig, overrides::FooterConfig)
+    if _is_default_footer(overrides)
+        return base
+    end
+
+    FooterConfig(
+        left = !isempty(overrides.left) ? overrides.left : base.left,
+        center = !isempty(overrides.center) ? overrides.center : base.center,
+        right = !isempty(overrides.right) ? overrides.right : base.right
+    )
+end
+
+function _merge_version_config(base::VersionConfig, overrides::VersionConfig)
+    if _is_default_version(overrides)
+        return base
+    end
+
+    VersionConfig(
+        enabled = overrides.enabled != false ? overrides.enabled : base.enabled,
+        current = !isempty(overrides.current) ? overrides.current : base.current,
+        dev_url = overrides.dev_url != "dev" ? overrides.dev_url : base.dev_url,
+        stable_url = overrides.stable_url != "stable" ? overrides.stable_url : base.stable_url,
+        versions = !isempty(overrides.versions) ? overrides.versions : base.versions,
+        keep_versions = overrides.keep_versions != 5 ? overrides.keep_versions : base.keep_versions,
+        dev_branch = overrides.dev_branch != "main" ? overrides.dev_branch : base.dev_branch
+    )
+end
+
 # Theme pairing for light/dark modes
 const DARK_THEME_MAP = Dict{String, String}(
     "flatly" => "darkly",
@@ -307,7 +387,7 @@ Returns empty string if not found.
 """
 function detect_repo()
     try
-        remote = read(`git remote get-url origin`, String)
+        remote = read(pipeline(`git remote get-url origin`, stderr=devnull), String)
         m = match(r"github\.com[:/](.+/.+?)(?:\.git)?$", strip(remote))
         return m !== nothing ? m.captures[1] : ""
     catch
@@ -343,7 +423,7 @@ Check if current git state is a release tag (v*.*.*)
 """
 function is_release_tag()
     try
-        tag = strip(read(`git describe --exact-match --tags HEAD`, String))
+        tag = strip(read(pipeline(`git describe --exact-match --tags HEAD`, stderr=devnull), String))
         return occursin(r"^v\d+\.\d+\.\d+", tag)
     catch
         return false
@@ -358,7 +438,7 @@ Returns empty string if not on a tag.
 """
 function get_current_tag()
     try
-        return strip(read(`git describe --exact-match --tags HEAD`, String))
+        return strip(read(pipeline(`git describe --exact-match --tags HEAD`, stderr=devnull), String))
     catch
         return ""
     end
@@ -372,7 +452,7 @@ Returns empty string if not in a git repository.
 """
 function get_current_branch()
     try
-        return strip(read(`git rev-parse --abbrev-ref HEAD`, String))
+        return strip(read(pipeline(`git rev-parse --abbrev-ref HEAD`, stderr=devnull), String))
     catch
         return ""
     end
@@ -594,7 +674,8 @@ end
 """
     merge_config(base::QuartoConfig, overrides::QuartoConfig) -> QuartoConfig
 
-Merge two configurations, with `overrides` taking precedence.
+Merge two configurations, with `overrides` taking precedence for any field
+that differs from its default constructor value.
 Useful for combining file-based config with programmatic options.
 """
 function merge_config(base::QuartoConfig, overrides::QuartoConfig)
@@ -608,14 +689,14 @@ function merge_config(base::QuartoConfig, overrides::QuartoConfig)
         reference = !isempty(overrides.reference) ? overrides.reference : base.reference,
         sections = !isempty(overrides.sections) ? overrides.sections : base.sections,
         get_started = !isempty(overrides.get_started) ? overrides.get_started : base.get_started,
-        news = overrides.news,
+        news = overrides.news != true ? overrides.news : base.news,
         news_file = overrides.news_file != "NEWS.md" ? overrides.news_file : base.news_file,
         navbar_left = !isempty(overrides.navbar_left) ? overrides.navbar_left : base.navbar_left,
         navbar_right = !isempty(overrides.navbar_right) ? overrides.navbar_right : base.navbar_right,
-        comments = overrides.comments,
+        comments = overrides.comments != true ? overrides.comments : base.comments,
         giscus_repo = !isempty(overrides.giscus_repo) ? overrides.giscus_repo : base.giscus_repo,
-        theme = overrides.theme,
-        footer = overrides.footer,
-        version = overrides.version.enabled ? overrides.version : base.version
+        theme = _merge_theme_config(base.theme, overrides.theme),
+        footer = _merge_footer_config(base.footer, overrides.footer),
+        version = _merge_version_config(base.version, overrides.version)
     )
 end

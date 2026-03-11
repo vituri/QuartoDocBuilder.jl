@@ -75,6 +75,7 @@ quarto_github_action_versioned()
 module QuartoDocBuilder
 
 using Markdown
+using REPL
 using TOML
 
 # ============================================================================

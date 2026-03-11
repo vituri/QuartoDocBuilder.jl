@@ -37,8 +37,12 @@ Create a file `docs/make.jl` with:
 using MyPackage
 using QuartoDocBuilder
 
-# Build documentation with default settings
-quarto_build_site(MyPackage; repo="username/MyPackage.jl")
+config = QuartoConfig(
+    module_name = MyPackage,
+    repo = "username/MyPackage.jl"
+)
+
+quarto_build_site(config)
 ```
 
 ### Step 2: Run the build script

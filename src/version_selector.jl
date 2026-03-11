@@ -200,6 +200,8 @@ Write the version selector JavaScript and CSS files to the docs directory.
 - `docs_dir::String`: The docs directory path (default: "docs")
 """
 function write_version_selector_assets(docs_dir::String="docs")
+    mkpath(docs_dir)
+
     # Write JavaScript file
     js_path = joinpath(docs_dir, "version-selector.js")
     open(js_path, "w") do io
@@ -213,6 +215,30 @@ function write_version_selector_assets(docs_dir::String="docs")
         write(io, _version_selector_css())
     end
     @info "Created $css_path"
+end
+
+function _parse_semver(version::String)
+    m = match(r"^v(\d+)\.(\d+)\.(\d+)(?:[-+].*)?$", version)
+    m === nothing && return nothing
+
+    (
+        parse(Int, m.captures[1]),
+        parse(Int, m.captures[2]),
+        parse(Int, m.captures[3])
+    )
+end
+
+function _version_sort_key(version::String, dev_url::String)
+    if version == dev_url
+        return (0, 0, 0, 0, "")
+    end
+
+    parsed = _parse_semver(version)
+    if parsed !== nothing
+        return (1, -parsed[1], -parsed[2], -parsed[3], "")
+    end
+
+    (2, 0, 0, 0, version)
 end
 
 """
@@ -239,25 +265,13 @@ function generate_versions_manifest(output_dir::String, current_version::String;
                                     dev_url::String="dev")
     # Merge versions
     all_versions = unique(vcat(existing_versions, [current_version]))
-
-    # Sort: dev first, then semver descending
-    function version_sort_key(v)
-        if v == dev_url
-            return (0, "")
-        elseif startswith(v, "v")
-            return (1, v)
-        else
-            return (2, v)
-        end
-    end
-    sort!(all_versions, by=version_sort_key)
+    sort!(all_versions, by = v -> _version_sort_key(v, dev_url))
 
     # Find stable version (latest semver if not specified)
     if isempty(stable_version)
-        semver_versions = filter(v -> occursin(r"^v\d+\.\d+\.\d+", v), all_versions)
+        semver_versions = filter(v -> _parse_semver(v) !== nothing, all_versions)
         if !isempty(semver_versions)
-            # Sort semver and take latest
-            stable_version = sort(semver_versions, rev=true)[1]
+            stable_version = semver_versions[1]
         end
     end
 

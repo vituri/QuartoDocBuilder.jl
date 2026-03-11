@@ -20,24 +20,29 @@ config = QuartoConfig(
             title = "Configuration",
             desc = "Types and functions for configuring documentation generation.",
             contents = [:QuartoConfig, :ReferenceGroup, :SectionConfig, :ThemeConfig,
-                       :FooterConfig, :NavbarItem, :load_config, :default_config,
-                       :validate_config, :merge_config, :get_dark_theme, :detect_repo]
+                       :FooterConfig, :NavbarItem, :VersionConfig, :load_config,
+                       :default_config, :validate_config, :merge_config,
+                       :get_dark_theme, :detect_repo, :detect_version,
+                       :determine_version_segment, :is_release_tag,
+                       :get_current_tag, :get_current_branch]
         ),
         ReferenceGroup(
             title = "Content Selectors",
             desc = "pkgdown-style helpers for organizing reference pages by matching function names.",
             contents = [:starts_with, :ends_with, :matches, :contains,
-                       :has_docstring, :is_exported, :is_function_symbol, :is_type_symbol,
-                       :parse_content_selector, :apply_selector, :filter_objects,
-                       :group_objects, :auto_group_objects]
+                       :has_docstring, :is_exported, :is_function_symbol,
+                       :is_type_symbol, :is_const_symbol, :parse_content_selector,
+                       :apply_selector, :filter_objects, :group_objects,
+                       :auto_group_objects, :autodocs_group,
+                       :check_missing_docstrings, :documentation_coverage]
         ),
         ReferenceGroup(
             title = "Site Building",
             desc = "Core functions for generating documentation sites.",
-            contents = [:quarto_build_site, :quarto_yaml, :quarto_yaml_from_config,
-                       :quarto_index, :quarto_git_ignore, :quarto_build_refpage,
+            contents = [:quarto_build_site, :quarto_yaml_from_config, :quarto_index,
+                       :quarto_git_ignore, :quarto_build_refpage,
                        :quarto_build_refpage_grouped, :quarto_rebuild_reference,
-                       :quarto_rebuild_all]
+                       :quarto_rebuild_all, :quarto_styles_from_config]
         ),
         ReferenceGroup(
             title = "Docstring Processing",
@@ -50,30 +55,38 @@ config = QuartoConfig(
             desc = "Article discovery and changelog generation.",
             contents = [:discover_articles, :discover_articles_recursive, :detect_get_started,
                        :get_article_title, :get_article_info, :ArticleInfo,
-                       :quarto_articles_index, :quarto_articles_index_manual,
-                       :build_articles_navbar, :build_articles_yaml,
-                       :create_articles_directory, :create_article_template,
-                       :NewsVersion, :parse_news, :linkify_github_refs,
+                       :get_article_order, :create_article_template, :NewsVersion,
+                       :parse_news, :linkify_github_refs,
                        :quarto_news_page, :has_news, :news_summary, :create_news_template]
         ),
         ReferenceGroup(
             title = "Auto-linking",
             desc = "Automatic cross-reference linking in documentation.",
             contents = [:ReferenceIndex, :build_reference_index, :autolink_references,
-                       :resolve_reference, :find_undefined_references,
-                       :create_reference_report, :link_julia_docs]
+                       :autolink_cross_package, :resolve_reference,
+                       :find_undefined_references, :create_reference_report,
+                       :link_julia_docs, :ExternalDocsRegistry,
+                       :register_external_docs, :get_external_docs_url,
+                       :clear_external_docs, :list_external_docs,
+                       :register_common_packages, :autolink_external,
+                       :ExternalRef, :parse_external_ref, :resolve_external_ref]
         ),
         ReferenceGroup(
-            title = "Styles & Themes",
-            desc = "CSS generation and theme customization.",
-            contents = [:quarto_styles, :quarto_styles_from_config]
+            title = "Link Checking & Versioning",
+            desc = "Utilities for validating docs links and managing multi-version documentation.",
+            contents = [:LinkCheckResult, :LinkCheckReport, :extract_links,
+                       :extract_links_from_file, :check_link, :check_links,
+                       :check_internal_links, :format_linkcheck_report,
+                       :write_version_selector_assets,
+                       :generate_versions_manifest, :read_versions_manifest]
         ),
         ReferenceGroup(
             title = "GitHub Integration",
             desc = "CI/CD workflow generation and deployment helpers.",
             contents = [:quarto_github_action, :quarto_github_action_simple,
-                       :quarto_makejl_template, :quarto_docs_project_toml,
-                       :quarto_setup_instructions, :setup_documentation]
+                       :quarto_github_action_versioned, :quarto_makejl_template,
+                       :quarto_docs_project_toml, :quarto_setup_instructions,
+                       :setup_documentation]
         )
     ],
 

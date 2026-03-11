@@ -21,8 +21,8 @@ config = QuartoConfig(
     # Reference page organization
     reference = [...],              # Vector of ReferenceGroup
 
-    # Articles
-    articles = ArticleConfig(...),
+    # Documentation sections
+    sections = [SectionConfig(...)],
     get_started = "articles/intro.qmd",
 
     # News
@@ -230,29 +230,25 @@ using QuartoDocBuilder
 
 # Load config from file
 config = load_config("_quartodoc.toml")
+config === nothing && error("Could not load _quartodoc.toml")
 
-# Set the module (can't be in TOML)
-config = QuartoConfig(
-    module_name = MyPackage,
-    # Other fields from loaded config are preserved
-    repo = config.repo,
-    reference = config.reference,
-    theme = config.theme,
-    # ...
-)
+# Fill in defaults that cannot live in TOML, such as the module itself
+config = merge_config(default_config(MyPackage), config)
 
 quarto_build_site(config)
 ```
 
-## Articles Configuration
+## Section Configuration
 
 ```julia
-articles = ArticleConfig(
-    title = "Tutorials",           # Navbar text
-    desc = "Learn how to use...",  # Index page description
-    dir = "articles",              # Directory name
-    dropdown = true                # Show as dropdown in navbar
-)
+sections = [
+    SectionConfig(
+        title = "Tutorials",           # Navbar text
+        desc = "Learn how to use...",  # Index page description
+        dir = "articles",              # Directory name
+        dropdown = true                # Show as dropdown in navbar
+    )
+]
 ```
 
 ### "Get Started" Link
@@ -313,10 +309,13 @@ config = QuartoConfig(
         )
     ],
 
-    articles = ArticleConfig(
-        title = "Guides",
-        dropdown = true
-    ),
+    sections = [
+        SectionConfig(
+            title = "Guides",
+            dir = "articles",
+            dropdown = true
+        )
+    ],
     get_started = "articles/quickstart.qmd",
 
     news = true,

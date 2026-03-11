@@ -6,7 +6,47 @@ Generate the index.qmd file from README.md with proper YAML front matter.
 # Arguments
 - `title::String`: Title for the page (shown in browser tab). Defaults to "Home".
 """
+function _yaml_escape(value::AbstractString)
+    replace(String(value), "\\" => "\\\\", "\"" => "\\\"")
+end
+
+function _ensure_docs_dir()
+    mkpath("docs")
+end
+
+function _append_navbar_item!(lines::Vector{String}, item::NavbarItem, indent::Int)
+    if isempty(item.text) && isempty(item.icon) && isempty(item.href) && isempty(item.menu)
+        return
+    end
+
+    prefix = " " ^ indent
+    if !isempty(item.text)
+        push!(lines, prefix * "- text: \"" * _yaml_escape(item.text) * "\"")
+    elseif !isempty(item.icon)
+        push!(lines, prefix * "- icon: " * item.icon)
+    else
+        push!(lines, prefix * "- href: " * item.href)
+    end
+
+    if !isempty(item.icon) && !isempty(item.text)
+        push!(lines, prefix * "  icon: " * item.icon)
+    end
+
+    if !isempty(item.href) && (!isempty(item.text) || !isempty(item.icon))
+        push!(lines, prefix * "  href: " * item.href)
+    end
+
+    if !isempty(item.menu)
+        push!(lines, prefix * "  menu:")
+        for child in item.menu
+            _append_navbar_item!(lines, child, indent + 4)
+        end
+    end
+end
+
 function quarto_index(; title::String="")
+    _ensure_docs_dir()
+
     if isfile("docs/index.qmd")
         @warn "docs/index.qmd already exists!"
         return
@@ -29,13 +69,14 @@ title: "$page_title"
 ---
 
 $readme_content
-"""
+    """
 
     write("docs/index.qmd", index_content)
     @info "Created docs/index.qmd"
 end
 
 function quarto_git_ignore()
+_ensure_docs_dir()
 texto = """site/
 .quarto/
 .jupyter_cache/
@@ -59,6 +100,7 @@ each object.
 - `output`: the output file. By default, it is "docs/reference.qmd".
 """
 function quarto_build_refpage(module_name; output = "docs/reference.qmd")
+  mkpath(dirname(output))
   fs = get_objects_from_module(module_name)
 
   short_docs = map(quarto_doc_short.(fs)) do x
@@ -88,7 +130,7 @@ end
 """
     quarto_yaml_from_config(config::QuartoConfig; force::Bool=false)
 
-Generate the _quarto.yml file from a QuartoConfig struct.
+Generate the `_quarto.yml` file from a `QuartoConfig` struct.
 
 Supports:
 - Light/dark mode toggle
@@ -102,6 +144,8 @@ Supports:
 - `force::Bool`: Overwrite existing file if true (default: false)
 """
 function quarto_yaml_from_config(config::QuartoConfig; force::Bool=false)
+    _ensure_docs_dir()
+
     if isfile("docs/_quarto.yml") && !force
         @warn "docs/_quarto.yml already exists! Use force=true to overwrite."
         return nothing
@@ -195,28 +239,16 @@ Supports multiple dropdown sections.
 """
 function _build_navbar_yaml(config::QuartoConfig, module_str::String)
     repo = config.repo
+    left_items = NavbarItem[
+        NavbarItem(text = "$module_str.jl", href = "index.qmd")
+    ]
 
-    yaml = """  navbar:
-    background: primary
-
-    left:
-      - text: "$module_str.jl"
-        href: index.qmd
-"""
-
-    # Add "Get Started" prominently if available
     if !isempty(config.get_started)
-        yaml *= """      - text: "Get Started"
-        href: $(config.get_started)
-"""
+        push!(left_items, NavbarItem(text = "Get Started", href = config.get_started))
     end
 
-    # Add Reference
-    yaml *= """      - text: "Reference"
-        href: reference.qmd
-"""
+    push!(left_items, NavbarItem(text = "Reference", href = "reference.qmd"))
 
-    # Build sections with dropdowns
     sorted_sections = sort(config.sections, by = s -> s.order)
 
     for section in sorted_sections
@@ -227,63 +259,69 @@ function _build_navbar_yaml(config::QuartoConfig, module_str::String)
             section_files = discover_articles(section_dir)
 
             if !isempty(section_files) && section.dropdown && length(section_files) <= section.dropdown_limit
-                # Create dropdown menu
-                yaml *= """      - text: "$(section.title)"
-        menu:
-"""
-                for f in section_files
-                    title = get_article_title("docs/" * f)
-                    yaml *= """          - text: "$title"
-            href: $f
-"""
-                end
+                menu_items = NavbarItem[
+                    NavbarItem(text = get_article_title("docs/" * f), href = f)
+                    for f in section_files
+                ]
+                push!(left_items, NavbarItem(text = section.title, menu = menu_items))
             elseif !isempty(section_files) || isfile("docs/$index_file")
-                # Link to index page
-                yaml *= """      - text: "$(section.title)"
-        href: $index_file
-"""
+                push!(left_items, NavbarItem(text = section.title, href = index_file))
             end
         elseif isfile("docs/$index_file")
-            # Directory doesn't exist but index file does
-            yaml *= """      - text: "$(section.title)"
-        href: $index_file
-"""
+            push!(left_items, NavbarItem(text = section.title, href = index_file))
         end
     end
 
-    # Add News if enabled and exists
     if config.news && isfile(config.news_file)
-        yaml *= """      - text: "News"
-        href: news.qmd
-"""
+        push!(left_items, NavbarItem(text = "News", href = "news.qmd"))
     end
 
-    # Right side: tools
-    yaml *= """
-    tools:
-"""
+    append!(left_items, config.navbar_left)
 
-    # GitHub link
+    lines = [
+        "  navbar:",
+        "    background: primary",
+        "",
+        "    left:",
+    ]
+
+    for item in left_items
+        _append_navbar_item!(lines, item, 6)
+    end
+
+    right_items = copy(config.navbar_right)
+    if !isempty(right_items) || config.version.enabled
+        push!(lines, "")
+        push!(lines, "    right:")
+
+        for item in right_items
+            _append_navbar_item!(lines, item, 6)
+        end
+
+        if config.version.enabled
+            append!(lines, [
+                "      - text: |",
+                "          <div class=\"version-selector-container\">",
+                "            <label for=\"version-selector\">Version:</label>",
+                "            <select id=\"version-selector\" aria-label=\"Select documentation version\">",
+                "              <option value=\"#\">Loading...</option>",
+                "            </select>",
+                "          </div>",
+            ])
+        end
+    end
+
     if !isempty(repo)
-        yaml *= """      - icon: github
-        href: https://github.com/$repo
-        text: "Source"
-"""
+        append!(lines, [
+            "",
+            "    tools:",
+            "      - icon: github",
+            "        href: https://github.com/$repo",
+            "        text: \"Source\"",
+        ])
     end
-    # Version selector (added via right section if enabled)
-    if config.version.enabled
-        yaml *= """
-    right:
-      - text: |
-          <div class="version-selector-container">
-            <label for="version-selector">Version:</label>
-            <select id="version-selector" aria-label="Select documentation version">
-              <option value="#">Loading...</option>
-            </select>
-          </div>
-"""
-    end
-    yaml
+
+    join(lines, "\n")
 end
 
 """
@@ -340,9 +378,9 @@ function _build_footer_yaml(config::QuartoConfig)
     end
 
     yaml = "  page-footer:\n"
-    !isempty(footer.left) && (yaml *= "    left: \"$(footer.left)\"\n")
-    !isempty(footer.center) && (yaml *= "    center: \"$(footer.center)\"\n")
-    !isempty(footer.right) && (yaml *= "    right: \"$(footer.right)\"\n")
+    !isempty(footer.left) && (yaml *= "    left: \"" * _yaml_escape(footer.left) * "\"\n")
+    !isempty(footer.center) && (yaml *= "    center: \"" * _yaml_escape(footer.center) * "\"\n")
+    !isempty(footer.right) && (yaml *= "    right: \"" * _yaml_escape(footer.right) * "\"\n")
 
     yaml
 end
@@ -352,6 +390,7 @@ Internal: Build format YAML section with theme support.
 """
 function _build_format_yaml(config::QuartoConfig)
     theme = config.theme
+
     # Build CSS list
     css_files = ["styles.css"]
     if config.version.enabled
@@ -379,16 +418,24 @@ format:
     end
     # Use default theme if none specified
     bootswatch = isempty(theme.bootswatch) ? "flatly" : theme.bootswatch
+    has_custom_scss = _has_custom_theme_scss(theme)
+
+    function format_theme_value(theme_name::String)
+        if has_custom_scss
+            return "[$theme_name, custom.scss]"
+        end
+        return theme_name
+    end
 
     # Theme with light/dark support
     if theme.dark_mode
         dark_theme = get_dark_theme(bootswatch)
         yaml *= """    theme:
-      light: $bootswatch
-      dark: $dark_theme
+      light: $(format_theme_value(bootswatch))
+      dark: $(format_theme_value(dark_theme))
 """
     else
-        yaml *= """    theme: $bootswatch
+        yaml *= """    theme: $(format_theme_value(bootswatch))
 """
     end
 
@@ -401,12 +448,21 @@ format:
     yaml
 end
 
+function quarto_build_site(module_name::Module; kwargs...)
+    error("""
+    `quarto_build_site(module; kwargs...)` is no longer supported.
+
+    Construct a `QuartoConfig` and call `quarto_build_site(config)` instead, for example:
+
+        config = QuartoConfig(module_name = $module_name; kwargs...)
+        quarto_build_site(config)
+    """)
+end
+
 """
     quarto_build_site(config::QuartoConfig)
 
-Build the documentation site from a QuartoConfig struct.
-
-This is the config-based alternative to `quarto_build_site(module_name; kwargs...)`.
+Build the documentation site from a `QuartoConfig` struct.
 Supports all pkgdown-like features including grouped references, multiple sections, news, etc.
 
 # Arguments
@@ -438,10 +494,7 @@ function quarto_build_site(config::QuartoConfig)
 
     module_name = config.module_name
 
-    # Create docs directory
-    if !isdir("docs")
-        mkdir("docs")
-    end
+    _ensure_docs_dir()
 
     # Generate _quarto.yml
     quarto_yaml_from_config(config; force=true)
@@ -545,6 +598,7 @@ quarto_build_refpage_grouped(MyModule, config)
 ```
 """
 function quarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String="docs/reference.qmd")
+    mkpath(dirname(output))
     groups = config.reference
 
     # If no groups specified, use auto-grouping
@@ -599,7 +653,8 @@ Internal: Get short description for a symbol.
 """
 function _get_short_description(module_name::Module, sym::Symbol)
     try
-        doc = Base.doc(getfield(module_name, sym))
+        doc = Base.Docs.doc(Base.Docs.Binding(module_name, sym))
+        doc === nothing && return ""
         doc_str = string(doc)
 
         # Get first paragraph/sentence

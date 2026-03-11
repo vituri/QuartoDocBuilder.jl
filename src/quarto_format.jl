@@ -137,6 +137,13 @@ function _doc_target(b)
     return b
 end
 
+function _doc_lookup(b)
+    if b isa Base.Docs.Binding
+        return Base.Docs.doc(b)
+    end
+    return Base.Docs.doc(b)
+end
+
 function quarto_doc(b)
     target = _doc_target(b)
     if target === nothing
@@ -150,7 +157,17 @@ No documentation found!
 """]
     end
 
-    z = Base.doc(target)
+    z = _doc_lookup(b)
+    if z === nothing
+        return ["""
+
+```julia
+$(b)
+```
+
+No documentation found!
+"""]
+    end
     ct = z.content
     
     if ct[1] isa Markdown.Paragraph
@@ -177,10 +194,10 @@ end
 Given a symbol or binding `s`, write its .qmd doc into the folder `dir`.
 """
 function quarto_doc_page(s; dir = "docs/reference")
+    mkpath(dir)
 
     blocks = quarto_doc(s) .|> quarto_callout_block
-    # Handle both Symbol and Binding inputs
-    st = s isa Symbol ? string(s) : string(s.var)
+    st = _doc_page_name(s)
 
     qmd = """
       ---
@@ -196,8 +213,17 @@ function quarto_doc_page(s; dir = "docs/reference")
     write(path, qmd)
 end
 
-function get_function_name(s)
-    s[1:findfirst("(", s)[1] - 1]
+function _doc_page_name(s)
+    if s isa Base.Docs.Binding
+        return string(s.var)
+    elseif s isa Symbol
+        return string(s)
+    elseif s isa AbstractString
+        paren = findfirst("(", s)
+        paren !== nothing && return s[1:paren[1] - 1]
+        return split(strip(s))[1]
+    end
+    return string(s)
 end
 
 """
@@ -221,7 +247,19 @@ No documentation found! :(
         ]
     end
 
-    z = Base.doc(target)
+    z = _doc_lookup(b)
+    if z === nothing
+        return [
+            """
+
+```julia
+$(b)
+```
+
+No documentation found! :(
+            """
+        ]
+    end
     ct = z.content
   
     if ct[1] isa Markdown.Paragraph
@@ -236,14 +274,13 @@ No documentation found! :(
             """
         ]
     else
-        x = ct[1]
+        page_name = _doc_page_name(b)
         dc_short = map(ct) do x
             code, description = x.content[1].content[1:2]
-            f_name = code.code |> get_function_name
   
             s = """
   
-  [$(code.code)](reference/$(f_name).qmd)
+  [$(code.code)](reference/$(page_name).qmd)
   
   > $(quarto_format(description))
   

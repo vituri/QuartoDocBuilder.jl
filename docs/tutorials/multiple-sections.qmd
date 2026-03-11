@@ -2,6 +2,7 @@
 title: "Multiple Navbar Sections"
 description: "Learn how to create multiple dropdown sections in your documentation"
 order: 2
+---
 
 # Multiple Navbar Sections
 

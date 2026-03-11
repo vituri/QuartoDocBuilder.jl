@@ -85,9 +85,14 @@ function extract_links_from_file(filepath::String)
                 push!(links, (url, line_num))
             end
         end
+
+        # Raw URLs (http:// or https://)
+        for m in eachmatch(r"https?://[^\s\)>\]\"']+", line)
+            push!(links, (m.match, line_num))
+        end
     end
 
-    links
+    unique(links)
 end
 
 """

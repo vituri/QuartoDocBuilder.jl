@@ -16,9 +16,15 @@ Types and functions for configuring documentation generation.
 | [`ReferenceGroup`](reference/ReferenceGroup.qmd) | Configuration for a reference section group. |
 | [`SectionConfig`](reference/SectionConfig.qmd) | Configuration for a navbar section (supports multiple dropdowns). |
 | [`ThemeConfig`](reference/ThemeConfig.qmd) | Configuration for theming and appearance. |
+| [`VersionConfig`](reference/VersionConfig.qmd) | Configuration for multi-version documentation. |
 | [`default_config`](reference/default_config.qmd) | default_config(module_name::Module) -> QuartoConfig |
 | [`detect_repo`](reference/detect_repo.qmd) | detect_repo() -> String |
+| [`detect_version`](reference/detect_version.qmd) | detect_version() -> String |
+| [`determine_version_segment`](reference/determine_version_segment.qmd) | determine_version_segment(config::VersionConfig) -> String |
+| [`get_current_branch`](reference/get_current_branch.qmd) | get_current_branch() -> String |
+| [`get_current_tag`](reference/get_current_tag.qmd) | get_current_tag() -> String |
 | [`get_dark_theme`](reference/get_dark_theme.qmd) | get_dark_theme(light_theme::String) -> String |
+| [`is_release_tag`](reference/is_release_tag.qmd) | is_release_tag() -> Bool |
 | [`load_config`](reference/load_config.qmd) | load_config(path::String="_quartodoc.toml") -> Union{QuartoConfig, Nothing} |
 | [`merge_config`](reference/merge_config.qmd) | merge_config(base::QuartoConfig, overrides::QuartoConfig) -> QuartoConfig |
 | [`validate_config`](reference/validate_config.qmd) | validate_config(config::QuartoConfig) -> Bool |
@@ -31,11 +37,15 @@ pkgdown-style helpers for organizing reference pages by matching function names.
 |----------|-------------|
 | [`apply_selector`](reference/apply_selector.qmd) | apply_selector(selector, symbols::Vector{Symbol}) -> Vector{Symbol} |
 | [`auto_group_objects`](reference/auto_group_objects.qmd) | auto_group_objects(module_name::Module) -> Vector{Tuple{ReferenceGroup, Vector{Symbol}}} |
+| [`autodocs_group`](reference/autodocs_group.qmd) | autodocs_group(module_name::Module; title::String="API Reference", desc::String="", filter=nothin... |
+| [`check_missing_docstrings`](reference/check_missing_docstrings.qmd) | check_missing_docstrings(module_name::Module; exported_only::Bool=true, warn::Bool=true) -> Vecto... |
 | [`contains`](reference/contains.qmd) | contains(substring::String) -> Function |
+| [`documentation_coverage`](reference/documentation_coverage.qmd) | documentation_coverage(module_name::Module; exported_only::Bool=true) -> NamedTuple |
 | [`ends_with`](reference/ends_with.qmd) | ends_with(suffix::String) -> Function |
 | [`filter_objects`](reference/filter_objects.qmd) | filter_objects(module_name::Module, selectors::Vector) -> Vector{Symbol} |
 | [`group_objects`](reference/group_objects.qmd) | group_objects(module_name::Module, groups::Vector{ReferenceGroup}) -> Vector{Tuple{ReferenceGroup... |
 | [`has_docstring`](reference/has_docstring.qmd) | has_docstring(module_name::Module) -> Function |
+| [`is_const_symbol`](reference/is_const_symbol.qmd) | is_const_symbol(module_name::Module) -> Function |
 | [`is_exported`](reference/is_exported.qmd) | is_exported(module_name::Module) -> Function |
 | [`is_function_symbol`](reference/is_function_symbol.qmd) | is_function_symbol(module_name::Module) -> Function |
 | [`is_type_symbol`](reference/is_type_symbol.qmd) | is_type_symbol(module_name::Module) -> Function |
@@ -52,9 +62,9 @@ Core functions for generating documentation sites.
 | [`quarto_build_refpage`](reference/quarto_build_refpage.qmd) | quarto_build_refpage(module_name; output = "docs/reference.qmd") |
 | [`quarto_build_refpage_grouped`](reference/quarto_build_refpage_grouped.qmd) | quarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String="docs/refe... |
 | [`quarto_build_site`](reference/quarto_build_site.qmd) | quarto_build_site(config::QuartoConfig) |
-| [`quarto_index`](reference/quarto_index.qmd) | quarto_index(; title::String="") |
 | [`quarto_rebuild_all`](reference/quarto_rebuild_all.qmd) | quarto_rebuild_all(config::QuartoConfig) |
 | [`quarto_rebuild_reference`](reference/quarto_rebuild_reference.qmd) | quarto_rebuild_reference(module_name::Module) |
+| [`quarto_styles_from_config`](reference/quarto_styles_from_config.qmd) | quarto_styles_from_config(config::QuartoConfig) |
 | [`quarto_yaml_from_config`](reference/quarto_yaml_from_config.qmd) | quarto_yaml_from_config(config::QuartoConfig; force::Bool=false) |
 
 ## Docstring Processing {#sec-docstring-processing}
@@ -83,6 +93,7 @@ Article discovery and changelog generation.
 | [`discover_articles`](reference/discover_articles.qmd) | discover_articles(dir::String="docs/articles") -> Vector{String} |
 | [`discover_articles_recursive`](reference/discover_articles_recursive.qmd) | discover_articles_recursive(dir::String="docs/articles") -> Vector{String} |
 | [`get_article_info`](reference/get_article_info.qmd) | get_article_info(filepath::String) -> ArticleInfo |
+| [`get_article_order`](reference/get_article_order.qmd) | get_article_order(filepath::String) -> Int |
 | [`get_article_title`](reference/get_article_title.qmd) | get_article_title(filepath::String) -> String |
 | [`has_news`](reference/has_news.qmd) | has_news(config::QuartoConfig) -> Bool |
 | [`linkify_github_refs`](reference/linkify_github_refs.qmd) | linkify_github_refs(text::String, repo::String) -> String |
@@ -96,21 +107,42 @@ Automatic cross-reference linking in documentation.
 
 | Function | Description |
 |----------|-------------|
+| [`ExternalDocsRegistry`](reference/ExternalDocsRegistry.qmd) | ExternalDocsRegistry |
+| [`ExternalRef`](reference/ExternalRef.qmd) | ExternalRef(package::String, symbol::String) |
 | [`ReferenceIndex`](reference/ReferenceIndex.qmd) | ReferenceIndex |
+| [`autolink_cross_package`](reference/autolink_cross_package.qmd) | autolink_cross_package(text::String, packages::Dict{String, ReferenceIndex}) -> String |
+| [`autolink_external`](reference/autolink_external.qmd) | autolink_external(text::String; registry=EXTERNAL_DOCS[]) -> String |
 | [`autolink_references`](reference/autolink_references.qmd) | autolink_references(text::String, index::ReferenceIndex) -> String |
 | [`build_reference_index`](reference/build_reference_index.qmd) | build_reference_index(module_name::Module; base_path::String="reference") -> ReferenceIndex |
+| [`clear_external_docs`](reference/clear_external_docs.qmd) | clear_external_docs(; registry=EXTERNAL_DOCS[]) |
 | [`create_reference_report`](reference/create_reference_report.qmd) | create_reference_report(module_name::Module) -> String |
 | [`find_undefined_references`](reference/find_undefined_references.qmd) | find_undefined_references(text::String, index::ReferenceIndex) -> Vector{String} |
+| [`get_external_docs_url`](reference/get_external_docs_url.qmd) | get_external_docs_url(package::String; registry=EXTERNAL_DOCS[]) -> Union{String, Nothing} |
 | [`link_julia_docs`](reference/link_julia_docs.qmd) | link_julia_docs(text::String) -> String |
+| [`list_external_docs`](reference/list_external_docs.qmd) | list_external_docs(; registry=EXTERNAL_DOCS[]) -> Dict{String, String} |
+| [`parse_external_ref`](reference/parse_external_ref.qmd) | parse_external_ref(ref::String) -> Union{ExternalRef, Nothing} |
+| [`register_common_packages`](reference/register_common_packages.qmd) | register_common_packages(; registry=EXTERNAL_DOCS[]) |
+| [`register_external_docs`](reference/register_external_docs.qmd) | register_external_docs(package::String, base_url::String; registry=EXTERNAL_DOCS[]) |
+| [`resolve_external_ref`](reference/resolve_external_ref.qmd) | resolve_external_ref(ref::ExternalRef; registry=EXTERNAL_DOCS[]) -> Union{String, Nothing} |
 | [`resolve_reference`](reference/resolve_reference.qmd) | resolve_reference(name::String, index::ReferenceIndex) -> Union{String, Nothing} |
 
-## Styles & Themes {#sec-styles-&-themes}
+## Link Checking & Versioning {#sec-link-checking-&-versioning}
 
-CSS generation and theme customization.
+Utilities for validating docs links and managing multi-version documentation.
 
 | Function | Description |
 |----------|-------------|
-| [`quarto_styles_from_config`](reference/quarto_styles_from_config.qmd) | quarto_styles_from_config(config::QuartoConfig) |
+| [`LinkCheckReport`](reference/LinkCheckReport.qmd) | LinkCheckReport |
+| [`LinkCheckResult`](reference/LinkCheckResult.qmd) | LinkCheckResult |
+| [`check_internal_links`](reference/check_internal_links.qmd) | check_internal_links(docs_dir::String; verbose::Bool=true) -> LinkCheckReport |
+| [`check_link`](reference/check_link.qmd) | check_link(url::String; timeout::Int=10) -> Tuple{Symbol, String} |
+| [`check_links`](reference/check_links.qmd) | check_links(docs_dir::String; timeout::Int=10, ignore_patterns::Vector{String}=String[], verbose:... |
+| [`extract_links`](reference/extract_links.qmd) | extract_links(text::String) -> Vector{String} |
+| [`extract_links_from_file`](reference/extract_links_from_file.qmd) | extract_links_from_file(filepath::String) -> Vector{Tuple{String, Int}} |
+| [`format_linkcheck_report`](reference/format_linkcheck_report.qmd) | format_linkcheck_report(report::LinkCheckReport; include_ok::Bool=false) -> String |
+| [`generate_versions_manifest`](reference/generate_versions_manifest.qmd) | generate_versions_manifest(output_dir::String, current_version::String; |
+| [`read_versions_manifest`](reference/read_versions_manifest.qmd) | read_versions_manifest(path::String) -> Vector{String} |
+| [`write_version_selector_assets`](reference/write_version_selector_assets.qmd) | write_version_selector_assets(docs_dir::String) |
 
 ## GitHub Integration {#sec-github-integration}
 
@@ -121,7 +153,8 @@ CI/CD workflow generation and deployment helpers.
 | [`quarto_docs_project_toml`](reference/quarto_docs_project_toml.qmd) | quarto_docs_project_toml(module_name::Module) |
 | [`quarto_github_action`](reference/quarto_github_action.qmd) | quarto_github_action(; kwargs...) |
 | [`quarto_github_action_simple`](reference/quarto_github_action_simple.qmd) | quarto_github_action_simple(; kwargs...) |
-| [`quarto_makejl_template`](reference/quarto_makejl_template.qmd) | quarto_makejl_template(module_name::Module; config_file::String="") |
+| [`quarto_github_action_versioned`](reference/quarto_github_action_versioned.qmd) | quarto_github_action_versioned(; kwargs...) |
+| [`quarto_makejl_template`](reference/quarto_makejl_template.qmd) | quarto_makejl_template(module_name::Module; config_file::String="", repo::String="") |
 | [`quarto_setup_instructions`](reference/quarto_setup_instructions.qmd) | quarto_setup_instructions() -> String |
 | [`setup_documentation`](reference/setup_documentation.qmd) | setup_documentation(module_name::Module; repo::String="", kwargs...) |
 

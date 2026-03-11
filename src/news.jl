@@ -277,6 +277,7 @@ toc-depth: 2
         end
     end
 
+    mkpath(dirname(output))
     write(output, s)
     @info "Changelog page created at $output"
 end

@@ -55,23 +55,40 @@ get_started_path = detect_get_started(MyPackage)
 Articles can appear as a dropdown menu in the navbar:
 
 ```julia
-articles = ArticleConfig(
-    title = "Guides",
-    dropdown = true   # Show as dropdown menu
+config = QuartoConfig(
+    module_name = MyPackage,
+    sections = [
+        SectionConfig(
+            title = "Guides",
+            dir = "articles",
+            dropdown = true
+        )
+    ]
 )
 ```
 
-When `dropdown = true` and you have 10 or fewer articles, they appear directly in a dropdown. With more articles, a link to the articles index is shown instead.
+When `dropdown = true` and you have 15 or fewer articles, they appear directly in a dropdown. With more articles, a link to the section index is shown instead.
 
 ### Articles Index Page
 
-Generate an articles index automatically:
+Declare the articles directory as a section and QuartoDocBuilder will create the section index automatically if it is missing:
 
 ```julia
-quarto_articles_index(config)
+config = QuartoConfig(
+    module_name = MyPackage,
+    sections = [
+        SectionConfig(
+            title = "Articles",
+            dir = "articles",
+            desc = "Long-form guides and tutorials."
+        )
+    ]
+)
+
+quarto_build_site(config)
 ```
 
-This creates `docs/articles.qmd` with a Quarto listing of all articles.
+This creates `docs/articles.qmd` with a Quarto listing of all `.qmd` files inside `docs/articles/`.
 
 ## News / Changelog
 

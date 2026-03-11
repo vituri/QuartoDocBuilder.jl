@@ -202,13 +202,14 @@ jobs:
 end
 
 """
-    quarto_makejl_template(module_name::Module; config_file::String="")
+    quarto_makejl_template(module_name::Module; config_file::String="", repo::String="")
 
 Generate a docs/make.jl template file.
 
 # Arguments
 - `module_name::Module`: The module being documented
 - `config_file::String`: Optional path to configuration file
+- `repo::String`: Repository in "user/repo" format for the generated example
 
 # Example
 ```julia
@@ -216,8 +217,9 @@ quarto_makejl_template(MyPackage)
 # Creates docs/make.jl
 ```
 """
-function quarto_makejl_template(module_name::Module; config_file::String="")
+function quarto_makejl_template(module_name::Module; config_file::String="", repo::String="")
     module_str = string(module_name)
+    repo_value = isempty(repo) ? "USERNAME/$module_str.jl" : repo
 
     if isempty(config_file)
         content = """# Documentation build script for $module_str
@@ -226,13 +228,15 @@ using $module_str
 using QuartoDocBuilder
 
 # Build the documentation site
-quarto_build_site($module_str;
-    repo = "USERNAME/$module_str.jl",  # Update with your GitHub repo
-    theme = "flatly"
+config = QuartoConfig(
+    module_name = $module_str,
+    repo = "$repo_value",
+    theme = ThemeConfig(
+        bootswatch = "flatly"
+    )
 )
 
-# Build the reference page with function descriptions
-quarto_build_refpage($module_str)
+quarto_build_site(config)
 
 println("Documentation build complete!")
 println("Run 'quarto render' in the docs/ directory to generate HTML.")
@@ -245,12 +249,10 @@ using QuartoDocBuilder
 
 # Load configuration from file
 config = load_config("$config_file")
+config === nothing && error("Could not load configuration file: $config_file")
 
-# Set the module (can't be loaded from TOML)
-config = QuartoConfig(
-    module_name = $module_str,
-    # Copy other fields from loaded config...
-)
+# Fill in defaults that cannot live in TOML, such as the module itself
+config = merge_config(default_config($module_str), config)
 
 # Build the documentation site
 quarto_build_site(config)
@@ -357,7 +359,7 @@ Creates:
 # Arguments
 - `module_name::Module`: The module to document
 - `repo::String`: GitHub repository in "user/repo" format
-- Additional kwargs passed to `quarto_build_site`
+- Additional keyword arguments passed through `QuartoConfig(...)`
 
 # Example
 ```julia
@@ -383,19 +385,23 @@ function setup_documentation(module_name::Module; repo::String="", kwargs...)
     quarto_docs_project_toml(module_name)
 
     # Create docs/make.jl
-    quarto_makejl_template(module_name)
+    quarto_makejl_template(module_name; repo=repo)
 
     # Create GitHub Actions workflow
     quarto_github_action()
 
     # Build initial site structure
-    quarto_build_site(module_name; repo=repo, kwargs...)
+    config = merge_config(
+        default_config(module_name),
+        QuartoConfig(module_name = module_name, repo = repo; kwargs...)
+    )
+    quarto_build_site(config)
 
     @info """
     Documentation setup complete!
 
     Next steps:
-    1. Update docs/make.jl with your GitHub repository
+    1. Review docs/make.jl and customize your site settings
     2. Add articles to docs/articles/
     3. Create NEWS.md for changelog
     4. Run 'julia --project=docs docs/make.jl' to rebuild
