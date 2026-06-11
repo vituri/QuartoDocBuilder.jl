@@ -209,6 +209,12 @@ Main configuration struct for QuartoDocBuilder.
 ## Versioning
 - `version::VersionConfig`: Multi-version documentation configuration
 
+## Build behaviour
+- `autolink::Bool`: Automatically convert backtick references to hyperlinks in generated .qmd files (default: true)
+- `strict::Bool`: Treat broken internal links as build errors instead of warnings (default: false)
+- `include_submodules::Bool`: Recurse into submodules when collecting documented objects, generating
+  a page (and inventory entry) for each documented binding in nested modules (default: false)
+
 # Example (with multiple sections)
 
 ```julia
@@ -266,6 +272,11 @@ Base.@kwdef struct QuartoConfig
 
     # Versioning
     version::VersionConfig = VersionConfig()
+
+    # Build behaviour
+    autolink::Bool = true
+    strict::Bool = false
+    include_submodules::Bool = false
 end
 
 function _is_default_theme(theme::ThemeConfig)
@@ -633,7 +644,10 @@ function _toml_to_config(data::Dict)
         giscus_repo = get(project, "giscus_repo", repo),
         theme = theme,
         footer = footer,
-        version = version
+        version = version,
+        autolink = get(project, "autolink", true),
+        strict = get(project, "strict", false),
+        include_submodules = get(project, "include_submodules", false)
     )
 end
 
@@ -697,6 +711,9 @@ function merge_config(base::QuartoConfig, overrides::QuartoConfig)
         giscus_repo = !isempty(overrides.giscus_repo) ? overrides.giscus_repo : base.giscus_repo,
         theme = _merge_theme_config(base.theme, overrides.theme),
         footer = _merge_footer_config(base.footer, overrides.footer),
-        version = _merge_version_config(base.version, overrides.version)
+        version = _merge_version_config(base.version, overrides.version),
+        autolink = overrides.autolink != true ? overrides.autolink : base.autolink,
+        strict = overrides.strict != false ? overrides.strict : base.strict,
+        include_submodules = overrides.include_submodules != false ? overrides.include_submodules : base.include_submodules
     )
 end

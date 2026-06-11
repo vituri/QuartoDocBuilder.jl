@@ -1,0 +1,168 @@
+---
+title: "Configure the Build"
+description: "Set build behaviour, comments, and load configuration from TOML"
+order: 4
+---
+
+# Configure the Build
+
+Everything about a site is described by a single [`QuartoConfig`](../reference/QuartoConfig.qmd)
+value passed to [`quarto_build_site`](../reference/quarto_build_site.qmd). This
+guide covers the fields that are not specific to themes or the reference page;
+for those, see [Customize Theme](customize-theme.qmd) and
+[Organize Reference Page](organize-reference.qmd).
+
+```julia
+config = QuartoConfig(
+    module_name = MyPackage,        # required: the module to document
+    repo = "user/MyPackage.jl",     # GitHub repo (enables edit links, Giscus)
+    output_dir = "site",            # where `quarto render` writes HTML
+
+    reference = [...],              # Vector of ReferenceGroup
+    sections = [...],               # Vector of SectionConfig (navbar dropdowns)
+    get_started = "tutorials/getting-started.qmd",
+
+    news = true,                    # build a changelog page from NEWS.md
+    news_file = "NEWS.md",
+
+    comments = true,                # Giscus comments
+    giscus_repo = "user/MyPackage.jl",
+)
+```
+
+## Build behaviour
+
+Three fields control how `quarto_build_site` post-processes the generated
+`.qmd` files.
+
+| Field | Default | Effect |
+|-------|---------|--------|
+| `autolink` | `true` | Turn backticked names into links to reference pages |
+| `strict` | `false` | Treat broken internal links as build errors |
+| `include_submodules` | `false` | Document bindings from nested submodules |
+
+### Autolinking
+
+When `autolink = true` (the default), every backticked mention of a documented
+name in the generated pages becomes a link to its reference page. A docstring
+that says `` Use `other_function` to ... `` produces a clickable
+`other_function` in the rendered site.
+
+```julia
+config = QuartoConfig(module_name = MyPackage, autolink = true)
+```
+
+Code blocks and existing links are never touched, and a page never links to
+itself. Linking to *other* packages works too — see
+[Cross-package Links](cross-package-links.qmd).
+
+To turn autolinking off:
+
+```julia
+config = QuartoConfig(module_name = MyPackage, autolink = false)
+```
+
+### Strict link checking
+
+After building, QuartoDocBuilder validates every relative link to a `.qmd`
+target. With `strict = true` the build fails and lists every broken link, the
+way Documenter.jl's `checkdocs`/`linkcheck` do:
+
+```julia
+config = QuartoConfig(module_name = MyPackage, strict = true)
+```
+
+With the default `strict = false`, a single warning is emitted instead. Links
+inside fenced code blocks are ignored — they are examples, not navigation.
+
+::: {.callout-tip}
+Enable `strict = true` in CI so a broken cross-reference fails the
+documentation build instead of silently shipping a dead link. This site is
+built with `strict = true`.
+:::
+
+### Documenting submodules
+
+By default only the bindings documented directly in `module_name` are included.
+Set `include_submodules = true` to recurse into nested submodules:
+
+```julia
+config = QuartoConfig(module_name = MyPackage, include_submodules = true)
+```
+
+Page names are collision-safe: a `foo` defined in the root module keeps
+`foo.qmd`, while a colliding `foo` in `MyPackage.Inner` becomes `Inner.foo.qmd`.
+See [Organize Reference Page](organize-reference.qmd#documenting-submodules) for
+details.
+
+## Giscus comments
+
+Enable reader comments backed by GitHub Discussions through
+[Giscus](https://giscus.app/):
+
+```julia
+config = QuartoConfig(
+    module_name = MyPackage,
+    comments = true,
+    giscus_repo = "user/MyPackage.jl",   # defaults to `repo` if empty
+)
+```
+
+You must first enable Discussions on the repository and install the
+[Giscus app](https://github.com/apps/giscus).
+
+## Loading configuration from TOML
+
+Configuration can also live in a `_quartodoc.toml` file, which is handy for
+options you would rather keep out of `make.jl`:
+
+```toml
+[project]
+repo = "user/MyPackage.jl"
+output_dir = "site"
+comments = true
+autolink = true
+strict = true
+include_submodules = false
+
+[execution]
+freeze = "auto"
+cache = true
+
+[[reference]]
+title = "Core Functions"
+desc = "Main package functionality"
+contents = ["main_func", "starts_with:process_"]
+
+[[sections]]
+title = "Tutorials"
+dir = "tutorials"
+order = 1
+
+[theme]
+bootswatch = "flatly"
+dark_mode = true
+code_highlight = "github"
+
+[footer]
+left = "MIT License"
+right = "Built with QuartoDocBuilder.jl"
+```
+
+The module itself cannot live in TOML, so load the file and merge it onto a
+default config that supplies the module:
+
+```julia
+using QuartoDocBuilder
+
+file_config = load_config("_quartodoc.toml")
+file_config === nothing && error("Could not load _quartodoc.toml")
+
+config = merge_config(default_config(MyPackage), file_config)
+quarto_build_site(config)
+```
+
+[`load_config`](../reference/load_config.qmd) returns `nothing` when the file is
+missing, and [`merge_config`](../reference/merge_config.qmd) keeps any
+non-default field from the file while filling in the module (and detected repo)
+from `default_config`.

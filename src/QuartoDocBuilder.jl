@@ -19,6 +19,8 @@ inspired by R's pkgdown package and Documenter.jl.
 - **Missing docstring detection** (`check_missing_docstrings`)
 - **External cross-references** to other packages' documentation
 - **Link checking** for broken URLs
+- **Submodule documentation** (`include_submodules`) with collision-safe page names
+- **Automatic `objects.inv` emission** for cross-package linking
 
 # Quick Start
 ```julia
@@ -97,19 +99,26 @@ export starts_with, ends_with, matches, contains
 export has_docstring, is_exported, is_function_symbol, is_type_symbol, is_const_symbol
 export parse_content_selector, apply_selector, filter_objects, group_objects, auto_group_objects
 export autodocs_group, check_missing_docstrings, documentation_coverage
+export reference_page_names
 
 # ============================================================================
 # Core Utilities
 # ============================================================================
 
 """
-    get_objects_from_module(m::Module) -> Vector{Docs.Binding}
+    get_objects_from_module(m::Module; recursive::Bool=false) -> Vector{Docs.Binding}
 
 Get all documented objects from a module using Base.Docs.meta().
 Returns a vector of Docs.Binding objects (preserving module context).
+
+When `recursive=true`, bindings from direct and nested submodules are included
+(see `_documented_bindings` in selectors.jl for the exact traversal rules).
+
+A warning is emitted when `recursive=false` and submodules with documented
+bindings are detected; pass `recursive=true` to suppress it and include them.
 """
-function get_objects_from_module(m::Module)
-    [k for (k, _) in Base.Docs.meta(m)]
+function get_objects_from_module(m::Module; recursive::Bool=false)
+    _documented_bindings(m; recursive=recursive)
 end
 
 export get_objects_from_module
@@ -137,6 +146,14 @@ include("news.jl")
 
 export NewsVersion, parse_news, linkify_github_refs
 export quarto_news_page, has_news, news_summary, create_news_template
+
+# ============================================================================
+# Inventories (Sphinx objects.inv read/write for cross-package links)
+# ============================================================================
+include("inventory.jl")
+
+export Inventory, InventoryItem
+export load_inventory, write_inventory, generate_inventory, resolve_inventory
 
 # ============================================================================
 # Auto-linking

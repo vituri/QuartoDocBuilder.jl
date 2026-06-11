@@ -163,3 +163,36 @@ reference = [
     ReferenceGroup(title = "Other", contents = [matches(r".*")])
 ]
 ```
+
+## Documenting submodules
+
+By default only bindings documented directly in `module_name` are included. If
+your package nests documented bindings in submodules, set `include_submodules`:
+
+```julia
+config = QuartoConfig(
+    module_name = MyPackage,
+    include_submodules = true,
+)
+```
+
+With this enabled, the reference page, the individual function pages, and the
+emitted `objects.inv` all include the submodule bindings. When
+`include_submodules = false` and a submodule contains documented bindings, a
+warning tells you they were skipped.
+
+### Collision-safe page names
+
+Page file names stay unique even when two modules define the same name. A name
+that is unique keeps its bare file name (`foo.qmd`). When two bindings share a
+name, the one owned directly by the root module keeps `foo.qmd` while the others
+get a qualified name from their submodule path — a `foo` in `MyPackage.Inner`
+becomes `Inner.foo.qmd`. Reference-page links and autolinks point at these
+collision-safe names automatically, so navigation never lands on the wrong page.
+
+The same names are used by [`reference_page_names`](../reference/reference_page_names.qmd),
+which you can call directly if you need the mapping. The selector and grouping
+helpers ([`filter_objects`](../reference/filter_objects.qmd),
+[`group_objects`](../reference/group_objects.qmd),
+[`autodocs_group`](../reference/autodocs_group.qmd), ...) all accept a
+`recursive` keyword that mirrors `include_submodules`.

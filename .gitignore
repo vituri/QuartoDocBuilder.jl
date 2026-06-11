@@ -4,5 +4,6 @@
 /docs/.quarto
 /docs/*/.cache
 /docs/reference/
+/docs/objects.inv
 /docs/site_libs/
 docs/index.html

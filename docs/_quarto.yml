@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: site
+  resources:
+    - objects.inv
 
 execute:
   freeze: auto
@@ -42,6 +44,10 @@ website:
             href: explanation/docstring-processing.qmd
       - text: "How-to Guides"
         menu:
+          - text: "Configure the Build"
+            href: how-to/configure.qmd
+          - text: "Cross-package Links"
+            href: how-to/cross-package-links.qmd
           - text: "Customize Theme"
             href: how-to/customize-theme.qmd
           - text: "Deploy to GitHub Pages"

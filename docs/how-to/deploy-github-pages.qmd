@@ -17,26 +17,41 @@ using QuartoDocBuilder
 quarto_github_action()
 ```
 
-This creates `.github/workflows/documentation.yml`.
+This creates `.github/workflows/docs.yml`.
+
+You can override the defaults:
+
+```julia
+quarto_github_action(
+    quarto_version = "pre-release",       # Quarto version (pre-release has Julia support)
+    julia_version = "1",                  # Julia version
+    output_dir = "site",                  # Quarto output directory
+    trigger_branches = ["main", "master"] # branches that trigger the build
+)
+```
 
 ## Workflow Contents
 
 The generated workflow:
 
-1. Triggers on pushes to `main` branch
-2. Installs Julia and Quarto
-3. Builds documentation
-4. Deploys to GitHub Pages
+1. Triggers on pushes (and PRs) to the configured branches
+2. Installs Julia and Quarto, caching Julia packages
+3. Runs `julia --project=docs docs/make.jl` to build the Quarto project
+4. Runs `quarto render`
+5. Uploads `docs/site` and deploys it to GitHub Pages (on `main`/`master`)
 
 ```yaml
-name: Documentation
+name: Build and Deploy Documentation
+
 on:
   push:
-    branches: [main]
+    branches: ["main", "master"]
+  pull_request:
+    branches: ["main", "master"]
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -45,25 +60,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: julia-actions/setup-julia@v1
-      - uses: quarto-dev/quarto-actions/setup@v2
-
-      - name: Build documentation
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: '1'
+      - name: Install Julia dependencies
         run: |
           julia --project=docs -e '
             using Pkg
-            Pkg.develop(path=".")
+            Pkg.develop(PackageSpec(path=pwd()))
             Pkg.instantiate()
-            include("docs/make.jl")
           '
-          cd docs && quarto render
-
+      - name: Build documentation (Julia)
+        run: julia --project=docs docs/make.jl
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: pre-release
+      - name: Render Quarto site
+        run: cd docs && quarto render
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs/site
 
   deploy:
     needs: build
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

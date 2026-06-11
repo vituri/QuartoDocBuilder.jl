@@ -1,6 +1,216 @@
 # Content selection helpers for QuartoDocBuilder.jl
 # Provides pkgdown-style selectors for organizing reference pages
 
+# ============================================================================
+# Shared helpers for collecting documented bindings across (sub)modules
+# ============================================================================
+
+"""
+    _documented_bindings(m::Module; recursive::Bool=false) -> Vector{Base.Docs.Binding}
+
+Return the `Base.Docs.Binding` keys from `Base.Docs.meta(m)`.
+
+When `recursive=true`, descend into direct submodules of `m` (depth-first),
+collecting their documented bindings as well.  A submodule `s` is a symbol in
+`names(m; all=true)` such that:
+- `isdefined(m, s)` is true,
+- `getfield(m, s) isa Module`,
+- `getfield(m, s) !== m` (not self-referential),
+- `parentmodule(getfield(m, s)) === m` (owned by `m`, not re-exported from elsewhere).
+
+A `seen::Set{Module}` guard prevents cycles.
+
+**Warnings emitted (only from the top-level call, not on recursive descent):**
+- When `recursive=false` and at least one direct submodule has documented
+  bindings, a single `@warn` is emitted listing those submodules and advising
+  the caller to pass `recursive=true`.
+- When `recursive=true` and two or more bindings share the same `.var` name
+  (e.g. `A.foo` and `A.Sub.foo`), a single `@warn` lists the colliding names
+  so the user is aware that page generation may overwrite files.
+"""
+function _documented_bindings(m::Module; recursive::Bool=false)
+    seen = Set{Module}()
+    _documented_bindings_impl(m, recursive, seen, true)
+end
+
+# Internal recursive implementation.
+# `toplevel` is true only for the initial call so that warnings are emitted
+# exactly once.
+function _documented_bindings_impl(
+    m::Module,
+    recursive::Bool,
+    seen::Set{Module},
+    toplevel::Bool,
+)
+    push!(seen, m)
+
+    # Own bindings
+    own = Base.Docs.Binding[k for (k, _) in Base.Docs.meta(m)]
+
+    # Identify direct submodules
+    direct_submods = Module[]
+    for s in names(m; all=true)
+        isdefined(m, s) || continue
+        child = getfield(m, s)
+        child isa Module || continue
+        child === m && continue
+        parentmodule(child) === m || continue
+        child in seen && continue
+        push!(direct_submods, child)
+    end
+
+    if !recursive
+        if toplevel
+            # Warn if any direct (or nested) submodule has documented bindings
+            submods_with_docs = Module[]
+            for child in direct_submods
+                if _has_any_docs(child, Set{Module}(seen))
+                    push!(submods_with_docs, child)
+                end
+            end
+            if !isempty(submods_with_docs)
+                names_str = join(string.(nameof.(submods_with_docs)), ", ")
+                @warn "Submodule(s) with documented bindings were skipped: $names_str. " *
+                      "Pass `recursive=true` to include them."
+            end
+        end
+        return own
+    end
+
+    # Recursive collection
+    all_bindings = copy(own)
+    for child in direct_submods
+        child in seen && continue
+        child_bindings = _documented_bindings_impl(child, true, seen, false)
+        append!(all_bindings, child_bindings)
+    end
+
+    if toplevel
+        # Warn about name collisions (same .var from different modules)
+        var_to_bindings = Dict{Symbol, Vector{Base.Docs.Binding}}()
+        for b in all_bindings
+            push!(get!(var_to_bindings, b.var, Base.Docs.Binding[]), b)
+        end
+        collisions = [(v, bs) for (v, bs) in var_to_bindings if length(bs) > 1]
+        if !isempty(collisions)
+            parts = String[]
+            for (v, bs) in sort(collisions; by=x->string(x[1]))
+                mods = join([string(b.mod, ".", b.var) for b in bs], ", ")
+                push!(parts, "$v ($mods)")
+            end
+            @warn "Name collision(s) in recursive documentation — page files may be overwritten: " *
+                  join(parts, "; ")
+        end
+    end
+
+    all_bindings
+end
+
+# Returns true if `m` or any of its submodules (not in `seen`) has at least one
+# documented binding.
+function _has_any_docs(m::Module, seen::Set{Module})
+    m in seen && return false
+    push!(seen, m)
+    !isempty(Base.Docs.meta(m)) && return true
+    for s in names(m; all=true)
+        isdefined(m, s) || continue
+        child = getfield(m, s)
+        child isa Module || continue
+        child === m && continue
+        parentmodule(child) === m || continue
+        _has_any_docs(child, seen) && return true
+    end
+    false
+end
+
+"""
+    _documented_symbols(m::Module; recursive::Bool=false) -> Vector{Symbol}
+
+Return the `.var` field of each binding from `_documented_bindings(m; recursive)`.
+"""
+function _documented_symbols(m::Module; recursive::Bool=false)
+    Symbol[b.var for b in _documented_bindings(m; recursive=recursive)]
+end
+
+"""
+    _module_path(m::Module, root::Module) -> Union{Vector{Symbol}, Nothing}
+
+Return the chain of module names from `root` (exclusive) down to `m`
+(inclusive) by walking `parentmodule` up from `m` to `root`.
+
+For example, with `root = Root` and `m = Root.Inner.Deep`, returns
+`[:Inner, :Deep]`. When `m === root`, returns an empty vector. If `root` is
+not an ancestor of `m`, returns `nothing`.
+"""
+function _module_path(m::Module, root::Module)
+    m === root && return Symbol[]
+    path = Symbol[]
+    cur = m
+    # Guard against pathological cycles (Main's parent is Main).
+    while cur !== root
+        parent = parentmodule(cur)
+        push!(path, nameof(cur))
+        if parent === cur
+            # Reached a fixed point (e.g. Main) without hitting root.
+            return nothing
+        end
+        cur = parent
+    end
+    return reverse(path)
+end
+
+"""
+    reference_page_names(bindings::Vector{Base.Docs.Binding}, root::Module) -> Dict{Base.Docs.Binding, String}
+
+Compute a collision-safe per-page file name for each documented binding.
+
+The page name for a binding is `string(b.var)` when that bare name is unique
+among `bindings`. When two or more bindings share the same `.var`, every
+colliding binding *except one owned directly by `root`* gets a qualified name
+formed from its module path relative to `root` joined with `.` followed by the
+bare name (e.g. a `foo` defined in `Root.Inner` becomes `"Inner.foo"`). A
+colliding binding owned directly by `root` keeps the bare name. If two
+colliders are both in submodules, both are qualified.
+
+When `root` is not an ancestor of a binding's module (which should not happen
+in normal use), the fully qualified `string(b.mod)` is used as the prefix as a
+fallback.
+"""
+function reference_page_names(bindings::Vector{Base.Docs.Binding}, root::Module)
+    # Count how many bindings share each bare name.
+    counts = Dict{Symbol, Int}()
+    for b in bindings
+        counts[b.var] = get(counts, b.var, 0) + 1
+    end
+
+    names = Dict{Base.Docs.Binding, String}()
+    for b in bindings
+        bare = string(b.var)
+        if get(counts, b.var, 0) <= 1
+            names[b] = bare
+            continue
+        end
+
+        # Collision: a root-owned binding keeps the bare name; others get
+        # qualified relative names.
+        if b.mod === root
+            names[b] = bare
+            continue
+        end
+
+        path = _module_path(b.mod, root)
+        if path === nothing
+            # Fallback: fully qualified module string.
+            names[b] = string(b.mod) * "." * bare
+        else
+            prefix = join(string.(path), ".")
+            names[b] = isempty(prefix) ? bare : prefix * "." * bare
+        end
+    end
+
+    names
+end
+
 """
     starts_with(prefix::String) -> Function
 
@@ -66,9 +276,12 @@ selector(:other_func)      # false
 contains(substring::String) = sym -> occursin(substring, string(sym))
 
 """
-    has_docstring(module_name::Module) -> Function
+    has_docstring(module_name::Module; recursive::Bool=false) -> Function
 
 Create a selector that matches symbols with documentation.
+
+When `recursive=true`, the set of documented symbols includes those from
+direct and nested submodules (see `_documented_bindings`).
 
 # Example
 ```julia
@@ -77,8 +290,8 @@ selector(:documented_func)    # true if has docstring
 selector(:undocumented_func)  # false
 ```
 """
-function has_docstring(module_name::Module)
-    documented = Set(k for (k, v) in Base.Docs.meta(module_name))
+function has_docstring(module_name::Module; recursive::Bool=false)
+    documented = Set(_documented_bindings(module_name; recursive=recursive))
     sym -> sym in documented
 end
 
@@ -216,7 +429,7 @@ function apply_selector(selector, symbols::Vector{Symbol})
 end
 
 """
-    filter_objects(module_name::Module, selectors::Vector) -> Vector{Symbol}
+    filter_objects(module_name::Module, selectors::Vector; recursive::Bool=false) -> Vector{Symbol}
 
 Filter module objects using a list of selectors.
 Applies selectors in order and returns unique matches.
@@ -224,16 +437,21 @@ Applies selectors in order and returns unique matches.
 # Arguments
 - `module_name::Module`: Module to get symbols from
 - `selectors::Vector`: List of selectors (Symbols, Functions, or Strings)
+- `recursive::Bool`: When `true`, include documented symbols from submodules
+  (default: `false`).
 
 # Example
 ```julia
 # Get all functions starting with "process_" or ending with "_util"
 symbols = filter_objects(MyModule, [starts_with("process_"), ends_with("_util")])
+
+# Also include submodule symbols
+symbols = filter_objects(MyModule, [starts_with("process_")]; recursive=true)
 ```
 """
-function filter_objects(module_name::Module, selectors::Vector)
-    # Get all documented symbols (extract .var from Binding objects)
-    all_symbols = Symbol[k.var for (k, _) in Base.Docs.meta(module_name)]
+function filter_objects(module_name::Module, selectors::Vector; recursive::Bool=false)
+    # Get all documented symbols via shared helper
+    all_symbols = _documented_symbols(module_name; recursive=recursive)
 
     result = Symbol[]
     for sel in selectors
@@ -245,7 +463,7 @@ function filter_objects(module_name::Module, selectors::Vector)
 end
 
 """
-    group_objects(module_name::Module, groups::Vector{ReferenceGroup}) -> Vector{Tuple{ReferenceGroup, Vector{Symbol}}}
+    group_objects(module_name::Module, groups::Vector{ReferenceGroup}; recursive::Bool=false) -> Vector{Tuple{ReferenceGroup, Vector{Symbol}}}
 
 Group module objects according to ReferenceGroup specifications.
 Returns a vector of (group, symbols) pairs.
@@ -253,13 +471,15 @@ Returns a vector of (group, symbols) pairs.
 # Arguments
 - `module_name::Module`: Module to get symbols from
 - `groups::Vector{ReferenceGroup}`: Group specifications
+- `recursive::Bool`: When `true`, include documented symbols from submodules
+  (default: `false`).
 
 # Returns
 Vector of tuples, each containing a ReferenceGroup and its matched symbols.
 """
-function group_objects(module_name::Module, groups::Vector{ReferenceGroup})
-    # Get all documented symbols (extract .var from Binding objects)
-    all_symbols = Symbol[k.var for (k, _) in Base.Docs.meta(module_name)]
+function group_objects(module_name::Module, groups::Vector{ReferenceGroup}; recursive::Bool=false)
+    # Get all documented symbols via shared helper
+    all_symbols = _documented_symbols(module_name; recursive=recursive)
     used_symbols = Set{Symbol}()
 
     result = Tuple{ReferenceGroup, Vector{Symbol}}[]
@@ -286,25 +506,30 @@ function group_objects(module_name::Module, groups::Vector{ReferenceGroup})
 end
 
 """
-    auto_group_objects(module_name::Module) -> Vector{Tuple{ReferenceGroup, Vector{Symbol}}}
+    auto_group_objects(module_name::Module; recursive::Bool=false) -> Vector{Tuple{ReferenceGroup, Vector{Symbol}}}
 
 Automatically group objects by type (functions, types, constants).
 Used as fallback when no custom grouping is specified.
 
 # Arguments
 - `module_name::Module`: Module to analyze
+- `recursive::Bool`: When `true`, include documented symbols from submodules
+  (default: `false`).
 """
-function auto_group_objects(module_name::Module)
-    all_symbols = Symbol[k.var for (k, _) in Base.Docs.meta(module_name)]
+function auto_group_objects(module_name::Module; recursive::Bool=false)
+    all_bindings = _documented_bindings(module_name; recursive=recursive)
 
     functions = Symbol[]
     types = Symbol[]
     constants = Symbol[]
     other = Symbol[]
 
-    for sym in all_symbols
+    for b in all_bindings
+        sym = b.var
+        # Determine the module that owns this binding so getfield works
+        owner = b.mod
         try
-            obj = getfield(module_name, sym)
+            obj = getfield(owner, sym)
             if obj isa Function
                 push!(functions, sym)
             elseif obj isa Type
@@ -345,7 +570,7 @@ function auto_group_objects(module_name::Module)
 end
 
 """
-    autodocs_group(module_name::Module; title::String="API Reference", desc::String="", filter=nothing) -> ReferenceGroup
+    autodocs_group(module_name::Module; title::String="API Reference", desc::String="", filter=nothing, recursive::Bool=false) -> ReferenceGroup
 
 Create a ReferenceGroup that automatically includes all documented symbols from a module.
 Similar to Documenter.jl's @autodocs macro.
@@ -355,6 +580,8 @@ Similar to Documenter.jl's @autodocs macro.
 - `title::String`: Group title (default: "API Reference")
 - `desc::String`: Group description
 - `filter`: Optional filter function (e.g., `is_exported(MyModule)`)
+- `recursive::Bool`: When `true`, include documented symbols from submodules
+  (default: `false`).
 
 # Example
 ```julia
@@ -367,6 +594,9 @@ group = autodocs_group(MyModule;
     filter=is_exported(MyModule)
 )
 
+# Include submodule symbols as well
+group = autodocs_group(MyModule; recursive=true)
+
 # Use in config
 config = QuartoConfig(
     module_name = MyModule,
@@ -377,10 +607,11 @@ config = QuartoConfig(
 function autodocs_group(module_name::Module;
     title::String = "API Reference",
     desc::String = "",
-    filter = nothing
+    filter = nothing,
+    recursive::Bool = false,
 )
-    # Get all documented symbols
-    all_symbols = Symbol[k.var for (k, _) in Base.Docs.meta(module_name)]
+    # Get all documented symbols via shared helper
+    all_symbols = _documented_symbols(module_name; recursive=recursive)
 
     # Apply filter if provided
     if filter !== nothing

@@ -88,7 +88,7 @@ end
 
 
 """
-    quarto_build_refpage(module_name; output = "docs/reference.qmd")
+    quarto_build_refpage(module_name; output = "docs/reference.qmd", recursive = false)
 
 Build the docs/reference.qmd file with a short description of
 each object.
@@ -98,12 +98,22 @@ each object.
 - `module_name`: the module name.
 
 - `output`: the output file. By default, it is "docs/reference.qmd".
-"""
-function quarto_build_refpage(module_name; output = "docs/reference.qmd")
-  mkpath(dirname(output))
-  fs = get_objects_from_module(module_name)
 
-  short_docs = map(quarto_doc_short.(fs)) do x
+- `recursive`: when `true`, include documented bindings from submodules
+  (default: `false`).
+"""
+function quarto_build_refpage(module_name; output = "docs/reference.qmd", recursive::Bool = false)
+  mkpath(dirname(output))
+  fs = get_objects_from_module(module_name; recursive=recursive)
+
+  # Collision-safe page names so the index links match the generated files.
+  page_names = (module_name isa Module && all(b -> b isa Base.Docs.Binding, fs)) ?
+               reference_page_names(collect(fs), module_name) :
+               Dict{Base.Docs.Binding, String}()
+
+  short_docs = map(fs) do f
+      pn = get(page_names, f, nothing)
+      x = quarto_doc_short(f; page_name = pn)
       if x isa Vector
           return string(x...)
       else
@@ -161,6 +171,8 @@ function quarto_yaml_from_config(config::QuartoConfig; force::Bool=false)
 project:
   type: website
   output-dir: $(config.output_dir)
+  resources:
+    - objects.inv
 """)
 
     # Execute section
@@ -448,6 +460,132 @@ format:
     yaml
 end
 
+"""
+    _mask_regions(text::String, pattern::Regex) -> (masked::String, store::Vector{String})
+
+Replace all non-overlapping matches of `pattern` in `text` with unique placeholder
+tokens of the form `\x00MASK_N\x00`. Returns the masked text and a vector of the
+original matched strings (indexed by N, 0-based).
+"""
+function _mask_regions(text::String, pattern::Regex)
+    store = String[]
+    result = replace(text, pattern => function(m)
+        push!(store, m)
+        "\x00MASK_$(length(store) - 1)\x00"
+    end)
+    result, store
+end
+
+"""
+    _unmask_regions(text::String, store::Vector{String}) -> String
+
+Restore placeholder tokens inserted by `_mask_regions`.
+"""
+function _unmask_regions(text::String, store::Vector{String})
+    result = text
+    for (i, original) in enumerate(store)
+        result = replace(result, "\x00MASK_$(i - 1)\x00" => original)
+    end
+    result
+end
+
+"""
+    _autolink_file_content(text::String, index::ReferenceIndex; self_name::String="") -> String
+
+Apply `autolink_references` to `text` while:
+- Skipping content inside fenced code blocks (``` ... ```).
+- Skipping existing markdown links to avoid double-linking.
+- Skipping the self-reference entry (the page for `foo` won't link `foo` to itself).
+"""
+function _autolink_file_content(text::String, index::ReferenceIndex; self_name::String="")
+    # Build a page-local index that excludes the self-entry
+    local_entries = copy(index.entries)
+    if !isempty(self_name) && haskey(local_entries, self_name)
+        delete!(local_entries, self_name)
+    end
+    local_index = ReferenceIndex(local_entries, index.module_name)
+
+    # Mask fenced code blocks first (``` ... ``` — may span multiple lines)
+    fence_pattern = r"```[\s\S]*?```"
+    text_masked_fences, fence_store = _mask_regions(text, fence_pattern)
+
+    # Mask existing markdown links whose display text is a backtick expression,
+    # e.g. [`foo`](reference/foo.qmd) — avoids nested links.
+    link_pattern = r"\[`[^`]*`\]\([^)]*\)"
+    text_masked_links, link_store = _mask_regions(text_masked_fences, link_pattern)
+
+    # Run autolinker on the clean text
+    linked = autolink_references(text_masked_links, local_index)
+
+    # Restore in reverse mask order
+    restored_links = _unmask_regions(linked, link_store)
+    _unmask_regions(restored_links, fence_store)
+end
+
+"""
+    _validate_internal_links(docs_dir::String; strict::Bool=false)
+
+Scan all .qmd files under `docs_dir` for relative markdown links to .qmd targets.
+Links inside fenced code blocks are ignored (they are examples, not navigation).
+If any targets are missing:
+- When `strict` is true, throw an error listing every broken link.
+- When `strict` is false, emit a single `@warn` summarising them.
+"""
+function _validate_internal_links(docs_dir::String; strict::Bool=false)
+    broken = Tuple{String, String}[]  # (source_file, target_url)
+
+    for (root, _, filenames) in walkdir(docs_dir)
+        for fname in filenames
+            endswith(fname, ".qmd") || continue
+            filepath = joinpath(root, fname)
+            file_dir = dirname(filepath)
+            content = read(filepath, String)
+            content, _ = _mask_regions(content, r"```[\s\S]*?```")
+            content, _ = _mask_regions(content, r"``[^`]+``")
+            content, _ = _mask_regions(content, r"`[^`\n]+`")
+
+            for m in eachmatch(r"\[([^\]]*)\]\(([^)]+)\)", content)
+                url = m.captures[2]
+
+                # Skip external links, mailto, and anchor-only links
+                startswith(url, "http://") && continue
+                startswith(url, "https://") && continue
+                startswith(url, "mailto:") && continue
+                startswith(url, "#") && continue
+
+                # Strip fragment and query string
+                path = split(url, "#")[1]
+                path = split(path, "?")[1]
+                isempty(path) && continue
+
+                # Only care about .qmd targets
+                endswith(path, ".qmd") || continue
+
+                target = normpath(joinpath(file_dir, path))
+                if !isfile(target)
+                    push!(broken, (filepath, url))
+                end
+            end
+        end
+    end
+
+    if isempty(broken)
+        return
+    end
+
+    msg_lines = ["Broken internal links found:"]
+    for (src, tgt) in broken
+        push!(msg_lines, "  $src -> $tgt")
+    end
+    msg = join(msg_lines, "\n")
+
+    if strict
+        error(msg)
+    else
+        @warn msg
+    end
+end
+
 function quarto_build_site(module_name::Module; kwargs...)
     error("""
     `quarto_build_site(module; kwargs...)` is no longer supported.
@@ -509,9 +647,9 @@ function quarto_build_site(config::QuartoConfig)
 
     # Generate reference page (grouped if config has groups)
     if !isempty(config.reference)
-        quarto_build_refpage_grouped(module_name, config)
+        quarto_build_refpage_grouped(module_name, config; recursive=config.include_submodules)
     else
-        quarto_build_refpage(module_name)
+        quarto_build_refpage(module_name; recursive=config.include_submodules)
     end
 
     # Create section directories and index files
@@ -554,11 +692,22 @@ $desc
     module_str = string(module_name)
     quarto_index(title = module_str * ".jl")
 
-    # Generate individual function documentation pages
-    fs = get_objects_from_module(module_name)
+    # Generate individual function documentation pages, using collision-safe
+    # page names so submodule bindings sharing a `.var` get distinct files.
+    fs = get_objects_from_module(module_name; recursive=config.include_submodules)
+    page_names = reference_page_names(collect(fs), module_name)
     for f in fs
-        quarto_doc_page(f)
+        quarto_doc_page(f; name = get(page_names, f, nothing))
     end
+
+    # Write the Sphinx inventory (objects.inv) so other packages can link back
+    # to this site. URIs are relative; consumers resolve them against the URL
+    # they fetched objects.inv from, so base_url stays empty.
+    write_inventory(
+        generate_inventory(module_name; version=detect_version(), recursive=config.include_submodules),
+        "docs/objects.inv"
+    )
+    @info "Wrote inventory to docs/objects.inv"
 
     # Generate styles
     quarto_styles_from_config(config)
@@ -570,12 +719,46 @@ $desc
         version_segment = determine_version_segment(config.version)
         @info "Version selector enabled. Building for version: $version_segment"
     end
+
+    # Post-process: autolink cross-references in generated .qmd files
+    if config.autolink
+        # Index for docs/reference.qmd (top-level): URLs like "reference/name.qmd"
+        top_index = build_reference_index(module_name; base_path="reference", recursive=config.include_submodules)
+        # Index for docs/reference/*.qmd (sibling-relative): URLs like "name.qmd"
+        sibling_index = build_reference_index(module_name; base_path=".", recursive=config.include_submodules)
+
+        # Process the top-level reference index page
+        ref_page = "docs/reference.qmd"
+        if isfile(ref_page)
+            content = read(ref_page, String)
+            content = _autolink_file_content(content, top_index)
+            write(ref_page, content)
+        end
+
+        # Process each individual reference page
+        ref_dir = "docs/reference"
+        if isdir(ref_dir)
+            for fname in readdir(ref_dir)
+                endswith(fname, ".qmd") || continue
+                fpath = joinpath(ref_dir, fname)
+                # Derive self-name from filename (strip .qmd)
+                self_name = fname[1:end-4]
+                content = read(fpath, String)
+                content = _autolink_file_content(content, sibling_index; self_name=self_name)
+                write(fpath, content)
+            end
+        end
+    end
+
+    # Validate internal links
+    _validate_internal_links("docs"; strict=config.strict)
+
     @info "Documentation site built successfully!"
     @info "Run 'cd docs && quarto preview' to preview locally."
 end
 
 """
-    quarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String="docs/reference.qmd")
+    quarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String="docs/reference.qmd", recursive::Bool=false)
 
 Build a grouped reference page with sections, titles, and descriptions.
 Similar to pkgdown's reference page organization.
@@ -584,6 +767,8 @@ Similar to pkgdown's reference page organization.
 - `module_name::Module`: Module to document
 - `config::QuartoConfig`: Configuration with reference groups
 - `output::String`: Output file path
+- `recursive::Bool`: when `true`, include documented bindings from submodules
+  (default: `false`).
 
 # Example
 ```julia
@@ -597,15 +782,26 @@ config = QuartoConfig(
 quarto_build_refpage_grouped(MyModule, config)
 ```
 """
-function quarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String="docs/reference.qmd")
+function quarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String="docs/reference.qmd", recursive::Bool=false)
     mkpath(dirname(output))
     groups = config.reference
 
     # If no groups specified, use auto-grouping
     if isempty(groups)
-        grouped = auto_group_objects(module_name)
+        grouped = auto_group_objects(module_name; recursive=recursive)
     else
-        grouped = group_objects(module_name, groups)
+        grouped = group_objects(module_name, groups; recursive=recursive)
+    end
+
+    # Build a symbol -> binding map and collision-safe page names so links point
+    # to the actual generated files (important when submodules introduce name
+    # collisions). For colliding symbols, the first binding encountered wins;
+    # `group_objects` already dedupes by symbol.
+    bindings = _documented_bindings(module_name; recursive=recursive)
+    page_names = reference_page_names(bindings, module_name)
+    sym_to_binding = Dict{Symbol, Base.Docs.Binding}()
+    for b in bindings
+        get!(sym_to_binding, b.var, b)
     end
 
     s = """---
@@ -635,10 +831,12 @@ toc-depth: 2
         s *= "|----------|-------------|\n"
 
         for sym in symbols
-            short_desc = _get_short_description(module_name, sym)
+            binding = get(sym_to_binding, sym, nothing)
+            page = binding !== nothing ? get(page_names, binding, string(sym)) : string(sym)
+            short_desc = _get_short_description(module_name, sym; binding=binding)
             # Escape pipe characters in description
             short_desc = replace(short_desc, "|" => "\\|")
-            s *= "| [`$sym`](reference/$sym.qmd) | $short_desc |\n"
+            s *= "| [`$sym`](reference/$page.qmd) | $short_desc |\n"
         end
 
         s *= "\n"
@@ -650,10 +848,15 @@ end
 
 """
 Internal: Get short description for a symbol.
+
+When `binding` is supplied (a `Base.Docs.Binding`), the docstring is looked up
+through it so symbols owned by submodules resolve correctly. Otherwise the
+symbol is resolved against `module_name`.
 """
-function _get_short_description(module_name::Module, sym::Symbol)
+function _get_short_description(module_name::Module, sym::Symbol; binding=nothing)
     try
-        doc = Base.Docs.doc(Base.Docs.Binding(module_name, sym))
+        lookup = binding !== nothing ? binding : Base.Docs.Binding(module_name, sym)
+        doc = Base.Docs.doc(lookup)
         doc === nothing && return ""
         doc_str = string(doc)
 
@@ -702,17 +905,18 @@ function quarto_rebuild_reference(config::QuartoConfig)
 
     module_name = config.module_name
 
-    # Regenerate individual pages
-    fs = get_objects_from_module(module_name)
+    # Regenerate individual pages with collision-safe page names.
+    fs = get_objects_from_module(module_name; recursive=config.include_submodules)
+    page_names = reference_page_names(collect(fs), module_name)
     for f in fs
-        quarto_doc_page(f)
+        quarto_doc_page(f; name = get(page_names, f, nothing))
     end
 
     # Regenerate index (grouped or simple)
     if !isempty(config.reference)
-        quarto_build_refpage_grouped(module_name, config)
+        quarto_build_refpage_grouped(module_name, config; recursive=config.include_submodules)
     else
-        quarto_build_refpage(module_name)
+        quarto_build_refpage(module_name; recursive=config.include_submodules)
     end
 
     @info "Reference pages rebuilt"

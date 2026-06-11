@@ -1,0 +1,103 @@
+---
+title: "Cross-package Links"
+description: "Link to other packages' docs and let them link back to yours"
+order: 5
+---
+
+# Cross-package Links
+
+QuartoDocBuilder resolves references to *other* packages through Sphinx
+`objects.inv` inventories — the same format Documenter.jl (≥ 1.0) publishes.
+Instead of guessing a URL (which often 404s), a reference is only linked when it
+resolves against a real inventory entry, so the links you ship are always valid.
+
+## Register an external package
+
+Tell the builder where another package's docs live with
+[`register_external_docs`](../reference/register_external_docs.qmd). It stores
+the base URL and, by default, tries to load `"$base_url/objects.inv"`:
+
+```julia
+using QuartoDocBuilder
+
+register_external_docs("DataFrames", "https://dataframes.juliadata.org/stable")
+register_external_docs("Plots", "https://docs.juliaplots.org/stable")
+```
+
+Loading the inventory needs network access. If the fetch fails (offline, or no
+inventory is published), the package is still registered but its references stay
+unlinked — URLs are never fabricated. You can also pass an explicit inventory,
+either an [`Inventory`](../reference/Inventory.qmd) value or a path/URL string:
+
+```julia
+register_external_docs("MyDep", "https://user.github.io/MyDep.jl/stable";
+                        inventory = "https://user.github.io/MyDep.jl/stable/objects.inv")
+```
+
+Once registered, [`autolink_external`](../reference/autolink_external.qmd) turns
+backticked `Package.symbol` mentions into links resolved through that package's
+inventory:
+
+```julia
+autolink_external("See `DataFrames.DataFrame` for the container type.")
+```
+
+## Register common packages
+
+[`register_common_packages`](../reference/register_common_packages.qmd)
+pre-registers the base URLs of widely used Julia packages (DataFrames, Plots,
+Makie, Flux, JuMP, and more). By default it does **no** network access — it only
+records URLs:
+
+```julia
+register_common_packages()                       # offline, URLs only
+register_common_packages(load_inventories = true) # also fetch each objects.inv
+```
+
+Pass `load_inventories = true` to additionally fetch each inventory; failures
+are skipped per-package, so it degrades gracefully when offline.
+
+## Your site ships an inventory too
+
+Every `quarto_build_site` run writes `docs/objects.inv` describing all
+documented bindings, and adds a `resources:` entry to `_quarto.yml` so the file
+is published alongside the rendered HTML. That means *other* packages can link
+back to your documentation with the same mechanism shown above — they just
+point `register_external_docs` at your docs URL.
+
+The inventory uses the `jl` domain, fully qualified names like
+`MyPackage.my_function`, and URIs of the form
+`reference/my_function.html#sec-doc` matching the pages QuartoDocBuilder
+generates.
+
+## Resolving against an inventory directly
+
+The inventory functions are also useful on their own. Load any
+`objects.inv` and resolve names against it with
+[`load_inventory`](../reference/load_inventory.qmd) and
+[`resolve_inventory`](../reference/resolve_inventory.qmd):
+
+```julia
+inv = load_inventory("https://dataframes.juliadata.org/stable/objects.inv")
+
+resolve_inventory(inv, "DataFrames.DataFrame")
+# => "https://dataframes.juliadata.org/stable/lib/types/#DataFrames.DataFrame"
+
+resolve_inventory(inv, "DataFrame")   # bare-name fallback also works
+```
+
+`resolve_inventory` returns `nothing` when the name is not found. Lookup tries
+the exact name, then the name with a trailing `()` stripped, then any entry
+whose name ends in `.<name>`.
+
+To build an inventory for your own module without running a full site build, use
+[`generate_inventory`](../reference/generate_inventory.qmd) and
+[`write_inventory`](../reference/write_inventory.qmd):
+
+```julia
+inv = generate_inventory(MyPackage; version = "1.0.0")
+write_inventory(inv, "docs/objects.inv")
+```
+
+Pass `recursive = true` to include submodule bindings, matching the
+collision-safe page names used when `include_submodules = true`.

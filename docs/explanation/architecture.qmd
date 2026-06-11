@@ -34,22 +34,35 @@ contains("helper")       # Contains substring
 
 ### 3. Docstring Processing (`quarto_format.jl`)
 
-Converts Julia docstrings to Quarto-compatible markdown:
+Converts Julia docstrings to Quarto-compatible markdown. The renderer is
+structure-agnostic — it dispatches on each Markdown node's type — so it:
 
-- Handles code blocks with proper fencing
-- Converts admonitions to callout blocks
-- Preserves formatting and structure
+- re-fences code blocks as `julia`,
+- demotes docstring headers by two levels,
+- maps admonitions to the matching Quarto callout type,
+- falls back to `Markdown.plain` for anything else.
+
+See [Docstring Processing](docstring-processing.qmd) for the full mapping.
 
 ### 4. Site Building (`build.jl`)
 
 The main build orchestrator:
 
-1. Generates `_quarto.yml` configuration
+1. Generates `_quarto.yml` configuration (including a `resources: objects.inv` entry)
 2. Creates section directories and index files
-3. Generates reference pages for each documented function
+3. Generates the reference index and a page for each documented binding
 4. Creates navigation structure (navbar, sidebars)
+5. Emits `docs/objects.inv` so other packages can cross-link back
+6. Post-processes the generated pages to autolink cross-references (when `autolink = true`)
+7. Validates internal links (failing the build when `strict = true`)
 
-### 5. Articles System (`articles.jl`)
+### 5. Inventories and Auto-linking (`inventory.jl`, `autolink.jl`)
+
+Reads and writes Sphinx `objects.inv` inventories and turns backticked names
+into links — both within the package and, via registered inventories, to other
+packages. See [Cross-package Links](../how-to/cross-package-links.qmd).
+
+### 6. Articles System (`articles.jl`)
 
 Discovers and organizes content files:
 
@@ -117,9 +130,11 @@ theme = ThemeConfig(
 
 ## Dependencies
 
-QuartoDocBuilder only depends on Julia standard library:
+QuartoDocBuilder keeps its dependency footprint small:
 
-- `Markdown` - Parsing docstrings
-- `TOML` - Configuration files
+- `Markdown`, `REPL`, `TOML` (Julia standard library) - docstring parsing and configuration
+- `Downloads` (standard library) - fetching remote `objects.inv` inventories
+- [`CodecZlib`](https://github.com/JuliaIO/CodecZlib.jl) - zlib (de)compression for the `objects.inv` format
 
-No external packages required!
+The `CodecZlib` and `Downloads` dependencies were added in 0.4.0 to support
+Sphinx inventories for cross-package linking.

@@ -1,6 +1,19 @@
 # Documentation build script for QuartoDocBuilder.jl
-# This script uses QuartoDocBuilder to document itself!
-# Showcases the multiple sections feature
+# This script uses QuartoDocBuilder to document itself, and is meant to be a
+# working example of the package's capabilities. It demonstrates:
+#
+#   - Grouped reference pages (the `reference` field below).
+#   - Multiple navbar sections with dropdowns (the `sections` field).
+#   - A changelog page generated from NEWS.md (`news = true`).
+#   - Automatic cross-reference autolinking (on by default; `autolink = true`).
+#   - Strict link checking: `strict = true` makes the build FAIL on any broken
+#     internal link, the way Documenter.jl does. This site must pass it.
+#   - An emitted `docs/objects.inv` (written on every build) so other packages
+#     can cross-link back to this documentation.
+#
+# Submodule documentation (`include_submodules = true`) is left off here because
+# QuartoDocBuilder has no documented submodules; see the "Configure the Build"
+# how-to for that feature.
 
 using Pkg
 Pkg.activate(@__DIR__)
@@ -33,7 +46,7 @@ config = QuartoConfig(
                        :has_docstring, :is_exported, :is_function_symbol,
                        :is_type_symbol, :is_const_symbol, :parse_content_selector,
                        :apply_selector, :filter_objects, :group_objects,
-                       :auto_group_objects, :autodocs_group,
+                       :auto_group_objects, :autodocs_group, :reference_page_names,
                        :check_missing_docstrings, :documentation_coverage]
         ),
         ReferenceGroup(
@@ -70,6 +83,12 @@ config = QuartoConfig(
                        :clear_external_docs, :list_external_docs,
                        :register_common_packages, :autolink_external,
                        :ExternalRef, :parse_external_ref, :resolve_external_ref]
+        ),
+        ReferenceGroup(
+            title = "Inventories",
+            desc = "Sphinx objects.inv read/write for cross-package linking.",
+            contents = [:Inventory, :InventoryItem, :load_inventory,
+                       :write_inventory, :generate_inventory, :resolve_inventory]
         ),
         ReferenceGroup(
             title = "Link Checking & Versioning",
@@ -119,6 +138,11 @@ config = QuartoConfig(
     # News/changelog enabled
     news = true,
     news_file = "NEWS.md",
+
+    # Build behaviour showcase: autolink is on by default; strict turns broken
+    # internal links into a hard build error so this site stays link-clean.
+    autolink = true,
+    strict = true,
 
     # # Theme configuration
     # theme = ThemeConfig(

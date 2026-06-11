@@ -84,10 +84,12 @@ QuartoDocBuilder automatically creates:
 
 ## Next Steps
 
-- **[Multiple Sections](multiple-sections.qmd)**: Learn how to organize your docs with multiple navbar dropdowns
+- **[Multiple Sections](multiple-sections.qmd)**: Organize your docs with multiple navbar dropdowns
+- **[Configure the Build](../how-to/configure.qmd)**: Autolinking, strict link checking, submodules, and TOML config
+- **[Cross-package Links](../how-to/cross-package-links.qmd)**: Link to (and from) other packages' docs
 - **[Reference](../reference.qmd)**: Full API documentation
 
 ::: {.callout-tip}
 ## Pro Tip
-Run `quarto_build_refpage(MyPackage)` after adding new functions to update the reference index without rebuilding everything.
+Run `quarto_rebuild_reference(config)` after adding new functions to update the reference pages without rebuilding the entire site.
 :::

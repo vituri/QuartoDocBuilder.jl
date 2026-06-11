@@ -38,6 +38,11 @@ function with_temp_project(f::Function)
     end
 end
 
+include("test_format.jl")
+include("test_build.jl")
+include("test_inventory.jl")
+include("test_submodules.jl")
+
 @testset "QuartoDocBuilder" begin
     @testset "Old API Guard" begin
         err = try

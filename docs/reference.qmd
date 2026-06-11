@@ -36,21 +36,22 @@ pkgdown-style helpers for organizing reference pages by matching function names.
 | Function | Description |
 |----------|-------------|
 | [`apply_selector`](reference/apply_selector.qmd) | apply_selector(selector, symbols::Vector{Symbol}) -> Vector{Symbol} |
-| [`auto_group_objects`](reference/auto_group_objects.qmd) | auto_group_objects(module_name::Module) -> Vector{Tuple{ReferenceGroup, Vector{Symbol}}} |
+| [`auto_group_objects`](reference/auto_group_objects.qmd) | auto_group_objects(module_name::Module; recursive::Bool=false) -> Vector{Tuple{ReferenceGroup, Ve... |
 | [`autodocs_group`](reference/autodocs_group.qmd) | autodocs_group(module_name::Module; title::String="API Reference", desc::String="", filter=nothin... |
 | [`check_missing_docstrings`](reference/check_missing_docstrings.qmd) | check_missing_docstrings(module_name::Module; exported_only::Bool=true, warn::Bool=true) -> Vecto... |
 | [`contains`](reference/contains.qmd) | contains(substring::String) -> Function |
 | [`documentation_coverage`](reference/documentation_coverage.qmd) | documentation_coverage(module_name::Module; exported_only::Bool=true) -> NamedTuple |
 | [`ends_with`](reference/ends_with.qmd) | ends_with(suffix::String) -> Function |
-| [`filter_objects`](reference/filter_objects.qmd) | filter_objects(module_name::Module, selectors::Vector) -> Vector{Symbol} |
-| [`group_objects`](reference/group_objects.qmd) | group_objects(module_name::Module, groups::Vector{ReferenceGroup}) -> Vector{Tuple{ReferenceGroup... |
-| [`has_docstring`](reference/has_docstring.qmd) | has_docstring(module_name::Module) -> Function |
+| [`filter_objects`](reference/filter_objects.qmd) | filter_objects(module_name::Module, selectors::Vector; recursive::Bool=false) -> Vector{Symbol} |
+| [`group_objects`](reference/group_objects.qmd) | group_objects(module_name::Module, groups::Vector{ReferenceGroup}; recursive::Bool=false) -> Vect... |
+| [`has_docstring`](reference/has_docstring.qmd) | has_docstring(module_name::Module; recursive::Bool=false) -> Function |
 | [`is_const_symbol`](reference/is_const_symbol.qmd) | is_const_symbol(module_name::Module) -> Function |
 | [`is_exported`](reference/is_exported.qmd) | is_exported(module_name::Module) -> Function |
 | [`is_function_symbol`](reference/is_function_symbol.qmd) | is_function_symbol(module_name::Module) -> Function |
 | [`is_type_symbol`](reference/is_type_symbol.qmd) | is_type_symbol(module_name::Module) -> Function |
 | [`matches`](reference/matches.qmd) | matches(pattern::Union{String, Regex}) -> Function |
 | [`parse_content_selector`](reference/parse_content_selector.qmd) | parse_content_selector(s::String) -> Union{Symbol, Function} |
+| [`reference_page_names`](reference/reference_page_names.qmd) | reference_page_names(bindings::Vector{Base.Docs.Binding}, root::Module) -> Dict{Base.Docs.Binding... |
 | [`starts_with`](reference/starts_with.qmd) | starts_with(prefix::String) -> Function |
 
 ## Site Building {#sec-site-building}
@@ -59,7 +60,7 @@ Core functions for generating documentation sites.
 
 | Function | Description |
 |----------|-------------|
-| [`quarto_build_refpage`](reference/quarto_build_refpage.qmd) | quarto_build_refpage(module_name; output = "docs/reference.qmd") |
+| [`quarto_build_refpage`](reference/quarto_build_refpage.qmd) | quarto_build_refpage(module_name; output = "docs/reference.qmd", recursive = false) |
 | [`quarto_build_refpage_grouped`](reference/quarto_build_refpage_grouped.qmd) | quarto_build_refpage_grouped(module_name::Module, config::QuartoConfig; output::String="docs/refe... |
 | [`quarto_build_site`](reference/quarto_build_site.qmd) | quarto_build_site(config::QuartoConfig) |
 | [`quarto_rebuild_all`](reference/quarto_rebuild_all.qmd) | quarto_rebuild_all(config::QuartoConfig) |
@@ -73,10 +74,11 @@ Functions for extracting and formatting Julia docstrings to Quarto format.
 
 | Function | Description |
 |----------|-------------|
-| [`get_objects_from_module`](reference/get_objects_from_module.qmd) | get_objects_from_module(m::Module) -> Vector{Docs.Binding} |
+| [`get_objects_from_module`](reference/get_objects_from_module.qmd) | get_objects_from_module(m::Module; recursive::Bool=false) -> Vector{Docs.Binding} |
 | [`quarto_callout_block`](reference/quarto_callout_block.qmd) | quarto_callout_block(s) |
-| [`quarto_doc_page`](reference/quarto_doc_page.qmd) | quarto_doc_page(s; dir = "docs/reference") |
-| [`quarto_doc_short`](reference/quarto_doc_short.qmd) | quarto_doc_short(s::Symbol) |
+| [`quarto_doc`](reference/quarto_doc.qmd) | quarto_doc(b) |
+| [`quarto_doc_page`](reference/quarto_doc_page.qmd) | quarto_doc_page(s; dir = "docs/reference", name = nothing) |
+| [`quarto_doc_short`](reference/quarto_doc_short.qmd) | quarto_doc_short(b; page_name = nothing) |
 | [`quarto_format`](reference/quarto_format.qmd) | quarto_format(m::Markdown.Code, eval = false) |
 
 ## Articles & News {#sec-articles-&-news}
@@ -113,7 +115,7 @@ Automatic cross-reference linking in documentation.
 | [`autolink_cross_package`](reference/autolink_cross_package.qmd) | autolink_cross_package(text::String, packages::Dict{String, ReferenceIndex}) -> String |
 | [`autolink_external`](reference/autolink_external.qmd) | autolink_external(text::String; registry=EXTERNAL_DOCS[]) -> String |
 | [`autolink_references`](reference/autolink_references.qmd) | autolink_references(text::String, index::ReferenceIndex) -> String |
-| [`build_reference_index`](reference/build_reference_index.qmd) | build_reference_index(module_name::Module; base_path::String="reference") -> ReferenceIndex |
+| [`build_reference_index`](reference/build_reference_index.qmd) | build_reference_index(module_name::Module; base_path::String="reference", recursive::Bool=false) ... |
 | [`clear_external_docs`](reference/clear_external_docs.qmd) | clear_external_docs(; registry=EXTERNAL_DOCS[]) |
 | [`create_reference_report`](reference/create_reference_report.qmd) | create_reference_report(module_name::Module) -> String |
 | [`find_undefined_references`](reference/find_undefined_references.qmd) | find_undefined_references(text::String, index::ReferenceIndex) -> Vector{String} |
@@ -121,10 +123,23 @@ Automatic cross-reference linking in documentation.
 | [`link_julia_docs`](reference/link_julia_docs.qmd) | link_julia_docs(text::String) -> String |
 | [`list_external_docs`](reference/list_external_docs.qmd) | list_external_docs(; registry=EXTERNAL_DOCS[]) -> Dict{String, String} |
 | [`parse_external_ref`](reference/parse_external_ref.qmd) | parse_external_ref(ref::String) -> Union{ExternalRef, Nothing} |
-| [`register_common_packages`](reference/register_common_packages.qmd) | register_common_packages(; registry=EXTERNAL_DOCS[]) |
-| [`register_external_docs`](reference/register_external_docs.qmd) | register_external_docs(package::String, base_url::String; registry=EXTERNAL_DOCS[]) |
+| [`register_common_packages`](reference/register_common_packages.qmd) | register_common_packages(; load_inventories::Bool=false, registry=EXTERNAL_DOCS[]) |
+| [`register_external_docs`](reference/register_external_docs.qmd) | register_external_docs(package::String, base_url::String; |
 | [`resolve_external_ref`](reference/resolve_external_ref.qmd) | resolve_external_ref(ref::ExternalRef; registry=EXTERNAL_DOCS[]) -> Union{String, Nothing} |
 | [`resolve_reference`](reference/resolve_reference.qmd) | resolve_reference(name::String, index::ReferenceIndex) -> Union{String, Nothing} |
+
+## Inventories {#sec-inventories}
+
+Sphinx objects.inv read/write for cross-package linking.
+
+| Function | Description |
+|----------|-------------|
+| [`Inventory`](reference/Inventory.qmd) | Inventory |
+| [`InventoryItem`](reference/InventoryItem.qmd) | InventoryItem |
+| [`generate_inventory`](reference/generate_inventory.qmd) | generate_inventory(mod::Module; project=string(mod), version="", base_url="", recursive=false) ->... |
+| [`load_inventory`](reference/load_inventory.qmd) | load_inventory(source::AbstractString; root_url=nothing) -> Inventory |
+| [`resolve_inventory`](reference/resolve_inventory.qmd) | resolve_inventory(inv::Inventory, name::AbstractString) -> Union{String, Nothing} |
+| [`write_inventory`](reference/write_inventory.qmd) | write_inventory(inv::Inventory, path::AbstractString) -> String |
 
 ## Link Checking & Versioning {#sec-link-checking-&-versioning}
 

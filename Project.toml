@@ -1,18 +1,23 @@
 name = "QuartoDocBuilder"
 uuid = "164f4f01-dadb-4e86-a767-9a3bba57cbbb"
+version = "0.4.0"
 authors = ["G. Vituri <56522687+vituri@users.noreply.github.com>"]
-version = "0.3.0"
 
 [deps]
+CodecZlib = "944b1d66-785c-5afd-91f1-9de20f533193"
+Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
 REPL = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 TOML = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
 
 [compat]
+CodecZlib = "0.7"
+Downloads = "1"
 julia = "1.6"
 
 [extras]
+Logging = "56ddb016-857b-54e1-b83d-db4d58db5568"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
-test = ["Test"]
+test = ["Logging", "Test"]

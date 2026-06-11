@@ -21,12 +21,25 @@ symbols = get_objects_from_module(MyModule)
 
 ### 2. Converting to Markdown
 
-Each docstring is parsed and converted to Quarto-compatible markdown:
+Each docstring comes back from `Base.Docs.doc` as a `Markdown.MD` tree. The
+renderer in `quarto_format.jl` is deliberately **structure-agnostic**: it
+dispatches `quarto_format` on the *type* of each node and never reaches into a
+field (`.code`, `.content[1]`, ...) without first checking the node type. This
+is why a docstring that starts with a paragraph instead of a signature renders
+just as cleanly as one that starts with a code block — there is no assumed
+shape. Unknown node types fall back to `Markdown.plain`, so any well-formed
+docstring renders without error.
 
-- **Code blocks** → Wrapped in proper fences with language hints
-- **Headers** → Adjusted to appropriate levels
-- **Admonitions** → Converted to Quarto callout blocks
-- **Examples** → Preserved with `#| eval: false` to prevent execution
+A `Markdown.MD` can be nested (one entry per method docstring), so the tree is
+flattened into a flat list of leaf nodes before each is formatted:
+
+- **Code blocks** → re-fenced as `julia` blocks; `jldoctest` and unlabelled
+  blocks are treated as `julia`. They are plain (non-executable) fences by
+  default, so examples are not run by Quarto.
+- **Headers** → demoted by two levels (see below).
+- **Admonitions** → mapped to the matching Quarto callout (see below).
+- **Everything else** (lists, tables, block quotes, inline math) →
+  `Markdown.plain`, which preserves `` `x` `` as `$x$`.
 
 ### 3. Generating Pages
 
@@ -43,20 +56,24 @@ docs/reference/
 
 ### Code Blocks
 
-```julia
-"""
-    my_function(x)
-
-Example:
-```julia
-result = my_function(42)
-```
-"""
-```
-
-Becomes a Quarto code block with `eval: false`.
+A fenced code block inside a docstring is re-emitted as a plain `julia` fence —
+it is shown as a static example and **not** executed by Quarto. Blocks tagged
+`jldoctest`, and blocks with no language tag, are also rendered as `julia`.
 
 ### Admonitions
+
+Julia admonitions are mapped to the corresponding Quarto callout type rather
+than always rendering as a warning:
+
+| Julia admonition | Quarto callout |
+|------------------|----------------|
+| `!!! note`, `!!! info`, `!!! compat` | `callout-note` |
+| `!!! tip` | `callout-tip` |
+| `!!! warning` | `callout-warning` |
+| `!!! danger` | `callout-important` |
+| anything else | `callout-note` |
+
+So a docstring admonition like:
 
 ```julia
 """
@@ -65,17 +82,33 @@ Becomes a Quarto code block with `eval: false`.
 """
 ```
 
-Becomes a Quarto callout:
+becomes a Quarto callout:
 
 ```markdown
 ::: {.callout-warning title="Performance Note"}
+
 This function is O(n²) for large inputs.
+
 :::
 ```
 
-### Multiple Signatures
+The callout takes its title from the admonition. When the title is empty or is
+just the capitalized category default (e.g. a `note` titled `"Note"`), the
+`title` attribute is omitted.
 
-Functions with multiple methods have all signatures documented:
+### Headers
+
+Headers inside a docstring are **demoted by two levels** (H1 → H3, H2 → H4,
+and so on, capped at H6). The reference page already uses an H1 for the object
+name, so demotion keeps a docstring's own `# Arguments` / `# Examples` headings
+below that title and out of the page-level table of contents, which would
+otherwise be polluted by every section of every docstring.
+
+### Multiple Signatures and Methods
+
+`Base.Docs.doc` returns one block per method docstring. The renderer produces
+one rendered block per entry, separated by a horizontal rule on the page, so a
+function with several documented methods has all of them shown:
 
 ```julia
 """
@@ -108,7 +141,13 @@ reference = [
 
 ### Short Descriptions
 
-The reference index shows short descriptions extracted from the first line of each docstring.
+The reference index links each object and follows it with a short description.
+For a docstring that starts with a signature code block, the rendered signature
+is the link text; otherwise the object name is used. The description is a
+blockquote of the docstring's first paragraph, truncated to roughly 200
+characters. Because the index is also passed through the structure-agnostic
+renderer, a paragraph-first docstring produces a valid entry rather than
+crashing the build.
 
 ## Best Practices
 

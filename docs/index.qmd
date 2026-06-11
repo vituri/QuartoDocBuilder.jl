@@ -4,12 +4,78 @@ title: "QuartoDocBuilder.jl"
 
 # QuartoDocBuilder.jl
 
-QuartoDocBuilder.jl is a package inspired by R [pkgdown](https://pkgdown.r-lib.org/). It provides an easy way to generate a website with documentation and vignettes, by creating a [Quarto](https://quarto.org/) project.
+QuartoDocBuilder.jl generates a documentation website for a Julia package by
+building a [Quarto](https://quarto.org/) project from your docstrings,
+`README.md`, `NEWS.md` and a set of hand-written `.qmd` pages. It is inspired by
+R's [pkgdown](https://pkgdown.r-lib.org/) and serves the same role as
+Documenter.jl, while letting you reuse everything Quarto already provides:
+GitHub Pages deployment, themes, dark mode, search and reader comments.
 
-Being powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted. This website doc even has a comment section! Check some examples [here](https://quarto.org/docs/gallery/#websites) and the complete list of options [here](https://quarto.org/docs/reference/projects/websites.html). 
+This site is built with QuartoDocBuilder itself — see
+[`docs/make.jl`](https://github.com/vituri/QuartoDocBuilder.jl/blob/main/docs/make.jl)
+for the configuration that produced it.
 
-The [Quarto website](https://quarto.org/) itself is written with Quarto! Check the github repo [here](https://github.com/quarto-dev/quarto-web) to get some inspiration.
+## Features
 
-# How to use
+- Reference pages generated from Julia docstrings, organized into named groups.
+- Multiple navbar sections with dropdowns (tutorials, how-to guides, explanation, ...).
+- Changelog page generated from `NEWS.md`, with GitHub issue/PR linking.
+- Light/dark mode with automatic Bootswatch theme pairing.
+- Automatic cross-reference autolinking: backticked `function` mentions become links.
+- Strict mode that validates internal links and fails the build on broken ones.
+- Inventory-based cross-package links via Sphinx `objects.inv` (the format Documenter publishes).
+- Every built site ships its own `objects.inv` so other packages can link back to yours.
+- Submodule documentation with collision-safe page names.
+- Multi-version documentation with a version selector dropdown.
+- GitHub Actions workflow generation for automated deployment.
+- Giscus comments and custom theming (colors, fonts, CSS/SCSS).
 
-See the tutorials at [https://vituri.github.io/QuartoDocBuilder.jl/tutorials.html](https://vituri.github.io/QuartoDocBuilder.jl/tutorials.html).
+## Installation
+
+```julia
+using Pkg
+Pkg.activate("docs")     # a dedicated docs environment
+Pkg.add("QuartoDocBuilder")
+```
+
+You will also need the [Quarto CLI](https://quarto.org/docs/get-started/)
+installed to render the generated project.
+
+## Quick start
+
+Create `docs/make.jl`:
+
+```julia
+using MyPackage
+using QuartoDocBuilder
+
+config = QuartoConfig(
+    module_name = MyPackage,
+    repo = "user/MyPackage.jl",
+    reference = [
+        ReferenceGroup(title = "Core", contents = [:main_func, :helper_func]),
+        ReferenceGroup(title = "Utilities", contents = [starts_with("util_")]),
+    ],
+    sections = [
+        SectionConfig(title = "Tutorials", dir = "tutorials", order = 1),
+        SectionConfig(title = "How-to Guides", dir = "how-to", order = 2),
+    ],
+    strict = true,   # fail the build on broken internal links
+)
+
+quarto_build_site(config)
+```
+
+Then build and preview:
+
+```bash
+julia --project=docs docs/make.jl   # writes the Quarto project under docs/
+cd docs && quarto preview           # or: quarto render
+```
+
+## Documentation
+
+Full documentation, tutorials and how-to guides are at
+[https://vituri.github.io/QuartoDocBuilder.jl/](https://vituri.github.io/QuartoDocBuilder.jl/).
+
+    

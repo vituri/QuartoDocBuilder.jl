@@ -21,13 +21,19 @@ function _reference_name(item)
 end
 
 """
-    build_reference_index(module_name::Module; base_path::String="reference") -> ReferenceIndex
+    build_reference_index(module_name::Module; base_path::String="reference", recursive::Bool=false) -> ReferenceIndex
 
 Build a lookup table mapping function names to their reference page URLs.
 
 # Arguments
 - `module_name::Module`: Module to index
 - `base_path::String`: Base path for reference pages (default: "reference")
+- `recursive::Bool`: When `true`, include documented bindings from submodules
+  and use the collision-safe page names from [`reference_page_names`](@ref) so
+  that autolink targets match the actual generated files. Entries are keyed by
+  the collision-safe page name and, when that bare name is unambiguous, also by
+  the bare name — so both `` `Inner.foo` `` and an unambiguous `` `bar` ``
+  mention autolink (default: `false`).
 
 # Returns
 A ReferenceIndex with all documented symbols.
@@ -38,13 +44,30 @@ index = build_reference_index(MyModule)
 index.entries["my_function"]  # "reference/my_function.qmd"
 ```
 """
-function build_reference_index(module_name::Module; base_path::String="reference")
+function build_reference_index(module_name::Module; base_path::String="reference", recursive::Bool=false)
     entries = Dict{String, String}()
 
-    for (sym, _) in Base.Docs.meta(module_name)
-        name = _reference_name(sym)
-        url = "$base_path/$name.qmd"
-        entries[name] = url
+    if recursive
+        bindings = _documented_bindings(module_name; recursive=true)
+        page_names = reference_page_names(bindings, module_name)
+        for b in bindings
+            page = page_names[b]
+            url = "$base_path/$page.qmd"
+            # Key by the (possibly qualified) page name, e.g. "Inner.foo".
+            entries[page] = url
+            # Also key by the bare name when it is unambiguous (the page name
+            # equals the bare name only for non-colliding bindings).
+            bare = string(b.var)
+            if page == bare
+                entries[bare] = url
+            end
+        end
+    else
+        for (sym, _) in Base.Docs.meta(module_name)
+            name = _reference_name(sym)
+            url = "$base_path/$name.qmd"
+            entries[name] = url
+        end
     end
 
     ReferenceIndex(entries, module_name)
@@ -259,11 +282,21 @@ end
 """
     ExternalDocsRegistry
 
-Registry of external package documentation URLs.
-Stores base URLs for external packages to enable cross-package linking.
+Registry of external package documentation.
+
+Stores, per package, a base URL plus an optional Sphinx [`Inventory`](@ref)
+loaded from that site's `objects.inv`. The inventory is what enables
+*correct* cross-package linking: references resolve to real URLs published
+by the upstream docs rather than fabricated, Documenter-specific paths.
+
+# Fields
+- `packages::Dict{String, String}`: package name => base URL.
+- `inventories::Dict{String, Inventory}`: package name => loaded inventory
+  (only present for packages whose `objects.inv` was successfully loaded).
 """
 struct ExternalDocsRegistry
-    packages::Dict{String, String}  # package_name => base_url
+    packages::Dict{String, String}        # package_name => base_url
+    inventories::Dict{String, Inventory}  # package_name => inventory
 end
 
 """
@@ -271,38 +304,68 @@ end
 
 Create an empty external docs registry.
 """
-ExternalDocsRegistry() = ExternalDocsRegistry(Dict{String, String}())
+ExternalDocsRegistry() = ExternalDocsRegistry(Dict{String, String}(), Dict{String, Inventory}())
 
 # Global registry for convenience
 const EXTERNAL_DOCS = Ref{ExternalDocsRegistry}(ExternalDocsRegistry())
 
 """
-    register_external_docs(package::String, base_url::String; registry=EXTERNAL_DOCS[])
+    register_external_docs(package::String, base_url::String;
+                           inventory=nothing, registry=EXTERNAL_DOCS[])
 
-Register an external package's documentation URL for cross-referencing.
+Register an external package's documentation for cross-referencing.
+
+The `base_url` is stored, and an [`Inventory`](@ref) is associated with the
+package so that references can be resolved to real URLs:
+
+- If `inventory` is an [`Inventory`](@ref), it is used directly.
+- If `inventory` is a `String`, it is treated as a path/URL to an
+  `objects.inv` and loaded.
+- If `inventory` is `nothing` (the default), this attempts to load
+  `"\$base_url/objects.inv"`. Network/parse failures are caught and degrade
+  gracefully to "no inventory" (the package is still registered, but its
+  references will not resolve until an inventory is available).
 
 # Arguments
-- `package::String`: Package name (e.g., "DataFrames")
-- `base_url::String`: Base URL for the package docs (e.g., "https://dataframes.juliadata.org/stable")
-- `registry`: Registry to add to (default: global registry)
+- `package::String`: Package name (e.g., "DataFrames").
+- `base_url::String`: Base URL for the package docs
+  (e.g., "https://dataframes.juliadata.org/stable").
+- `inventory`: An `Inventory`, a path/URL string, or `nothing` (default).
+- `registry`: Registry to add to (default: global registry).
 
 # Example
 ```julia
-# Register external packages
 register_external_docs("DataFrames", "https://dataframes.juliadata.org/stable")
 register_external_docs("Plots", "https://docs.juliaplots.org/stable")
-
-# Now `DataFrame` references can be linked
-text = "Use `DataFrame` to store tabular data."
-autolink_external(text)
-# -> "Use [`DataFrame`](https://dataframes.juliadata.org/stable/lib/types/#DataFrames.DataFrame) to store tabular data."
 ```
 """
-function register_external_docs(package::String, base_url::String; registry::ExternalDocsRegistry=EXTERNAL_DOCS[])
+function register_external_docs(package::String, base_url::String;
+                                inventory=nothing,
+                                registry::ExternalDocsRegistry=EXTERNAL_DOCS[])
     # Ensure URL doesn't end with /
     url = rstrip(base_url, '/')
-    registry.packages[package] = url
-    @info "Registered external docs: $package => $url"
+    registry.packages[package] = String(url)
+
+    if inventory isa Inventory
+        registry.inventories[package] = inventory
+    elseif inventory isa AbstractString
+        try
+            registry.inventories[package] = load_inventory(String(inventory); root_url = url)
+        catch err
+            @warn "Could not load inventory for $package from $inventory" exception=err
+        end
+    elseif inventory === nothing
+        # Best-effort: try the conventional objects.inv at the docs root.
+        try
+            registry.inventories[package] = load_inventory("$(url)/objects.inv")
+        catch
+            # Network may be unavailable / no inventory published. Degrade
+            # gracefully: keep the base URL but no inventory.
+        end
+    end
+
+    @info "Registered external docs: $package => $url" *
+          (haskey(registry.inventories, package) ? " (inventory loaded)" : " (no inventory)")
 end
 
 """
@@ -324,10 +387,11 @@ end
 """
     clear_external_docs(; registry=EXTERNAL_DOCS[])
 
-Clear all registered external documentation URLs.
+Clear all registered external documentation URLs and inventories.
 """
 function clear_external_docs(; registry::ExternalDocsRegistry=EXTERNAL_DOCS[])
     empty!(registry.packages)
+    empty!(registry.inventories)
 end
 
 """
@@ -359,36 +423,55 @@ const COMMON_JULIA_PACKAGES = Dict{String, String}(
 )
 
 """
-    register_common_packages(; registry=EXTERNAL_DOCS[])
+    register_common_packages(; load_inventories::Bool=false, registry=EXTERNAL_DOCS[])
 
 Register common Julia packages with their documentation URLs.
 Includes DataFrames, Plots, Makie, Flux, JuMP, and more.
 
+By default this only records base URLs and performs **no** network access;
+references will resolve only once an inventory is available. Pass
+`load_inventories=true` to additionally attempt to fetch each package's
+`objects.inv` (each fetch is wrapped in its own try/catch and failures are
+skipped, so this degrades gracefully when offline).
+
 # Example
 ```julia
-register_common_packages()
-# Now references to common packages will be linkable
+register_common_packages()                      # offline, URLs only
+register_common_packages(load_inventories=true) # also fetch inventories
 ```
 """
-function register_common_packages(; registry::ExternalDocsRegistry=EXTERNAL_DOCS[])
+function register_common_packages(; load_inventories::Bool=false,
+                                   registry::ExternalDocsRegistry=EXTERNAL_DOCS[])
     for (pkg, url) in COMMON_JULIA_PACKAGES
         registry.packages[pkg] = url
+        if load_inventories
+            try
+                registry.inventories[pkg] = load_inventory("$(url)/objects.inv")
+            catch
+                # No inventory available / offline: skip this package.
+            end
+        end
     end
-    @info "Registered $(length(COMMON_JULIA_PACKAGES)) common Julia packages"
+    @info "Registered $(length(COMMON_JULIA_PACKAGES)) common Julia packages" *
+          (load_inventories ? " ($(length(registry.inventories)) inventories loaded)" : "")
 end
 
 """
     autolink_external(text::String; registry=EXTERNAL_DOCS[]) -> String
 
-Add links to external package documentation.
-Uses registered external docs URLs to create links.
+Add links to external package documentation, resolving every reference
+through the package's Sphinx [`Inventory`](@ref).
+
+Only references that resolve through a loaded inventory are linked; if a
+package has no inventory, its references are left untouched. URLs are never
+fabricated.
 
 # Arguments
 - `text::String`: Text to process
 - `registry`: External docs registry to use
 
 # Returns
-Text with external package links added.
+Text with inventory-resolved external package links added.
 
 # Note
 External references are detected by patterns like:
@@ -398,16 +481,19 @@ External references are detected by patterns like:
 function autolink_external(text::String; registry::ExternalDocsRegistry=EXTERNAL_DOCS[])
     result = text
 
-    for (pkg, base_url) in registry.packages
+    for (pkg, _) in registry.packages
+        # Only packages with a loaded inventory can produce links.
+        haskey(registry.inventories, pkg) || continue
+
         # Pattern: `PackageName.something`
         pattern = Regex("`($pkg\\.(\\w+))`")
         result = replace(result, pattern => function(m)
             full_match = match(pattern, m)
             if full_match !== nothing
                 full_ref = full_match.captures[1]
-                symbol = full_match.captures[2]
-                # Create URL - using common Documenter.jl URL pattern
-                url = "$base_url/lib/types/#$pkg.$symbol"
+                url = resolve_external_ref(ExternalRef(pkg, full_match.captures[2]);
+                                           registry = registry)
+                url === nothing && return m
                 return "[`$full_ref`]($url)"
             end
             return m
@@ -446,19 +532,25 @@ end
 """
     resolve_external_ref(ref::ExternalRef; registry=EXTERNAL_DOCS[]) -> Union{String, Nothing}
 
-Resolve an external reference to its documentation URL.
+Resolve an external reference to its documentation URL using the package's
+Sphinx [`Inventory`](@ref).
 
 # Arguments
 - `ref::ExternalRef`: External reference to resolve
 - `registry`: External docs registry to use
 
 # Returns
-URL string if the package is registered, `nothing` otherwise.
+The full URL if the package has a loaded inventory containing the symbol,
+`nothing` otherwise. URLs are never fabricated: a registered package without
+an inventory (or one whose inventory lacks the symbol) yields `nothing`.
 """
 function resolve_external_ref(ref::ExternalRef; registry::ExternalDocsRegistry=EXTERNAL_DOCS[])
-    base_url = get_external_docs_url(ref.package; registry=registry)
-    if base_url !== nothing
-        return "$base_url/lib/types/#$(ref.package).$(ref.symbol)"
-    end
-    nothing
+    inv = get(registry.inventories, ref.package, nothing)
+    inv === nothing && return nothing
+
+    # Try fully-qualified "Package.symbol" first, then the bare symbol
+    # (resolve_inventory itself also performs a bare-name fallback).
+    url = resolve_inventory(inv, "$(ref.package).$(ref.symbol)")
+    url === nothing && (url = resolve_inventory(inv, ref.symbol))
+    return url
 end
