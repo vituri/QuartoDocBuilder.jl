@@ -56,5 +56,11 @@ end
         @test occursin("'versions'", yaml) || occursin("\"versions\"", yaml)
         @test occursin("/stable/", yaml)
         @test occursin("/dev/", yaml)
+
+        # 9. Deploys are serialized so concurrent branch+tag runs can't
+        #    force-push over each other (a fixed deploy concurrency group with
+        #    cancel-in-progress: false).
+        @test occursin("gh-pages-deploy", yaml)
+        @test occursin("cancel-in-progress: false", yaml)
     end
 end

@@ -91,6 +91,15 @@ jobs:
   deploy:
     needs: build
     if: github.event_name != 'pull_request'
+    # Serialize every gh-pages deploy (across branches and tags) into one queue
+    # so concurrent runs cannot force-push over each other. The top-level
+    # concurrency group is keyed by ref, so without this a tag build and a
+    # branch build deploy at the same time and the last force-push wins,
+    # clobbering the other's version directories. cancel-in-progress: false
+    # makes queued deploys wait their turn instead of being dropped.
+    concurrency:
+      group: gh-pages-deploy
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout gh-pages
