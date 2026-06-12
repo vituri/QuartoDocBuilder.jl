@@ -42,6 +42,8 @@ include("test_format.jl")
 include("test_build.jl")
 include("test_inventory.jl")
 include("test_submodules.jl")
+include("test_version_selector.jl")
+include("test_github_actions.jl")
 
 @testset "QuartoDocBuilder" begin
     @testset "Old API Guard" begin

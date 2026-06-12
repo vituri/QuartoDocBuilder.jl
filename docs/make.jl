@@ -159,6 +159,15 @@ config = QuartoConfig(
     footer = FooterConfig(
         left = "Developed by [G. Vituri](https://github.com/vituri)",
         right = "Built with [QuartoDocBuilder.jl](https://github.com/vituri/QuartoDocBuilder.jl)"
+    ),
+
+    # Multi-version documentation (like Documenter.jl / pkgdown). main builds
+    # deploy to /dev/, release tags to /vX.Y.Z/, and /stable/ tracks the latest
+    # release. Pair this with the workflow from quarto_github_action_versioned().
+    version = VersionConfig(
+        enabled = true,
+        dev_branch = "main",
+        keep_versions = 5
     )
 )
 

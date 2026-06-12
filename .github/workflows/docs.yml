@@ -126,10 +126,11 @@ jobs:
           # Copy new docs
           cp -r new-docs "gh-pages/$VERSION_PATH"
 
-          # Update stable symlink for releases
+          # Update stable (real copy) for releases
           if [ "$IS_RELEASE" = "true" ]; then
+            echo "$VERSION_PATH" > gh-pages/.stable-version
             rm -rf gh-pages/stable
-            ln -s "$VERSION_PATH" gh-pages/stable
+            cp -r "gh-pages/$VERSION_PATH" gh-pages/stable
           fi
 
           # Update versions.json
@@ -138,14 +139,13 @@ jobs:
           import json
           import os
           from pathlib import Path
-          
+
           versions = []
           for p in Path('.').iterdir():
               if p.is_dir() and not p.name.startswith('.'):
                   if p.name.startswith('v') or p.name == 'dev':
-                      if not p.is_symlink():
-                          versions.append(p.name)
-          
+                      versions.append(p.name)
+
           # Sort versions (dev first, then semver descending)
           def sort_key(v):
               if v == 'dev':
@@ -157,70 +157,72 @@ jobs:
                   except:
                       return (2, [0, 0, 0])
               return (2, [0, 0, 0])
-          
+
           versions.sort(key=sort_key)
-          
+
           # Keep only N versions plus dev
           keep = 5
           kept = ['dev'] if 'dev' in versions else []
           semvers = [v for v in versions if v.startswith('v')][:keep]
           versions = kept + semvers
-          
-          # Remove old versions
+
+          # Remove old versions (never remove stable or .stable-version)
           for p in Path('.').iterdir():
-              if p.is_dir() and not p.name.startswith('.') and not p.is_symlink():
+              if p.is_dir() and not p.name.startswith('.'):
                   if p.name not in versions and p.name not in ['stable']:
                       print(f"Removing old version: {p.name}")
                       import shutil
                       shutil.rmtree(p)
-          
-          # Find stable
+
+          # Find stable via marker file
           stable = None
-          if os.path.islink('stable'):
-              stable = os.readlink('stable')
-          
+          if os.path.exists('.stable-version'):
+              stable = open('.stable-version').read().strip()
+
           # Build manifest
           manifest = {
               'stable': stable,
               'dev': 'dev',
               'versions': []
           }
-          
+
           if stable:
               manifest['versions'].append({
                   'version': 'stable',
                   'url': '/stable/',
                   'aliases': [stable]
               })
-          
+
           for v in versions:
+              url = '/dev/' if v == 'dev' else f'/{v}/'
               manifest['versions'].append({
                   'version': v,
-                  'url': f'/{v}/'
+                  'url': url
               })
-          
+
           with open('versions.json', 'w') as f:
               json.dump(manifest, f, indent=2)
-          
+
           print("Updated versions.json")
           EOF
 
       - name: Create root redirect
         run: |
-          cat > gh-pages/index.html << 'EOF'
+          if [ -d gh-pages/stable ]; then RT="stable/"; else RT="dev/"; fi
+          cat > gh-pages/index.html << HTMLEOF
           <!DOCTYPE html>
           <html>
           <head>
             <meta charset="utf-8">
-            <meta http-equiv="refresh" content="0; url=stable/">
-            <link rel="canonical" href="stable/">
+            <meta http-equiv="refresh" content="0; url=$RT">
+            <link rel="canonical" href="$RT">
             <title>Redirecting...</title>
           </head>
           <body>
-            <p>Redirecting to <a href="stable/">stable documentation</a>...</p>
+            <p>Redirecting to <a href="$RT">documentation</a>...</p>
           </body>
           </html>
-          EOF
+          HTMLEOF
 
       - name: Commit and push
         run: |

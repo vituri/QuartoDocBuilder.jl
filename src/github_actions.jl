@@ -420,7 +420,7 @@ Generate a GitHub Actions workflow for building and deploying versioned document
 This workflow supports:
 - `/dev/` documentation on push to main/master branch
 - `/vX.Y.Z/` documentation on release tags
-- `/stable/` symlink pointing to latest release
+- `/stable/` published copy of the latest release
 - Automatic `versions.json` manifest updates
 - Old version cleanup (configurable retention)
 
@@ -441,7 +441,7 @@ quarto_github_action_versioned(keep_versions=10, dev_branch="develop")
 
 # URL Structure
 The workflow deploys to:
-- `/stable/` - Symlink to latest release tag
+- `/stable/` - Published copy of the latest release tag
 - `/dev/` - Development branch documentation
 - `/vX.Y.Z/` - Specific version documentation (from tags)
 - `versions.json` - Manifest of all available versions
@@ -581,101 +581,103 @@ jobs:
           # Copy new docs
           cp -r new-docs "gh-pages/\$VERSION_PATH"
 
-          # Update stable symlink for releases
+          # Update stable (real copy) for releases
           if [ "\$IS_RELEASE" = "true" ]; then
+            echo "\$VERSION_PATH" > gh-pages/.stable-version
             rm -rf gh-pages/stable
-            ln -s "\$VERSION_PATH" gh-pages/stable
+            cp -r "gh-pages/\$VERSION_PATH" gh-pages/stable
           fi
 
           # Update versions.json
           cd gh-pages
           python3 << 'EOF'
-import json
-import os
-from pathlib import Path
+          import json
+          import os
+          from pathlib import Path
 
-versions = []
-for p in Path('.').iterdir():
-    if p.is_dir() and not p.name.startswith('.'):
-        if p.name.startswith('v') or p.name == 'dev':
-            if not p.is_symlink():
-                versions.append(p.name)
+          versions = []
+          for p in Path('.').iterdir():
+              if p.is_dir() and not p.name.startswith('.'):
+                  if p.name.startswith('v') or p.name == 'dev':
+                      versions.append(p.name)
 
-# Sort versions (dev first, then semver descending)
-def sort_key(v):
-    if v == 'dev':
-        return (0, [0, 0, 0])
-    elif v.startswith('v'):
-        try:
-            parts = v[1:].split('.')
-            return (1, [-int(p) for p in parts[:3]])
-        except:
-            return (2, [0, 0, 0])
-    return (2, [0, 0, 0])
+          # Sort versions (dev first, then semver descending)
+          def sort_key(v):
+              if v == 'dev':
+                  return (0, [0, 0, 0])
+              elif v.startswith('v'):
+                  try:
+                      parts = v[1:].split('.')
+                      return (1, [-int(p) for p in parts[:3]])
+                  except:
+                      return (2, [0, 0, 0])
+              return (2, [0, 0, 0])
 
-versions.sort(key=sort_key)
+          versions.sort(key=sort_key)
 
-# Keep only N versions plus dev
-keep = $keep_versions
-kept = ['dev'] if 'dev' in versions else []
-semvers = [v for v in versions if v.startswith('v')][:keep]
-versions = kept + semvers
+          # Keep only N versions plus dev
+          keep = $keep_versions
+          kept = ['dev'] if 'dev' in versions else []
+          semvers = [v for v in versions if v.startswith('v')][:keep]
+          versions = kept + semvers
 
-# Remove old versions
-for p in Path('.').iterdir():
-    if p.is_dir() and not p.name.startswith('.') and not p.is_symlink():
-        if p.name not in versions and p.name not in ['stable']:
-            print(f"Removing old version: {p.name}")
-            import shutil
-            shutil.rmtree(p)
+          # Remove old versions (never remove stable or .stable-version)
+          for p in Path('.').iterdir():
+              if p.is_dir() and not p.name.startswith('.'):
+                  if p.name not in versions and p.name not in ['stable']:
+                      print(f"Removing old version: {p.name}")
+                      import shutil
+                      shutil.rmtree(p)
 
-# Find stable
-stable = None
-if os.path.islink('stable'):
-    stable = os.readlink('stable')
+          # Find stable via marker file
+          stable = None
+          if os.path.exists('.stable-version'):
+              stable = open('.stable-version').read().strip()
 
-# Build manifest
-manifest = {
-    'stable': stable,
-    'dev': 'dev',
-    'versions': []
-}
+          # Build manifest
+          manifest = {
+              'stable': stable,
+              'dev': 'dev',
+              'versions': []
+          }
 
-if stable:
-    manifest['versions'].append({
-        'version': 'stable',
-        'url': '/stable/',
-        'aliases': [stable]
-    })
+          if stable:
+              manifest['versions'].append({
+                  'version': 'stable',
+                  'url': '/stable/',
+                  'aliases': [stable]
+              })
 
-for v in versions:
-    manifest['versions'].append({
-        'version': v,
-        'url': f'/{v}/'
-    })
+          for v in versions:
+              url = '/dev/' if v == 'dev' else f'/{v}/'
+              manifest['versions'].append({
+                  'version': v,
+                  'url': url
+              })
 
-with open('versions.json', 'w') as f:
-    json.dump(manifest, f, indent=2)
+          with open('versions.json', 'w') as f:
+              json.dump(manifest, f, indent=2)
 
-print("Updated versions.json")
-EOF
+          print("Updated versions.json")
+          EOF
 
       - name: Create root redirect
         run: |
-          cat > gh-pages/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=stable/">
-  <link rel="canonical" href="stable/">
-  <title>Redirecting...</title>
-</head>
-<body>
-  <p>Redirecting to <a href="stable/">stable documentation</a>...</p>
-</body>
-</html>
-EOF
+          if [ -d gh-pages/stable ]; then RT="stable/"; else RT="dev/"; fi
+          cat > gh-pages/index.html << HTMLEOF
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <meta http-equiv="refresh" content="0; url=\$RT">
+            <link rel="canonical" href="\$RT">
+            <title>Redirecting...</title>
+          </head>
+          <body>
+            <p>Redirecting to <a href="\$RT">documentation</a>...</p>
+          </body>
+          </html>
+          HTMLEOF
 
       - name: Commit and push
         run: |
@@ -700,7 +702,7 @@ EOF
     This workflow will:
     - Deploy to /dev/ on push to $dev_branch branch
     - Deploy to /vX.Y.Z/ on release tags (e.g., v1.0.0)
-    - Update /stable/ symlink to latest release
+    - Publish a real copy of the latest release to /stable/
     - Keep the last $keep_versions versions
     - Auto-update versions.json manifest
 

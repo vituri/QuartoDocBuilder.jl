@@ -57,6 +57,15 @@ website:
       - text: "News"
         href: news.qmd
 
+    right:
+      - text: |
+          <div class="version-selector-container">
+            <label for="version-selector">Version:</label>
+            <select id="version-selector" aria-label="Select documentation version">
+              <option value="#">Loading...</option>
+            </select>
+          </div>
+
     tools:
       - icon: github
         href: https://github.com/vituri/QuartoDocBuilder.jl
@@ -102,13 +111,16 @@ engine: julia
 
 format:
   html:
-    css: ["styles.css"]
+    css: ["styles.css", "version-selector.css"]
     code-copy: true
     code-overflow: wrap
     preview-links: true
     toc: true
     toc-depth: 3
     toc-expand: true
+    include-after-body:
+      - text: |
+          <script src="version-selector.js"></script>
     theme:
       light: flatly
       dark: darkly
