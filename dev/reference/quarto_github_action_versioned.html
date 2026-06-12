@@ -114,6 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../version-selector.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -362,6 +363,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../news.html"> 
 <span class="menu-text">News</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">&lt;div class="version-selector-container"&gt;
+  &lt;label for="version-selector"&gt;Version:&lt;/label&gt;
+  &lt;select id="version-selector" aria-label="Select documentation version"&gt;
+    &lt;option value="#"&gt;Loading...&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;
+</span>
+    </span>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -1095,7 +1109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><code>/dev/</code> documentation on push to main/master branch</li>
 <li><code>/vX.Y.Z/</code> documentation on release tags</li>
-<li><code>/stable/</code> symlink pointing to latest release</li>
+<li><code>/stable/</code> published copy of the latest release</li>
 <li>Automatic <code>versions.json</code> manifest updates</li>
 <li>Old version cleanup (configurable retention)</li>
 </ul>
@@ -1120,7 +1134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="url-structure">URL Structure</h3>
 <p>The workflow deploys to:</p>
 <ul>
-<li><code>/stable/</code> - Symlink to latest release tag</li>
+<li><code>/stable/</code> - Published copy of the latest release tag</li>
 <li><code>/dev/</code> - Development branch documentation</li>
 <li><code>/vX.Y.Z/</code> - Specific version documentation (from tags)</li>
 <li><code>versions.json</code> - Manifest of all available versions</li>
@@ -1605,6 +1619,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
   </div>
 </footer>
+<script src="version-selector.js"></script>
 
 
 

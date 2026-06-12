@@ -114,6 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../version-selector.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -362,6 +363,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../news.html"> 
 <span class="menu-text">News</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">&lt;div class="version-selector-container"&gt;
+  &lt;label for="version-selector"&gt;Version:&lt;/label&gt;
+  &lt;select id="version-selector" aria-label="Select documentation version"&gt;
+    &lt;option value="#"&gt;Loading...&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;
+</span>
+    </span>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -1590,6 +1604,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
   </div>
 </footer>
+<script src="version-selector.js"></script>
 
 
 

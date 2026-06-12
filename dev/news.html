@@ -77,6 +77,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="version-selector.css">
 </head>
 
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -327,6 +328,19 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">News</span></a>
   </li>  
 </ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">&lt;div class="version-selector-container"&gt;
+  &lt;label for="version-selector"&gt;Version:&lt;/label&gt;
+  &lt;select id="version-selector" aria-label="Select documentation version"&gt;
+    &lt;option value="#"&gt;Loading...&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;
+</span>
+    </span>
+  </li>  
+</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
     <a href="https://github.com/vituri/QuartoDocBuilder.jl" title="Source" class="quarto-navigation-tool px-1" aria-label="Source"><i class="bi bi-github"></i></a>
@@ -388,6 +402,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Admonitions now map to the correct Quarto callout types (<code>!!! note</code> → <code>callout-note</code>, <code>!!! tip</code> → <code>callout-tip</code>, <code>!!! danger</code> → <code>callout-important</code>, …) instead of always rendering as warnings.</li>
 <li>All docstring headers are demoted consistently (H1→H3, H2→H4, …), so headings inside docstrings no longer pollute the page table of contents.</li>
 <li><code>resolve_external_ref</code>/<code>autolink_external</code> no longer fabricate <code>/lib/types/#</code> URLs that 404 on most sites.</li>
+<li>Fixed multi-version deployment end to end. The workflow from <code>quarto_github_action_versioned</code> previously generated invalid YAML, published <code>/stable/</code> as a symlink (which GitHub Pages does not serve, yielding a 404), and the version-selector dropdown assumed the docs were hosted at a domain root. Now <code>stable</code> is a real published copy of the latest release, the version selector locates <code>versions.json</code> and switches versions correctly under project-page subpaths (e.g.&nbsp;<code>user.github.io/Repo.jl/</code>), and the site root redirects to <code>dev/</code> until the first release exists.</li>
 </ul>
 </section>
 <section id="new-features" class="level3">
@@ -950,6 +965,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
   </div>
 </footer>
+<script src="version-selector.js"></script>
 
 
 
