@@ -1,10 +1,21 @@
 {
-  "stable": null,
+  "stable": "v0.4.0",
   "dev": "dev",
   "versions": [
     {
+      "version": "stable",
+      "url": "/stable/",
+      "aliases": [
+        "v0.4.0"
+      ]
+    },
+    {
       "version": "dev",
       "url": "/dev/"
+    },
+    {
+      "version": "v0.4.0",
+      "url": "/v0.4.0/"
     }
   ]
 }

@@ -1,0 +1,32 @@
+---
+engine: markdown
+---
+
+# _documented_bindings {#sec-doc}
+
+
+::: {.callout-note appearance="simple" title="docblock" collapse=false}
+
+
+```julia
+_documented_bindings(m::Module; recursive::Bool=false) -> Vector{Base.Docs.Binding}
+```
+Return the `Base.Docs.Binding` keys from `Base.Docs.meta(m)`.
+ 
+When `recursive=true`, descend into direct submodules of `m` (depth-first), collecting their documented bindings as well.  A submodule `s` is a symbol in `names(m; all=true)` such that:
+ 
+  * `isdefined(m, s)` is true,
+  * `getfield(m, s) isa Module`,
+  * `getfield(m, s) !== m` (not self-referential),
+  * `parentmodule(getfield(m, s)) === m` (owned by `m`, not re-exported from elsewhere).
+A `seen::Set{Module}` guard prevents cycles.
+ 
+**Warnings emitted (only from the top-level call, not on recursive descent):**
+ 
+  * When `recursive=false` and at least one direct submodule has documented bindings, a single `@warn` is emitted listing those submodules and advising the caller to pass `recursive=true`.
+  * When `recursive=true` and two or more bindings share the same `.var` name (e.g. `A.foo` and `A.Sub.foo`), a single `@warn` lists the colliding names so the user is aware that page generation may overwrite files.
+
+
+:::
+
+
