@@ -302,24 +302,16 @@ function _build_navbar_yaml(config::QuartoConfig, module_str::String)
     end
 
     right_items = copy(config.navbar_right)
-    if !isempty(right_items) || config.version.enabled
+    # Note: the version selector is NOT added as a navbar item here. Quarto
+    # HTML-escapes the `text:` field, so raw markup would render as literal
+    # text. Instead version-selector.js builds the dropdown and injects it into
+    # the navbar DOM at runtime (see _version_selector_js).
+    if !isempty(right_items)
         push!(lines, "")
         push!(lines, "    right:")
 
         for item in right_items
             _append_navbar_item!(lines, item, 6)
-        end
-
-        if config.version.enabled
-            append!(lines, [
-                "      - text: |",
-                "          <div class=\"version-selector-container\">",
-                "            <label for=\"version-selector\">Version:</label>",
-                "            <select id=\"version-selector\" aria-label=\"Select documentation version\">",
-                "              <option value=\"#\">Loading...</option>",
-                "            </select>",
-                "          </div>",
-            ])
         end
     end
 

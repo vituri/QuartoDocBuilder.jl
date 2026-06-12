@@ -21,22 +21,49 @@ const manifest = {
   ],
 };
 
-function runScenario({pathname, siteRootPath, expectSelected, change, expectNav}) {
-  const options = [];
-  let changeHandler = null;
-  const selectEl = {
-    innerHTML: '',
-    appendChild(o) { options.push(o); },
-    addEventListener(ev, fn) { if (ev === 'change') changeHandler = fn; },
-    closest() { return { style: {} }; },
+// Minimal functional DOM so the script can inject the selector into a navbar
+// (the real page has no pre-existing #version-selector element).
+function makeEl(tag) {
+  const el = {
+    tag, children: [], attrs: {}, className: '', id: '', style: {}, _change: null,
+    _text: '', _matchers: [],
+    setAttribute(k, v) { this.attrs[k] = v; },
+    appendChild(c) { this.children.push(c); c.parentNode = this; return c; },
+    insertBefore(c, ref) {
+      const i = this.children.indexOf(ref);
+      this.children.splice(i < 0 ? this.children.length : i, 0, c);
+      c.parentNode = this; return c;
+    },
+    addEventListener(ev, fn) { if (ev === 'change') this._change = fn; },
+    matchesSel(sel) {
+      if (sel[0] === '#') return this.id === sel.slice(1);
+      if (sel[0] === '.') return this.className.split(/\s+/).indexOf(sel.slice(1)) !== -1;
+      return false;
+    },
+    closest(sel) { let n = this; while (n) { if (n.matchesSel && n.matchesSel(sel)) return n; n = n.parentNode; } return null; },
+    set innerHTML(v) { if (v === '') this.children = []; },
+    get innerHTML() { return ''; },
   };
+  Object.defineProperty(el, 'text', { set(v){el._text=v;}, get(){return el._text;}, configurable:true });
+  Object.defineProperty(el, 'textContent', { set(v){el._text=v;}, get(){return el._text;}, configurable:true });
+  return el;
+}
+
+function walk(node, fn) { fn(node); (node.children||[]).forEach(c => walk(c, fn)); }
+
+function runScenario({pathname, siteRootPath, expectSelected, change, expectNav}) {
+  const collapse = makeEl('div'); collapse.id = 'navbarCollapse';
   const win = { location: { origin: 'https://example.test', pathname, href: '' } };
   globalThis.window = win;
   globalThis.document = {
     _h: null,
     addEventListener(ev, fn) { if (ev === 'DOMContentLoaded') this._h = fn; },
-    getElementById(id) { return id === 'version-selector' ? selectEl : null; },
-    createElement() { const o = {}; Object.defineProperty(o,'text',{set(v){o._t=v;},get(){return o._t;},configurable:true}); return o; },
+    getElementById(id) { let found = null; walk(collapse, n => { if (n.id === id) found = n; }); return found; },
+    querySelector(sel) {
+      if (sel.indexOf('navbarCollapse') !== -1 || sel.indexOf('navbar-collapse') !== -1) return collapse;
+      return null; // no .quarto-navbar-tools, no fallback navbar needed
+    },
+    createElement(tag) { return makeEl(tag); },
   };
   globalThis.fetch = (url, opts) => {
     if (opts && opts.method === 'HEAD') return Promise.resolve({ ok: true });
@@ -47,11 +74,18 @@ function runScenario({pathname, siteRootPath, expectSelected, change, expectNav}
   eval(jsSource);
   return Promise.resolve(globalThis.document._h()).then(async () => {
     await new Promise(r => setTimeout(r, 15));
+    const sel = globalThis.document.getElementById('version-selector');
+    if (!sel) { console.error('FAIL: selector was not injected for', pathname); return false; }
+    const container = sel.closest('.version-selector-container');
+    const shown = container && container.style.display === 'flex';
+    const options = sel.children;
     const selected = options.filter(o => o.selected).map(o => o.value);
     let navResult = null;
-    if (change && changeHandler) { await changeHandler({ target: { value: change } }); await new Promise(r => setTimeout(r, 15)); navResult = win.location.href; }
-    const ok = JSON.stringify(selected) === JSON.stringify([expectSelected]) && (!change || navResult === expectNav);
-    if (!ok) console.error('FAIL', pathname, {selected, navResult, expectSelected, expectNav});
+    if (change && sel._change) { await sel._change({ target: { value: change } }); await new Promise(r => setTimeout(r, 15)); navResult = win.location.href; }
+    const ok = shown &&
+      JSON.stringify(selected) === JSON.stringify([expectSelected]) &&
+      (!change || navResult === expectNav);
+    if (!ok) console.error('FAIL', pathname, {selected, navResult, expectSelected, expectNav, shown, injected: !!sel});
     return ok;
   });
 }
@@ -77,6 +111,10 @@ process.exit(results.every(Boolean) ? 0 : 1);
         @test occursin("segmentOf", js)
         # Does not hardcode the old root-only assumption.
         @test !occursin("origin + '/versions.json'", js)
+        # Builds and injects the dropdown into the navbar (Quarto escapes navbar
+        # `text:` HTML, so the markup must not come from _quarto.yml).
+        @test occursin("ensureSelector", js)
+        @test occursin("navbar", js)
     end
 
     @testset "behaviour (node)" begin

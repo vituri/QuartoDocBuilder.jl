@@ -57,6 +57,43 @@ document.addEventListener('DOMContentLoaded', function() {
     return raw.replace(/^\/+|\/+$/g, '');
   }
 
+  // Build the dropdown and inject it into the navbar. We do this in JS rather
+  // than via _quarto.yml because Quarto HTML-escapes navbar `text:` fields, so
+  // markup placed there would render as literal text.
+  function ensureSelector() {
+    let selector = document.getElementById('version-selector');
+    if (selector) return selector;
+
+    const container = document.createElement('div');
+    container.className = 'version-selector-container';
+    const label = document.createElement('label');
+    label.setAttribute('for', 'version-selector');
+    label.textContent = 'Version:';
+    selector = document.createElement('select');
+    selector.id = 'version-selector';
+    selector.setAttribute('aria-label', 'Select documentation version');
+    container.appendChild(label);
+    container.appendChild(selector);
+
+    // Prefer the navbar's collapsible area, inserting before the tools (GitHub
+    // icon / search) so it reads "... | Version: [v] | tools". Fall back to the
+    // navbar container, then the navbar itself.
+    const collapse = document.querySelector('#navbarCollapse') ||
+                     document.querySelector('.navbar-collapse');
+    const tools = document.querySelector('.quarto-navbar-tools');
+    if (collapse && tools && tools.parentNode === collapse) {
+      collapse.insertBefore(container, tools);
+    } else if (collapse) {
+      collapse.appendChild(container);
+    } else {
+      const navbar = document.querySelector('.navbar .navbar-container') ||
+                     document.querySelector('.navbar');
+      if (!navbar) return null;
+      navbar.appendChild(container);
+    }
+    return selector;
+  }
+
   function tryBases(index) {
     if (index >= basePrefixes.length) {
       console.warn('Version selector: could not locate versions.json');
@@ -77,8 +114,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // `base` is the site base path; `rest` is the path segments after the base,
   // the first of which is the current version segment.
   function initVersionSelector(data, base, rest) {
-    const selector = document.getElementById('version-selector');
-    if (!selector || !data || !Array.isArray(data.versions)) return;
+    if (!data || !Array.isArray(data.versions) || data.versions.length === 0) return;
+    const selector = ensureSelector();
+    if (!selector) return;
 
     const baseForUrls = (base === '/' ? '' : base);
     const currentSegment = rest.length > 0 ? rest[0] : '';

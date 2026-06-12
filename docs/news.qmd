@@ -18,6 +18,7 @@ toc-depth: 2
 - Admonitions now map to the correct Quarto callout types (`!!! note` → `callout-note`, `!!! tip` → `callout-tip`, `!!! danger` → `callout-important`, ...) instead of always rendering as warnings.
 - All docstring headers are demoted consistently (H1→H3, H2→H4, ...), so headings inside docstrings no longer pollute the page table of contents.
 - `resolve_external_ref`/`autolink_external` no longer fabricate `/lib/types/#` URLs that 404 on most sites.
+- Fixed multi-version deployment end to end. The workflow from `quarto_github_action_versioned` previously generated invalid YAML, published `/stable/` as a symlink (which GitHub Pages does not serve, yielding a 404), and the version-selector dropdown assumed the docs were hosted at a domain root. Now `stable` is a real published copy of the latest release, the version selector locates `versions.json` and switches versions correctly under project-page subpaths (e.g. `user.github.io/Repo.jl/`), and the site root redirects to `dev/` until the first release exists.
 
 ### New Features
 
