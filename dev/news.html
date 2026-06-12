@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.31">
+<meta name="generator" content="quarto-1.10.11">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -39,14 +39,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9c584ca951e49926686c986861625e9f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-c5e9030d44b7e5c93256025c8069bf18.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9c584ca951e49926686c986861625e9f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-cb022060680057909813cc3e4dbc4767.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6607198171fb9ad3fd0f0dc3a40a1216.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-bd42aa30c9fb9483bdb4b8fcf43b982e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-6607198171fb9ad3fd0f0dc3a40a1216.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f38432df4455bda585783a29170252c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-1b461b8be016c4d9583ad461e26df53b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f38432df4455bda585783a29170252c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -301,6 +301,14 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-how-to-guides">    
         <li>
+    <a class="dropdown-item" href="./how-to/configure.html">
+ <span class="dropdown-text">Configure the Build</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./how-to/cross-package-links.html">
+ <span class="dropdown-text">Cross-package Links</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./how-to/customize-theme.html">
  <span class="dropdown-text">Customize Theme</span></a>
   </li>  
@@ -336,7 +344,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#version-0.2.0-2026-01-25" id="toc-version-0.2.0-2026-01-25" class="nav-link active" data-scroll-target="#version-0.2.0-2026-01-25">Version 0.2.0 (2026-01-25)</a></li>
+  <li><a href="#version-0.4.0-2026-06-11" id="toc-version-0.4.0-2026-06-11" class="nav-link active" data-scroll-target="#version-0.4.0-2026-06-11">Version 0.4.0 (2026-06-11)</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/vituri/QuartoDocBuilder.jl/edit/main/news.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/vituri/QuartoDocBuilder.jl/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -363,17 +371,57 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="version-0.2.0-2026-01-25" class="level2">
-<h2 class="anchored" data-anchor-id="version-0.2.0-2026-01-25">Version 0.2.0 (2026-01-25)</h2>
+<section id="version-0.4.0-2026-06-11" class="level2">
+<h2 class="anchored" data-anchor-id="version-0.4.0-2026-06-11">Version 0.4.0 (2026-06-11)</h2>
 <section id="breaking-changes" class="level3">
 <h3 class="anchored" data-anchor-id="breaking-changes">Breaking Changes</h3>
+<ul>
+<li><code>ExternalDocsRegistry</code> now stores inventories alongside base URLs (its field layout changed). Code constructing it via the zero-argument constructor is unaffected.</li>
+<li>New dependencies: CodecZlib (zlib for <code>objects.inv</code>) and Downloads.</li>
+</ul>
+</section>
+<section id="bug-fixes" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes">Bug Fixes</h3>
+<ul>
+<li>Fixed a crash in <code>quarto_doc_short</code> (and therefore in <code>quarto_build_site</code> with the default ungrouped reference page) for docstrings that start with a paragraph instead of a signature code block.</li>
+<li>Docstring rendering is now structure-agnostic: it walks the Markdown AST generically instead of assuming a fixed shape, so any well-formed docstring renders without errors.</li>
+<li>Admonitions now map to the correct Quarto callout types (<code>!!! note</code> → <code>callout-note</code>, <code>!!! tip</code> → <code>callout-tip</code>, <code>!!! danger</code> → <code>callout-important</code>, …) instead of always rendering as warnings.</li>
+<li>All docstring headers are demoted consistently (H1→H3, H2→H4, …), so headings inside docstrings no longer pollute the page table of contents.</li>
+<li><code>resolve_external_ref</code>/<code>autolink_external</code> no longer fabricate <code>/lib/types/#</code> URLs that 404 on most sites.</li>
+</ul>
+</section>
+<section id="new-features" class="level3">
+<h3 class="anchored" data-anchor-id="new-features">New Features</h3>
+<ul>
+<li><strong>Automatic cross-reference autolinking</strong>: backticked mentions like <code>`my_function`</code> in docstrings now become links to the corresponding reference pages during <code>quarto_build_site</code>. Controlled by the new <code>QuartoConfig</code> field <code>autolink</code> (default <code>true</code>). Links inside code blocks and existing links are never touched.</li>
+<li><strong>Strict mode</strong>: new <code>QuartoConfig</code> field <code>strict</code> (default <code>false</code>). After building, all internal links are validated; with <code>strict = true</code> the build fails listing every broken link (like Documenter.jl), otherwise a warning is emitted.</li>
+<li><strong>Inventory-based external cross-references</strong>: external package links are now resolved through Sphinx <code>objects.inv</code> inventories (the format Documenter.jl publishes) instead of guessed URLs. <code>register_external_docs</code> loads inventories automatically; unresolvable references are left unlinked instead of producing broken URLs.</li>
+<li><strong><code>objects.inv</code> emission</strong>: every built site now ships its own <code>objects.inv</code> (via <code>generate_inventory</code>/<code>write_inventory</code>), so other packages can reliably cross-link to your documentation.</li>
+<li><strong>Submodule documentation</strong>: new <code>QuartoConfig</code> field <code>include_submodules</code> (default <code>false</code>) documents bindings from nested submodules, with collision-safe page names (<code>Inner.foo.qmd</code> when <code>foo</code> exists in two modules). A warning now tells you when documented submodules are being skipped.</li>
+<li>New exports: <code>Inventory</code>, <code>InventoryItem</code>, <code>load_inventory</code>, <code>write_inventory</code>, <code>generate_inventory</code>, <code>resolve_inventory</code>, <code>reference_page_names</code>.</li>
+</ul>
+<hr>
+<div class="callout callout-style-default callout-note callout-titled" title="Version 0.2.0 (2026-01-25)">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Version 0.2.0 (2026-01-25)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="breaking-changes-1" class="level3">
+<h3 class="anchored" data-anchor-id="breaking-changes-1">Breaking Changes</h3>
 <ul>
 <li>Removed deprecated kwarg-based API functions (<code>quarto_yaml</code>, <code>quarto_build_site(module; kwargs...)</code>)</li>
 <li>Removed broken article functions that referenced non-existent <code>config.articles</code> field:</li>
 </ul>
 </section>
-<section id="bug-fixes" class="level3">
-<h3 class="anchored" data-anchor-id="bug-fixes">Bug Fixes</h3>
+<section id="bug-fixes-1" class="level3">
+<h3 class="anchored" data-anchor-id="bug-fixes-1">Bug Fixes</h3>
 <ul>
 <li>Fixed code block formatting in docstrings showing raw <code>{julia}</code> markers (#fix)</li>
 <li>Fixed browser tab title showing “index” instead of package name on home page</li>
@@ -387,16 +435,19 @@ ul.task-list li input[type="checkbox"] {
 <li>Updated module docstring with config-based examples</li>
 </ul>
 </section>
-<section id="new-features" class="level3">
-<h3 class="anchored" data-anchor-id="new-features">New Features</h3>
+<section id="new-features-1" class="level3">
+<h3 class="anchored" data-anchor-id="new-features-1">New Features</h3>
 <ul>
 <li><strong>Optional default styles</strong>: Default QuartoDocBuilder CSS is now only applied when no bootswatch theme is specified</li>
 <li>New <code>use_default_styles</code> field in <code>ThemeConfig</code> for explicit control over default CSS</li>
 <li>Default styles are bundled in <code>src/default_styles.css</code> and automatically applied when:</li>
 </ul>
-<hr>
+</section>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled" title="Version 0.1.0 (2026-01-24)">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -405,7 +456,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <section id="dependencies" class="level3">
 <h3 class="anchored" data-anchor-id="dependencies">Dependencies</h3>

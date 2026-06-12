@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.31">
+<meta name="generator" content="quarto-1.10.11">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -39,14 +74,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9c584ca951e49926686c986861625e9f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-c5e9030d44b7e5c93256025c8069bf18.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9c584ca951e49926686c986861625e9f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-cb022060680057909813cc3e4dbc4767.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6607198171fb9ad3fd0f0dc3a40a1216.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-bd42aa30c9fb9483bdb4b8fcf43b982e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-6607198171fb9ad3fd0f0dc3a40a1216.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f38432df4455bda585783a29170252c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-1b461b8be016c4d9583ad461e26df53b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f38432df4455bda585783a29170252c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -301,6 +336,14 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-how-to-guides">    
         <li>
+    <a class="dropdown-item" href="./how-to/configure.html">
+ <span class="dropdown-text">Configure the Build</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./how-to/cross-package-links.html">
+ <span class="dropdown-text">Cross-package Links</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./how-to/customize-theme.html">
  <span class="dropdown-text">Customize Theme</span></a>
   </li>  
@@ -336,8 +379,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#quartodocbuilder.jl" id="toc-quartodocbuilder.jl" class="nav-link active" data-scroll-target="#quartodocbuilder.jl">QuartoDocBuilder.jl</a></li>
-  <li><a href="#how-to-use" id="toc-how-to-use" class="nav-link" data-scroll-target="#how-to-use">How to use</a></li>
+  <li><a href="#quartodocbuilder.jl" id="toc-quartodocbuilder.jl" class="nav-link active" data-scroll-target="#quartodocbuilder.jl">QuartoDocBuilder.jl</a>
+  <ul class="collapse">
+  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
+  <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick start</a></li>
+  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/vituri/QuartoDocBuilder.jl/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/vituri/QuartoDocBuilder.jl/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -366,15 +414,63 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="quartodocbuilder.jl" class="level1">
 <h1>QuartoDocBuilder.jl</h1>
-<p>QuartoDocBuilder.jl is a package inspired by R <a href="https://pkgdown.r-lib.org/">pkgdown</a>. It provides an easy way to generate a website with documentation and vignettes, by creating a <a href="https://quarto.org/">Quarto</a> project.</p>
-<p>Being powered by Quarto means that deploying to Github pages, customizing the style and many more things are taken for granted. This website doc even has a comment section! Check some examples <a href="https://quarto.org/docs/gallery/#websites">here</a> and the complete list of options <a href="https://quarto.org/docs/reference/projects/websites.html">here</a>.</p>
-<p>The <a href="https://quarto.org/">Quarto website</a> itself is written with Quarto! Check the github repo <a href="https://github.com/quarto-dev/quarto-web">here</a> to get some inspiration.</p>
+<p>QuartoDocBuilder.jl generates a documentation website for a Julia package by building a <a href="https://quarto.org/">Quarto</a> project from your docstrings, <code>README.md</code>, <code>NEWS.md</code> and a set of hand-written <code>.qmd</code> pages. It is inspired by R’s <a href="https://pkgdown.r-lib.org/">pkgdown</a> and serves the same role as Documenter.jl, while letting you reuse everything Quarto already provides: GitHub Pages deployment, themes, dark mode, search and reader comments.</p>
+<p>This site is built with QuartoDocBuilder itself — see <a href="https://github.com/vituri/QuartoDocBuilder.jl/blob/main/docs/make.jl"><code>docs/make.jl</code></a> for the configuration that produced it.</p>
+<section id="features" class="level2">
+<h2 class="anchored" data-anchor-id="features">Features</h2>
+<ul>
+<li>Reference pages generated from Julia docstrings, organized into named groups.</li>
+<li>Multiple navbar sections with dropdowns (tutorials, how-to guides, explanation, …).</li>
+<li>Changelog page generated from <code>NEWS.md</code>, with GitHub issue/PR linking.</li>
+<li>Light/dark mode with automatic Bootswatch theme pairing.</li>
+<li>Automatic cross-reference autolinking: backticked <code>function</code> mentions become links.</li>
+<li>Strict mode that validates internal links and fails the build on broken ones.</li>
+<li>Inventory-based cross-package links via Sphinx <code>objects.inv</code> (the format Documenter publishes).</li>
+<li>Every built site ships its own <code>objects.inv</code> so other packages can link back to yours.</li>
+<li>Submodule documentation with collision-safe page names.</li>
+<li>Multi-version documentation with a version selector dropdown.</li>
+<li>GitHub Actions workflow generation for automated deployment.</li>
+<li>Giscus comments and custom theming (colors, fonts, CSS/SCSS).</li>
+</ul>
 </section>
-<section id="how-to-use" class="level1">
-<h1>How to use</h1>
-<p>See the tutorials at <a href="https://vituri.github.io/QuartoDocBuilder.jl/tutorials.html">https://vituri.github.io/QuartoDocBuilder.jl/tutorials.html</a>.</p>
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="st">"docs"</span>)     <span class="co"># a dedicated docs environment</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">add</span>(<span class="st">"QuartoDocBuilder"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You will also need the <a href="https://quarto.org/docs/get-started/">Quarto CLI</a> installed to render the generated project.</p>
+</section>
+<section id="quick-start" class="level2">
+<h2 class="anchored" data-anchor-id="quick-start">Quick start</h2>
+<p>Create <code>docs/make.jl</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">MyPackage</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">QuartoDocBuilder</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> <span class="fu">QuartoConfig</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    module_name <span class="op">=</span> MyPackage,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    repo <span class="op">=</span> <span class="st">"user/MyPackage.jl"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    reference <span class="op">=</span> [</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ReferenceGroup</span>(title <span class="op">=</span> <span class="st">"Core"</span>, contents <span class="op">=</span> [<span class="op">:</span>main_func, <span class="op">:</span>helper_func]),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ReferenceGroup</span>(title <span class="op">=</span> <span class="st">"Utilities"</span>, contents <span class="op">=</span> [<span class="fu">starts_with</span>(<span class="st">"util_"</span>)]),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    sections <span class="op">=</span> [</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">SectionConfig</span>(title <span class="op">=</span> <span class="st">"Tutorials"</span>, dir <span class="op">=</span> <span class="st">"tutorials"</span>, order <span class="op">=</span> <span class="fl">1</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">SectionConfig</span>(title <span class="op">=</span> <span class="st">"How-to Guides"</span>, dir <span class="op">=</span> <span class="st">"how-to"</span>, order <span class="op">=</span> <span class="fl">2</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    strict <span class="op">=</span> <span class="cn">true</span>,   <span class="co"># fail the build on broken internal links</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">quarto_build_site</span>(config)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then build and preview:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">julia</span> <span class="at">--project</span><span class="op">=</span>docs docs/make.jl   <span class="co"># writes the Quarto project under docs/</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> docs <span class="kw">&amp;&amp;</span> <span class="ex">quarto</span> preview           <span class="co"># or: quarto render</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="documentation" class="level2">
+<h2 class="anchored" data-anchor-id="documentation">Documentation</h2>
+<p>Full documentation, tutorials and how-to guides are at <a href="https://vituri.github.io/QuartoDocBuilder.jl/">https://vituri.github.io/QuartoDocBuilder.jl/</a>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

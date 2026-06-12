@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.31">
+<meta name="generator" content="quarto-1.10.11">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -77,14 +77,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-9c584ca951e49926686c986861625e9f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c5e9030d44b7e5c93256025c8069bf18.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-9c584ca951e49926686c986861625e9f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-cb022060680057909813cc3e4dbc4767.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-6607198171fb9ad3fd0f0dc3a40a1216.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-bd42aa30c9fb9483bdb4b8fcf43b982e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-6607198171fb9ad3fd0f0dc3a40a1216.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f38432df4455bda585783a29170252c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-1b461b8be016c4d9583ad461e26df53b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-f38432df4455bda585783a29170252c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -339,6 +339,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-how-to-guides">    
         <li>
+    <a class="dropdown-item" href="../how-to/configure.html">
+ <span class="dropdown-text">Configure the Build</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/cross-package-links.html">
+ <span class="dropdown-text">Cross-package Links</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../how-to/customize-theme.html">
  <span class="dropdown-text">Customize Theme</span></a>
   </li>  
@@ -417,7 +425,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#content-selectors-selectors.jl" id="toc-content-selectors-selectors.jl" class="nav-link" data-scroll-target="#content-selectors-selectors.jl">2. Content Selectors (<code>selectors.jl</code>)</a></li>
   <li><a href="#docstring-processing-quarto_format.jl" id="toc-docstring-processing-quarto_format.jl" class="nav-link" data-scroll-target="#docstring-processing-quarto_format.jl">3. Docstring Processing (<code>quarto_format.jl</code>)</a></li>
   <li><a href="#site-building-build.jl" id="toc-site-building-build.jl" class="nav-link" data-scroll-target="#site-building-build.jl">4. Site Building (<code>build.jl</code>)</a></li>
-  <li><a href="#articles-system-articles.jl" id="toc-articles-system-articles.jl" class="nav-link" data-scroll-target="#articles-system-articles.jl">5. Articles System (<code>articles.jl</code>)</a></li>
+  <li><a href="#inventories-and-auto-linking-inventory.jl-autolink.jl" id="toc-inventories-and-auto-linking-inventory.jl-autolink.jl" class="nav-link" data-scroll-target="#inventories-and-auto-linking-inventory.jl-autolink.jl">5. Inventories and Auto-linking (<code>inventory.jl</code>, <code>autolink.jl</code>)</a></li>
+  <li><a href="#articles-system-articles.jl" id="toc-articles-system-articles.jl" class="nav-link" data-scroll-target="#articles-system-articles.jl">6. Articles System (<code>articles.jl</code>)</a></li>
   </ul></li>
   <li><a href="#data-flow" id="toc-data-flow" class="nav-link" data-scroll-target="#data-flow">Data Flow</a></li>
   <li><a href="#extension-points" id="toc-extension-points" class="nav-link" data-scroll-target="#extension-points">Extension Points</a>
@@ -485,25 +494,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="docstring-processing-quarto_format.jl" class="level3">
 <h3 class="anchored" data-anchor-id="docstring-processing-quarto_format.jl">3. Docstring Processing (<code>quarto_format.jl</code>)</h3>
-<p>Converts Julia docstrings to Quarto-compatible markdown:</p>
+<p>Converts Julia docstrings to Quarto-compatible markdown. The renderer is structure-agnostic — it dispatches on each Markdown node’s type — so it:</p>
 <ul>
-<li>Handles code blocks with proper fencing</li>
-<li>Converts admonitions to callout blocks</li>
-<li>Preserves formatting and structure</li>
+<li>re-fences code blocks as <code>julia</code>,</li>
+<li>demotes docstring headers by two levels,</li>
+<li>maps admonitions to the matching Quarto callout type,</li>
+<li>falls back to <code>Markdown.plain</code> for anything else.</li>
 </ul>
+<p>See <a href="../explanation/docstring-processing.html">Docstring Processing</a> for the full mapping.</p>
 </section>
 <section id="site-building-build.jl" class="level3">
 <h3 class="anchored" data-anchor-id="site-building-build.jl">4. Site Building (<code>build.jl</code>)</h3>
 <p>The main build orchestrator:</p>
 <ol type="1">
-<li>Generates <code>_quarto.yml</code> configuration</li>
+<li>Generates <code>_quarto.yml</code> configuration (including a <code>resources: objects.inv</code> entry)</li>
 <li>Creates section directories and index files</li>
-<li>Generates reference pages for each documented function</li>
+<li>Generates the reference index and a page for each documented binding</li>
 <li>Creates navigation structure (navbar, sidebars)</li>
+<li>Emits <code>docs/objects.inv</code> so other packages can cross-link back</li>
+<li>Post-processes the generated pages to autolink cross-references (when <code>autolink = true</code>)</li>
+<li>Validates internal links (failing the build when <code>strict = true</code>)</li>
 </ol>
 </section>
+<section id="inventories-and-auto-linking-inventory.jl-autolink.jl" class="level3">
+<h3 class="anchored" data-anchor-id="inventories-and-auto-linking-inventory.jl-autolink.jl">5. Inventories and Auto-linking (<code>inventory.jl</code>, <code>autolink.jl</code>)</h3>
+<p>Reads and writes Sphinx <code>objects.inv</code> inventories and turns backticked names into links — both within the package and, via registered inventories, to other packages. See <a href="../how-to/cross-package-links.html">Cross-package Links</a>.</p>
+</section>
 <section id="articles-system-articles.jl" class="level3">
-<h3 class="anchored" data-anchor-id="articles-system-articles.jl">5. Articles System (<code>articles.jl</code>)</h3>
+<h3 class="anchored" data-anchor-id="articles-system-articles.jl">6. Articles System (<code>articles.jl</code>)</h3>
 <p>Discovers and organizes content files:</p>
 <ul>
 <li>Auto-discovers <code>.qmd</code> files in section directories</li>
@@ -565,12 +583,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="dependencies" class="level2">
 <h2 class="anchored" data-anchor-id="dependencies">Dependencies</h2>
-<p>QuartoDocBuilder only depends on Julia standard library:</p>
+<p>QuartoDocBuilder keeps its dependency footprint small:</p>
 <ul>
-<li><code>Markdown</code> - Parsing docstrings</li>
-<li><code>TOML</code> - Configuration files</li>
+<li><code>Markdown</code>, <code>REPL</code>, <code>TOML</code> (Julia standard library) - docstring parsing and configuration</li>
+<li><code>Downloads</code> (standard library) - fetching remote <code>objects.inv</code> inventories</li>
+<li><a href="https://github.com/JuliaIO/CodecZlib.jl"><code>CodecZlib</code></a> - zlib (de)compression for the <code>objects.inv</code> format</li>
 </ul>
-<p>No external packages required!</p>
+<p>The <code>CodecZlib</code> and <code>Downloads</code> dependencies were added in 0.4.0 to support Sphinx inventories for cross-package linking.</p>
 
 
 </section>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.31">
+<meta name="generator" content="quarto-1.10.11">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -76,14 +76,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-9c584ca951e49926686c986861625e9f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c5e9030d44b7e5c93256025c8069bf18.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-9c584ca951e49926686c986861625e9f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-cb022060680057909813cc3e4dbc4767.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-6607198171fb9ad3fd0f0dc3a40a1216.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-bd42aa30c9fb9483bdb4b8fcf43b982e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-6607198171fb9ad3fd0f0dc3a40a1216.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f38432df4455bda585783a29170252c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-1b461b8be016c4d9583ad461e26df53b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-f38432df4455bda585783a29170252c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -112,6 +112,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -337,6 +366,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">How-to Guides</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-how-to-guides">    
+        <li>
+    <a class="dropdown-item" href="../how-to/configure.html">
+ <span class="dropdown-text">Configure the Build</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/cross-package-links.html">
+ <span class="dropdown-text">Cross-package Links</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="../how-to/customize-theme.html">
  <span class="dropdown-text">Customize Theme</span></a>
@@ -598,6 +635,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../reference/generate_inventory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">generate_inventory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../reference/generate_versions_manifest.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">generate_versions_manifest</span></a>
   </div>
@@ -670,6 +713,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../reference/Inventory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inventory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/InventoryItem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">InventoryItem</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../reference/is_const_symbol.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">is_const_symbol</span></a>
   </div>
@@ -696,6 +751,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../reference/is_type_symbol.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">is_type_symbol</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/item_dispname.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">item_dispname</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/item_uri.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">item_uri</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -732,6 +799,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../reference/load_config.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">load_config</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/load_inventory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">load_inventory</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -804,6 +877,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../reference/quarto_callout_block.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_callout_block</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/quarto_doc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_doc</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -910,6 +989,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../reference/reference_page_names.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">reference_page_names</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../reference/ReferenceGroup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ReferenceGroup</span></a>
   </div>
@@ -936,6 +1021,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../reference/resolve_external_ref.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">resolve_external_ref</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/resolve_inventory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">resolve_inventory</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -982,6 +1073,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../reference/write_inventory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">write_inventory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../reference/write_version_selector_assets.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">write_version_selector_assets</span></a>
   </div>
@@ -1021,13 +1118,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">build_reference_index</span>(module_name<span class="op">::</span><span class="dt">Module</span>; base_path<span class="op">::</span><span class="dt">String</span>=<span class="st">"reference"</span>) <span class="op">-&gt;</span> ReferenceIndex</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Build a lookup table mapping function names to their reference page URLs.</p>
+<p><a href="@ref"><code>reference_page_names</code></a> Build a lookup table mapping function names to their reference page URLs.</p>
 <section id="arguments" class="level3">
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <ul>
 <li><code>module_name::Module</code>: Module to index</li>
 <li><code>base_path::String</code>: Base path for reference pages (default: “reference”)</li>
+<li><code>recursive::Bool</code>: When <code>true</code>, include documented bindings from submodules and use the collision-safe page names from <a href="@ref"><code>reference_page_names</code></a> so that autolink targets match the actual generated files. Entries are keyed by the collision-safe page name and, when that bare name is unambiguous, also by the bare name — so both <span class="math inline">\(`Inner.foo`\)</span> and an unambiguous <span class="math inline">\(`bar`\)</span> mention autolink (default: <code>false</code>).</li>
 </ul>
 </section>
 <section id="returns" class="level3">
@@ -1036,8 +1133,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="example" class="level3">
 <h3 class="anchored" data-anchor-id="example">Example</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> <span class="fu">build_reference_index</span>(MyModule)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>index.entries[<span class="st">"my_function"</span>]  <span class="co"># "reference/my_function.qmd"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> <span class="fu">build_reference_index</span>(MyModule)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>index.entries[<span class="st">"my_function"</span>]  <span class="co"># "reference/my_function.qmd"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </div>
 </div>

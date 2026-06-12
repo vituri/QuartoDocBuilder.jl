@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.31">
+<meta name="generator" content="quarto-1.10.11">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,41 +23,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -76,14 +41,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-9c584ca951e49926686c986861625e9f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c5e9030d44b7e5c93256025c8069bf18.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-9c584ca951e49926686c986861625e9f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-cb022060680057909813cc3e4dbc4767.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-8dc15bc9c3943fa16cc112da73343fe6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-6607198171fb9ad3fd0f0dc3a40a1216.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-bd42aa30c9fb9483bdb4b8fcf43b982e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-6607198171fb9ad3fd0f0dc3a40a1216.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f38432df4455bda585783a29170252c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-1b461b8be016c4d9583ad461e26df53b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-f38432df4455bda585783a29170252c7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -337,6 +302,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">How-to Guides</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-how-to-guides">    
+        <li>
+    <a class="dropdown-item" href="../how-to/configure.html">
+ <span class="dropdown-text">Configure the Build</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../how-to/cross-package-links.html">
+ <span class="dropdown-text">Cross-package Links</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="../how-to/customize-theme.html">
  <span class="dropdown-text">Customize Theme</span></a>
@@ -598,6 +571,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../reference/generate_inventory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">generate_inventory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../reference/generate_versions_manifest.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">generate_versions_manifest</span></a>
   </div>
@@ -670,6 +649,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../reference/Inventory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inventory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/InventoryItem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">InventoryItem</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../reference/is_const_symbol.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">is_const_symbol</span></a>
   </div>
@@ -696,6 +687,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../reference/is_type_symbol.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">is_type_symbol</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/item_dispname.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">item_dispname</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/item_uri.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">item_uri</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -732,6 +735,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../reference/load_config.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">load_config</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/load_inventory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">load_inventory</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -804,6 +813,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../reference/quarto_callout_block.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">quarto_callout_block</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/quarto_doc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">quarto_doc</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -910,6 +925,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../reference/reference_page_names.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">reference_page_names</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../reference/ReferenceGroup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ReferenceGroup</span></a>
   </div>
@@ -936,6 +957,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../reference/resolve_external_ref.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">resolve_external_ref</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/resolve_inventory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">resolve_inventory</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -982,6 +1009,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../reference/write_inventory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">write_inventory</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../reference/write_version_selector_assets.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">write_version_selector_assets</span></a>
   </div>
@@ -1021,26 +1054,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">register_external_docs</span>(package<span class="op">::</span><span class="dt">String</span>, base_url<span class="op">::</span><span class="dt">String</span>; registry<span class="op">=</span>EXTERNAL_DOCS[])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Register an external package’s documentation URL for cross-referencing.</p>
+<p><a href="@ref"><code>Inventory</code></a> Register an external package’s documentation for cross-referencing.</p>
+<p>The <code>base_url</code> is stored, and an <a href="@ref"><code>Inventory</code></a> is associated with the package so that references can be resolved to real URLs:</p>
+<ul>
+<li>If <code>inventory</code> is an <a href="@ref"><code>Inventory</code></a>, it is used directly.</li>
+<li>If <code>inventory</code> is a <code>String</code>, it is treated as a path/URL to an <code>objects.inv</code> and loaded.</li>
+<li>If <code>inventory</code> is <code>nothing</code> (the default), this attempts to load <code>"$base_url/objects.inv"</code>. Network/parse failures are caught and degrade gracefully to “no inventory” (the package is still registered, but its references will not resolve until an inventory is available).</li>
+</ul>
 <section id="arguments" class="level3">
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <ul>
-<li><code>package::String</code>: Package name (e.g., “DataFrames”)</li>
-<li><code>base_url::String</code>: Base URL for the package docs (e.g., “https://dataframes.juliadata.org/stable”)</li>
-<li><code>registry</code>: Registry to add to (default: global registry)</li>
+<li><code>package::String</code>: Package name (e.g., “DataFrames”).</li>
+<li><code>base_url::String</code>: Base URL for the package docs (e.g., “https://dataframes.juliadata.org/stable”).</li>
+<li><code>inventory</code>: An <a href="../reference/Inventory.html"><code>Inventory</code></a>, a path/URL string, or <code>nothing</code> (default).</li>
+<li><code>registry</code>: Registry to add to (default: global registry).</li>
 </ul>
 </section>
 <section id="example" class="level3">
 <h3 class="anchored" data-anchor-id="example">Example</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Register external packages</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">register_external_docs</span>(<span class="st">"DataFrames"</span>, <span class="st">"https://dataframes.juliadata.org/stable"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">register_external_docs</span>(<span class="st">"Plots"</span>, <span class="st">"https://docs.juliaplots.org/stable"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Now `DataFrame` references can be linked</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"Use `DataFrame` to store tabular data."</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">autolink_external</span>(text)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; "Use [`DataFrame`](https://dataframes.juliadata.org/stable/lib/types/#DataFrames.DataFrame) to store tabular data."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="@ref"><code>Inventory</code></a></p>
 </section>
 </div>
 </div>
